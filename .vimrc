@@ -49,6 +49,10 @@ if !has('nvim')
 		" MAAV syntax checker
 		let g:syntastic_cpp_compiler_options = '-Wall -Wextra -pedantic -pthread -std=c++14 -g -fPIC'
 else
+	" For some reason, unimpared doesn't work in neovim?
+	nnoremap ]l :lnext
+	nnoremap [l :lprev
+
 	" " Asynchronous syntax checker
 	Plugin 'neomake/neomake'
 		" In normal map mode, press Ctrl-C to save buffer and run Syntastic check
