@@ -12,7 +12,7 @@ sudo apt install neovim
 mv ~/.vimrc ~/.vimrc.bak
 
 # Create symlink to this .vimrc
-ln -s `dirname $0` ~/.vimrc
+ln -s `dirname $0`/.vimrc ~/.vimrc
 
 mkdir ~/.config/nvim
 ln -s ~/.vim ~/.config/nvim

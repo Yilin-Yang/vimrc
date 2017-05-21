@@ -94,6 +94,9 @@ set background=dark " Make text readable on dark background
 set number " Show line numbers
 set hidden " Allow hidden buffers, not limited to 1 file/window
 
+" Decrease timeout for combined keymaps
+set timeoutlen=50
+
 " Highlight text going past 80 chars on one line
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
@@ -107,13 +110,35 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+inoremap <C-h> <C-\><C-N><C-w>h
+inoremap <C-j> <C-\><C-N><C-w>j
+inoremap <C-k> <C-\><C-N><C-w>k
+inoremap <C-l> <C-\><C-N><C-w>l
 
 " Exit interactive mode by hitting j and k at the same time
 inoremap jk <esc>
 
-" Alt key can now be used as modifier (sends Escape character)
-execute "set <M-d>=\ed"
-execute "set <M-a>=\ea"
+" vim specific, not needed for nvim
+if !has('nvim')
+	" Alt key can now be used as modifier (sends Escape character)
+	execute "set <M-d>=\ed"
+	execute "set <M-a>=\ea"
+
+endif
+
+" nvim specific, not needed for vim
+if has('nvim')
+	" Map j and k to exiting terminal mode
+	tnoremap jk <C-\><C-n>
+	" Ditto with ESC
+	tnoremap <Esc> <C-\><C-n>
+
+	" Control plus HJKL to move between windows in terminal mode
+	tnoremap <C-h> <C-\><C-N><C-w>h
+    tnoremap <C-j> <C-\><C-N><C-w>j
+    tnoremap <C-k> <C-\><C-N><C-w>k
+    tnoremap <C-l> <C-\><C-N><C-w>l
+endif
 
 " Tabs!
 " Alt + AD to move through tabs!
@@ -141,7 +166,7 @@ nnoremap <C-c> :w \| :SyntasticReset \| :SyntasticCheck<cr>
 nnoremap <C-z> :SyntasticReset<cr>
 
 " In normal map mode, press Ctrl-X to erase currently selected word
-nnoremap <C-x> daw
+nnoremap <C-x> diw
 
 " Ctrl-Backspace deletes the previous word
 inoremap <C-BS> <C-w> " Doesn't work, unfortunately; terminal bug?
