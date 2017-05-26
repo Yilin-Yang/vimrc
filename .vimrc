@@ -27,7 +27,7 @@ if !has('nvim')
 		nnoremap <C-z> :SyntasticReset<cr>
 
 	"	Syntastic debug
-	"	let g:syntastic_debug=1
+		let g:syntastic_debug=1
 	"	set statusline+=%#warningmsg#
 	"	set statusline+=%{SyntasticStatuslineFlag()}
 	"	set statusline+=%*
@@ -57,7 +57,7 @@ else
 	Plugin 'neomake/neomake'
 		" In normal map mode, press Ctrl-C to save buffer and run Syntastic check
 		" backslash is necessary to escape pipe character
-		nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake<cr>
+		nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake \| :call Highlight() <cr>
 
 		" In normal map mode, press Ctrl-Z to close Syntastic error window
 		nnoremap <C-z> :call CloseErrorWindows() <cr>
@@ -167,7 +167,7 @@ set hidden " Allow hidden buffers, not limited to 1 file/window
 augroup buffer_stuff
 	au!
 	autocmd BufWritePre * :%s/\s\+$//e "Delete trailing whitespace on save
-	autocmd BufRead * :call Highlight() " highlight overlength on buffer read
+	" autocmd BufRead * :call Highlight() " highlight overlength on buffer read
 	" autocmd BufReadPost,BufWritePost,BufEnter * :Neomake
 	" autocmd BufUnload * :call CloseErrorWindows() " close windows upon leaving buffer
 augroup END
@@ -220,8 +220,8 @@ nnoremap <M-a> :tabp<cr>
 nnoremap <M-d> :tabn<cr>
 
 " Plus and minus to open and close tabs
-nnoremap = :tabnew<cr>:NERDTreeToggle<CR>
-nnoremap - :tabclose<cr>
+nnoremap 0= :tabnew<cr>:NERDTreeToggle<CR>
+nnoremap 0- :tabclose<cr>
 
 " FOR THE LOVE OF GOD STOP BOOPING
 set visualbell " oh praise jesus
