@@ -143,7 +143,10 @@ endfunction
 function TestCaseAutoformat()
 	" Takes void function header prototypes from cursor to EOF,
 	" formats them as function declarations, and adds in cout statements
-	.,$s/void \(\<\w\+\>\);\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r
+	"
+	" TODO: don't reformat function header prototypes from before the main
+	" method
+	.,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r
 endfunction
 
 " MAAV formatting
