@@ -140,6 +140,12 @@ function CloseErrorWindows()
 	lclose
 endfunction
 
+function TestCaseAutoformat()
+	" Takes void function header prototypes from cursor to EOF,
+	" formats them as function declarations, and adds in cout statements
+	.,$s/void \(\<\w\+\>\);\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r
+endfunction
+
 " MAAV formatting
 set noexpandtab " Tabs for indentation
 set tabstop=4 " Tabs are four spaces wide
@@ -153,6 +159,7 @@ colorscheme default " For now, all this does is trigger the autocmd for changing
 set backspace=indent,eol,start " Sane backspace
 syntax on " Turn on syntax highlighting
 set background=dark " Make text readable on dark background
+set relativenumber " Relative numbering!
 set number " Show line numbers
 set hidden " Allow hidden buffers, not limited to 1 file/window
 
@@ -166,21 +173,21 @@ augroup buffer_stuff
 augroup END
 
 " Decrease timeout for combined keymaps
-set timeoutlen=75
+set timeoutlen=125
 
 " Enable paste-mode that doesn't autotab
 set pastetoggle=<F2>
 
 " Split view!
-" Ctrl + HJKL to cycle through windows!
+" Ctrl + hjkl to cycle through windows!
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
-inoremap <C-h> <C-\><C-N><C-w>h
-inoremap <C-j> <C-\><C-N><C-w>j
-inoremap <C-k> <C-\><C-N><C-w>k
-inoremap <C-l> <C-\><C-N><C-w>l
+inoremap <C-h> <C-\><C-N><C-w>hi
+inoremap <C-j> <C-\><C-N><C-w>ji
+inoremap <C-k> <C-\><C-N><C-w>ki
+inoremap <C-l> <C-\><C-N><C-w>li
 
 " Exit interactive mode by hitting j and k at the same time
 inoremap jk <esc>
@@ -215,10 +222,6 @@ nnoremap <M-d> :tabn<cr>
 " Plus and minus to open and close tabs
 nnoremap = :tabnew<cr>:NERDTreeToggle<CR>
 nnoremap - :tabclose<cr>
-
-" Shift + Up/Down to scroll
-"noremap <S-Up> <C-u>
-"noremap  <C-d>
 
 " FOR THE LOVE OF GOD STOP BOOPING
 set visualbell " oh praise jesus
