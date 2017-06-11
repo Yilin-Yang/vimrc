@@ -170,6 +170,7 @@ syntax on " Turn on syntax highlighting
 set background=dark " Make text readable on dark background
 set relativenumber " Relative numbering!
 set number " Show line numbers
+set ruler " Show current line number
 set hidden " Allow hidden buffers, not limited to 1 file/window
 
 " Buffer events
