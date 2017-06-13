@@ -147,6 +147,12 @@ function TestCaseAutoformat()
 	" TODO: don't reformat function header prototypes from before the main
 	" method
 	.,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r
+	noh " stop highlighting matched function headers after the above call
+endfunction
+
+function Tca()
+	" Shorter alias for TestCaseAutoformat
+	call TestCaseAutoformat()
 endfunction
 
 " MAAV formatting
