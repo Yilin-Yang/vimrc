@@ -170,7 +170,6 @@ syntax on " Turn on syntax highlighting
 set background=dark " Make text readable on dark background
 set relativenumber " Relative numbering!
 set number " Show line numbers
-set ruler " Show current line number
 set hidden " Allow hidden buffers, not limited to 1 file/window
 
 " Buffer events
@@ -201,8 +200,10 @@ inoremap <C-l> <C-\><C-N><C-w>li
 
 " Exit interactive mode by hitting j and k at the same time
 inoremap jk <esc>
+inoremap kj <esc>
 " Ditto visual mode
 vnoremap jk <esc>
+inoremap kj <esc>
 
 " vim specific, not needed for nvim
 if !has('nvim')
@@ -212,6 +213,7 @@ if !has('nvim')
 else " nvim specific, not needed for vim
 	" Map j and k to exiting terminal mode
 	tnoremap jk <C-\><C-n>
+	tnoremap kj <C-\><C-n>
 	" Ditto with ESC
 	tnoremap <Esc> <C-\><C-n>
 
