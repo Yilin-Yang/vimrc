@@ -199,11 +199,17 @@ inoremap <C-k> <C-\><C-N><C-w>ki
 inoremap <C-l> <C-\><C-N><C-w>li
 
 " Exit interactive mode by hitting j and k at the same time
+" (df works too, because hand pain)
 inoremap jk <esc>
 inoremap kj <esc>
+inoremap df <esc>
+inoremap fd <esc>
+
 " Ditto visual mode
 vnoremap jk <esc>
 inoremap kj <esc>
+inoremap df <esc>
+inoremap fd <esc>
 
 " vim specific, not needed for nvim
 if !has('nvim')
@@ -214,6 +220,8 @@ else " nvim specific, not needed for vim
 	" Map j and k to exiting terminal mode
 	tnoremap jk <C-\><C-n>
 	tnoremap kj <C-\><C-n>
+	tnoremap df <C-\><C-n>
+	tnoremap fd <C-\><C-n>
 	" Ditto with ESC
 	tnoremap <Esc> <C-\><C-n>
 
