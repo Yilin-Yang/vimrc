@@ -4,8 +4,6 @@ filetype off
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
-" " alternatively, pass a path where Vundle should install plugins
-" "call vundle#begin('~/some/path/here')
 
 " " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
@@ -27,7 +25,7 @@ if !has('nvim')
 		nnoremap <C-z> :SyntasticReset<cr>
 
 	"	Syntastic debug
-		let g:syntastic_debug=1
+	"	let g:syntastic_debug=1
 	"	set statusline+=%#warningmsg#
 	"	set statusline+=%{SyntasticStatuslineFlag()}
 	"	set statusline+=%*
@@ -207,9 +205,9 @@ inoremap fd <esc>
 
 " Ditto visual mode
 vnoremap jk <esc>
-inoremap kj <esc>
-inoremap df <esc>
-inoremap fd <esc>
+vnoremap kj <esc>
+vnoremap df <esc>
+vnoremap fd <esc>
 
 " vim specific, not needed for nvim
 if !has('nvim')
@@ -233,21 +231,31 @@ else " nvim specific, not needed for vim
 endif
 
 " Tabs!
-" Alt + AD to move through tabs!
+" Alt + A/D to move through tabs!
 "noremap <A-w> :tabr<cr>
 "noremap <A-s> :tabl<cr>
 nnoremap <M-a> :tabp<cr>
 nnoremap <M-d> :tabn<cr>
 
-" Plus and minus to open and close tabs
+" Alt + F to backspace in insert and normal mode
+inoremap <M-f> <BS>
+nnoremap <M-f> i<BS>jk
+
+" Alt + S to delete-in-word in insert and normal mode
+" TODO: get this working correctly
+imap <M-s> jkl diw
+nnoremap <M-s> diw
+
+
+" Number row zero and +/- to open and close tabs
 nnoremap 0= :tabnew<cr>:NERDTreeToggle<CR>
 nnoremap 0- :tabclose<cr>
 
 " FOR THE LOVE OF GOD STOP BOOPING
 set visualbell " oh praise jesus
 
-" In normal map mode, press Ctrl-X to erase currently selected word
-nnoremap <C-x> diw
+" In normal map mode, press Ctrl-X to copy selection to system clipboard
+nnoremap <C-x> "+y
 
 " Ctrl-Backspace deletes the previous word
 inoremap <C-BS> <C-w> " Doesn't work, unfortunately; terminal bug?
