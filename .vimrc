@@ -128,7 +128,7 @@ filetype plugin indent on	" required, filetype detect, indenting per lang
 
 function Highlight()
 	" Highlight text going past 80 chars on one line
-	highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+	highlight OverLength ctermbg=DarkRed ctermfg=white guibg=#592929
 	match OverLength /\%81v.\+/
 endfunction
 
@@ -153,6 +153,28 @@ function Tca()
 	call TestCaseAutoformat()
 endfunction
 
+" Functions for merge conflict resolution
+
+function DiffgetLo()
+	" filler is default and inserts empty lines for sync
+	set diffopt=filler,context:1000000
+	diffget LO
+endfunction
+
+function DiffgetRe()
+	" filler is default and inserts empty lines for sync
+	set diffopt=filler,context:1000000
+	diffget RE
+endfunction
+
+function ExitMergeResolutionIfDone()
+	if search("<<<<<<<") || search(">>>>>>>")
+		echoerr "Still conflicts to resolve!"
+	else
+		wq | qa
+	endif
+endfunction
+
 " MAAV formatting
 set noexpandtab " Tabs for indentation
 set tabstop=4 " Tabs are four spaces wide
@@ -168,7 +190,11 @@ syntax on " Turn on syntax highlighting
 set background=dark " Make text readable on dark background
 set relativenumber " Relative numbering!
 set number " Show line numbers
-set hidden " Allow hidden buffers, not limited to 1 file/window
+set ruler " Show line lengths
+set nohidden " Allow hidden buffers, not limited to 1 file/window
+set visualbell " FOR THE LOVE OF GOD STOP BOOPING IN WSL
+
+set colorcolumn=81 " Visual indicator of my personal line length limit
 
 " Buffer events
 augroup buffer_stuff
@@ -184,6 +210,15 @@ set timeoutlen=125
 
 " Enable paste-mode that doesn't autotab
 set pastetoggle=<F2>
+
+" Make merge conflict resolution less agonizing
+if &diff                             " only for diff mode/vimdiff
+endif
+
+nnoremap dl :call DiffgetLo()<CR>
+nnoremap dr :call DiffgetRe()<CR>
+nnoremap dn /<<<<<CR><C-d>N
+nnoremap dq :call ExitMergeResolutionIfDone()<CR>
 
 " Split view!
 " Ctrl + hjkl to cycle through windows!
@@ -232,30 +267,22 @@ endif
 
 " Tabs!
 " Alt + A/D to move through tabs!
-"noremap <A-w> :tabr<cr>
-"noremap <A-s> :tabl<cr>
 nnoremap <M-a> :tabp<cr>
 nnoremap <M-d> :tabn<cr>
 
-" Alt + F to backspace in insert and normal mode
-inoremap <M-f> <BS>
-nnoremap <M-f> i<BS>jk
+" Alt + J/K to move through tabs!
+nnoremap <M-j> :tabp<cr>
+nnoremap <M-k> :tabn<cr>
 
-" Alt + S to delete-in-word in insert and normal mode
-" TODO: get this working correctly
-imap <M-s> jkl diw
-nnoremap <M-s> diw
+" Alt + N/C to open/close tabs!
+nnoremap <M-n> :tabnew<cr>:NERDTreeToggle<CR>
+nnoremap <M-c> :tabclose<cr>
 
+nnoremap <M-h> :noh<cr>:echo "Cleared highlights."<cr>
 
 " Number row zero and +/- to open and close tabs
 nnoremap 0= :tabnew<cr>:NERDTreeToggle<CR>
 nnoremap 0- :tabclose<cr>
 
-" FOR THE LOVE OF GOD STOP BOOPING
-set visualbell " oh praise jesus
-
-" In normal map mode, press Ctrl-X to copy selection to system clipboard
-nnoremap <C-x> "+y
-
-" Ctrl-Backspace deletes the previous word
-inoremap <C-BS> <C-w> " Doesn't work, unfortunately; terminal bug?
+" In normal map mode, press Ctrl-X to activate clipboard register
+nnoremap <C-x> "+:echo "SYSTEM CLIPBOARD REGISTER"<cr>
