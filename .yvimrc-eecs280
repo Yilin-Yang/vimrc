@@ -1,0 +1,10 @@
+let g:neomake_cpp_gcc_maker = {
+	\ 'args': [
+	\ '-Wall',
+	\ '-Werror',
+	\ '-pedantic',
+	\ '-O1',
+	\ '--std=c++11',
+	\ '-I.',
+	\ '-I..',
+	\ }
