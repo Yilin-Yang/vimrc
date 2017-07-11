@@ -26,6 +26,8 @@ let g:neomake_cpp_gcc_maker = {
 	\ '-I../src/sim',
 	\ '-I../src/tools',
 	\ '-I../src/vision',
+	\ '-I/home/yiliny/maav/nav/',
+	\ '-I/home/yiliny/maav/nav/atomcore/src',
 	\ '-I/home/yiliny/maav/nav/src/atomcore',
 	\ '-I/home/yiliny/maav/nav/src/common',
 	\ '-I/home/yiliny/maav/nav/src/gcs',
