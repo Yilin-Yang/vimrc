@@ -14,6 +14,60 @@ Plugin 'embear/vim-localvimrc'
 	let g:localvimrc_sandbox=0
 	let g:localvimrc_name=['.yvimrc']
 
+" " Fugitive
+" " Wrapper for git.
+"
+" Usage:
+" 	:Gstatus
+" 		- to add-reset a file's changes
+" 		p to add-reset a patch
+" 	:Gcommit	=	commit changes to the current file
+" 	:Gblame		=	open interactive vertical split with git blame
+" 					press enter on a line to edit the command where the line
+" 						changed, or o to open in a split
+" 	:Gedit		=	in the historic buffer to return to the work tree version
+"
+" 	:Gmove		=	automatic git mv and renames the buffer
+" 	:Gdelete	=	automatic git rm and deletes the buffer
+"
+" 	:Ggrep		=	searches the work tree with git grep, skipping whatever's
+" 						not tracked in the repo
+" 	:Glog		=	loads all previous revisions into the quickfix list,
+" 						can iterate over them
+" 	:Gread		=	git checkout -- {active file} that operates on the buffer,
+" 						not the file itself
+"
+"	:Gwrite		=	like git add when called from a working tree file, like
+"						git checkout when called from an index/blob from
+"						history
+"
+"	:Git		=	run an arbitrary command
+"	:Git!		=	run an arbitrary command and open output in a temp file
+Plugin 'tpope/vim-fugitive'
+
+" " Easily modify the characters surrounding a particular word
+"
+" Usage:
+"	cs"'		=	change surroundings (from) " to '
+"	cs'<q>		=	change surroundings (from) ' to <q> ... </q>
+"	cst"		=	change surroundings TO "
+"	ds"			=	delete (from) surroundings "
+"	ysiw]		=	YOOM surroundings (in word) ], producing [foo]
+"	cs]{		=	change surroundings (from) ] to {fooOO, producing { foo }
+"	cs]}		=	change surroundings (from) ] to }, producing {foo}
+"	yss)		=	YOOM the entire line with )
+"	ds{ds)		=	delete surroundings {ooOO, then delete surroundings )
+"
+"	In visual mode,
+"		V						=	line-wise visual select
+"		S<p class"important">	=	SURROUND with this HTML tag
+""	Produces:
+"		<p class="important">
+"		  <em>Hello</em> world!
+"		</p>
+Plugin 'tpope/vim-surround'
+
+
 if !has('nvim')
 	" " Syntax checker
 	Plugin 'scrooloose/syntastic'
@@ -48,14 +102,15 @@ if !has('nvim')
 		let g:syntastic_cpp_compiler_options = '-Wall -Wextra -pedantic -pthread -std=c++14 -g -fPIC'
 else
 	" For some reason, unimpared doesn't work in neovim?
-	nnoremap ]l :lnext
-	nnoremap [l :lprev
+	" nnoremap ]l :lnext
+	" nnoremap [l :lprev
 
 	" " Asynchronous syntax checker
 	Plugin 'neomake/neomake'
 		" In normal map mode, press Ctrl-C to save buffer and run Syntastic check
 		" backslash is necessary to escape pipe character
-		nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake \| :call Highlight() <cr>
+		" nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake \| :call Highlight() <cr>
+		nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake <cr>
 
 		" In normal map mode, press Ctrl-Z to close Syntastic error window
 		nnoremap <C-z> :call CloseErrorWindows() <cr>
@@ -185,16 +240,23 @@ colorscheme default " For now, all this does is trigger the autocmd for changing
 					" Neomake's highlight colors
 
 " Personal stuff
-set backspace=indent,eol,start " Sane backspace
-syntax on " Turn on syntax highlighting
-set background=dark " Make text readable on dark background
-set relativenumber " Relative numbering!
-set number " Show line numbers
-set ruler " Show line lengths
-set nohidden " Allow hidden buffers, not limited to 1 file/window
-set visualbell " FOR THE LOVE OF GOD STOP BOOPING IN WSL
+set backspace=indent,eol,start		" Sane backspace
+syntax on							" Turn on syntax highlighting
+set background=dark					" Make text readable on dark background
+set relativenumber					" Relative numbering!
+set number							" Show line numbers
+set ruler							" Show line lengths
+set nohidden						" Allow hidden buffers, not limited to 1 file/window
+set visualbell						" FOR THE LOVE OF GOD STOP BOOPING IN WSL
+set showcmd							" See leader key in corner
+set colorcolumn=81 					" My personal line limit
+set foldmethod=syntax				" Autofold function names
 
-set colorcolumn=81 " Visual indicator of my personal line length limit
+" Decrease timeout for combined keymaps
+set timeoutlen=125
+
+" Enable paste-mode that doesn't autotab
+set pastetoggle=<F2>
 
 " Buffer events
 augroup buffer_stuff
@@ -204,12 +266,6 @@ augroup buffer_stuff
 	" autocmd BufReadPost,BufWritePost,BufEnter * :Neomake
 	" autocmd BufUnload * :call CloseErrorWindows() " close windows upon leaving buffer
 augroup END
-
-" Decrease timeout for combined keymaps
-set timeoutlen=125
-
-" Enable paste-mode that doesn't autotab
-set pastetoggle=<F2>
 
 " Make merge conflict resolution less agonizing
 if &diff                             " only for diff mode/vimdiff
