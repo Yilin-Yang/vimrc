@@ -236,6 +236,19 @@ function RecursiveFoldPast(level)
 	setlocal foldlevel=a:level
 endfunction
 
+" Fold everything indented at this level.
+function FoldAt(level)
+	setlocal foldmethod=indent
+	setlocal foldlevel=a:level
+	setlocal foldnestmax=1
+endfunction
+
+function SyntaxFold(level)
+	setlocal foldmethod=syntax
+	setlocal foldlevel=a:level
+	setlocal foldnestmax=1
+endfunction
+
 " MAAV formatting
 set noexpandtab " Tabs for indentation
 set tabstop=4 " Tabs are four spaces wide
@@ -256,6 +269,7 @@ set nohidden						" Allow hidden buffers, not limited to 1 file/window
 set visualbell						" FOR THE LOVE OF GOD STOP BOOPING IN WSL
 set showcmd							" See leader key in corner
 set colorcolumn=81 					" My personal line limit
+set foldcolumn=1					" Show a column with all folds
 
 " Decrease timeout for combined keymaps
 set timeoutlen=125
@@ -267,9 +281,9 @@ set pastetoggle=<F2>
 " C++ Formatting
 " .cpp files
 augroup cpp_fold
-	autocmd FileType cpp call RecursiveFoldPast(1)
-	autocmd FileType hpp call RecursiveFoldPast(2)
-	autocmd FileType h call RecursiveFoldPast(2)
+	autocmd FileType cpp call FoldAt(1)
+	autocmd FileType hpp call FoldAt(2)
+	autocmd FileType h call FoldAt(2)
 augroup end
 
 
