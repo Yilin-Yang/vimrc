@@ -230,6 +230,12 @@ function ExitMergeResolutionIfDone()
 	endif
 endfunction
 
+" Fold everything indented past this fold-level.
+function RecursiveFoldPast(level)
+	setlocal foldmethod=indent
+	setlocal foldlevel=a:level
+endfunction
+
 " MAAV formatting
 set noexpandtab " Tabs for indentation
 set tabstop=4 " Tabs are four spaces wide
@@ -250,13 +256,22 @@ set nohidden						" Allow hidden buffers, not limited to 1 file/window
 set visualbell						" FOR THE LOVE OF GOD STOP BOOPING IN WSL
 set showcmd							" See leader key in corner
 set colorcolumn=81 					" My personal line limit
-set foldmethod=syntax				" Autofold function names
 
 " Decrease timeout for combined keymaps
 set timeoutlen=125
 
 " Enable paste-mode that doesn't autotab
 set pastetoggle=<F2>
+
+
+" C++ Formatting
+" .cpp files
+augroup cpp_fold
+	autocmd FileType cpp call RecursiveFoldPast(1)
+	autocmd FileType hpp call RecursiveFoldPast(2)
+	autocmd FileType h call RecursiveFoldPast(2)
+augroup end
+
 
 " Buffer events
 augroup buffer_stuff
