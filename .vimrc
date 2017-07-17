@@ -232,21 +232,16 @@ endfunction
 
 " Fold everything indented past this fold-level.
 function RecursiveFoldPast(level)
+	echo a:level
 	setlocal foldmethod=indent
-	setlocal foldlevel=a:level
+	let &l:foldlevel = a:level
 endfunction
 
 " Fold everything indented at this level.
 function FoldAt(level)
-	setlocal foldmethod=indent
-	setlocal foldlevel=a:level
-	setlocal foldnestmax=1
-endfunction
-
-function SyntaxFold(level)
-	setlocal foldmethod=syntax
-	setlocal foldlevel=a:level
-	setlocal foldnestmax=1
+	let &l:foldnestmax=a:level + 1
+	call RecursiveFoldPast(a:level)
+	"%foldo
 endfunction
 
 " MAAV formatting
@@ -281,9 +276,9 @@ set pastetoggle=<F2>
 " C++ Formatting
 " .cpp files
 augroup cpp_fold
-	autocmd FileType cpp call FoldAt(1)
-	autocmd FileType hpp call FoldAt(2)
-	autocmd FileType h call FoldAt(2)
+	au!
+	autocmd BufEnter,BufNew *.cpp call FoldAt(0) " FileType cpp includes headers
+	autocmd BufEnter,BufNew *.hpp call FoldAt(2)
 augroup end
 
 
