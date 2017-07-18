@@ -110,7 +110,8 @@ else
 		" In normal map mode, press Ctrl-C to save buffer and run Syntastic check
 		" backslash is necessary to escape pipe character
 		" nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake \| :call Highlight() <cr>
-		nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake <cr>
+		" nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake <cr>
+		nnoremap <C-c> :call WriteAndLint() <cr>
 
 		" In normal map mode, press Ctrl-Z to close Syntastic error window
 		nnoremap <C-z> :call CloseErrorWindows() <cr>
@@ -232,7 +233,6 @@ endfunction
 
 " Fold everything indented past this fold-level.
 function RecursiveFoldPast(level)
-	echo a:level
 	setlocal foldmethod=indent
 	let &l:foldlevel = a:level
 endfunction
@@ -243,6 +243,18 @@ function FoldAt(level)
 	call RecursiveFoldPast(a:level)
 	"%foldo
 endfunction
+
+" Write the current buffer and run Neomake's syntax checker.
+" Also, stop vim from reclosing folds when Neomake shows the quickfix list.
+function WriteAndLint()
+	" setlocal foldmethod=manual
+	w
+	call CloseErrorWindows()
+	Neomake
+	" setlocal foldmethod=syntax
+endfunction
+
+
 
 " MAAV formatting
 set noexpandtab " Tabs for indentation
@@ -275,11 +287,11 @@ set pastetoggle=<F2>
 
 " C++ Formatting
 " .cpp files
-augroup cpp_fold
-	au!
-	autocmd BufEnter,BufNew *.cpp call FoldAt(0) " FileType cpp includes headers
-	autocmd BufEnter,BufNew *.hpp call FoldAt(2)
-augroup end
+" augroup cpp_fold
+" 	au!
+" 	autocmd BufEnter,BufNew *.cpp call FoldAt(0) " FileType cpp includes headers
+" 	autocmd BufEnter,BufNew *.hpp call FoldAt(2)
+" augroup end
 
 
 " Buffer events
