@@ -155,7 +155,7 @@ Plugin 'scrooloose/nerdtree'
 	autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 	" Open NerdTree with CTRL-N
-	map <C-n> :NERDTreeToggle<CR>
+	map <C-n> :NERDTreeToggle<cr>
 
 	let NERDTreeQuitOnOpen = 1
 
@@ -195,12 +195,15 @@ function CloseErrorWindows()
 endfunction
 
 function TestCaseAutoformat()
-	" Takes void function header prototypes from cursor to EOF,
-	" formats them as function declarations, and adds in cout statements
-	"
-	" TODO: don't reformat function header prototypes from before the main
-	" method
-	.,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r
+	if search("BOOST")
+		" If I'm writing Boost test cases, format the function headers differently
+		%s/BOOST_AUTO_TEST_CASE(\(.*\))/BOOST_AUTO_TEST_CASE(\1)\r{\r\tBOOST_TEST_MESSAGE("\1");\r\t\r\tBOOST_CHECK_MESSAGE(,"\1 failed!");\r}\r
+	else
+		" But, if I'm just writing generic test cases for a class,
+		search("int main") " Don't reformat the forward declarations
+		.,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r
+	endif
+
 	noh " stop highlighting matched function headers after the above call
 endfunction
 
@@ -254,7 +257,22 @@ function WriteAndLint()
 	" setlocal foldmethod=syntax
 endfunction
 
-
+" Fold all of the function implementations in the current file.
+function FoldFunctionBodies()
+	setlocal foldmethod=indent
+	if &foldlevel !=? 20
+		setlocal foldlevel=20
+	else
+		" Expand the name of just this file, see what filetype it is
+		let filename = expand('%:t')
+		if match(filename, "hpp") !=? -1 || match(filename, "h") !=? -1
+			setlocal foldlevel=1
+		else
+			setlocal foldlevel=0
+		endif
+		let l:foldnestmax=&foldlevel + 1
+	endif
+endfunction
 
 " MAAV formatting
 set noexpandtab " Tabs for indentation
@@ -279,7 +297,7 @@ set colorcolumn=81 					" My personal line limit
 set foldcolumn=1					" Show a column with all folds
 
 " Decrease timeout for combined keymaps
-set timeoutlen=125
+set timeoutlen=200					" vim-surround keybindings takes a while
 
 " Enable paste-mode that doesn't autotab
 set pastetoggle=<F2>
@@ -303,16 +321,13 @@ augroup buffer_stuff
 	" autocmd BufUnload * :call CloseErrorWindows() " close windows upon leaving buffer
 augroup END
 
-" Make merge conflict resolution less agonizing
-if &diff                             " only for diff mode/vimdiff
-endif
+nnoremap dr :call DiffgetRe()<cr>
+nnoremap dn /<<<<<cr><C-d>N
+nnoremap dq :call ExitMergeResolutionIfDone()<cr>
 
-nnoremap dl :call DiffgetLo()<CR>
-nnoremap dr :call DiffgetRe()<CR>
-nnoremap dn /<<<<<CR><C-d>N
-nnoremap dq :call ExitMergeResolutionIfDone()<CR>
+" Toggle Fold Functions
+nnoremap <F5> :call FoldFunctionBodies()<cr>
 
-" Split view!
 " Ctrl + hjkl to cycle through windows!
 nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
@@ -323,18 +338,11 @@ inoremap <C-j> <C-\><C-N><C-w>ji
 inoremap <C-k> <C-\><C-N><C-w>ki
 inoremap <C-l> <C-\><C-N><C-w>li
 
-" Exit interactive mode by hitting j and k at the same time
-" (df works too, because hand pain)
+" Exit interactive mode by hitting j and k
 inoremap jk <esc>
-inoremap kj <esc>
-inoremap df <esc>
-inoremap fd <esc>
 
 " Ditto visual mode
 vnoremap jk <esc>
-vnoremap kj <esc>
-vnoremap df <esc>
-vnoremap fd <esc>
 
 " vim specific, not needed for nvim
 if !has('nvim')
@@ -343,10 +351,8 @@ if !has('nvim')
 	execute "set <M-a>=\ea"
 else " nvim specific, not needed for vim
 	" Map j and k to exiting terminal mode
-	tnoremap jk <C-\><C-n>
-	tnoremap kj <C-\><C-n>
-	tnoremap df <C-\><C-n>
-	tnoremap fd <C-\><C-n>
+	tnoremap jk <esc>
+
 	" Ditto with ESC
 	tnoremap <Esc> <C-\><C-n>
 
@@ -367,13 +373,13 @@ nnoremap <M-j> :tabp<cr>
 nnoremap <M-k> :tabn<cr>
 
 " Alt + N/C to open/close tabs!
-nnoremap <M-n> :tabnew<cr>:NERDTreeToggle<CR>
+nnoremap <M-n> :tabnew<cr>:NERDTreeToggle<cr>
 nnoremap <M-c> :tabclose<cr>
 
-nnoremap <M-h> :noh<cr>:echo "Cleared highlights."<cr>
+nnoremap <M-h> :call CloseErrorWindows()<cr>:noh<cr>:echo "Cleared highlights."<cr>
 
 " Number row zero and +/- to open and close tabs
-nnoremap 0= :tabnew<cr>:NERDTreeToggle<CR>
+nnoremap 0= :tabnew<cr>:NERDTreeToggle<cr>
 nnoremap 0- :tabclose<cr>
 
 " In normal map mode, press Ctrl-X to activate clipboard register
