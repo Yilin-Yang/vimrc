@@ -1,8 +1,11 @@
+" The arguments list that will be passed to the maker
+
+
+" if has('nvim')
 " For use with the :Neomake command (makers that run on an individual file),
 " 		it is critical that makers follow this naming convention:
 "
 "	g:neomake_{ filetype }_{ makername }_maker
-
 let g:neomake_cpp_gcc_maker = {
 	\ 'args': [
 		\ '-fsyntax-only',
@@ -90,3 +93,5 @@ let g:neomake_cpp_gcc_maker = {
 		\ '-I/usr/include/bullet'
 	\ ],
 \ }
+" else
+" endif

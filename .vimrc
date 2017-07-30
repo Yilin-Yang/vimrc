@@ -68,79 +68,50 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 
 
-if !has('nvim')
-	" " Syntax checker
-	Plugin 'scrooloose/syntastic'
-		" In normal map mode, press Ctrl-C to save buffer and run Syntastic check
-		" backslash is necessary to escape pipe character
-		nnoremap <C-c> :w \| :SyntasticReset \| :SyntasticCheck<cr>
+" " Asynchronous syntax checker
+Plugin 'neomake/neomake'
+	" In normal map mode, press Ctrl-C to save buffer and run Syntastic check
+	" backslash is necessary to escape pipe character
+	" nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake \| :call Highlight() <cr>
+	" nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake <cr>
+	nnoremap <C-c> :call WriteAndLint() <cr>
 
-		" In normal map mode, press Ctrl-Z to close Syntastic error window
-		nnoremap <C-z> :SyntasticReset<cr>
+	" In normal map mode, press Ctrl-Z to close Syntastic error window
+	nnoremap <C-z> :call CloseErrorWindows() <cr>
 
-	"	Syntastic debug
-	"	let g:syntastic_debug=1
-	"	set statusline+=%#warningmsg#
-	"	set statusline+=%{SyntasticStatuslineFlag()}
-	"	set statusline+=%*
+	augroup neomake_scheme
+		au!
+		autocmd ColorScheme *
+			\ hi link NeomakeError SpellBad |
+			\ hi link NeomakeWarning Todo
+	augroup END
 
-		let g:syntastic_always_populate_loc_list = 1
-		let g:syntastic_auto_loc_list = 1
-		let g:syntastic_check_on_open = 0
-		let g:syntastic_check_on_wq = 0
-		let g:syntastic_c_check_header = 1
-		let g:syntastic_c_remove_include_errors = 1
-		let g:syntastic_cpp_checkers=['gcc']
-		let g:syntastic_cpp_compiler = 'g++'
+	let g:neomake_open_list = 2 " Preserve cursor location on loc-list open
+	let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
+	let g:neomake_warning_sign = {
+		 \   'text': '⚠',
+		 \   'texthl': 'NeomakeWarning',
+		 \ }
+	let g:neomake_message_sign = {
+		  \   'text': '➤',
+		  \   'texthl': 'NeomakeMessageSign',
+		  \ }
+	let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
 
-		let g:syntastic_enable_signs = 1
-
-		" EECS 280 syntax checker
-		" let g:syntastic_cpp_compiler_options = '-Wall -Werror --std=c++11'
-
-		" MAAV syntax checker
-		let g:syntastic_cpp_compiler_options = '-Wall -Wextra -pedantic -pthread -std=c++14 -g -fPIC'
-else
-	" For some reason, unimpared doesn't work in neovim?
-	" nnoremap ]l :lnext
-	" nnoremap [l :lprev
-
-	" " Asynchronous syntax checker
-	Plugin 'neomake/neomake'
-		" In normal map mode, press Ctrl-C to save buffer and run Syntastic check
-		" backslash is necessary to escape pipe character
-		" nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake \| :call Highlight() <cr>
-		" nnoremap <C-c> :w \| :call CloseErrorWindows() \| :Neomake <cr>
-		nnoremap <C-c> :call WriteAndLint() <cr>
-
-		" In normal map mode, press Ctrl-Z to close Syntastic error window
-		nnoremap <C-z> :call CloseErrorWindows() <cr>
-
-		augroup neomake_scheme
-			au!
-			autocmd ColorScheme *
-				\ hi link NeomakeError SpellBad |
-				\ hi link NeomakeWarning Todo
-		augroup END
-
-		let g:neomake_open_list = 2 " Preserve cursor location on loc-list open
-		let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
-		let g:neomake_warning_sign = {
-			 \   'text': '⚠',
-			 \   'texthl': 'NeomakeWarning',
-			 \ }
-		let g:neomake_message_sign = {
-			  \   'text': '➤',
-			  \   'texthl': 'NeomakeMessageSign',
-			  \ }
-		let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
-
-		let g:neomake_cpp_gcc_maker = {
-			\ 'args': '-Wall -Wextra -pedantic -pthread -std=c++14 -g -fPIC',
-			\ }
-		let g:neomake_cpp_enable_makers = ['gcc']
-
-endif
+	let g:neomake_cpp_gcc_maker = {
+		\ 'args': [
+			\ '-fsyntax-only',
+			\ '-Wall',
+			\ '-Werror',
+			\ '-pedantic',
+			\ '-O1',
+			\ '--std=c++11',
+			\ '-I.',
+			\ '-I..'
+		\ ],
+		\ 'exe': 'g++'
+	\ }
+	let g:neomake_cpp_enable_makers = ['gcc']
 
 Plugin 'scrooloose/nerdtree'
 	" Open NerdTree automatically if no files were specified
@@ -302,15 +273,10 @@ set timeoutlen=200					" vim-surround keybindings takes a while
 " Enable paste-mode that doesn't autotab
 set pastetoggle=<F2>
 
-
-" C++ Formatting
-" .cpp files
-" augroup cpp_fold
-" 	au!
-" 	autocmd BufEnter,BufNew *.cpp call FoldAt(0) " FileType cpp includes headers
-" 	autocmd BufEnter,BufNew *.hpp call FoldAt(2)
-" augroup end
-
+augroup cpp_formatting
+	au!
+    autocmd BufRead,BufNewFile *.hpp,*.cpp set filetype=cpp.doxygen
+augroup END
 
 " Buffer events
 augroup buffer_stuff
@@ -344,12 +310,8 @@ inoremap jk <esc>
 " Ditto visual mode
 vnoremap jk <esc>
 
-" vim specific, not needed for nvim
-if !has('nvim')
-	" Alt key can now be used as modifier (sends Escape character)
-	execute "set <M-d>=\ed"
-	execute "set <M-a>=\ea"
-else " nvim specific, not needed for vim
+if has('nvim')
+	" nvim specific, not needed for vim
 	" Map j and k to exiting terminal mode
 	tnoremap jk <esc>
 
@@ -361,6 +323,12 @@ else " nvim specific, not needed for vim
     tnoremap <C-j> <C-\><C-N><C-w>j
     tnoremap <C-k> <C-\><C-N><C-w>k
     tnoremap <C-l> <C-\><C-N><C-w>l
+else
+	" vim specific, not needed for nvim
+
+	" Enable use of Alt key as modifier (sends Escape character)
+	execute "set <M-d>=\ed"
+	execute "set <M-a>=\ea"
 endif
 
 " Tabs!
@@ -382,5 +350,5 @@ nnoremap <M-h> :call CloseErrorWindows()<cr>:noh<cr>:echo "Cleared highlights."<
 nnoremap 0= :tabnew<cr>:NERDTreeToggle<cr>
 nnoremap 0- :tabclose<cr>
 
-" In normal map mode, press Ctrl-X to activate clipboard register
-nnoremap <C-x> "+:echo "SYSTEM CLIPBOARD REGISTER"<cr>
+" In normal map mode, press Ctrl-X to delete a word
+nnoremap <C-x> diw
