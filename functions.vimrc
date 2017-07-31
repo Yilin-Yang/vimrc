@@ -176,5 +176,5 @@ function TextWrap(should_format)
         set textwidth=75                " Hard line breaks, with newline chars
     else
         set textwidth=0                 " Disable text wrapping
-    fi
+    endif
 endfunction
