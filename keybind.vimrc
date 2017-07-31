@@ -21,7 +21,7 @@ vnoremap jk <esc>
 if has('nvim')
     " nvim specific, not needed for vim
     " Map j and k to exiting terminal mode
-    tnoremap jk <esc>
+    tnoremap jk <C-\><C-n>
 
     " Ditto with ESC
     tnoremap <Esc> <C-\><C-n>
