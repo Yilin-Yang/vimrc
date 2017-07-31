@@ -1,17 +1,17 @@
 augroup proper_headers
-	au!
+    au!
     autocmd BufRead,BufNewFile *.h,*.cpp set filetype=cpp.doxygen
 augroup END
 
 let g:neomake_cpp_gcc_maker = {
-	\ 'args': [
-		\ '-Wall',
-		\ '-Werror',
-		\ '-pedantic',
-		\ '-O1',
-		\ '--std=c++11',
-		\ '-I.',
-		\ '-I..'
-	\ ],
-	\ 'exe': 'g++'
+    \ 'args': [
+        \ '-Wall',
+        \ '-Werror',
+        \ '-pedantic',
+        \ '-O1',
+        \ '--std=c++11',
+        \ '-I.',
+        \ '-I..'
+    \ ],
+    \ 'exe': 'g++'
 \ }
