@@ -120,7 +120,7 @@ function FoldFunctionBodies()
     else
         " Expand the name of just this file, see what filetype it is
         let filename = expand('%:t')
-        if match(filename, "hpp") !=? -1 || match(filename, "h") !=? -1
+        if match(filename, "hpp$") !=? -1 || match(filename, "h$") !=? -1
             setlocal foldlevel=1
         else
             setlocal foldlevel=0
