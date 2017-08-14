@@ -41,23 +41,23 @@ endif
 
 " Tabs
     " Alt + A/D to move through tabs
-    nnoremap <M-a> :tabp<cr>
-    nnoremap <M-d> :tabn<cr>
+    nnoremap <silent> <M-a> :tabp<cr>
+    nnoremap <silent> <M-d> :tabn<cr>
 
     " Alt + J/K to move through tabs
-    nnoremap <M-j> :tabp<cr>
-    nnoremap <M-k> :tabn<cr>
+    nnoremap <silent> <M-j> :tabp<cr>
+    nnoremap <silent> <M-k> :tabn<cr>
 
     " Alt + N/C to open/close tabs
-    nnoremap <M-n> :tabnew<cr>:NERDTreeToggle<cr>
-    nnoremap <M-c> :tabclose<cr>
+    nnoremap <silent> <M-n> :tabnew<cr>:NERDTreeToggle<cr>
+    nnoremap <silent> <M-c> :tabclose<cr>
 
     " Alt + H to clear highlights and error windows
-    nnoremap <M-h> :call CloseErrorWindows()<cr>:noh<cr>:echo "Cleared highlights."<cr>
+    nnoremap <silent> <M-h> :call CloseErrorWindows()<cr>:noh<cr>:echo "Cleared highlights."<cr>
 
     " Number row zero and +/- to open and close tabs
-    nnoremap 0= :tabnew<cr>:NERDTreeToggle<cr>
-    nnoremap 0- :tabclose<cr>
+    nnoremap <silent> 0= :tabnew<cr>:NERDTreeToggle<cr>
+    nnoremap <silent> 0- :tabclose<cr>
 
 "=============================================================================
 "   System                                                  [SYSTEM]
@@ -75,11 +75,11 @@ let mapleader=","
 
 " Function Key Toggles
 "   Toggle Fold
-    nnoremap <F5> :call FoldFunctionBodies()<cr>
+    nnoremap <silent> <F5> :call FoldFunctionBodies()<cr>
 
 "   Wrap/Unwrap Lines
-    nnoremap <F3> :call WrapAll()<cr>
-    nnoremap <F4> :call UnwrapAll()<cr>
+    nnoremap <silent> <F3> :call WrapAll()<cr>
+    nnoremap <silent> <F4> :call UnwrapAll()<cr>
 
 "=============================================================================
 "   Split Navigation                                        [SPLITS]
@@ -100,6 +100,6 @@ inoremap <C-l> <C-\><C-N><C-w>li
 "=============================================================================
 
 " Resolving merge conflicts
-    nnoremap dr :call DiffgetRe()<cr>
-    nnoremap dn /<<<<<cr><C-d>N
-    nnoremap dq :call ExitMergeResolutionIfDone()<cr>
+    nnoremap <silent> dr :call DiffgetRe()<cr>
+    nnoremap <silent> dn /<<<<<cr><C-d>N
+    nnoremap <silent> dq :call ExitMergeResolutionIfDone()<cr>
