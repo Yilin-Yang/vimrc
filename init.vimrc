@@ -79,8 +79,17 @@ Plugin 'scrooloose/nerdtree'
 " See documentation here: ~/.vim/bundle/vim-unimpaired/doc/unpaired.txt
 Plugin 'tpope/vim-unimpaired'
 
-" Create a bar that shows you ctags for the current file.
+" " Create a bar that shows you ctags for the current file.
 Plugin 'majutsushi/tagbar'
+
+" " Asynchronous autocompletion that's less bloated than YouCompleteMe.
+" Requires neovim.
+if has('nvim')
+    Plugin 'Shougo/deoplete.nvim'
+
+    " " Use included files and path for candidate completion!
+    Plugin 'Shougo/neoinclude.vim'
+endif
 
 " " All of your Plugins must be added before the following line.
 call vundle#end()           " required.

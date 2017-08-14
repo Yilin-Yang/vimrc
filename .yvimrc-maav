@@ -1,7 +1,6 @@
 " The arguments list that will be passed to the maker
 
 
-" if has('nvim')
 " For use with the :Neomake command (makers that run on an individual file),
 "       it is critical that makers follow this naming convention:
 "
@@ -13,6 +12,7 @@ set shiftwidth=4                    " Indentation depth with << and >> commands
 set tabstop=4                       " One tab counts for four spaces
 
 let g:neomake_cpp_gcc_maker = {
+    \ 'exe': 'g++',
     \ 'args': [
         \ '-fsyntax-only',
         \ '-Wall',
@@ -145,5 +145,3 @@ let g:neomake_cpp_gcc_maker = {
             \ '/usr/include/bullet'
     \ ],
 \ }
-" else
-" endif
