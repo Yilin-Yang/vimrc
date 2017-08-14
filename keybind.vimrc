@@ -66,6 +66,8 @@ endif
 " Enable paste-mode that doesn't autotab
 set pastetoggle=<F2>
 
+" Set my preferred leader key
+let mapleader=","
 
 "=============================================================================
 "   Functions                                               [FUNCTIONS]
