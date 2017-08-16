@@ -7,6 +7,7 @@
 "   NerdTree                                                [NERDTREE]
 "   Tagbar                                                  [TAGBAR]
 "   deoplete                                                [DEOPLETE]
+"   vim-easytags                                            [EASYTAGS]
 "=============================================================================
 
 "=============================================================================
@@ -21,11 +22,14 @@ nnoremap <silent> <C-c> :call WriteAndLint() <cr>
 " In normal map mode, press Ctrl-Z to close Syntastic error window
 nnoremap <silent> <C-z> :call CloseErrorWindows() <cr>
 
+" For whatever reason, the ColorScheme event doesn't fire anymore?.
 augroup neomake_scheme
     au!
-    autocmd ColorScheme *
-        \ hi link NeomakeError SpellBad |
-        \ hi link NeomakeWarning Todo
+    autocmd BufWinEnter *
+        \ hi link NeomakeError Error |
+        \ hi link NeomakeWarning Todo |
+        \ hi link NeomakeInfo Statement |
+        \ hi link NeomakeMessage Todo |
 augroup END
 
 let g:neomake_open_list = 2 " Preserve cursor location on loc-list open
@@ -36,9 +40,9 @@ let g:neomake_warning_sign = {
      \ }
 let g:neomake_message_sign = {
       \   'text': '➤',
-      \   'texthl': 'NeomakeMessageSign',
+      \   'texthl': 'NeomakeMessage',
       \ }
-let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfoSign'}
+let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfo'}
 
 let g:neomake_cpp_gcc_maker = {
     \ 'exe': 'g++',
@@ -78,7 +82,9 @@ let NERDTreeQuitOnOpen = 1
 "   Tagbar                                                  [TAGBAR]
 "=============================================================================
 " Open an informational bar showing ctags for the current file.
-nnoremap <silent> <Leader>b :TagbarToggle<CR>
+" Will open Tagbar, jump to it, and close after choosing a tag.
+nnoremap <silent> <Leader>g :TagbarOpenAutoClose<cr>
+nnoremap <silent> <Leader>b :TagbarToggle<cr>
 
 "=============================================================================
 "   deoplete                                                [DEOPLETE]
@@ -108,3 +114,40 @@ if has('nvim')
     " Insert mode tab-completion without breaking real presses of the tab key.
     inoremap <expr><tab> pumvisible() ? DeopleteTab() : "\<tab>"
 endif
+
+"=============================================================================
+"   vim-easytags                                            [EASYTAGS]
+"=============================================================================
+
+" General Settings
+    let g:easytags_file = '~/.tags'     " Store tags in the home directory.
+    let g:easytags_auto_highlight = 0   " Disable tag highlighting.
+
+" Performance Settings
+    let g:easytags_async = 1            " Generate tags asynchronously.
+    "let g:easytags_python_enabled = 1   " Use faster Python syntax highlighter.
+
+"   With this setup, it's actually a bad idea to turn this option on.
+"       I ran :UpdateTags inside of /usr, and the tags file it generated was
+"   over a gibibyte (GiB) in size.
+"       It's probably okay to turn this on in a local .vimrc, especially
+"   with asynchronous execution, but if you turn it on globally, you run
+"   the risk of making your global tags file unusably large.
+"
+" let g:easytags_autorecurse = 1      " Generate tags for all subdirs as well.
+
+" Recursively generate tags for the current file, and everything in
+"   subdirectories below.
+nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
+
+" Update Frequency
+
+    "let g:easytags_on_cursorhold = 1    " Run :UpdateTags whenever idle.
+
+    " Try to trigger this all the time. Wasteful multithreading HO!
+    "let g:easytags_always_enabled = 1   " HA HA HA HA HAAAAAAAA
+    let g:easytags_events = [
+        \ 'BufWritePost',
+        \ 'BufEnter',
+        \ 'BufLeave'
+    \ ]

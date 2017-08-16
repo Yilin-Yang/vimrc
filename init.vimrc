@@ -91,6 +91,14 @@ if has('nvim')
     Plugin 'Shougo/neoinclude.vim'
 endif
 
+" " Dependency for vim-easytags.
+Plugin 'xolox/vim-misc'
+
+" " Automatic tag generation for whatever file I'm using!
+" This variable has to be set before loading the plugin.
+let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
+Plugin 'xolox/vim-easytags'
+
 " " All of your Plugins must be added before the following line.
 call vundle#end()           " required.
 

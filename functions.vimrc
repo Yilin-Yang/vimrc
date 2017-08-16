@@ -4,6 +4,7 @@
 "
 "
 "   Utility                                                 [UTILITY]
+"   ctags                                                   [CTAGS]
 "   Convenience Macros                                      [MACRO]
 "   Merge Conflict Resolution                               [MERGE_CONFLICT]
 "   Folding                                                 [FOLDING]
@@ -29,6 +30,52 @@ function CloseErrorWindows()
     lclose
 endfunction
 
+" EFFECTS:  Executes the given command in all active buffers.
+"           When finished, go back to the buffer from which the command
+"           was executed.
+"
+" USAGE:        call BufDoAll({arg})                <cr>
+"               BufDoAll {arg1} {arg2} {arg3}...    <cr>
+"
+"           Note that, when executing a search-and-replace, you should
+"           follow this format:
+"
+"               BufDoAll s:replaceMe:withThisText:ge | update
+"
+"           The option `e` in the call to `s` tells vim to ignore errors
+"           (i.e. from not finding 'replaceMe' in a given buffer.)
+"
+"           `| update` tells vim to write any changes that were made, if
+"           there were any. This stops vim's complaints that it can't abandon
+"           the current buffer since the buffer has unsaved changes.
+"
+" CREDIT:   Taken from:
+"               http://vim.wikia.com/wiki/Run_a_command_in_multiple_buffers
+"
+function BufDoAll(command)
+  let currBuff=bufnr("%")
+  execute 'bufdo ' . a:command
+  execute 'buffer ' . currBuff
+endfunction
+command! -nargs=+ -complete=command BufDoAll call BufDoAll(<q-args>)
+
+
+"=============================================================================
+"   ctags                                                   [CTAGS]
+"=============================================================================
+
+" EFFECTS: Runs ctags recursively on all files and directories in the PWD.
+function UpdateGlobalTags()
+    let l:already_on = 0
+
+    " If autorecursion is on, note that; if not, turn it on.
+    g:easytags_autorecurse ? let l:already_on = 1 : let g:easytags_autorecurse = 1
+
+    execute "normal! :UpdateTags\<cr>"
+
+    " Turn autorecursion off it wasn't on originally.
+    l:already_on ? return : let g:easytags_autorecurse = 0
+endfunction
 
 "=============================================================================
 "   Convenience Macros                                      [MACRO]
