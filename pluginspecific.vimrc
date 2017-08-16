@@ -99,7 +99,7 @@ if has('nvim')
     endif
 
     " Close scratch window upon leaving a buffer.
-    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
+"    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
 
     " omnifuncs
     augroup omnifuncs
