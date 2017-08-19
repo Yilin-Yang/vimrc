@@ -5,6 +5,7 @@
 "
 "   System                                                  [SYSTEM]
 "   Ordinary                                                [ORDINARY]
+"   User Interface                                          [UI]
 "   Functions                                               [FUNCTIONS]
 "   Split Navigation                                        [SPLITS]
 "   Merge Conflicts                                         [MERGE_CONFLICTS]
@@ -68,6 +69,19 @@ endif
     " Number row zero and +/- to open and close tabs
     nnoremap <silent> 0= :tabnew<cr>:NERDTreeToggle<cr>
     nnoremap <silent> 0- :tabclose<cr>
+
+" Exit the rabbit hole
+" " (If you dug too deep into a location list, etc.)
+nnoremap <silent> <leader>^ :e#1<cr>
+
+"=============================================================================
+"   User Interface                                          [UI]
+"=============================================================================
+" Open Location List
+nnoremap <silent> <leader>l :call CloseErrorWindows()<cr>:ll<cr>
+
+" Open QuickFix List
+nnoremap <silent> <leader>q :call CloseErrorWindows()<cr>:cc<cr>
 
 "=============================================================================
 "   Functions                                               [FUNCTIONS]
