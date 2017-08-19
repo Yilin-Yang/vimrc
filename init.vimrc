@@ -1,8 +1,37 @@
+"=============================================================================
+"                             TABLE OF CONTENTS
+"=============================================================================
+"
+"
+"   Fugitive                                                [FUGITIVE]
+"   vim-surround                                            [SURROUND]
+"   Neomake                                                 [NEOMAKE]
+"   vim-unimpaired                                          [UNIMPAIRED]
+"   Tagbar                                                  [TAGBAR]
+"   deoplete                                                [DEOPLETE]
+"=============================================================================
+
 set nocompatible        " non-compatible with basic vi
 filetype off            " don't enable filetype detection during Vundle setup
 
 " Set the runtime path to include Vundle and initialize.
 set rtp+=~/.vim/bundle/Vundle.vim
+
+
+" Basic Vundle Commands:
+" " :PluginList         - lists configured plugins
+" " :PluginInstall      - installs plugins; append `!` to update or just :PluginUpdate
+" " :PluginSearch foo   - searches for foo; append `!` to refresh local cache
+" " :PluginClean        - confirms removal of unused plugins; append `!` to auto-approve removal.
+" "
+" " See :h vundle for more details or the wiki for an FAQ.
+" " Put your non-Plugin stuff after this point.
+"#############################################################################
+"#############################################################################
+"                               BEGIN PLUGINS
+"#############################################################################
+"#############################################################################
+
 call vundle#begin()
 
 " " Let Vundle manage Vundle. Required.
@@ -14,8 +43,11 @@ Plugin 'embear/vim-localvimrc'
     let g:localvimrc_sandbox=0
     let g:localvimrc_name=['.yvimrc']
 
-" " Fugitive
-" " Wrapper for git.
+"=============================================================================
+"   Fugitive                                                [FUGITIVE]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" Wrapper for git.
 "
 " Usage:
 "   :Gstatus
@@ -43,9 +75,14 @@ Plugin 'embear/vim-localvimrc'
 "
 "   :Git        =   run an arbitrary command
 "   :Git!       =   run an arbitrary command and open output in a temp file
+"=============================================================================
 Plugin 'tpope/vim-fugitive'
 
-" " Easily modify the characters surrounding a particular word
+"=============================================================================
+"   vim-surround                                            [SURROUND]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" Easily edit the characters surrounding a given word.
 "
 " Usage:
 "   cs"'        =   change surroundings (from) " to '
@@ -68,20 +105,40 @@ Plugin 'tpope/vim-fugitive'
 Plugin 'tpope/vim-surround'
 
 
+"=============================================================================
+"   Neomake                                                 [NEOMAKE]
+"=============================================================================
+"-----------------------------------------------------------------------------
 " " Asynchronous syntax checker.
 Plugin 'neomake/neomake'
 
+"=============================================================================
+"   NerdTree                                                [NERDTREE]
+"=============================================================================
+"-----------------------------------------------------------------------------
 " " Open a vertical split for hopping between files.
 Plugin 'scrooloose/nerdtree'
 
+"=============================================================================
+"   vim-unimpaired                                          [UNIMPAIRED]
+"=============================================================================
+"-----------------------------------------------------------------------------
 " " Some nice convenience keymappings using the square brackets.
 "
 " See documentation here: ~/.vim/bundle/vim-unimpaired/doc/unpaired.txt
 Plugin 'tpope/vim-unimpaired'
 
+"=============================================================================
+"   Tagbar                                                  [TAGBAR]
+"=============================================================================
+"-----------------------------------------------------------------------------
 " " Create a bar that shows you ctags for the current file.
 Plugin 'majutsushi/tagbar'
 
+"=============================================================================
+"   deoplete                                                [DEOPLETE]
+"=============================================================================
+"-----------------------------------------------------------------------------
 " " Asynchronous autocompletion that's less bloated than YouCompleteMe.
 " Requires neovim.
 if has('nvim')
@@ -94,6 +151,10 @@ endif
 " " Dependency for vim-easytags.
 Plugin 'xolox/vim-misc'
 
+"=============================================================================
+"   vim-surround                                            [SURROUND]
+"=============================================================================
+"-----------------------------------------------------------------------------
 " " Automatic tag generation for whatever file I'm using!
 " This variable has to be set before loading the plugin.
 let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
@@ -102,13 +163,10 @@ Plugin 'xolox/vim-easytags'
 " " All of your Plugins must be added before the following line.
 call vundle#end()           " required.
 
-filetype plugin indent on   " required, filetype detect, indenting per lang
+"#############################################################################
+"#############################################################################
+"                               END PLUGINS
+"#############################################################################
+"#############################################################################
 
-" Basic Vundle Commands:
-" " :PluginList         - lists configured plugins
-" " :PluginInstall      - installs plugins; append `!` to update or just :PluginUpdate
-" " :PluginSearch foo   - searches for foo; append `!` to refresh local cache
-" " :PluginClean        - confirms removal of unused plugins; append `!` to auto-approve removal.
-" "
-" " See :h vundle for more details or the wiki for an FAQ.
-" " Put your non-Plugin stuff after this point.
+filetype plugin indent on   " required, filetype detect, indenting per lang
