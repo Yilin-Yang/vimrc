@@ -1,9 +1,4 @@
 #!/bin/bash
-if [ `dirname $0` == '.' ]; then
-	echo "Don't run from this directory (doesn't work and Yilin is lazy!)"
-	echo "Clone vimrc into a folder in your home folder, then run from your home folder!"
-	exit
-fi
 
 INSTALLCMD="sudo apt-get install -y"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
