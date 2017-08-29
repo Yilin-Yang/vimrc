@@ -19,7 +19,7 @@
 set pastetoggle=<F2>
 
 " Set my preferred leader key
-let mapleader=","
+let mapleader="\\"
 
 "=============================================================================
 "   Ordinary                                                [ORDINARY]
