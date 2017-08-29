@@ -3,6 +3,7 @@
 "=============================================================================
 "
 "
+"   localvimrc                                              [LOCALVIMRC]
 "   Fugitive                                                [FUGITIVE]
 "   vim-surround                                            [SURROUND]
 "   Neomake                                                 [NEOMAKE]
@@ -37,7 +38,11 @@ call vundle#begin()
 " " Let Vundle manage Vundle. Required.
 Plugin 'VundleVim/Vundle.vim'
 
-" " Local .vimrc settings.
+"=============================================================================
+"   localvimrc                                              [LOCALVIMRC]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" Local .vimrc settings.
 Plugin 'embear/vim-localvimrc'
     let g:localvimrc_ask=0
     let g:localvimrc_sandbox=0
