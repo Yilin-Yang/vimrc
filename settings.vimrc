@@ -11,9 +11,11 @@ set tabstop=4                       " One tab counts for four spaces
 set backspace=indent,eol,start      " Backspace over autoindents, line breaks,
                                     " position at start of insert mode
 set timeoutlen=200                  " Decrease timeout for combined keymaps
+set scrolloff=20
 set nohidden                        " Disallow hidden buffers.
 set visualbell                      " FOR THE LOVE OF GOD STOP BOOPING IN WSL
 set showcmd                         " See leader key in corner
+set lazyredraw                      " Only redraw after given command has completed
 
 " Appearance
 syntax on                           " Turn on syntax highlighting
@@ -26,7 +28,7 @@ set foldcolumn=1                    " Show a column with all folds
     set ruler                       " Show line lengths
     set cursorline                  " Mark the current line
     set cursorcolumn                " Mark the current column
-        hi CursorColumn cterm=NONE ctermbg=235 ctermfg=white guibg=235 guifg=white
+        hi CursorColumn cterm=NONE ctermbg=NONE ctermfg=white guibg=NONE guifg=white
                                     " ^ very dark gray
                                     "           ^ creates a cool effect
 
