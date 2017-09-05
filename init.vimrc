@@ -10,6 +10,7 @@
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
 "   deoplete                                                [DEOPLETE]
+"   lldb                                                    [LLDB]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -46,7 +47,8 @@ Plugin 'VundleVim/Vundle.vim'
 Plugin 'embear/vim-localvimrc'
     let g:localvimrc_ask=0
     let g:localvimrc_sandbox=0
-    let g:localvimrc_name=['.yvimrc']
+    let g:localvimrc_name=['.yvimrc', '.lvimrc']
+    let g:localvimrc_reverse = 1
 
 "=============================================================================
 "   Fugitive                                                [FUGITIVE]
@@ -165,6 +167,15 @@ Plugin 'xolox/vim-misc'
 let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
 Plugin 'xolox/vim-easytags'
 
+"=============================================================================
+"   lldb.nvim                                                    [LLDB]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " IDE-like debugger integration for vim.
+Plugin 'dbgx/lldb.nvim'
+
+
+"#############################################################################
 " " All of your Plugins must be added before the following line.
 call vundle#end()           " required.
 
