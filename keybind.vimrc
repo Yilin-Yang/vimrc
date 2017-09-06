@@ -19,7 +19,7 @@
 set pastetoggle=<F2>
 
 " Set my preferred leader key
-let mapleader="\\"
+let mapleader="\<Space>"
 
 "=============================================================================
 "   Ordinary                                                [ORDINARY]
@@ -88,12 +88,19 @@ nnoremap <silent> <leader>q :call CloseErrorWindows()<cr>:cc<cr>
 "=============================================================================
 
 " Function Key Toggles
+
 "   Toggle Fold
     nnoremap <silent> <F5> :call FoldFunctionBodies()<cr>
 
-"   Wrap/Unwrap Lines
-    nnoremap <silent> <F3> :call WrapAll()<cr>
-    nnoremap <silent> <F4> :call UnwrapAll()<cr>
+" Wrap or unwrap large markdown files
+
+augroup markdown_specific
+    autocmd!
+    " Wrap/Unwrap Lines
+    autocmd FileType markdown
+        \ nnoremap <silent> <F3> :call WrapAll()<cr>
+        \ | nnoremap <silent> <F4> :call UnwrapAll()<cr>
+augroup END
 
 "=============================================================================
 "   Split Navigation                                        [SPLITS]
