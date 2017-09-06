@@ -23,6 +23,9 @@ $INSTALLCMD clang
 #	Should work automatically with syntastic and neomake
 $INSTALLCMD yamllint
 
+# Install shellcheck, for bash script linting
+$INSTALLCMD shellcheck
+
 # Install ctags
 $INSTALLCMD exuberant-ctags
 
@@ -34,7 +37,7 @@ $INSTALLCMD exuberant-ctags
 mv ~/.vimrc ~/.vimrc.bak
 
 # Create symlink to this .vimrc
-ln -s $DIR/.vimrc ~/.vimrc
+ln -s "$DIR/.vimrc" ~/.vimrc
 
 mkdir ~/.config
 mkdir ~/.config/nvim
