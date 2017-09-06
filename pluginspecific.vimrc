@@ -8,6 +8,7 @@
 "   Tagbar                                                  [TAGBAR]
 "   deoplete                                                [DEOPLETE]
 "   vim-easytags                                            [EASYTAGS]
+"   lldb                                                    [LLDB]
 "=============================================================================
 
 "=============================================================================
@@ -151,3 +152,48 @@ nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
         \ 'BufEnter',
         \ 'BufLeave'
     \ ]
+
+
+"=============================================================================
+"   lldb                                                    [LLDB]
+"=============================================================================
+
+"-------------------------------------------------------------------------
+" Starts LLDB debugger session.
+nnoremap <silent> <Leader>dn :LLsession new<cr>
+"-------------------------------------------------------------------------
+
+
+" Switch to debug mode.
+nnoremap <silent> <Leader>md :LLmode debug<cr>
+
+" Switch to code mode.
+nnoremap <silent> <Leader>mc :LLmode code<cr>
+
+"-------------------------------------------------------------------------
+" NOTE: these mappings can't be 'nore', since they have to invoke other
+"       mappings.
+"-------------------------------------------------------------------------
+
+" Set breakpoint on current line.
+nmap <Leader>b <Plug>LLBreakSwitch
+
+" Send selected text to stdin.
+vmap <F4> <Plug>LLStdInSelected
+
+"-------------------------------------------------------------------------
+
+" Prompt the user for something to send to stdin.
+" Sends a newline character at the end of the input line.
+nnoremap <silent> <Leader><F4> :LLstdin<cr>
+
+nnoremap <F8> :LL continue<cr>
+nnoremap <S-F8> :LL process interrupt<cr>
+nnoremap <F9> :LL print <C-R>=expand('<cword>')<cr>
+vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<cr><cr>
+
+" Step in.
+nnoremap = :LL step<cr>
+
+" Step over.
+nnoremap + :LL next<cr>
