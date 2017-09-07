@@ -12,6 +12,7 @@ sudo apt update
 $INSTALLCMD neovim
 
 ## Enable python support in nvim
+sudo apt install python2-pip
 sudo apt install python3-pip
 pip2 install --upgrade neovim
 pip3 install --upgrade neovim
