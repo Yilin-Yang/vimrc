@@ -7,6 +7,7 @@
 "   Fugitive                                                [FUGITIVE]
 "   vim-surround                                            [SURROUND]
 "   Neomake                                                 [NEOMAKE]
+"   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
 "   deoplete                                                [DEOPLETE]
@@ -118,6 +119,13 @@ Plugin 'tpope/vim-surround'
 "-----------------------------------------------------------------------------
 " " Asynchronous syntax checker.
 Plugin 'neomake/neomake'
+
+"=============================================================================
+"   vimtex                                                  [VIMTEX]
+"=============================================================================
+" " LaTeX plugin for vim. Support for document compilation, PDF viewers,
+" navigation, etc.
+Plugin 'lervag/vimtex'
 
 "=============================================================================
 "   NerdTree                                                [NERDTREE]

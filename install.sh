@@ -37,6 +37,9 @@ $INSTALLCMD exuberant-ctags
 #   From: https://github.com/dbgx/lldb.nvim/issues/6#issuecomment-127192347
 ./fix-lldb.sh
 
+# Install vimtex dependencies
+$INSTALLCMD latexmk
+
 # Delete backup vimrc if you need to
 mv ~/.vimrc ~/.vimrc.bak
 

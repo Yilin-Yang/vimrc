@@ -9,6 +9,7 @@
 "   deoplete                                                [DEOPLETE]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
+"   vimtex                                                  [VIMTEX]
 "=============================================================================
 
 "=============================================================================
@@ -114,6 +115,13 @@ if has('nvim')
 
     " Insert mode tab-completion without breaking real presses of the tab key.
     inoremap <expr><tab> pumvisible() ? DeopleteTab() : "\<tab>"
+
+    " Enable vimtex support.
+    if !exists('g:deoplete#omni#input_patterns')
+        let g:deoplete#omni#input_patterns = {}
+    endif
+    let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
+
 endif
 
 "=============================================================================
@@ -200,3 +208,9 @@ nnoremap + :LL next<cr>
 
 let g:lldb#sign#bp_symbol="B>"
 let g:lldb#sign#pc_symbol="->"
+
+"=============================================================================
+"   vimtex                                                  [VIMTEX]
+"=============================================================================
+" Enable folding of documents by LaTeX structure.
+let g:vimtex_fold_enabled=1

@@ -21,6 +21,9 @@ set pastetoggle=<F2>
 " Set my preferred leader key
 let mapleader="\<Space>"
 
+" Set my preferred local leader, primarily used with vimtex
+let maplocalleader="\\"
+
 "=============================================================================
 "   Ordinary                                                [ORDINARY]
 "=============================================================================
