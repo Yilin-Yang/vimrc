@@ -30,7 +30,7 @@ augroup neomake_scheme
         \ hi link NeomakeError Error |
         \ hi link NeomakeWarning Todo |
         \ hi link NeomakeInfo Statement |
-        \ hi link NeomakeMessage Todo |
+        \ hi link NeomakeMessage Todo
 augroup END
 
 let g:neomake_open_list = 2 " Preserve cursor location on loc-list open
@@ -197,3 +197,6 @@ nnoremap = :LL step<cr>
 
 " Step over.
 nnoremap + :LL next<cr>
+
+let g:lldb#sign#bp_symbol="B>"
+let g:lldb#sign#pc_symbol="->"
