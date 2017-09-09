@@ -46,10 +46,6 @@ Plugin 'VundleVim/Vundle.vim'
 "-----------------------------------------------------------------------------
 " Local .vimrc settings.
 Plugin 'embear/vim-localvimrc'
-    let g:localvimrc_ask=0
-    let g:localvimrc_sandbox=0
-    let g:localvimrc_name=['.yvimrc', '.lvimrc']
-    let g:localvimrc_reverse = 1
 
 "=============================================================================
 "   Fugitive                                                [FUGITIVE]
