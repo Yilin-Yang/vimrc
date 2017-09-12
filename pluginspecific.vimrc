@@ -70,6 +70,27 @@ let g:neomake_cpp_gcc_maker = {
 \ }
 let g:neomake_cpp_enabled_makers = ['gcc']
 
+" -c:   clean regeneratable files
+" -cd:  change-dir to the source file before processing
+" -f:   continue processing after errors
+" -g:   force reprocessing, even if no changes were made
+" -pvc: preview file continuously
+let g:neomake_tex_latexmk_maker = {
+    \ 'exe' : 'latexmk',
+    \ 'args' : [
+    \   '-c',
+    \   '-cd',
+    \   '-f',
+    \   '-g',
+    \   '-pdf',
+    \   '-pvc',
+    \   '-verbose',
+    \   '-file-line-error',
+    \   '-synctex=1',
+    \ ],
+\ }
+"let g:neomake_tex_enabled_makers = ['latexmk']
+
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
 "=============================================================================
