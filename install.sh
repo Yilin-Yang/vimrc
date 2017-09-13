@@ -30,6 +30,9 @@ $INSTALLCMD yamllint
 # Install shellcheck, for bash script linting
 $INSTALLCMD shellcheck
 
+# Install cppcheck, for clang checking
+$INSTALLCMD cppcheck;
+
 # Install ctags
 $INSTALLCMD exuberant-ctags
 
