@@ -220,6 +220,15 @@ nmap <Leader>b <Plug>LLBreakSwitch
 vmap <F4> <Plug>LLStdInSelected
 
 "-------------------------------------------------------------------------
+" NOTE: file redirection doesn't work like it does in GDB. You have to
+"       start LLDB and start the program with:
+"               process launch -i <filename> -- <program's arguments>
+"                                            ^ end of arguments to `process
+"                                               launch`
+"                               ^ redirect the given file to stdin
+"-------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------
 
 " Prompt the user for something to send to stdin.
 " Sends a newline character at the end of the input line.
