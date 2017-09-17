@@ -1,0 +1,57 @@
+snippet section_divider
+%===============================================================================
+$0
+endsnippet
+
+snippet subsection_divider
+%-------------------------------------------------------------------------------
+$0
+endsnippet
+
+snippet pagebreak
+%--------------------------------------------------------------------------------
+\pagebreak
+%--------------------------------------------------------------------------------
+
+$0
+endsnippet
+
+snippet hw_template
+\documentclass[english]{article}
+
+\usepackage{amsmath}                % math formatting
+\usepackage{amsfonts}               % math fonts
+\usepackage{color}                  % colored text
+\usepackage{etoolbox}               % block quotes
+\usepackage[margin=1.5in]{geometry} % change margin sizes
+\usepackage{hyperref}               % hyperlinks
+\usepackage{listings}               % code-block formatting
+\usepackage{parskip}                % no indentation
+
+%-------------------------------------------------------------------------------
+% Define local variables.
+%-------------------------------------------------------------------------------
+\begingroup
+\def \titleshift {-1.5cm}
+\def \subsectionshift {-0.5cm}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{\vspace{-1in}$1\vspace{-2ex}}
+\author{Yilin Yang (yiliny)$2}
+\date{$3} % blank date
+\maketitle
+\vspace{\titleshift} % reduce space
+
+\section{$0}
+%===============================================================================
+
+\subsection{}
+%-------------------------------------------------------------------------------
+
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\endgroup
+endsnippet
