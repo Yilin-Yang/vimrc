@@ -221,7 +221,7 @@ endfunction
 function TextWrap(should_format)
     if a:should_format==?1
         " Text wrapping
-        set textwidth=75                " Hard line breaks, with newline chars
+        set textwidth=80                " Hard line breaks, with newline chars
     else
         set textwidth=0                 " Disable text wrapping
     endif
