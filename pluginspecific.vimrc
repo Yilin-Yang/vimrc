@@ -11,6 +11,7 @@
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   vimtex                                                  [VIMTEX]
+"   UltiSnips                                               [ULTISNIPS]
 "=============================================================================
 
 
@@ -253,3 +254,30 @@ let g:lldb#sign#pc_symbol="->"
 "=============================================================================
 " Enable folding of documents by LaTeX structure.
 let g:vimtex_fold_enabled=1
+
+
+"=============================================================================
+"   UltiSnips                                               [ULTISNIPS]
+"=============================================================================
+" Decide whether to open snippet editor in a horizontal/vertical split
+" automatically.
+let g:UltiSnipsEditSplit='context'
+
+" Append the UltiSnips directory in the ~/vimrc folder to runtimepath.
+let &runtimepath.=',~/vimrc/'
+
+" Store snippets files in the vimrc repository.
+let g:UltiSnipsSnippetsDir='~/vimrc/UltiSnips'
+
+" Search the above directory for snippets files.
+let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/vimrc/UltiSnips"]
+
+let g:UltiSnipsExpandTrigger='<Leader><Tab>'
+let g:UltiSnipsListSnippets='<Leader>ui'
+"let g:UltiSnipsJumpForwardTrigger='<M-d>'
+"let g:UltiSnipsJumpBackwardTrigger='<M-a>'
+
+" Launch UltiSnips snippets editor.
+"   'The UltiSnipsEdit command opens a private snippet definition file for the
+"   current filetype. If no snippet file exists, a new file is created.'
+nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>

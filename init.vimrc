@@ -12,6 +12,8 @@
 "   Tagbar                                                  [TAGBAR]
 "   deoplete                                                [DEOPLETE]
 "   lldb                                                    [LLDB]
+"   vim-snippets                                            [SNIPPETS]
+"   UltiSnips                                               [ULTISNIPS]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -178,6 +180,20 @@ Plugin 'xolox/vim-easytags'
 " " IDE-like debugger integration for vim.
 Plugin 'dbgx/lldb.nvim'
 
+
+"=============================================================================
+"   vim-snippets                                            [SNIPPETS]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Actual implementation of snippets. Requires an engine, like UltiSnips.
+Plugin 'honza/vim-snippets'
+
+"=============================================================================
+"   UltiSnips                                               [ULTISNIPS]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Snippets engine that uses Python and neocomplete.
+Plugin 'SirVer/ultisnips'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
