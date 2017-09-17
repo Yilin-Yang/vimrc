@@ -4,6 +4,7 @@
 "
 "   C++ Formatting                                          [CPP]
 "   Markdown Formatting                                     [MARKDOWN]
+"   TeX Formatting                                          [TEX]
 "=============================================================================
 
 "=============================================================================
@@ -38,8 +39,14 @@ endfunction
 " .md files, .markdown files
  augroup md_format
     au!
-    autocmd BufEnter,BufNew *.md        call MdFormat(1)
-    autocmd BufEnter,BufNew *.markdown  call MdFormat(1)
-    autocmd BufLeave *.md               call MdFormat(0)
-    autocmd BufLeave *.markdown         call MdFormat(0)
- augroup end
+    autocmd filetype markdown           call MdFormat(1)
+augroup end
+
+
+"=============================================================================
+"   TeX Formatting                                          [TEX]
+"=============================================================================
+augroup tex_format
+    au!
+    autocmd filetype tex                call TextWrap(1)
+augroup end
