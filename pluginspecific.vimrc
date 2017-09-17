@@ -274,8 +274,8 @@ let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/vimrc/UltiSnips"]
 
 let g:UltiSnipsExpandTrigger='<Leader><Tab>'
 let g:UltiSnipsListSnippets='<Leader>ui'
-"let g:UltiSnipsJumpForwardTrigger='<M-d>'
-"let g:UltiSnipsJumpBackwardTrigger='<M-a>'
+let g:UltiSnipsJumpForwardTrigger='<Leader><Tab>'
+let g:UltiSnipsJumpBackwardTrigger='<Leader><S-Tab>'
 
 " Launch UltiSnips snippets editor.
 "   'The UltiSnipsEdit command opens a private snippet definition file for the
