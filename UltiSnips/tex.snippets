@@ -71,3 +71,40 @@ snippet hw_template
 
 \endgroup
 endsnippet
+
+snippet code_notes_template
+\documentclass[english]{article}
+
+\usepackage{amsmath}                % math formatting
+\usepackage{amsfonts}               % math fonts
+\usepackage{etoolbox}               % block quotes
+\usepackage[margin=1.5in]{geometry} % change margin sizes
+\usepackage{listings}               % code-block formatting
+\usepackage{parskip}                % don't indent paragraphs
+\usepackage[usenames,dvipsnames,svgnames,table]{xcolor} % color
+
+%-------------------------------------------------------------------------------
+% Define local variables.
+%-------------------------------------------------------------------------------
+\begingroup
+\def \subsectionshift {-0.5cm}
+% C++ code formatting.
+\lstset{language=C++,
+        basicstyle=\ttfamily,
+        keywordstyle=\color{blue}\ttfamily,
+        stringstyle=\color{red}\ttfamily,
+        commentstyle=\color{cyan}\ttfamily,
+        morecomment=[l][\color{magenta}]{\#}
+}
+%-------------------------------------------------------------------------------
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+\title{\vspace{-1in}$1\vspace{-2ex}}
+\author{Yilin Yang (yiliny)}
+\maketitle
+
+\section{$0}
+%===============================================================================
+endsnippet
