@@ -95,7 +95,7 @@ function TestCaseAutoformat()
         %s/BOOST_AUTO_TEST_CASE(\(.*\))/BOOST_AUTO_TEST_CASE(\1)\r{\r\tBOOST_TEST_MESSAGE("\1");\r\t\r\tBOOST_CHECK_MESSAGE(,"\1 failed!");\r}\r
     else
         " But, if I'm just writing generic test cases for a class,
-        search("int main") " Don't reformat the forward declarations
+        call search("int main")
 
         .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r
     endif
