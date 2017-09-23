@@ -21,6 +21,8 @@ set lazyredraw                      " Only redraw after given command has comple
 syntax on                           " Turn on syntax highlighting
 set background=dark                 " Make text readable on dark background
 set foldcolumn=1                    " Show a column with all folds
+set listchars=tab:│·,trail:X,extends:>,precedes:<,nbsp:+
+set list
 
 " Information Density
     set relativenumber              " Relative numbering!
