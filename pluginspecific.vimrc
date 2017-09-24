@@ -241,10 +241,10 @@ nnoremap <F9> :LL print <C-R>=expand('<cword>')<cr>
 vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<cr><cr>
 
 " Step in.
-nnoremap = :LL step<cr>
+nnoremap + :LL step<cr>
 
 " Step over.
-nnoremap + :LL next<cr>
+nnoremap = :LL next<cr>
 
 let g:lldb#sign#bp_symbol="B>"
 let g:lldb#sign#pc_symbol="->"
