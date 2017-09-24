@@ -97,9 +97,10 @@ function TestCaseAutoformat()
         " But, if I'm just writing generic test cases for a class,
         call search("int main")
 
-        .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r
+        .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r\r
     endif
 
+    execute "normal! :retab\<cr>"
     noh " stop highlighting matched function headers after the above call
 endfunction
 
