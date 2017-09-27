@@ -200,6 +200,9 @@ nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
 "-------------------------------------------------------------------------
 " Starts LLDB debugger session.
 nnoremap <silent> <Leader>dn :LLsession new<cr>
+
+" Starts LLDB debugger session and immediately switches to debug mode.
+nnoremap <silent> <Leader>dd :LLsession new<cr>:LLmode debug<cr>
 "-------------------------------------------------------------------------
 
 
