@@ -203,8 +203,25 @@ nnoremap <silent> <Leader>dn :LLsession new<cr>
 
 " Starts LLDB debugger session and immediately switches to debug mode.
 nnoremap <silent> <Leader>dd :LLsession new<cr>:LLmode debug<cr>
+
+" Loads the (default) existing LLDB debugger session.
+nnoremap <silent> <Leader>dr :LLsession load<cr>:LLmode debug<cr>
+
+" Reloads the current debugger session from the file.
+nnoremap <silent> <Leader>dr :LLsession reload<cr>
+
+" Shows the current session file.
+nnoremap <silent> <Leader>dl :LLsession show<cr>
 "-------------------------------------------------------------------------
 
+
+"-------------------------------------------------------------------------
+" Save existing breakpoints.
+nnoremap <silent> <Leader>ds :LLsession bp-save<cr>
+
+" Load breakpoints that were defined in the session state.
+nnoremap <silent> <Leader>do :LLsession bp-save<cr>
+"-------------------------------------------------------------------------
 
 " Switch to debug mode.
 nnoremap <silent> <Leader>md :LLmode debug<cr>
@@ -233,6 +250,19 @@ vmap <F4> <Plug>LLStdInSelected
 "-------------------------------------------------------------------------
 
 "-------------------------------------------------------------------------
+" NOTE: setting conditional breakpoints in LLDB is annoying, but useful.
+"
+"       1)  Set a breakpoint and note its number. Assume it's 3, for sake of
+"           example.
+"       2)  The following will modify that breakpoint to be a conditional
+"           breakpoint, that only fires if the given condition is true.
+"               :LL br mod -c '(obj.mem == 3) && (obj.other_mem == 2)' 3
+"                   ^ breakpoint
+"                      ^ modify
+"                           ^ condition
+"-------------------------------------------------------------------------
+
+"-------------------------------------------------------------------------
 
 " Prompt the user for something to send to stdin.
 " Sends a newline character at the end of the input line.
@@ -249,8 +279,12 @@ nnoremap + :LL step<cr>
 " Step over.
 nnoremap = :LL next<cr>
 
+"-------------------------------------------------------------------------
+hi link LLSelectedPCSign Underlined
+
 let g:lldb#sign#bp_symbol="B>"
 let g:lldb#sign#pc_symbol="->"
+"-------------------------------------------------------------------------
 
 "=============================================================================
 "   vimtex                                                  [VIMTEX]
