@@ -11,6 +11,7 @@
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
 "   deoplete                                                [DEOPLETE]
+"   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
@@ -165,7 +166,7 @@ endif
 Plugin 'xolox/vim-misc'
 
 "=============================================================================
-"   vim-surround                                            [SURROUND]
+"   vim-easytags                                            [EASYTAGS]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Automatic tag generation for whatever file I'm using!
