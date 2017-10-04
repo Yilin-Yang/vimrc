@@ -42,23 +42,30 @@ snippet hw_template
 \usepackage[margin=1.5in]{geometry} % change margin sizes
 \usepackage{hyperref}               % hyperlinks
 \usepackage{listings}               % code-block formatting
-\usepackage{parskip}                % no indentation
 
-%-------------------------------------------------------------------------------
-% Define local variables.
-%-------------------------------------------------------------------------------
-\begingroup
-\def \titleshift {-1.5cm}
-\def \subsectionshift {-0.5cm}
+% Krista macro: (no para space between items, small indent)
+% Very handy for cheatsheets and smushing bulleted lists onto the same page
+\ifx\maketight\undefined
+\newcommand{\maketight}{            % tight tight tight
+    \setlength{\topsep}{0in}
+    \setlength{\partopsep}{0in}
+    \setlength{\itemsep}{-.05in}
+    \setlength{\parsep}{0in}
+    \setlength{\leftmargin}{1.5em}
+    \setlength{\rightmargin}{0in}
+    \setlength{\itemindent}{0in}
+}
+
+% Lowercase alphabetic enumeration for subsections.
+\renewcommand\thesubsection{\alph{subsection}}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{\vspace{-1in}$1\vspace{-2ex}}
+\title{$1}
 \author{Yilin Yang (yiliny)$2}
 \date{$3} % blank date
 \maketitle
-\vspace{\titleshift} % reduce space
 
 \section{$0}
 %===============================================================================
@@ -68,8 +75,6 @@ snippet hw_template
 
 \end{document}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\endgroup
 endsnippet
 
 snippet code_notes_template
