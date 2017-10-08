@@ -49,4 +49,5 @@ augroup end
 augroup tex_format
     au!
     autocmd filetype tex                call TextWrap(1)
+    autocmd BufEnter *.tex              set filetype=tex
 augroup end

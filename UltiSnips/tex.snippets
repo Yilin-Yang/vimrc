@@ -23,11 +23,11 @@ snippet problem_template
 \section*{$1}
 %===============================================================================
 
-\subsection*{$2}
+\subsection{$2}
 %-------------------------------------------------------------------------------
 $0
 
-\subsection*{$3}
+\subsection{$3}
 %-------------------------------------------------------------------------------
 
 endsnippet
@@ -42,29 +42,26 @@ snippet hw_template
 \usepackage[margin=1.5in]{geometry} % change margin sizes
 \usepackage{hyperref}               % hyperlinks
 \usepackage{listings}               % code-block formatting
+\usepackage{tikz}                   % circle-y arrow diagrams and whatnot
+    \usetikzlibrary{arrows,automata}
 
-% Krista macro: (no para space between items, small indent)
-% Very handy for cheatsheets and smushing bulleted lists onto the same page
-\ifx\maketight\undefined
-\newcommand{\maketight}{            % tight tight tight
-    \setlength{\topsep}{0in}
-    \setlength{\partopsep}{0in}
-    \setlength{\itemsep}{-.05in}
-    \setlength{\parsep}{0in}
-    \setlength{\leftmargin}{1.5em}
-    \setlength{\rightmargin}{0in}
-    \setlength{\itemindent}{0in}
-}
+\input{../header.tex}
 
 % Lowercase alphabetic enumeration for subsections.
 \renewcommand\thesubsection{\alph{subsection}}
 
+% Section headers for answering questions.
+\newcommand{\problem}[1]{\section*{Problem #1}}		% for numbered problems
+\newcommand{\subproblem}{\subsection{}}				% for lettered subproblems
+\newcommand{\answer}{\subsection*{Answer}}			% for numbered problems
+\newcommand{\subanswer}{\subsubsection*{Answer}}	% for subproblem answers
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
-\title{$1}
-\author{Yilin Yang (yiliny)$2}
-\date{$3} % blank date
+\title{EECS 376 Homework \#$1}
+\author{Yilin Yang (yiliny), Section 002}
+\date{} % blank date
 \maketitle
 
 \section{$0}
