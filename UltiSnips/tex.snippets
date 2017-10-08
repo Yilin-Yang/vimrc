@@ -47,14 +47,16 @@ snippet hw_template
 
 \input{../header.tex}
 
+% Better numbering scheme for numbered problems.
+\renewcommand\thesection{Problem \arabic{section}}
+
 % Lowercase alphabetic enumeration for subsections.
-\renewcommand\thesubsection{\alph{subsection}}
+\renewcommand\thesubsection{Part \alph{subsection}}
 
 % Section headers for answering questions.
-\newcommand{\problem}[1]{\section*{Problem #1}}		% for numbered problems
-\newcommand{\subproblem}{\subsection{}}				% for lettered subproblems
-\newcommand{\answer}{\subsection*{Answer}}			% for numbered problems
-\newcommand{\subanswer}{\subsubsection*{Answer}}	% for subproblem answers
+\newcommand{\subproblem}{\subsection{} \\}				% for lettered subproblems
+\newcommand{\answer}{\subsection*{Answer} \\}			% for numbered problems
+\newcommand{\subanswer}{\subsubsection*{Answer} \\}	% for subproblem answers
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
