@@ -32,6 +32,9 @@ let maplocalleader="\\"
 inoremap jk <esc>
 vnoremap jk <esc>
 
+" Write file by double-tapping space.
+nnoremap <leader><leader> :w<cr>
+
 if has('nvim')
     " nvim specific, not needed for vim
     " Map j and k to exiting terminal mode
