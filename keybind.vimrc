@@ -28,6 +28,9 @@ let maplocalleader="\\"
 "   Ordinary                                                [ORDINARY]
 "=============================================================================
 
+" Write the current buffer by double-tapping the leader key.
+nnoremap <leader><leader> :w<cr>
+
 " Exit interactive/visual mode by hitting j and k
 inoremap jk <esc>
 vnoremap jk <esc>
@@ -84,10 +87,10 @@ nnoremap <silent> <leader>^ :e#1<cr>
 "   User Interface                                          [UI]
 "=============================================================================
 " Open Location List
-nnoremap <silent> <leader>l :call CloseErrorWindows()<cr>:ll<cr>
+nnoremap <silent> <leader>l :call CloseErrorWindows()<cr>:lopen<cr>
 
 " Open QuickFix List
-nnoremap <silent> <leader>q :call CloseErrorWindows()<cr>:cc<cr>
+nnoremap <silent> <leader>q :call CloseErrorWindows()<cr>:copen<cr>
 
 "=============================================================================
 "   Functions                                               [FUNCTIONS]
