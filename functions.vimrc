@@ -92,7 +92,7 @@ endfunction
 function TestCaseAutoformat()
     if search("BOOST")
         " If I'm writing Boost test cases, format the function headers differently
-        %s/BOOST_AUTO_TEST_CASE(\(.*\))/BOOST_AUTO_TEST_CASE(\1)\r{\r\tBOOST_TEST_MESSAGE("\1");\r\t\r\tBOOST_CHECK_MESSAGE(,"\1 failed!");\r}\r
+        %s/BOOST_AUTO_TEST_CASE(\(.*\))/BOOST_AUTO_TEST_CASE(\1)\r{\r\tBOOST_TEST_MESSAGE("\1");\r\t\r\tBOOST_CHECK_MESSAGE(, "\1 failed!");\r}\r
     else
         " But, if I'm just writing generic test cases for a class,
         call search("int main")
