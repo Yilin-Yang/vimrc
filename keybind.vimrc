@@ -68,6 +68,10 @@ endif
     nnoremap <silent> <M-j> :tabp<cr>
     nnoremap <silent> <M-k> :tabn<cr>
 
+    " Alt + E/Q to open/close tabs
+    nnoremap <silent> <M-e> :tabnew<cr>:NERDTreeToggle<cr>
+    nnoremap <silent> <M-q> :tabclose<cr>
+
     " Alt + N/C to open/close tabs
     nnoremap <silent> <M-n> :tabnew<cr>:NERDTreeToggle<cr>
     nnoremap <silent> <M-c> :tabclose<cr>
