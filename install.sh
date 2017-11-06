@@ -17,11 +17,12 @@ $INSTALLCMD python3-pip
 pip2 install --upgrade neovim
 pip3 install --upgrade neovim
 
-## Install libclang for deoplete-clang support
-$INSTALLCMD clang
+## Install recent clang version for LSP support
+./llvm.sh
 
 ## Install lldb for integrated debugger support
 $INSTALLCMD lldb
+
 
 # Install yamllint
 #	Should work automatically with syntastic and neomake
