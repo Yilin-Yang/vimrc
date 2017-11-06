@@ -9,7 +9,6 @@
 "   Merge Conflict Resolution                               [MERGE_CONFLICT]
 "   Folding                                                 [FOLDING]
 "   Text Wrapping                                           [TEXT_WRAPPING]
-"   Autocompletion                                          [AUTOCOMPLETION]
 "=============================================================================
 
 "=============================================================================
@@ -226,20 +225,4 @@ function TextWrap(should_format)
     else
         set textwidth=0                 " Disable text wrapping
     endif
-endfunction
-
-"=============================================================================
-"   Autocompletion                                          [AUTOCOMPLETION]
-"=============================================================================
-
-" EFFECTS:  If a deoplete completion window is open, selects the next item down
-"           from the top (or the first item, if one wasn't selected), inserts
-"           it, and closes the popup by typing a space.
-function DeopleteTab()
-    " 1) Select the item at the top of the list,
-    " 2) Exit insert mode,
-    " 3) Call the close_popup function,
-    " 4) Enter insert mode again, with the cursor in the correct position,
-    " 5) Type a space, to close the popup window.
-    return "\<C-n>\<Esc>a "
 endfunction

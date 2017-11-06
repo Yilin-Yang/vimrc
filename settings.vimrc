@@ -16,6 +16,13 @@ set nohidden                        " Disallow hidden buffers.
 set visualbell                      " FOR THE LOVE OF GOD STOP BOOPING IN WSL
 set showcmd                         " See leader key in corner
 set lazyredraw                      " Only redraw after given command has completed
+set completeopt=menuone,noinsert    " Show pop-up menu even when
+                                    " there's only one option, don't insert
+                                    " text without user input.
+
+
+let g:cm_completeopt=&completeopt   " workaround to prevent overriding by
+                                    " nvim-completion-manager
 
 " Appearance
 syntax on                           " Turn on syntax highlighting

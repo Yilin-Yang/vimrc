@@ -7,7 +7,7 @@
 "   Neomake                                                 [NEOMAKE]
 "   NerdTree                                                [NERDTREE]
 "   Tagbar                                                  [TAGBAR]
-"   deoplete                                                [DEOPLETE]
+"   nvim-completion-manager                                 [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   vimtex                                                  [VIMTEX]
@@ -121,39 +121,28 @@ nnoremap <silent> <Leader>g :TagbarOpenAutoClose<cr>
 nnoremap <silent> <Leader>b :TagbarToggle<cr>
 
 "=============================================================================
-"   deoplete                                                [DEOPLETE]
+"   nvim-completion-manager                                 [NCM]
 "=============================================================================
 if has('nvim')
-    " Run at startup.
-    let g:deoplete#enable_at_startup = 1
-
-    " Make sure that autocompletion will actually trigger.
-    if !exists('g:deoplete#omni#input_patterns')
-        let g:deoplete#omni#input_patterns = {}
-    endif
-
-    " Close scratch window upon leaving a buffer.
-"    autocmd InsertLeave,CompleteDone * if pumvisible() == 0 | pclose | endif
-
-    " omnifuncs
-    augroup omnifuncs
-      autocmd!
-      autocmd FileType css setlocal omnifunc=csscomplete#CompleteCSS
-      autocmd FileType html,markdown setlocal omnifunc=htmlcomplete#CompleteTags
-      autocmd FileType javascript setlocal omnifunc=javascriptcomplete#CompleteJS
-      autocmd FileType python setlocal omnifunc=pythoncomplete#Complete
-      autocmd FileType xml setlocal omnifunc=xmlcomplete#CompleteTags
-    augroup end
-
     " Insert mode tab-completion without breaking real presses of the tab key.
-    inoremap <expr><tab> pumvisible() ? DeopleteTab() : "\<tab>"
+    inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
+
+    " Press Enter to close the menu **and also** start a new line.
+    inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
 
     " Enable vimtex support.
-    if !exists('g:deoplete#omni#input_patterns')
-        let g:deoplete#omni#input_patterns = {}
-    endif
-    let g:deoplete#omni#input_patterns.tex = g:vimtex#re#deoplete
-
+    augroup nvim_cm_setup
+      autocmd!
+      autocmd User CmSetup call cm#register_source({
+            \ 'name' : 'vimtex',
+            \ 'priority': 8,
+            \ 'scoping': 1,
+            \ 'scopes': ['tex'],
+            \ 'abbreviation': 'tex',
+            \ 'cm_refresh_patterns': g:vimtex#re#ncm,
+            \ 'cm_refresh': {'omnifunc': 'vimtex#complete#omnifunc'},
+            \ })
+    augroup END
 endif
 
 "=============================================================================

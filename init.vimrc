@@ -10,7 +10,7 @@
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
-"   deoplete                                                [DEOPLETE]
+"   nvim-completion-manager                                 [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   vim-snippets                                            [SNIPPETS]
@@ -151,16 +151,19 @@ Plugin 'tpope/vim-unimpaired'
 Plugin 'majutsushi/tagbar'
 
 "=============================================================================
-"   deoplete                                                [DEOPLETE]
+"   nvim-completion-manager                                 [NCM]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " Asynchronous autocompletion that's less bloated than YouCompleteMe.
-" Requires neovim.
+" " Asynchronous autocompletion that's less bloated than YouCompleteMe and
+" better written/maintained than deoplete. Requires neovim.
 if has('nvim')
-    Plugin 'Shougo/deoplete.nvim'
+    Plugin 'roxma/nvim-completion-manager'
 
-    " " Use included files and path for candidate completion!
+    " " Use included files and path for candidate completion.
     Plugin 'Shougo/neoinclude.vim'
+
+    " " clang completion
+    " Plugin 'roxma/ncm-clang' " Needs debugging.
 endif
 
 " " Dependency for vim-easytags.
