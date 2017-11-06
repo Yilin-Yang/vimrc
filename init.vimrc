@@ -15,6 +15,7 @@
 "   lldb                                                    [LLDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
+"   LanguageClient-neovim                                   [LSP]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -195,6 +196,16 @@ Plugin 'honza/vim-snippets'
 "-----------------------------------------------------------------------------
 " " Snippets engine that uses Python and neocomplete.
 Plugin 'SirVer/ultisnips'
+
+"=============================================================================
+"   LanguageClient-neovim                                   [LSP]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Enables neovim support for Language Server Protocol.
+" Requires neovim.
+if has('nvim')
+    Plugin 'autozimu/LanguageClient-neovim'
+endif
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

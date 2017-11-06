@@ -12,6 +12,7 @@
 "   lldb                                                    [LLDB]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
+"   LanguageClient-neovim                                   [LSP]
 "=============================================================================
 
 
@@ -318,3 +319,17 @@ let g:UltiSnipsJumpBackwardTrigger='<Leader><S-Tab>'
 "   'The UltiSnipsEdit command opens a private snippet definition file for the
 "   current filetype. If no snippet file exists, a new file is created.'
 nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>
+
+
+"=============================================================================
+"   LanguageClient-neovim                                   [LSP]
+"=============================================================================
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
+
+" Debugging Notes
+" https://github.com/autozimu/LanguageClient-neovim/issues/72
+
+let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['clangd']
+    \ }
