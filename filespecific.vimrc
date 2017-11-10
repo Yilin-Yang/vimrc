@@ -21,8 +21,8 @@ endfunction
 " .cpp files
  augroup cpp_format
     au!
-    autocmd BufEnter,BufNew *.cpp       call CppFormat()
-    autocmd BufEnter,BufNew *.hpp       call CppFormat()
+    autocmd BufEnter *.cpp              call CppFormat()
+    autocmd BufEnter *.hpp              call CppFormat()
  augroup end
 
 
