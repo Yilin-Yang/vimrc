@@ -57,6 +57,7 @@ let g:neomake_message_sign = {
       \ }
 let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfo'}
 
+" **** GCC Syntax Checker ****
 let g:neomake_cpp_gcc_maker = {
     \ 'exe': 'g++',
     \ 'args': [
@@ -71,6 +72,21 @@ let g:neomake_cpp_gcc_maker = {
     \ ],
 \ }
 let g:neomake_cpp_enabled_makers = ['gcc']
+
+" **** bash Syntax Checker ****
+" Redefined to remove -x flag, which causes errors.
+let g:neomake_sh_shellcheck_maker = {
+    \ 'append_file'     : 1,
+    \ 'args'            : ['-fgcc'],
+    \ 'auto_enabled'    : 1,
+    \ 'cwd'             : '%:h',
+    \ 'errorformat'     : '%f:%l:%c: %trror: %m [SC%n],%f:%l:%c: %tarning: %m [SC%n],%I%f:%l:%c: Note: %m [SC%n] ',
+    \ 'exe'             : 'shellcheck',
+    \ 'output_stream'   : 'stdout',
+    \ 'short_name'      : 'SC',
+\ }
+
+" **** TeX Syntax Checker ****
 
 " -c:   clean regeneratable files
 " -cd:  change-dir to the source file before processing
@@ -91,7 +107,8 @@ let g:neomake_tex_latexmk_maker = {
     \   '-synctex=1',
     \ ],
 \ }
-"let g:neomake_tex_enabled_makers = ['latexmk']
+
+
 
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
@@ -128,7 +145,7 @@ if has('nvim')
     inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
     " Press Enter to close the menu **and also** start a new line.
-    inoremap <expr> <cr> pumvisible() ? "\<C-y>\<cr>" : "\<cr>"
+    inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
     " Enable vimtex support.
     augroup nvim_cm_setup
