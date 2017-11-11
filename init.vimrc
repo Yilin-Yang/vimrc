@@ -16,6 +16,7 @@
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
 "   LanguageClient-neovim                                   [LSP]
+"   BufExplorer                                             [BUFFER]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -209,6 +210,12 @@ Plugin 'SirVer/ultisnips'
 if has('nvim')
     Plugin 'autozimu/LanguageClient-neovim'
 endif
+
+"=============================================================================
+"   BufExplorer                                             [BUFFER]
+"=============================================================================
+" " Navigate open buffers.
+Plugin 'jlanzarotta/bufexplorer'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

@@ -13,6 +13,7 @@
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
 "   LanguageClient-neovim                                   [LSP]
+"   BufExplorer                                             [BUFFER]
 "=============================================================================
 
 
@@ -339,3 +340,12 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_serverCommands = {
     \ 'cpp': ['clangd']
     \ }
+
+"=============================================================================
+"   BufExplorer                                             [BUFFER]
+"=============================================================================
+" Don't go to the active window after opening a buffer.
+let g:bufExplorerFindActive=0
+
+" Easier shortcut for toggling bufexplorer.
+nnoremap <silent> <Leader>bb :ToggleBufExplorer<cr>
