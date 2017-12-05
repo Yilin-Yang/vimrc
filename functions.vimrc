@@ -58,6 +58,14 @@ function BufDoAll(command)
 endfunction
 command! -nargs=+ -complete=command BufDoAll call BufDoAll(<q-args>)
 
+" EFFECTS:  Deletes all trailing whitespace in the active file, returning
+"           the cursor to its old location afterwards.
+function DeleteTrailing()
+    let cols_from_left = getpos(".")[2] - 1
+    let lines_from_top = line(".") - 1
+    %s/\s\+$//e
+    execute 'normal! 0gg' . eval(lines_from_top) . 'j' . eval(cols_from_left) . 'l'
+endfunction
 
 "=============================================================================
 "   ctags                                                   [CTAGS]
