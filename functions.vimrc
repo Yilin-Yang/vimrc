@@ -16,14 +16,14 @@
 "=============================================================================
 
 " EFFECTS:  Highlights in red all text going past 80 chars
-function Highlight()
+function! Highlight()
     " Highlight text going past 80 chars on one line
     highlight OverLength ctermbg=DarkRed ctermfg=white guibg=#592929
     match OverLength /\%81v.\+/
 endfunction
 
 " EFFECTS:  Closes error windows opened by Syntastic or Neomake.
-function CloseErrorWindows()
+function! CloseErrorWindows()
     " Closes quickfix list and locations list
     cclose
     lclose
@@ -51,7 +51,7 @@ endfunction
 " CREDIT:   Taken from:
 "               http://vim.wikia.com/wiki/Run_a_command_in_multiple_buffers
 "
-function BufDoAll(command)
+function! BufDoAll(command)
   let currBuff=bufnr("%")
   execute 'bufdo ' . a:command
   execute 'buffer ' . currBuff
@@ -60,7 +60,7 @@ command! -nargs=+ -complete=command BufDoAll call BufDoAll(<q-args>)
 
 " EFFECTS:  Deletes all trailing whitespace in the active file, returning
 "           the cursor to its old location afterwards.
-function DeleteTrailing()
+function! DeleteTrailing()
     let cols_from_left = getpos(".")[2] - 1
     let lines_from_top = line(".") - 1
     %s/\s\+$//e
@@ -72,7 +72,7 @@ endfunction
 "=============================================================================
 
 " EFFECTS: Runs ctags recursively on all files and directories in the PWD.
-function UpdateGlobalTags()
+function! UpdateGlobalTags()
     let l:already_on = 0
 
     " If autorecursion is on, note that; if not, turn it on.
@@ -96,7 +96,7 @@ endfunction
 "           Given the function prototypes for EECS280 style test cases, remove
 "           the semicolon, add curly braces, add a print statement giving the
 "           name of the test, and a print statement reporting test success.
-function TestCaseAutoformat()
+function! TestCaseAutoformat()
     if search("BOOST")
         " If I'm writing Boost test cases, format the function headers differently
         %s/BOOST_AUTO_TEST_CASE(\(.*\))/BOOST_AUTO_TEST_CASE(\1)\r{\r\tBOOST_TEST_MESSAGE("\1");\r\t\r\tBOOST_CHECK_MESSAGE(, "\1 failed!");\r}\r
@@ -112,7 +112,7 @@ function TestCaseAutoformat()
 endfunction
 
 " EFFECTS:  Calls TestCaseAutoFormat().
-function Tca()
+function! Tca()
     " Shorter alias for TestCaseAutoformat
     call TestCaseAutoformat()
 endfunction
@@ -121,19 +121,19 @@ endfunction
 "   Merge Conflict Resolution                               [MERGE_CONFLICT]
 "=============================================================================
 
-function DiffgetLo()
+function! DiffgetLo()
     " filler is default and inserts empty lines for sync
     set diffopt=filler,context:1000000
     diffget LO
 endfunction
 
-function DiffgetRe()
+function! DiffgetRe()
     " filler is default and inserts empty lines for sync
     set diffopt=filler,context:1000000
     diffget RE
 endfunction
 
-function ExitMergeResolutionIfDone()
+function! ExitMergeResolutionIfDone()
     if search("<<<<<<<") || search(">>>>>>>")
         echoerr "Still conflicts to resolve!"
     else
@@ -146,13 +146,13 @@ endfunction
 "=============================================================================
 
 " Fold everything indented past this fold-level.
-function RecursiveFoldPast(level)
+function! RecursiveFoldPast(level)
     setlocal foldmethod=indent
     let &l:foldlevel = a:level
 endfunction
 
 " Fold everything indented at this level.
-function FoldAt(level)
+function! FoldAt(level)
     let &l:foldnestmax=a:level + 1
     call RecursiveFoldPast(a:level)
     "%foldo
@@ -160,7 +160,7 @@ endfunction
 
 " Write the current buffer and run Neomake's syntax checker.
 " Also, stop vim from reclosing folds when Neomake shows the quickfix list.
-function WriteAndLint()
+function! WriteAndLint()
     " setlocal foldmethod=manual
     w
     call CloseErrorWindows()
@@ -169,7 +169,7 @@ function WriteAndLint()
 endfunction
 
 " Fold all of the function implementations in the current file.
-function FoldFunctionBodies()
+function! FoldFunctionBodies()
     setlocal foldmethod=indent
     if &foldlevel !=? 20
         setlocal foldlevel=20
@@ -192,7 +192,7 @@ endfunction
 " Searches for the next multiline paragraph and unwraps it.
 " Returns the line number of the multiline paragraph, or zero if one wasn't
 " found.
-function UnwrapAParagraph()
+function! UnwrapAParagraph()
     let lineno=search('\(^[^\n\r]\+\n\)\{2,}')
     "                    ^ from the start of the line,
     "                      ^ a character that isn't a newline char
@@ -206,27 +206,27 @@ function UnwrapAParagraph()
 endfunction
 
 " Unwrap all text
-function UnwrapAll()
+function! UnwrapAll()
     " While there are unwrapped paragraphs, UnwrapAParagraph.
     while UnwrapAParagraph()
     endwhile
     echo "Unwrapped all lines in file."
 endfunction
 
-function YankUnwrapped()
+function! YankUnwrapped()
     call UnwrapAll()
     normal! ggVG"+yu
     echo "Unwrapped paragraphs yanked to clipboard."
 endfunction
 
 " Wrap all text
-function WrapAll()
+function! WrapAll()
     normal! ggVGgqq
     echo "Hard-wrapped all lines in file."
 endfunction
 
 " Set text wrapping value.
-function TextWrap(should_format)
+function! TextWrap(should_format)
     if a:should_format==?1
         " Text wrapping
         set textwidth=80                " Hard line breaks, with newline chars
