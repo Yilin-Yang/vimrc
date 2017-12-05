@@ -331,15 +331,16 @@ nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>
 "=============================================================================
 "   LanguageClient-neovim                                   [LSP]
 "=============================================================================
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
-
 " Debugging Notes
 " https://github.com/autozimu/LanguageClient-neovim/issues/72
 
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['clangd']
+    \ 'cpp': ['clangd'],
+    \ 'python': ['pyls']
     \ }
+
+" Automatically start language servers.
+let g:LanguageClient_autoStart = 1
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]

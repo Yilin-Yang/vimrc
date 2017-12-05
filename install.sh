@@ -20,6 +20,9 @@ pip3 install --upgrade neovim
 ## Install recent clang version for LSP support
 ./llvm.sh
 
+## Install palantir's Python language server
+pip install --user python-language-server
+
 ## Install lldb for integrated debugger support
 $INSTALLCMD lldb
 
