@@ -2,7 +2,6 @@
 "                             TABLE OF CONTENTS
 "=============================================================================
 "
-"
 "   localvimrc                                              [LOCALVIMRC]
 "   Fugitive                                                [FUGITIVE]
 "   vim-surround                                            [SURROUND]
@@ -17,6 +16,8 @@
 "   UltiSnips                                               [ULTISNIPS]
 "   LanguageClient-neovim                                   [LSP]
 "   BufExplorer                                             [BUFFER]
+"   vim-vebugger                                            [VEBUGGER]
+"   vimproc                                                 [VIMPROC]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -216,6 +217,19 @@ endif
 "=============================================================================
 " " Navigate open buffers.
 Plugin 'jlanzarotta/bufexplorer'
+
+"=============================================================================
+"   vim-vebugger                                            [VEBUGGER]
+"=============================================================================
+" " More modular debugger frontend for Vim.
+" Requires Shougo/vimproc for async support. Grr, shake fist.
+Plugin 'https://github.com/idanarye/vim-vebugger'
+
+"=============================================================================
+"   vimproc                                                 [VIMPROC]
+"=============================================================================
+" " Asynchronous job support. Required by vim-vebugger.
+Plugin 'Shougo/vimproc.vim'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

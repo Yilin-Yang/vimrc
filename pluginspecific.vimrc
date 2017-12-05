@@ -9,7 +9,6 @@
 "   Tagbar                                                  [TAGBAR]
 "   nvim-completion-manager                                 [NCM]
 "   vim-easytags                                            [EASYTAGS]
-"   lldb                                                    [LLDB]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
 "   LanguageClient-neovim                                   [LSP]
@@ -199,100 +198,6 @@ nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
         \ 'BufEnter',
         \ 'BufLeave'
     \ ]
-
-
-"=============================================================================
-"   lldb                                                    [LLDB]
-"=============================================================================
-
-"-------------------------------------------------------------------------
-" Starts LLDB debugger session.
-nnoremap <silent> <Leader>dn :LLsession new<cr>
-
-" Starts LLDB debugger session and immediately switches to debug mode.
-nnoremap <silent> <Leader>dd :LLsession new<cr>:LLmode debug<cr>
-
-" Loads the (default) existing LLDB debugger session.
-nnoremap <silent> <Leader>dr :LLsession load<cr>:LLmode debug<cr>
-
-" Reloads the current debugger session from the file.
-nnoremap <silent> <Leader>dr :LLsession reload<cr>
-
-" Shows the current session file.
-nnoremap <silent> <Leader>dl :LLsession show<cr>
-"-------------------------------------------------------------------------
-
-
-"-------------------------------------------------------------------------
-" Save existing breakpoints.
-nnoremap <silent> <Leader>ds :LLsession bp-save<cr>
-
-" Load breakpoints that were defined in the session state.
-nnoremap <silent> <Leader>do :LLsession bp-save<cr>
-"-------------------------------------------------------------------------
-
-" Switch to debug mode.
-nnoremap <silent> <Leader>md :LLmode debug<cr>
-
-" Switch to code mode.
-nnoremap <silent> <Leader>mc :LLmode code<cr>
-
-"-------------------------------------------------------------------------
-" NOTE: these mappings can't be 'nore', since they have to invoke other
-"       mappings.
-"-------------------------------------------------------------------------
-
-" Set breakpoint on current line.
-nmap <Leader>b <Plug>LLBreakSwitch
-
-" Send selected text to stdin.
-vmap <F4> <Plug>LLStdInSelected
-
-"-------------------------------------------------------------------------
-" NOTE: file redirection doesn't work like it does in GDB. You have to
-"       start LLDB and start the program with:
-"               process launch -i <filename> -- <program's arguments>
-"                                            ^ end of arguments to `process
-"                                               launch`
-"                               ^ redirect the given file to stdin
-"-------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------
-" NOTE: setting conditional breakpoints in LLDB is annoying, but useful.
-"
-"       1)  Set a breakpoint and note its number. Assume it's 3, for sake of
-"           example.
-"       2)  The following will modify that breakpoint to be a conditional
-"           breakpoint, that only fires if the given condition is true.
-"               :LL br mod -c '(obj.mem == 3) && (obj.other_mem == 2)' 3
-"                   ^ breakpoint
-"                      ^ modify
-"                           ^ condition
-"-------------------------------------------------------------------------
-
-"-------------------------------------------------------------------------
-
-" Prompt the user for something to send to stdin.
-" Sends a newline character at the end of the input line.
-nnoremap <silent> <Leader><F4> :LLstdin<cr>
-
-nnoremap <F8> :LL continue<cr>
-nnoremap <S-F8> :LL process interrupt<cr>
-nnoremap <F9> :LL print <C-R>=expand('<cword>')<cr>
-vnoremap <F9> :<C-U>LL print <C-R>=lldb#util#get_selection()<cr><cr>
-
-" Step in.
-nnoremap + :LL step<cr>
-
-" Step over.
-nnoremap = :LL next<cr>
-
-"-------------------------------------------------------------------------
-hi link LLSelectedPCSign Underlined
-
-let g:lldb#sign#bp_symbol="B>"
-let g:lldb#sign#pc_symbol="->"
-"-------------------------------------------------------------------------
 
 "=============================================================================
 "   vimtex                                                  [VIMTEX]

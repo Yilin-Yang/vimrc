@@ -26,7 +26,6 @@ pip install --user python-language-server
 ## Install lldb for integrated debugger support
 $INSTALLCMD lldb
 
-
 # Install yamllint
 #	Should work automatically with syntastic and neomake
 $INSTALLCMD yamllint
@@ -60,3 +59,7 @@ ln -s ~/.vimrc ~/.config/nvim/init.vim
 
 # Run PluginInstall
 nvim -c 'PluginInstall' -c `qa!`
+
+# Build vimproc
+cd ~/.vim/bundle/vimproc.vim && make -j
+cd $DIR
