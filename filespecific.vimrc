@@ -5,6 +5,7 @@
 "   C++ Formatting                                          [CPP]
 "   Markdown Formatting                                     [MARKDOWN]
 "   TeX Formatting                                          [TEX]
+"   Snippets                                                [SNIPPETS]
 "=============================================================================
 
 "=============================================================================
@@ -50,4 +51,13 @@ augroup tex_format
     au!
     autocmd filetype tex                call TextWrap(1)
     autocmd BufEnter *.tex              set filetype=tex
+augroup end
+
+"=============================================================================
+"   Snippets                                                [SNIPPETS]
+"=============================================================================
+
+augroup snippets_format
+    au!
+    autocmd filetype snippets           set expandtab
 augroup end
