@@ -13,7 +13,7 @@
 "=============================================================================
 
 " Set C++ specific formatting options.
-function CppFormat()
+function! CppFormat()
     set colorcolumn=81              " My personal line limit
     set filetype=cpp.doxygen        " And highlight doxygen formatting
 endfunction
@@ -32,7 +32,7 @@ endfunction
 "=============================================================================
 
 " Set Markdown specific formatting options.
-function MdFormat(should_format)
+function! MdFormat(should_format)
     call TextWrap(a:should_format)
 endfunction
 
