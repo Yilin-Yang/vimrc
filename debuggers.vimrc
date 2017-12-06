@@ -52,6 +52,10 @@ fu! DebuggerStepOver()
     return "="
 endf
 
+fu! DebuggerKill()
+    return "k"
+endf
+
 "=============================================================================
 "   lldb                                                    [LLDB]
 "=============================================================================
@@ -87,6 +91,7 @@ execute 'nnoremap <silent> ' . DebuggerPrefix() . "d" . " :LLmode debug<cr>"
 
 " Switch to code mode.
 execute 'nnoremap <silent> ' . DebuggerPrefix() . "c" . " :LLmode code<cr>"
+execute 'nnoremap <silent> ' . DebuggerPrefix() . DebuggerKill() . " :LL process kill<cr>:LLmode code<cr>"
 
 "-------------------------------------------------------------------------
 " NOTE: these mappings can't be 'nore', since they have to invoke other
@@ -166,7 +171,7 @@ endfunction " StartLLDB
 function! StartVebugger(debugger, test_exe, ...)
     let test_args = " "
     for val in a:000
-        let test_args .= val " concatenate
+        let test_args .= val . " " " concatenate
     endfor
 
     execute ":VBGstart" . a:debugger . " " . a:test_exe . test_args
@@ -184,7 +189,8 @@ execute 'vnoremap '             . DebuggerToStdin()     .   " :VBGrawWriteSelect
 " Continue.
 execute 'nnoremap <silent> '    . DebuggerContinue()    .   " :VBGcontinue<cr>"
 execute 'nnoremap <silent> '    . DebuggerEvaluate()    .   " :VBGevalWordUnderCursor<cr>"
-execute 'vnoremap <silent> '    . DebuggerEvaluate()    .   " :VBGevalSelectedText<cr>"
+execute 'nnoremap <silent> '    . DebuggerEvaluate()    .   " :VBGeval<cr>"
+execute 'vnoremap <silent> ' . DebuggerPrefix() . DebuggerEvaluate() . " :VBGevalSelectedText<cr>"
 
 " Step in.
 execute 'nnoremap <silent> '    . DebuggerStepIn()      .   " :VBGstepIn<cr>"
@@ -194,6 +200,9 @@ execute 'nnoremap <silent> '    . DebuggerStepOver()    .   " :VBGstepOver<cr>"
 
 " Toggle terminal buffer.
 execute 'nnoremap <silent> '    . DebuggerPrefix() . "t" .  " :VBGtoggleTerminalBuffer<cr>"
+
+" Kill vebugger session.
+execute 'nnoremap <silent> '    . DebuggerPrefix() . DebuggerKill() .  " :VBGkill<cr>"
 
 "-------------------------------------------------------------------------
 
