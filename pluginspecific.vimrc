@@ -247,6 +247,22 @@ let g:LanguageClient_serverCommands = {
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
 
+" Show type info and short doc of identifier under cursor.
+nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cR>
+
+" Goto definition of identifier.
+nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
+
+" Rename the identifier under the cursor.
+" NOTE: requires `set hidden`
+"nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()
+
+" List the symbols in the current document.
+nnoremap <silent> <Leader>ps :call LanguageClient_textDocument_documentSymbol()
+
+" List all references of the identifier under the cursor.
+nnoremap <silent> <Leader>pf :call LanguageClient_textDocument_references()
+
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
 "=============================================================================
