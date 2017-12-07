@@ -189,7 +189,7 @@ execute 'vnoremap '             . DebuggerToStdin()     .   " :VBGrawWriteSelect
 " Continue.
 execute 'nnoremap <silent> '    . DebuggerContinue()    .   " :VBGcontinue<cr>"
 execute 'nnoremap <silent> '    . DebuggerEvaluate()    .   " :VBGevalWordUnderCursor<cr>"
-execute 'nnoremap <silent> '    . DebuggerEvaluate()    .   " :VBGeval<cr>"
+execute 'nnoremap <silent> '    . DebuggerEvaluate()    .   " :VBGeval("
 execute 'vnoremap <silent> ' . DebuggerPrefix() . DebuggerEvaluate() . " :VBGevalSelectedText<cr>"
 
 " Step in.
