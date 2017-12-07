@@ -3,6 +3,7 @@
 "=============================================================================
 "
 "   C++ Formatting                                          [CPP]
+"   Python Formatting                                       [PYTHON]
 "   Markdown Formatting                                     [MARKDOWN]
 "   TeX Formatting                                          [TEX]
 "   Snippets                                                [SNIPPETS]
@@ -26,6 +27,19 @@ endfunction
     autocmd BufEnter *.hpp              call CppFormat()
  augroup end
 
+"=============================================================================
+"   Python Formatting                                       [PYTHON]
+"=============================================================================
+
+" TODO: make these functions script-local?
+function! PyFormat()
+    set colorcolumn=80              " PEP-standard lines are 79 characters max
+endfunction
+
+augroup py_format
+    au!
+    autocmd BufEnter *.py               call PyFormat()
+augroup end
 
 "=============================================================================
 "   Markdown Formatting                                     [MARKDOWN]
