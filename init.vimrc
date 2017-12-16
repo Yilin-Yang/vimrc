@@ -18,6 +18,7 @@
 "   BufExplorer                                             [BUFFER]
 "   vim-vebugger                                            [VEBUGGER]
 "   vimproc                                                 [VIMPROC]
+"   vim-obsession                                           [OBSESSION]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -230,6 +231,12 @@ Plugin 'https://github.com/idanarye/vim-vebugger'
 "=============================================================================
 " " Asynchronous job support. Required by vim-vebugger.
 Plugin 'Shougo/vimproc.vim'
+
+"=============================================================================
+"   vim-obsession                                           [OBSESSION]
+"=============================================================================
+" " Autosave vim sessions as I go.
+Plugin 'tpope/vim-obsession'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
