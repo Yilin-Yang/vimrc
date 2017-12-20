@@ -8,17 +8,8 @@ sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
 $INSTALLCMD neovim
 
-
 # Install vim-plug
-
-## Install for standard vim
-curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
-## Install for neovim
-curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
-    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-
+$DIR/vim-plug.sh
 
 ## Enable python support in nvim
 $INSTALLCMD python-pip
