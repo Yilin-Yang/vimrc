@@ -3,13 +3,22 @@
 INSTALLCMD="sudo apt-get install -y"
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 
-# Install Vundle
-git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
-
 # Set up nvim
 sudo add-apt-repository ppa:neovim-ppa/stable
 sudo apt update
 $INSTALLCMD neovim
+
+
+# Install vim-plug
+
+## Install for standard vim
+curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
+## Install for neovim
+curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs \
+    https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+
 
 ## Enable python support in nvim
 $INSTALLCMD python-pip
@@ -27,7 +36,7 @@ pip install --user python-language-server
 $INSTALLCMD lldb
 
 # Install yamllint
-#	Should work automatically with syntastic and neomake
+#   Should work automatically with syntastic and neomake
 $INSTALLCMD yamllint
 
 # Install shellcheck, for bash script linting
@@ -59,7 +68,3 @@ ln -s ~/.vimrc ~/.config/nvim/init.vim
 
 # Run PluginInstall
 nvim -c 'PluginInstall' -c `qa!`
-
-# Build vimproc
-cd ~/.vim/bundle/vimproc.vim && make -j
-cd $DIR

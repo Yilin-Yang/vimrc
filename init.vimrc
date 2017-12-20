@@ -19,40 +19,37 @@
 "   vim-vebugger                                            [VEBUGGER]
 "   vimproc                                                 [VIMPROC]
 "   vim-obsession                                           [OBSESSION]
+"   vim-repeat                                              [REPEAT]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
-filetype off            " don't enable filetype detection during Vundle setup
 
-" Set the runtime path to include Vundle and initialize.
-set rtp+=~/.vim/bundle/Vundle.vim
-
-
-" Basic Vundle Commands:
-" " :PluginList         - lists configured plugins
-" " :PluginInstall      - installs plugins; append `!` to update or just :PluginUpdate
-" " :PluginSearch foo   - searches for foo; append `!` to refresh local cache
-" " :PluginClean        - confirms removal of unused plugins; append `!` to auto-approve removal.
+" Basic Plug Commands:
+" PlugInstall [name ...] [#threads]     Install plugins
+" PlugUpdate [name ...] [#threads]      Install or update plugins
+" PlugClean[!]                          Remove unused directories (bang
+"                                           version will clean without prompt)
+" PlugUpgrade                           Upgrade vim-plug itself
+" PlugStatus                            Check the status of plugins
+" PlugDiff                              Examine changes from the previous
+"                                           update and the pending changes
+" PlugSnapshot[!] [output path]         Generate script for restoring the
+"                                           current snapshot of the plugins
 " "
-" " See :h vundle for more details or the wiki for an FAQ.
-" " Put your non-Plugin stuff after this point.
 "#############################################################################
 "#############################################################################
 "                               BEGIN PLUGINS
 "#############################################################################
 "#############################################################################
 
-call vundle#begin()
-
-" " Let Vundle manage Vundle. Required.
-Plugin 'VundleVim/Vundle.vim'
+call plug#begin('~/.vim/bundle')
 
 "=============================================================================
 "   localvimrc                                              [LOCALVIMRC]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " Local .vimrc settings.
-Plugin 'embear/vim-localvimrc'
+Plug 'embear/vim-localvimrc'
 
 "=============================================================================
 "   Fugitive                                                [FUGITIVE]
@@ -87,7 +84,7 @@ Plugin 'embear/vim-localvimrc'
 "   :Git        =   run an arbitrary command
 "   :Git!       =   run an arbitrary command and open output in a temp file
 "=============================================================================
-Plugin 'tpope/vim-fugitive'
+Plug 'tpope/vim-fugitive'
 
 "=============================================================================
 "   vim-surround                                            [SURROUND]
@@ -113,7 +110,7 @@ Plugin 'tpope/vim-fugitive'
 "       <p class="important">
 "         <em>Hello</em> world!
 "       </p>
-Plugin 'tpope/vim-surround'
+Plug 'tpope/vim-surround'
 
 
 "=============================================================================
@@ -121,21 +118,21 @@ Plugin 'tpope/vim-surround'
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Asynchronous syntax checker.
-Plugin 'neomake/neomake'
+Plug 'neomake/neomake'
 
 "=============================================================================
 "   vimtex                                                  [VIMTEX]
 "=============================================================================
 " " LaTeX plugin for vim. Support for document compilation, PDF viewers,
 " navigation, etc.
-Plugin 'lervag/vimtex'
+Plug 'lervag/vimtex'
 
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Open a vertical split for hopping between files.
-Plugin 'scrooloose/nerdtree'
+Plug 'scrooloose/nerdtree'
 
 "=============================================================================
 "   vim-unimpaired                                          [UNIMPAIRED]
@@ -144,14 +141,14 @@ Plugin 'scrooloose/nerdtree'
 " " Some nice convenience keymappings using the square brackets.
 "
 " See documentation here: ~/.vim/bundle/vim-unimpaired/doc/unpaired.txt
-Plugin 'tpope/vim-unimpaired'
+Plug 'tpope/vim-unimpaired'
 
 "=============================================================================
 "   Tagbar                                                  [TAGBAR]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Create a bar that shows you ctags for the current file.
-Plugin 'majutsushi/tagbar'
+Plug 'majutsushi/tagbar'
 
 "=============================================================================
 "   nvim-completion-manager                                 [NCM]
@@ -160,17 +157,17 @@ Plugin 'majutsushi/tagbar'
 " " Asynchronous autocompletion that's less bloated than YouCompleteMe and
 " better written/maintained than deoplete. Requires neovim.
 if has('nvim')
-    Plugin 'roxma/nvim-completion-manager'
+    Plug 'roxma/nvim-completion-manager'
 
     " " Use included files and path for candidate completion.
-    Plugin 'Shougo/neoinclude.vim'
+    Plug 'Shougo/neoinclude.vim'
 
     " " clang completion
-    " Plugin 'roxma/ncm-clang' " Needs debugging.
+    " Plug 'roxma/ncm-clang' " Needs debugging.
 endif
 
 " " Dependency for vim-easytags.
-Plugin 'xolox/vim-misc'
+Plug 'xolox/vim-misc'
 
 "=============================================================================
 "   vim-easytags                                            [EASYTAGS]
@@ -179,14 +176,14 @@ Plugin 'xolox/vim-misc'
 " " Automatic tag generation for whatever file I'm using!
 " This variable has to be set before loading the plugin.
 let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
-Plugin 'xolox/vim-easytags'
+Plug 'xolox/vim-easytags'
 
 "=============================================================================
 "   lldb.nvim                                                    [LLDB]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " IDE-like debugger integration for vim.
-Plugin 'dbgx/lldb.nvim'
+Plug 'dbgx/lldb.nvim'
 
 
 "=============================================================================
@@ -194,14 +191,14 @@ Plugin 'dbgx/lldb.nvim'
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Actual implementation of snippets. Requires an engine, like UltiSnips.
-Plugin 'honza/vim-snippets'
+Plug 'honza/vim-snippets'
 
 "=============================================================================
 "   UltiSnips                                               [ULTISNIPS]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Snippets engine that uses Python and neocomplete.
-Plugin 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 "=============================================================================
 "   LanguageClient-neovim                                   [LSP]
@@ -210,37 +207,43 @@ Plugin 'SirVer/ultisnips'
 " " Enables neovim support for Language Server Protocol.
 " Requires neovim.
 if has('nvim')
-    Plugin 'autozimu/LanguageClient-neovim'
+    Plug 'autozimu/LanguageClient-neovim'
 endif
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
 "=============================================================================
 " " Navigate open buffers.
-Plugin 'jlanzarotta/bufexplorer'
+Plug 'jlanzarotta/bufexplorer'
 
 "=============================================================================
 "   vim-vebugger                                            [VEBUGGER]
 "=============================================================================
 " " More modular debugger frontend for Vim.
 " Requires Shougo/vimproc for async support. Grr, shake fist.
-Plugin 'https://github.com/idanarye/vim-vebugger'
+Plug 'https://github.com/idanarye/vim-vebugger'
 
 "=============================================================================
 "   vimproc                                                 [VIMPROC]
 "=============================================================================
 " " Asynchronous job support. Required by vim-vebugger.
-Plugin 'Shougo/vimproc.vim'
+Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 "=============================================================================
 "   vim-obsession                                           [OBSESSION]
 "=============================================================================
 " " Autosave vim sessions as I go.
-Plugin 'tpope/vim-obsession'
+Plug 'tpope/vim-obsession'
+
+"=============================================================================
+"   vim-repeat                                              [REPEAT]
+"=============================================================================
+" " Repeat vim-surround commands using the period command.
+Plug 'tpope/vim-repeat'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
-call vundle#end()           " required.
+call plug#end()           " required.
 
 "#############################################################################
 "#############################################################################
