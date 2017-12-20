@@ -13,6 +13,7 @@
 "   UltiSnips                                               [ULTISNIPS]
 "   LanguageClient-neovim                                   [LSP]
 "   BufExplorer                                             [BUFFER]
+"   vim-repeat                                              [REPEAT]
 "=============================================================================
 
 
@@ -271,3 +272,13 @@ let g:bufExplorerFindActive=0
 
 " Easier shortcut for toggling bufexplorer.
 nnoremap <silent> <Leader>bb :ToggleBufExplorer<cr>
+
+"=============================================================================
+"   vim-repeat                                              [REPEAT]
+"=============================================================================
+" Ctrl-S to make vim-obsession start saving the current session in the current
+" directory.
+nnoremap <silent> <C-s> :Obsession .<cr>
+
+" Ctrl-P to pause/resume vim-obsession.
+nnoremap <silent> <C-p> :Obsession<cr>
