@@ -307,11 +307,5 @@ nnoremap <silent> <C-p> :Obsession<cr>
 " Easymotion prefix/leader key.
 map <Bslash> <Plug>(easymotion-prefix)
 
-" Uppercase letters for improved readability.
-let g:easymotion_use_upper = 1
-
-" Keys can't include lowercase letters when use_upper is set.
-let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
-
 " Less case-sensitive easymotion jumping.
 let g:EasyMotion_smartcase = 1
