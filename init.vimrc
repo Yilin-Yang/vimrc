@@ -158,12 +158,6 @@ Plug 'majutsushi/tagbar'
 " better written/maintained than deoplete. Requires neovim.
 if has('nvim')
     Plug 'roxma/nvim-completion-manager'
-
-    " " Use included files and path for candidate completion.
-    Plug 'Shougo/neoinclude.vim'
-
-    " " clang completion
-    " Plug 'roxma/ncm-clang' " Needs debugging.
 endif
 
 " " Dependency for vim-easytags.

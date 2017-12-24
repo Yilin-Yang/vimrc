@@ -240,13 +240,30 @@ nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>
 " Debugging Notes
 " https://github.com/autozimu/LanguageClient-neovim/issues/72
 
-let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['clangd'],
-    \ 'python': ['pyls']
-    \ }
-
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
+
+" Load LanguageClient settings.json files when relevant.
+" This must be an absolute path; tilde expansion doesn't work.
+"let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
+let g:LanguageClient_settingsPath = '/home/yiliny/.config/nvim/settings.json'
+let g:LanguageClient_loadSettings = 1
+
+" NOTE: cquery requires that `compile_commands.json` exist in the current
+"       directory or a parent directory!
+"
+"       Running `bear make` on a Makefile-based project will allow bear
+"       to capture the compilation commands used and generate a matching
+"       JSON file. If `compile_commands.json` is empty, try running
+"       `make clean` first.
+"
+"       (Obviously, this only works if you have bear installed.)
+
+let g:LanguageClient_serverCommands = {
+    \ 'cpp': ['~/.local/stow/cquery/bin/cquery', '--language-server'],
+    \ 'cpp.doxygen': ['~/.local/stow/cquery/bin/cquery', '--language-server'],
+    \ 'python': ['pyls']
+    \ }
 
 " Show type info and short doc of identifier under cursor.
 nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cR>
