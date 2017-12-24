@@ -20,6 +20,7 @@
 "   vimproc                                                 [VIMPROC]
 "   vim-obsession                                           [OBSESSION]
 "   vim-repeat                                              [REPEAT]
+"   vim-easymotion                                          [EASYMOTION]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -234,6 +235,12 @@ Plug 'tpope/vim-obsession'
 "=============================================================================
 " " Repeat vim-surround commands using the period command.
 Plug 'tpope/vim-repeat'
+
+"=============================================================================
+"   vim-easymotion                                          [EASYMOTION]
+"=============================================================================
+" " Text navigation! Navigate all about!
+Plug 'easymotion/vim-easymotion'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

@@ -14,6 +14,7 @@
 "   LanguageClient-neovim                                   [LSP]
 "   BufExplorer                                             [BUFFER]
 "   vim-repeat                                              [REPEAT]
+"   vim-easymotion                                          [EASYMOTION]
 "=============================================================================
 
 
@@ -299,3 +300,18 @@ nnoremap <silent> <C-s> :Obsession .<cr>
 
 " Ctrl-P to pause/resume vim-obsession.
 nnoremap <silent> <C-p> :Obsession<cr>
+
+"=============================================================================
+"   vim-easymotion                                          [EASYMOTION]
+"=============================================================================
+" Easymotion prefix/leader key.
+map <Bslash> <Plug>(easymotion-prefix)
+
+" Uppercase letters for improved readability.
+let g:easymotion_use_upper = 1
+
+" Keys can't include lowercase letters when use_upper is set.
+let g:EasyMotion_keys = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ;'
+
+" Less case-sensitive easymotion jumping.
+let g:EasyMotion_smartcase = 1
