@@ -1,61 +1,23 @@
 #!/bin/bash
 
-INSTALLCMD="sudo apt-get install -y"
-DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+# EFFECTS:  Sets up (neo)vim, just the way I like it.
 
-# Set up nvim
-sudo add-apt-repository ppa:neovim-ppa/stable
-sudo apt update
-$INSTALLCMD neovim
+source "`dirname $0`/global_constants.sh"
 
-# Install vim-plug
-$DIR/vim-plug.sh
-
-## Enable python support in nvim
-$INSTALLCMD python-pip
-$INSTALLCMD python3-pip
-pip2 install --upgrade neovim
-pip3 install --upgrade neovim
-
-## Install recent clang version for LSP support
-./llvm.sh
-
-## Install palantir's Python language server
-pip install --user python-language-server
-
-## Install lldb for integrated debugger support
-$INSTALLCMD lldb
-
-# Install yamllint
-#   Should work automatically with syntastic and neomake
-$INSTALLCMD yamllint
-
-# Install shellcheck, for bash script linting
-$INSTALLCMD shellcheck
-
-# Install cppcheck, for clang checking
-$INSTALLCMD cppcheck;
-
-# Install ctags
-$INSTALLCMD exuberant-ctags
+$DIR/external_tools.sh  # install some dependencies
+$DIR/neovim.sh          # install neovim
 
 # Do some weird stuff to get Python working with lldb
 #   From: https://github.com/dbgx/lldb.nvim/issues/6#issuecomment-127192347
-./fix-lldb.sh
-
-# Install vimtex dependencies
-$INSTALLCMD latexmk
+$DIR/fix-lldb.sh
 
 # Delete backup vimrc if you need to
-mv ~/.vimrc ~/.vimrc.bak
+if [ -f ~/.vimrc ]; then
+    mv ~/.vimrc ~/.vimrc.bak
+fi
 
 # Create symlink to this .vimrc
 ln -s "$DIR/.vimrc" ~/.vimrc
 
-mkdir ~/.config
-mkdir ~/.config/nvim
-ln -s ~/.vim ~/.config/nvim
-ln -s ~/.vimrc ~/.config/nvim/init.vim
-
 # Run PluginInstall
-nvim -c 'PluginInstall' -c `qa!`
+nvim -c 'PlugInstall' -c `qa!`
