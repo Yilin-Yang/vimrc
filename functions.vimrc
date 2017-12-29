@@ -250,7 +250,7 @@ endfunction
 "                   for incrementing/decrementing by an absolute number of
 "                   rows/cols.
 "               change (float)          The window's new size, as a proportion
-"                   relative to its current size.
+"                   of vim's current displayable area.
 function! ResizeSplit(dimension, change)
     let l:command = "normal! :"  " build a resize command piece by piece
     if type(a:change) == v:t_string
@@ -274,9 +274,9 @@ function! ResizeSplit(dimension, change)
         " Assume we were given a floating point proportion.
 
         if a:dimension ==# 'WIDTH'
-            let l:new_size = string(winwidth(0) * a:change)
+            let l:new_size = string(&columns * a:change)
         elseif a:dimension ==# 'HEIGHT'
-            let l:new_size = string(winheight(0) * a:change)
+            let l:new_size = string(&lines * a:change)
         endif
             let l:command = l:command . l:new_size
     endif
@@ -286,3 +286,7 @@ function! ResizeSplit(dimension, change)
 
     execute l:command
 endfunction
+
+" Resize split to a proportion of its size.
+command! -nargs=1 Rs   call ResizeSplit('HEIGHT', <args>)
+command! -nargs=1 Vrs  call ResizeSplit('WIDTH', <args>)
