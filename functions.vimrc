@@ -9,6 +9,7 @@
 "   Merge Conflict Resolution                               [MERGE_CONFLICT]
 "   Folding                                                 [FOLDING]
 "   Text Wrapping                                           [TEXT_WRAPPING]
+"   Window Resizing                                         [WINDOW_RESIZE]
 "=============================================================================
 
 "=============================================================================
@@ -233,4 +234,55 @@ function! TextWrap(should_format)
     else
         set textwidth=0                 " Disable text wrapping
     endif
+endfunction
+
+"=============================================================================
+"   Window Resizing                                         [WINDOW_RESIZE]
+"=============================================================================
+
+" EFFECTS:  Resizes the active split, along a given direction, to a provided
+"           size proportional to its current size OR by
+"           incrementing/decrementing by an absolute number of rows/cols.
+" PARAM:    dimension (string)  Whether to change the split's width or its
+"           height. Valid values are 'WIDTH' and 'HEIGHT'.
+" PARAM:    change (string OR float)    How much to change the window's size.
+"               change (string)             Formatted like '+5' or '-3'. Used
+"                   for incrementing/decrementing by an absolute number of
+"                   rows/cols.
+"               change (float)          The window's new size, as a proportion
+"                   relative to its current size.
+function! ResizeSplit(dimension, change)
+    let l:command = "normal! :"  " build a resize command piece by piece
+    if type(a:change) == v:t_string
+        let l:change = a:change
+    else
+        let l:change = string(a:change)
+    endif
+
+    if a:dimension ==# 'WIDTH'
+        let l:command = l:command . "vertical resize "
+    elseif a:dimension ==# 'HEIGHT'
+        let l:command = l:command . "resize "
+    endif
+
+    let l:match = matchstr(l:change, '^[+-]')
+    if l:match ==# '+' || l:match ==# '-'
+        " Regex match detected a plus or minus at the start of the variable,
+        " so we're incrementing/decrementing absolutely.
+        let l:command = l:command . l:change
+    else
+        " Assume we were given a floating point proportion.
+
+        if a:dimension ==# 'WIDTH'
+            let l:new_size = string(winwidth(0) * a:change)
+        elseif a:dimension ==# 'HEIGHT'
+            let l:new_size = string(winheight(0) * a:change)
+        endif
+            let l:command = l:command . l:new_size
+    endif
+
+    let l:command = l:command . "\<cr>"
+    echo l:command
+
+    execute l:command
 endfunction
