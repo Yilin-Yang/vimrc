@@ -23,7 +23,7 @@ fi
 cat << EOF >> $SETTINGS_FILE
 {
     "initializationOptions": {
-        "cacheDirectory": "/tmp/cquery"
+        "cacheDirectory": "/tmp/cquery",
         "resourceDirectory": $RESOURCE_DIR
     }
 }
