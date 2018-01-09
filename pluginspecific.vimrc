@@ -240,6 +240,13 @@ nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>
 "=============================================================================
 " Debugging Notes
 " https://github.com/autozimu/LanguageClient-neovim/issues/72
+"
+" TROUBLESHOOTING: If the cquery LSP doesn't work, try the following:
+" 1) Verify that `~/.local/stow/cquery/bin/cquery --language-server` runs.
+" 2) Verify that `~/.config/nvim/settings.json` is correctly populated.
+" 3) Verify that nvim has registered all active remote plugins. (:CheckHealth,
+"    :UpdateRemotePlugins).
+" 4) Make sure that the active directory contains `compile_commands.json`.
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
