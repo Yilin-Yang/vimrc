@@ -12,7 +12,7 @@ set backspace=indent,eol,start      " Backspace over autoindents, line breaks,
                                     " position at start of insert mode
 set timeoutlen=200                  " Decrease timeout for combined keymaps
 set scrolloff=20
-set nohidden                        " Disallow hidden buffers.
+set hidden                          " Allow hidden buffers.
 set visualbell                      " FOR THE LOVE OF GOD STOP BOOPING IN WSL
 set showcmd                         " See leader key in corner
 set lazyredraw                      " Only redraw after given command has completed

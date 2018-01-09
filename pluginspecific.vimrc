@@ -281,13 +281,13 @@ nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
 
 " Rename the identifier under the cursor.
 " NOTE: requires `set hidden`
-"nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()
+nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()<cr>
 
 " List the symbols in the current document.
-nnoremap <silent> <Leader>ps :call LanguageClient_textDocument_documentSymbol()
+nnoremap <silent> <Leader>ps :call LanguageClient_textDocument_documentSymbol()<cr>
 
 " List all references of the identifier under the cursor.
-nnoremap <silent> <Leader>pf :call LanguageClient_textDocument_references()
+nnoremap <silent> <Leader>pf :call LanguageClient_textDocument_references()<cr>
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
