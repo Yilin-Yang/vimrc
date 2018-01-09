@@ -30,6 +30,7 @@ set background=dark                 " Make text readable on dark background
 set foldcolumn=1                    " Show a column with all folds
 set listchars=tab:│·,extends:>,precedes:<,nbsp:+
 set list
+set nowrap                          " Don't wrap lines that are too long
 
 " Information Density
     set relativenumber              " Relative numbering!

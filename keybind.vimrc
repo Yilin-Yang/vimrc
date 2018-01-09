@@ -59,6 +59,10 @@ else
     execute "set <M-a>=\ea"
 endif
 
+" Scroll laterally by large amounts.
+nnoremap H 40h
+nnoremap L 40l
+
 " Tabs
     " Alt + A/D to move through tabs
     nnoremap <silent> <M-a> :tabp<cr>
