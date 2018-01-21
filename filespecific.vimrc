@@ -5,6 +5,7 @@
 "   C++ Formatting                                          [CPP]
 "   Python Formatting                                       [PYTHON]
 "   Markdown Formatting                                     [MARKDOWN]
+"   AutoHotkey Formatting                                   [AUTOHOTKEY]
 "   TeX Formatting                                          [TEX]
 "   Snippets                                                [SNIPPETS]
 "=============================================================================
@@ -65,6 +66,22 @@ augroup tex_format
     au!
     autocmd filetype tex                call TextWrap(1)
     autocmd BufEnter *.tex              set filetype=tex
+augroup end
+
+
+"=============================================================================
+"   AutoHotkey Formatting                                   [AUTOHOTKEY]
+"=============================================================================
+
+" Set AutoHotkey specific formatting options.
+function! AhkFormat()
+    set noexpandtab
+endfunction
+
+augroup ahk_format
+    autocmd filetype autohotkey         call AhkFormat()
+    autocmd BufEnter *.ahk              set filetype=autohotkey
+    au!
 augroup end
 
 "=============================================================================
