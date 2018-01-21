@@ -44,3 +44,13 @@ set nowrap                          " Don't wrap lines that are too long
 
 " Color Reference
 "   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+
+" Place tempfiles in a central location, naming folders by PID.
+" This *does* break some of the 'prevent simultaneous editing' enabled by
+" swapback files, and it makes recovering lost data a bit harder, but that's a
+" worthy price to pay in exchange for `nvim -S` calls that actually work.
+" " Taken from: https://github.com/tpope/vim-obsession/issues/18
+let vimtmp = $HOME . '/.tmp/' . getpid()
+silent! call mkdir(vimtmp, "p", 0700)
+let &backupdir=vimtmp
+let &directory=vimtmp
