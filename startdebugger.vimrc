@@ -3,7 +3,7 @@
 "           type of the current file.
 "-----------------------------------------------------------------------------
 function! Debug(...)
-    if &filetype == "cpp"
+    if match(&filetype, "cpp") !=? -1
         " Start lldb.nvim.
         call StartLLDB()
     elseif &filetype == "python"
