@@ -87,7 +87,7 @@ execute 'nnoremap <silent> ' . DebuggerPrefix() . "o" . " :LLsession bp-save<cr>
 "-------------------------------------------------------------------------
 
 " Switch to debug mode.
-execute 'nnoremap <silent> ' . DebuggerPrefix() . "d" . " :LLmode debug<cr>"
+execute 'nnoremap <silent> ' . DebuggerPrefix() . "md" . " :LLmode debug<cr>"
 
 " Switch to code mode.
 execute 'nnoremap <silent> ' . DebuggerPrefix() . "c" . " :LLmode code<cr>"
