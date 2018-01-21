@@ -21,6 +21,7 @@
 "   vim-obsession                                           [OBSESSION]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
+"   vim-commentary                                          [COMMENTARY]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -178,8 +179,9 @@ Plug 'xolox/vim-easytags'
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " IDE-like debugger integration for vim.
-Plug 'dbgx/lldb.nvim'
-
+if has('nvim')
+    Plug 'dbgx/lldb.nvim'
+endif
 
 "=============================================================================
 "   vim-snippets                                            [SNIPPETS]
@@ -241,6 +243,12 @@ Plug 'tpope/vim-repeat'
 "=============================================================================
 " " Text navigation! Navigate all about!
 Plug 'easymotion/vim-easymotion'
+
+"=============================================================================
+"   vim-commentary                                          [COMMENTARY]
+"=============================================================================
+" " Comment stuff out!
+Plug 'tpope/vim-commentary'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

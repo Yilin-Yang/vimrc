@@ -15,6 +15,7 @@
 "   BufExplorer                                             [BUFFER]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
+"   vim-commentary                                          [COMMENTARY]
 "=============================================================================
 
 
@@ -316,3 +317,11 @@ map <Bslash> <Plug>(easymotion-prefix)
 
 " Less case-sensitive easymotion jumping.
 let g:EasyMotion_smartcase = 1
+
+"=============================================================================
+"   vim-commentary                                          [COMMENTARY]
+"=============================================================================
+" Easier keymappings that use <Leader> instead of 'g'.
+nmap <Leader>c gc
+vnoremap <silent> <Leader>c :Commentary<cr>
+
