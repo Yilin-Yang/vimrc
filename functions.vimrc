@@ -106,9 +106,10 @@ function! TestCaseAutoformat()
         call search("int main")
 
         .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r\r
+        normal! dk
     endif
 
-    execute "normal! :retab\<cr>"
+    retab
     noh " stop highlighting matched function headers after the above call
 endfunction
 
