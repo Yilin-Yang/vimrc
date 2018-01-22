@@ -14,3 +14,5 @@ function! Debug(...)
         call call('StartVebugger', ["PDB", filename] + a:000)
     endif
 endfunction " Debug
+
+command! -nargs=* D call Debug(<args>)
