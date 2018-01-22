@@ -22,6 +22,7 @@
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
 "   vim-commentary                                          [COMMENTARY]
+"   tabular                                                 [TABULAR]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -249,6 +250,12 @@ Plug 'easymotion/vim-easymotion'
 "=============================================================================
 " " Comment stuff out!
 Plug 'tpope/vim-commentary'
+
+"=============================================================================
+"   tabular                                                 [TABULAR]
+"=============================================================================
+" " Align things more easily!
+Plug 'godlygeek/tabular'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

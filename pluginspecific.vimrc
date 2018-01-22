@@ -16,6 +16,7 @@
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
 "   vim-commentary                                          [COMMENTARY]
+"   tabular                                                 [TABULAR]
 "=============================================================================
 
 
@@ -328,3 +329,9 @@ let g:EasyMotion_smartcase = 1
 nmap <Leader>c gc
 vnoremap <silent> <Leader>c :Commentary<cr>
 
+"=============================================================================
+"   tabular                                                 [TABULAR]
+"=============================================================================
+" Faster mapping to access Tabular Ex command.
+nnoremap t :Tabularize /
+nnoremap <silent> tt :Tabularize /,<cr>
