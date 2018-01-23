@@ -12,7 +12,7 @@ if [ ! -f $SETTINGS_FILE ]; then
 fi
 
 # Ideally, cquery should already be installed. Try to find the clang version it uses.
-CQUERY_PREFIX_DIR="~/.local/stow/cquery"
+CQUERY_PREFIX_DIR=~/.local/stow/cquery
 CLANG_DIR="`ls $CQUERY_PREFIX_DIR/lib`"
 if [ $CLANG_DIR ]; then
     RESOURCE_DIR="$CQUERY_PREFIX_DIR/lib/$CLANG_DIR"
@@ -24,7 +24,7 @@ cat << EOF >> $SETTINGS_FILE
 {
     "initializationOptions": {
         "cacheDirectory": "/tmp/cquery",
-        "resourceDirectory": $RESOURCE_DIR
+        "resourceDirectory": "$RESOURCE_DIR"
     }
 }
 EOF
