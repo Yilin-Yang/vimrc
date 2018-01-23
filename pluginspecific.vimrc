@@ -334,4 +334,7 @@ vnoremap <silent> <Leader>c :Commentary<cr>
 "=============================================================================
 " Faster mapping to access Tabular Ex command.
 nnoremap t :Tabularize /
+vnoremap t :Tabularize /
+
 nnoremap <silent> tt :Tabularize /,<cr>
+vnoremap <silent> tt :Tabularize /,<cr>
