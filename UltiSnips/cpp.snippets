@@ -1,0 +1,128 @@
+snippet json_assert
+static_assert(is_json_convertible<$1>::value,
+              "All saveable data types must be constructible from and "
+              "reducible to a JSON struct!");
+endsnippet
+
+snippet pragma_once
+#ifndef $1_HPP
+#define $1_HPP
+
+$0
+
+#endif // $1_HPP
+endsnippet
+
+snippet emmy-template
+namespace emmy
+{
+
+namespace $1
+{
+
+/**
+ * @brief $3
+ */
+class $2
+{
+public:
+
+    $2() = default;
+
+}; // class $2
+
+} // namespace $1
+
+} // namespace emmy
+endsnippet
+
+snippet json_ctor
+    virtual void from_json(const nlohmann::json&) override;
+
+    virtual nlohmann::json to_json() override;
+endsnippet
+
+snippet maav-template
+namespace maav
+{
+
+namespace $1
+{
+
+/**
+ * @brief $3
+ * @author Yilin Yang (yiliny@umich.edu)
+ */
+class $2
+{
+public:
+
+	$2() = default;$0
+
+}; // class $2
+
+} // namespace $1
+
+} // namespace maav
+endsnippet
+
+snippet tab-function-template
+	/**
+	 * @$5 $6
+	 */
+	$1 $2($3)$4
+endsnippet
+
+snippet maav-namespace
+namespace maav
+{
+
+namespace $1
+{
+
+$0
+
+} // namespace $1
+
+} // namespace maav
+endsnippet
+
+snippet boost-test-file
+#define BOOST_TEST_MODULE "$1"
+#include <boost/test/unit_test.hpp>
+$0
+endsnippet
+
+snippet boost-auto-test-case
+BOOST_AUTO_TEST_CASE($1)
+{
+	$0
+}
+endsnippet
+
+snippet class-template
+/**
+ * @brief $2
+ * @author Yilin Yang (yiliny@umich.edu)
+ */
+class $1
+{
+public:
+
+    $1() = default;$0
+
+}; // class $1
+endsnippet
+
+snippet struct-template
+/**
+ * @brief $2
+ * @author Yilin Yang (yiliny@umich.edu)
+ */
+struct $1
+{
+
+    $1() = default;$0
+
+}; // struct $1
+endsnippet
