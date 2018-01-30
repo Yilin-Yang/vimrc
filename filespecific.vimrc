@@ -62,9 +62,13 @@ augroup end
 "=============================================================================
 "   TeX Formatting                                          [TEX]
 "=============================================================================
+function! TeXFormat()
+    call EnableLexical()
+    call TextWrap(1)
+endfunction
 augroup tex_format
     au!
-    autocmd filetype tex                call TextWrap(1)
+    autocmd filetype tex                call TeXFormat()
     autocmd BufEnter *.tex              set filetype=tex
 augroup end
 

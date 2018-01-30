@@ -17,6 +17,7 @@
 "   vim-easymotion                                          [EASYMOTION]
 "   vim-commentary                                          [COMMENTARY]
 "   tabular                                                 [TABULAR]
+"   vim-lexical                                             [LEXICAL]
 "=============================================================================
 
 
@@ -338,3 +339,17 @@ vnoremap t :Tabularize /
 
 nnoremap <silent> tt :Tabularize /,<cr>
 vnoremap <silent> tt :Tabularize /,<cr>
+
+"=============================================================================
+"   vim-lexical                                             [LEXICAL]
+"=============================================================================
+
+let g:lexical#spellfile = ['~/.local/share/nvim/site/spell/en.utf-8.add',]
+let g:lexical#dictionary = ['~/vimrc/dictionary/english.dict',]
+let g:lexical#thesaurus = ['~/vimrc/thesaurus/mthesaur.txt',]
+
+" EFFECTS:  Enables vim-lexical's spellchecking and thesaurus functionality.
+"           Adds spellcheck to the list of autocompletion options.
+function! EnableLexical()
+    call lexical#init({'spell': 1,})
+endfunction

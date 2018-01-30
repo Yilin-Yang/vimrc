@@ -23,6 +23,7 @@
 "   vim-easymotion                                          [EASYMOTION]
 "   vim-commentary                                          [COMMENTARY]
 "   tabular                                                 [TABULAR]
+"   vim-lexical                                             [LEXICAL]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -256,6 +257,11 @@ Plug 'tpope/vim-commentary'
 "=============================================================================
 " " Align things more easily!
 Plug 'godlygeek/tabular'
+
+"=============================================================================
+"   vim-lexical                                             [LEXICAL]
+"=============================================================================
+Plug 'reedes/vim-lexical'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
