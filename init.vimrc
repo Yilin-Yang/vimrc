@@ -220,7 +220,7 @@ Plug 'jlanzarotta/bufexplorer'
 "=============================================================================
 " " More modular debugger frontend for Vim.
 " Requires Shougo/vimproc for async support. Grr, shake fist.
-Plug 'https://github.com/idanarye/vim-vebugger'
+Plug 'idanarye/vim-vebugger'
 
 "=============================================================================
 "   vimproc                                                 [VIMPROC]
