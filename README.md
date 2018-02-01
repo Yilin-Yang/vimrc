@@ -12,17 +12,26 @@ something to point at as I explain something.
 
 An (Incomplete) List of (Hyperlinks to) Plugins That I Use
 --------------------------------------------------------------------------------
-For convenience's sake. (Not guaranteed to be comprehensive.)
+For convenience's sake. (Not guaranteed to be current or comprehensive; see
+`init.vimrc` for all plugins I'm currently using.)
 
-* [deoplete](https://github.com/Shougo/deoplete.nvim)
-* [vim-easytags](https://github.com/xolox/vim-easytags)
-* [vim-fugitive](https://github.com/tpope/vim-fugitive)
+* [BufExplorer](https://github.com/jlanzarotta/bufexplorer)
+* [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim)
+* [Tagbar](https://github.com/majutsushi/tagbar	)
+* [UltiSnips](https://github.com/SirVer/ultisnips)
 * [lldb](https://github.com/dbgx/lldb.nvim)
 * [localvimrc](https://github.com/embear/vim-localvimrc)
 * [neomake](https://github.com/neomake/neomake)
+* [tabular](https://github.com/godlygeek/tabular)
+* [vim-commentary](https://github.com/tpope/vim-commentary)
+* [vim-easymotion](https://github.com/easymotion/vim-easymotion)
+* [vim-easytags](https://github.com/xolox/vim-easytags)
+* [vim-fugitive](https://github.com/tpope/vim-fugitive)
+* [vim-lexical](https://github.com/reedes/vim-lexical)
+* [vim-obsession](https://github.com/tpope/vim-obsession)
+* [vim-repeat](https://github.com/tpope/vim-repeat)
 * [vim-snippets](https://github.com/honza/vim-snippets)
 * [vim-surround](https://github.com/tpope/vim-surround)
-* [Tagbar](https://github.com/majutsushi/tagbar	)
-* [vimtex](https://github.com/lervag/vimtex)
-* [UltiSnips](https://github.com/SirVer/ultisnips)
 * [vim-unimpaired](https://github.com/tpope/vim-unimpaired)
+* [vim-vebugger](https://github.com/idanarye/vim-vebugger)
+* [vimtex](https://github.com/lervag/vimtex)
