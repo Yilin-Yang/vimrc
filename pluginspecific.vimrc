@@ -18,6 +18,7 @@
 "   vim-commentary                                          [COMMENTARY]
 "   tabular                                                 [TABULAR]
 "   vim-lexical                                             [LEXICAL]
+"   vim-easy-align                                          [EASYALIGN]
 "=============================================================================
 
 
@@ -353,3 +354,63 @@ let g:lexical#thesaurus = ['~/vimrc/thesaurus/mthesaur.txt',]
 function! EnableLexical()
     call lexical#init({'spell': 1,})
 endfunction
+
+"=============================================================================
+"   vim-easy-align                                          [EASYALIGN]
+"=============================================================================
+" Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
+vmap <Enter> <Plug>(EasyAlign)
+
+" Start interactive EasyAlign for a motion/text object (e.g. gaip)
+nmap ga <Plug>(EasyAlign)
+
+"-----------------------------------------------------------------------------
+" Alignment:    after entering EasyAlign, use Enter to cycle through left,
+"               right, and center alignment options.
+"-----------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------
+" Examples:
+"--------------------+------------------------------------+--------------------
+"  With visual map   | Description                        | Equivalent command
+"--------------------+------------------------------------+--------------------
+"  <Enter><Space>    | Around 1st whitespaces             | :'<,'>EasyAlign\
+"  <Enter>2<Space>   | Around 2nd whitespaces             | :'<,'>EasyAlign2\
+"  <Enter>-<Space>   | Around the last whitespaces        | :'<,'>EasyAlign-\
+"  <Enter>-2<Space>  | Around the 2nd to last whitespaces | :'<,'>EasyAlign-2\
+"  <Enter>:          | Around 1st colon ( `key:  value` ) | :'<,'>EasyAlign:
+"  <Enter><Right>:   | Around 1st colon ( `key : value` ) | :'<,'>EasyAlign:<l1
+"  <Enter>=          | Around 1st operators with =        | :'<,'>EasyAlign=
+"  <Enter>3=         | Around 3rd operators with =        | :'<,'>EasyAlign3=
+"  <Enter>*=         | Around all operators with =        | :'<,'>EasyAlign*=
+"  <Enter>**=        | Left-right alternating around =    | :'<,'>EasyAlign**=
+"  <Enter><Enter>=   | Right alignment around 1st =       | :'<,'>EasyAlign!=
+"  <Enter><Enter>**= | Right-left alternating around =    | :'<,'>EasyAlign!**=
+"--------------------+------------------------------------+--------------------
+" NOTE: Preceding the delimiter with a number X means "align around every Xth
+"       delimiter". Preceding the delimiter with a single `*` means "align
+"       around every occurrence of the delimiter." Two stars alternates
+"       between left-right alignment after each delimiter.
+"
+"       By default, EasyAlign will align around the first occurrence of the
+"       delimiter.
+"-----------------------------------------------------------------------------
+
+"-----------------------------------------------------------------------------
+" Indentation Option Settings:
+"-----------------------------------------------------------------------------
+"       k       |       'keep'      |       Preserve existing indentation.
+"-----------------------------------------------------------------------------
+"       d       |       'deep'      |       Use the indentation of the
+"               |                   |       most indented line.
+"-----------------------------------------------------------------------------
+"       s       |       'shallow'   |       Use the indentation of the
+"               |                   |       least indented line.
+"-----------------------------------------------------------------------------
+"       n       |       'none'      |       Left-align in-and-along the
+"               |                   |       left boundary of selected text.
+"-----------------------------------------------------------------------------
+let g:easy_align_indentation = "s"
+
+" Visual Block select all text between the next matched pair of parentheses.
+nnoremap gf /(<CR>l<C-v>/)<CR>

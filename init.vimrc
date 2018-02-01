@@ -22,7 +22,7 @@
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
 "   vim-commentary                                          [COMMENTARY]
-"   tabular                                                 [TABULAR]
+"   vim-easy-align                                          [EASYALIGN]
 "   vim-lexical                                             [LEXICAL]
 "=============================================================================
 
@@ -253,14 +253,15 @@ Plug 'easymotion/vim-easymotion'
 Plug 'tpope/vim-commentary'
 
 "=============================================================================
-"   tabular                                                 [TABULAR]
+"   vim-easy-align                                          [EASYALIGN]
 "=============================================================================
 " " Align things more easily!
-Plug 'godlygeek/tabular'
+Plug 'junegunn/vim-easy-align'
 
 "=============================================================================
 "   vim-lexical                                             [LEXICAL]
 "=============================================================================
+" " Spellchecker and such!
 Plug 'reedes/vim-lexical'
 
 "#############################################################################
