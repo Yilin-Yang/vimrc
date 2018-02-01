@@ -31,6 +31,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-lexical](https://github.com/reedes/vim-lexical)
 * [vim-obsession](https://github.com/tpope/vim-obsession)
 * [vim-repeat](https://github.com/tpope/vim-repeat)
+* [vim-rsi](https://github.com/tpope/vim-rsi)
 * [vim-snippets](https://github.com/honza/vim-snippets)
 * [vim-surround](https://github.com/tpope/vim-surround)
 * [vim-unimpaired](https://github.com/tpope/vim-unimpaired)

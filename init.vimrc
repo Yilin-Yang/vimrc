@@ -25,6 +25,7 @@
 "   vim-easy-align                                          [EASYALIGN]
 "   vim-lexical                                             [LEXICAL]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
+"   vim-rsi                                                 [RSI]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -272,6 +273,12 @@ Plug 'reedes/vim-lexical'
 " " register 'x', without clobbering the unnamed register.
 " NOTE: gr is the default keybinding, which I've replaced with <Leader>r.
 Plug 'vim-scripts/ReplaceWithRegister'
+
+"=============================================================================
+"   vim-rsi                                                 [RSI]
+"=============================================================================
+" " Use Readline mappings inside of vim, including vim's command line.
+Plug 'https://github.com/tpope/vim-rsi'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
