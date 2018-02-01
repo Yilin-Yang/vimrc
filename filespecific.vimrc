@@ -65,13 +65,23 @@ augroup end
 function! TeXFormat()
     call EnableLexical()
     call TextWrap(1)
+
+    " Opening double quote.
+    inoremap <leader>` ``
+    inoremap <leader>' ''
 endfunction
+
+function! TeXUnformat()
+    iunmap <leader>`
+    iunmap <leader>'
+endfunction
+
 augroup tex_format
     au!
     autocmd filetype tex                call TeXFormat()
     autocmd BufEnter *.tex              set filetype=tex
+    autocmd BufLeave *.tex              call TeXUnformat()
 augroup end
-
 
 "=============================================================================
 "   AutoHotkey Formatting                                   [AUTOHOTKEY]
