@@ -1,4 +1,4 @@
-source $HOME/vimrc/init.vimrc           " Vundle configuration, plugin settings
+source $HOME/vimrc/init.vimrc           " vim-plug configuration, plugin settings
 source $HOME/vimrc/settings.vimrc       " Function declarations
 source $HOME/vimrc/functions.vimrc      " Function declarations
 source $HOME/vimrc/keybind.vimrc        " Keybindings
