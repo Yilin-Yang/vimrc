@@ -19,6 +19,7 @@
 "   tabular                                                 [TABULAR]
 "   vim-lexical                                             [LEXICAL]
 "   vim-easy-align                                          [EASYALIGN]
+"   ReplaceWithRegister                                     [REPLACEREGISTER]
 "=============================================================================
 
 
@@ -414,3 +415,11 @@ let g:easy_align_indentation = "s"
 
 " Visual Block select all text between the next matched pair of parentheses.
 nnoremap gf /(<CR>l<C-v>/)<CR>
+
+"=============================================================================
+"   ReplaceWithRegister                                     [REPLACEREGISTER]
+"=============================================================================
+" Unmap and replace the default ReplaceWithRegister commands.
+xmap <leader>r  <Plug>ReplaceWithRegisterVisual
+nmap <leader>rr <Plug>ReplaceWithRegisterLine
+nmap <leader>r  <Plug>ReplaceWithRegisterOperator

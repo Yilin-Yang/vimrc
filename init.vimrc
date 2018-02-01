@@ -24,6 +24,7 @@
 "   vim-commentary                                          [COMMENTARY]
 "   vim-easy-align                                          [EASYALIGN]
 "   vim-lexical                                             [LEXICAL]
+"   ReplaceWithRegister                                     [REPLACEREGISTER]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -263,6 +264,14 @@ Plug 'junegunn/vim-easy-align'
 "=============================================================================
 " " Spellchecker and such!
 Plug 'reedes/vim-lexical'
+
+"=============================================================================
+"   ReplaceWithRegister                                     [REPLACEREGISTER]
+"=============================================================================
+" " Use [count][''x]gr to overwrite the given text with the contents of
+" " register 'x', without clobbering the unnamed register.
+" NOTE: gr is the default keybinding, which I've replaced with <Leader>r.
+Plug 'vim-scripts/ReplaceWithRegister'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
