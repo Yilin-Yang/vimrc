@@ -91,6 +91,9 @@ nnoremap L 40l
 " " (If you dug too deep into a location list, etc.)
 nnoremap <silent> <leader>^ :e#1<cr>
 
+" Rewrap the current paragraph.
+nnoremap <leader>w vipJgqq
+
 "=============================================================================
 "   User Interface                                          [UI]
 "=============================================================================
