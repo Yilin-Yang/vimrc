@@ -27,6 +27,7 @@
 "   vim-lexical                                             [LEXICAL]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
 "   vim-rsi                                                 [RSI]
+"   vim-tmux-focus-events                                   [FOCUSEVENTS]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -285,6 +286,12 @@ Plug 'vim-scripts/ReplaceWithRegister'
 "=============================================================================
 " " Use Readline mappings inside of vim, including vim's command line.
 Plug 'https://github.com/tpope/vim-rsi'
+
+"=============================================================================
+"   vim-tmux-focus-events                                   [FOCUSEVENTS]
+"=============================================================================
+" " Make the 'FocusGained' event, etc. work properly in tmux and the terminal.
+Plug 'tmux-plugins/vim-tmux-focus-events'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
