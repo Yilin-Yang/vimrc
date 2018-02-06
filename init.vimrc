@@ -22,6 +22,7 @@
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
 "   vim-commentary                                          [COMMENTARY]
+"   tabular                                                 [TABULAR]
 "   vim-easy-align                                          [EASYALIGN]
 "   vim-lexical                                             [LEXICAL]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
@@ -253,6 +254,11 @@ Plug 'easymotion/vim-easymotion'
 "=============================================================================
 " " Comment stuff out!
 Plug 'tpope/vim-commentary'
+
+"=============================================================================
+"   tabular                                                 [TABULAR]
+"=============================================================================
+Plug 'godlygeek/tabular'
 
 "=============================================================================
 "   vim-easy-align                                          [EASYALIGN]
