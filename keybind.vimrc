@@ -94,6 +94,9 @@ nnoremap <silent> <leader>^ :e#1<cr>
 " Rewrap the current paragraph.
 nnoremap <leader>w vipJgqq
 
+" Sort the highlighted lines.
+vnoremap <silent> <leader>s :sort<cr>
+
 "=============================================================================
 "   User Interface                                          [UI]
 "=============================================================================
