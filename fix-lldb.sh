@@ -4,6 +4,8 @@
 # Modified to use libLLVM-3.8 rather than 3.6, since these files are in 3.8
 #   on my personal machine.
 
+sudo apt-get install -y lldb
+
 cd /usr/lib/llvm-3.8/lib/python2.7/site-packages/lldb
 sudo rm _lldb.so
 sudo ln -s ../../../liblldb.so.1 _lldb.so
