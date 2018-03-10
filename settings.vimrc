@@ -38,7 +38,7 @@ set nowrap                          " Don't wrap lines that are too long
     set ruler                       " Show line lengths
     set cursorline                  " Mark the current line
     set cursorcolumn                " Mark the current column
-        hi CursorColumn cterm=NONE ctermbg=NONE ctermfg=white guibg=NONE guifg=white
+        hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
                                     " ^ very dark gray
                                     "           ^ creates a cool effect
 
