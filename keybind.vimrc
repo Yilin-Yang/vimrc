@@ -28,6 +28,9 @@ let maplocalleader="\\"
 "   Ordinary                                                [ORDINARY]
 "=============================================================================
 
+" Refresh the current buffer.
+nnoremap <silent> <F5> :e<cr>
+
 " Write the current buffer by double-tapping the leader key.
 nnoremap <leader><leader> :w<cr>
 
@@ -113,7 +116,7 @@ nnoremap <silent> <leader>q :call CloseErrorWindows()<cr>:copen<cr>
 " Function Key Toggles
 
 "   Toggle Fold
-    nnoremap <silent> <F5> :call FoldFunctionBodies()<cr>
+    "nnoremap <silent> <F5> :call FoldFunctionBodies()<cr>
 
 " Wrap or unwrap large markdown files
 
