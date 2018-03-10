@@ -32,7 +32,7 @@ endf
 
 " Analogous to hitting Ctrl-C while running GDB.
 fu! DebuggerInterrupt()
-    return "<S-F8>"
+    return "<F7>"
 endf
 
 fu! DebuggerToStdin()
