@@ -4,6 +4,7 @@
 
 source "`dirname $0`/global_constants.sh"
 
+$DIR/vim-plug.sh        # install vim-plug
 $DIR/external_tools.sh  # install some dependencies
 $DIR/neovim.sh          # install neovim
 
