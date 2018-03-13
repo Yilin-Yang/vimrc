@@ -113,13 +113,7 @@ nnoremap <silent> <leader>q :call CloseErrorWindows()<cr>:copen<cr>
 "   Functions                                               [FUNCTIONS]
 "=============================================================================
 
-" Function Key Toggles
-
-"   Toggle Fold
-    "nnoremap <silent> <F5> :call FoldFunctionBodies()<cr>
-
 " Wrap or unwrap large markdown files
-
 augroup markdown_specific
     autocmd!
     " Wrap/Unwrap Lines
