@@ -246,12 +246,13 @@ nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>
 " Debugging Notes
 " https://github.com/autozimu/LanguageClient-neovim/issues/72
 "
-" TROUBLESHOOTING: If the cquery LSP doesn't work, try the following:
-" 1) Verify that `~/.local/stow/cquery/bin/cquery --language-server` runs.
-" 2) Verify that `~/.config/nvim/settings.json` is correctly populated.
-" 3) Verify that nvim has registered all active remote plugins. (:CheckHealth,
+" TROUBLESHOOTING: If the C++ LSP doesn't work, try the following:
+" 1) Verify that nvim has registered all active remote plugins. (:CheckHealth,
 "    :UpdateRemotePlugins).
-" 4) Make sure that the active directory contains `compile_commands.json`.
+" 2) Make sure that the active directory contains `compile_commands.json`.
+" 3) Make sure that you've installed clang-6.0 (or later) as well as
+"    clang-tools-6.0 (or later), and that you've used update-alternatives to
+"    make the clang symlinks point to those new executables.
 
 " Automatically start language servers.
 let g:LanguageClient_autoStart = 1
@@ -262,7 +263,7 @@ let g:LanguageClient_autoStart = 1
 let g:LanguageClient_settingsPath = '/home/yiliny/.config/nvim/settings.json'
 let g:LanguageClient_loadSettings = 1
 
-" NOTE: cquery requires that `compile_commands.json` exist in the current
+" NOTE: clangd requires that `compile_commands.json` exist in the current
 "       directory or a parent directory!
 "
 "       Running `bear make` on a Makefile-based project will allow bear
@@ -271,16 +272,6 @@ let g:LanguageClient_loadSettings = 1
 "       `make clean` first.
 "
 "       (Obviously, this only works if you have bear installed.)
-let s:cqueryArgsList = [
-    \ '~/.local/stow/cquery/bin/cquery',
-    \ '--language-server',
-    \ '--log-stdin-stdout-to-stderr'
-\]
-" let g:LanguageClient_serverCommands = {
-"     \ 'cpp': s:cqueryArgsList,
-"     \ 'cpp.doxygen': s:cqueryArgsList,
-"     \ 'python': ['pyls']
-"     \ }
 let g:LanguageClient_serverCommands = {
     \ 'cpp': ['clangd'],
     \ 'cpp.doxygen': ['clangd'],
