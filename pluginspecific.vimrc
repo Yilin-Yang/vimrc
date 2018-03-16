@@ -288,7 +288,7 @@ let g:LanguageClient_serverCommands = {
     \ }
 
 " Show type info and short doc of identifier under cursor.
-nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cR>
+nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
 
 " Goto definition of identifier.
 nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
