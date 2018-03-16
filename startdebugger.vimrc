@@ -5,7 +5,7 @@
 function! Debug(...)
     if match(&filetype, "cpp") !=? -1
         " Start lldb.nvim.
-        call StartLLDB()
+        call StartConqueGDB()
     elseif &filetype == "python"
         let filename = @%
 
