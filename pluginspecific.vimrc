@@ -274,10 +274,16 @@ let g:LanguageClient_loadSettings = 1
 let s:cqueryArgsList = [
     \ '~/.local/stow/cquery/bin/cquery',
     \ '--language-server',
-    \ '--log-stdin-stdout-to-stderr']
+    \ '--log-stdin-stdout-to-stderr'
+\]
+" let g:LanguageClient_serverCommands = {
+"     \ 'cpp': s:cqueryArgsList,
+"     \ 'cpp.doxygen': s:cqueryArgsList,
+"     \ 'python': ['pyls']
+"     \ }
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': s:cqueryArgsList,
-    \ 'cpp.doxygen': s:cqueryArgsList,
+    \ 'cpp': ['clangd'],
+    \ 'cpp.doxygen': ['clangd'],
     \ 'python': ['pyls']
     \ }
 
