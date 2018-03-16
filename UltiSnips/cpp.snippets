@@ -138,3 +138,11 @@ snippet ifdef
 $0
 #endif // $1
 endsnippet
+
+snippet object_type_print_case
+case (maav::sim::ObjectType::$1):
+	type_name = "$1";
+	break;
+$0
+endsnippet
+

@@ -19,6 +19,7 @@ let g:neomake_cpp_gcc_maker = {
         \ '-fsyntax-only',
         \ '-Wall',
         \ '-Wextra',
+        \ '-Wno-narrowing',
         \ '-pedantic',
         \ '-pthread',
         \ '--std=c++14',
