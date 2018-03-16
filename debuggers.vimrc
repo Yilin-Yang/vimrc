@@ -5,6 +5,7 @@
 "   GENERAL                                                 [GENERAL]
 "
 "   lldb                                                    [LLDB]
+"   ConqueGDB                                               [CONQUEGDB]
 "   vim-vebugger                                            [VEBUGGER]
 "=============================================================================
 
@@ -68,7 +69,7 @@ execute 'nnoremap <silent> ' . DebuggerPrefix() . "n" . " :LLsession new<cr>"
 execute 'nnoremap <silent> ' . DebuggerPrefix() . "d" . " :LLsession new<cr>:LLmode debug<cr>"
 
 " Loads the (default) existing LLDB debugger session.
-execute 'nnoremap <silent> ' . DebuggerPrefix() . "r" . " :LLsession load<cr>:LLmode debug<cr>"
+execute 'nnoremap <silent> ' . DebuggerPrefix() . "e" . " :LLsession load<cr>:LLmode debug<cr>"
 
 " Reloads the current debugger session from the file.
 execute 'nnoremap <silent> ' . DebuggerPrefix() . "r" . " :LLsession reload<cr>"
@@ -147,6 +148,37 @@ let g:lldb#sign#pc_symbol="->"
 
 "-------------------------------------------------------------------------
 endfunction " StartLLDB
+
+
+"=============================================================================
+"   ConqueGDB                                               [CONQUEGDB]
+"=============================================================================
+
+" Run the program.
+" DEFAULT: let g:ConqueGdb_Run = g:ConqueGdb_Leader . 'r'
+
+" Set ConqueGDB leader key.
+let g:ConqueGdb_Leader      = DebuggerPrefix()
+
+" Continue execution.
+let g:ConqueGdb_Continue    = DebuggerContinue()
+
+let g:ConqueGdb_Next        = DebuggerStepOver()
+
+let g:ConqueGdb_Step        = DebuggerStepIn()
+let g:ConqueGdb_Print       = DebuggerEvaluate()
+let g:ConqueGdb_ToggleBreak = DebuggerSetBreakpoint()
+let g:ConqueTerm_SendVisKey = DebuggerToStdin()
+let g:ConqueTerm_ToggleKey  = DebuggerPrefix() . 'p'
+
+function! StartConqueGDB()
+"-------------------------------------------------------------------------
+
+" Starts GDB debugger session.
+execute 'nnoremap <silent> ' . DebuggerPrefix() . "d" . " :ConqueGdb -d . --args "
+
+"-------------------------------------------------------------------------
+endfunction " StartConqueGDB
 
 
 "=============================================================================

@@ -12,6 +12,7 @@
 "   nvim-completion-manager                                 [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
+"   ConqueGDB                                               [GDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
 "   LanguageClient-neovim                                   [LSP]
@@ -188,6 +189,11 @@ Plug 'xolox/vim-easytags'
 if has('nvim')
     Plug 'dbgx/lldb.nvim'
 endif
+
+"=============================================================================
+"   ConqueGDB                                               [GDB]
+"=============================================================================
+Plug 'vim-scripts/Conque-GDB'
 
 "=============================================================================
 "   vim-snippets                                            [SNIPPETS]

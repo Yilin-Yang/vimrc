@@ -20,6 +20,7 @@
 "   vim-lexical                                             [LEXICAL]
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
+"   ConqueGDB                                               [GDB]
 "=============================================================================
 
 
@@ -420,3 +421,28 @@ nnoremap gf /(<CR>l<C-v>/)<CR>
 xmap <leader>r  <Plug>ReplaceWithRegisterVisual
 nmap <leader>rr <Plug>ReplaceWithRegisterLine
 nmap <leader>r  <Plug>ReplaceWithRegisterOperator
+
+"=============================================================================
+"   ConqueGDB                                               [CONQUEGDB]
+"=============================================================================
+
+" Continue updating Conque buffers after switching to another buffer.
+let g:ConqueTerm_ReadUnfocused = 1
+
+" Prevent collision with Neomake command.
+let g:ConqueTerm_Interrupt = '<C-i>'
+
+" Try to use the Python3 interface, which I presume is better?
+let g:ConqueTerm_PyVersion = 3
+
+" Open the GDB terminal on the right side of the screen.
+let g:ConqueGdb_SrcSplit = 'left' " Open source on the *left* side.
+
+" Update very frequently while I'm in insert mode.
+let g:ConqueTerm_FocusedUpdateTime = 10
+
+" Update very frequently while I'm not in insert mode.
+let g:ConqueTerm_UnfocusedUpdateTime = 100
+
+" Disable start warnings.
+let g:ConqueTerm_StartMessages = 0
