@@ -16,6 +16,14 @@
 "   Utility                                                 [UTILITY]
 "=============================================================================
 
+" EFFECTS:  Opens the given file and jumps to the given line.
+" PARAM:    filename (string)   The filepath to the target file.
+" PARAM:    lineno (string)     The target line number in the target file.
+function! Goto(filename, lineno)
+    execute "normal! :e " . a:filename . " | " . a:lineno . "\<cr>"
+endfunction()
+command! -nargs=+ -complete=file Gt call Goto(<f-args>)
+
 " EFFECTS:  Highlights in red all text going past 80 chars
 function! Highlight()
     " Highlight text going past 80 chars on one line
