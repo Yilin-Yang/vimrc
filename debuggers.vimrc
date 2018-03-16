@@ -175,7 +175,9 @@ function! StartConqueGDB()
 "-------------------------------------------------------------------------
 
 " Starts GDB debugger session.
-execute 'nnoremap <silent> ' . DebuggerPrefix() . "d" . " :ConqueGdb -d . --args "
+execute 'nnoremap ' . DebuggerPrefix() . "d" . " :ConqueGdb -d . --args "
+
+execute 'nnoremap ' . DebuggerPrefix() . "s" . " :ConqueGdbCommand "
 
 "-------------------------------------------------------------------------
 endfunction " StartConqueGDB
