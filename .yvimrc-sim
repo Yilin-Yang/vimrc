@@ -22,6 +22,8 @@ let g:neomake_cpp_gcc_maker = {
         \ '-Wno-narrowing',
         \ '-pedantic',
         \ '-pthread',
+        \ '-DDEBUG',
+        \ '-DNDEBUG',
         \ '--std=c++17',
         \ '-g',
         \ '-fPIC',
