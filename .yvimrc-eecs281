@@ -14,7 +14,6 @@ let g:neomake_cpp_gcc_maker = {
         \ '-pedantic',
         \ '-O3',
         \ '-DDEBUG',
-        \ '-DNDEBUG',
         \ '-I.',
         \ '-I..'
     \ ],
