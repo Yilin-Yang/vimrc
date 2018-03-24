@@ -429,9 +429,6 @@ nmap <leader>r  <Plug>ReplaceWithRegisterOperator
 " Continue updating Conque buffers after switching to another buffer.
 let g:ConqueTerm_ReadUnfocused = 1
 
-" Prevent collision with Neomake command.
-let g:ConqueTerm_Interrupt = '<C-i>'
-
 " Try to use the Python3 interface, which I presume is better?
 let g:ConqueTerm_PyVersion = 3
 
