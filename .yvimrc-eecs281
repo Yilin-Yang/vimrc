@@ -3,6 +3,8 @@ augroup proper_headers
     autocmd BufRead,BufNewFile *.h,*.cpp set filetype=cpp.doxygen
 augroup END
 
+nnoremap <silent> <C-c> :silent exec "!rm *.gch" <cr> :call WriteAndLint() <cr>
+
 let g:neomake_cpp_gcc_maker = {
     \ 'exe': 'g++',
     \ 'args': [
