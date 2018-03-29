@@ -120,12 +120,7 @@ function! TestCaseAutoformat()
     retab
     noh " stop highlighting matched function headers after the above call
 endfunction
-
-" EFFECTS:  Calls TestCaseAutoFormat().
-function! Tca()
-    " Shorter alias for TestCaseAutoformat
-    call TestCaseAutoformat()
-endfunction
+command! -nargs=0 Tca call TestCaseAutoformat()
 
 "=============================================================================
 "   Merge Conflict Resolution                               [MERGE_CONFLICT]
