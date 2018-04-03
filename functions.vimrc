@@ -71,9 +71,9 @@ command! -nargs=+ -complete=command BufDoAll call BufDoAll(<q-args>)
 "           the cursor to its old location afterwards.
 function! DeleteTrailing()
     let cols_from_left = getpos(".")[2] - 1
-    let lines_from_top = line(".") - 1
+    let lines_from_top = line(".")
     %s/\s\+$//e
-    execute 'normal! 0gg' . eval(lines_from_top) . 'j' . eval(cols_from_left) . 'l'
+    execute 'normal! ' . eval(lines_from_top) . 'G' . '0' . eval(cols_from_left) . 'l'
 endfunction
 
 "=============================================================================
