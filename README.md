@@ -20,6 +20,8 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [ReplaceWithRegister](https://github.com/vim-scripts/ReplaceWithRegister)
 * [Tagbar](https://github.com/majutsushi/tagbar	)
 * [UltiSnips](https://github.com/SirVer/ultisnips)
+* [fuzzyfind](https://github.com/junegunn/fzf)
+* [fuzzyfind-vim](https://github.com/junegunn/fzf.vim)
 * [lldb](https://github.com/dbgx/lldb.nvim)
 * [localvimrc](https://github.com/embear/vim-localvimrc)
 * [neomake](https://github.com/neomake/neomake)

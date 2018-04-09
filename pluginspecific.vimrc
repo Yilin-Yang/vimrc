@@ -21,6 +21,7 @@
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
 "   ConqueGDB                                               [GDB]
+"   fuzzy-find vim plugin                                   [FZFVIM]
 "=============================================================================
 
 
@@ -443,3 +444,50 @@ let g:ConqueTerm_UnfocusedUpdateTime = 100
 
 " Disable start warnings.
 let g:ConqueTerm_StartMessages = 0
+
+"=============================================================================
+"   fuzzy-find vim plugin                                   [FZFVIM]
+"=============================================================================
+
+fu! FuzzyFindPrefix()
+    return "m"
+endf
+
+" fzf files in the PWD.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'ff'  . ' :Files .<cr>'
+
+" Start writing a 'fuzzyfind file' command.
+execute 'nnoremap '          . FuzzyFindPrefix() . 'f'   . ' :Files '
+
+" fzf through git ls' . FuzzyFindPrefix() . 'files.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gf'  . ' :GFiles<cr>'
+
+" Start writing a 'git ls' . FuzzyFindPrefix() . 'files' fuzzyfind command.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gf'  . ' :GFiles<cr>'
+
+" fzf through 'git status'.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gs'  . ' :GFiles?<cr>'
+
+" fzf through git commits. Requires fugitive.vim.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gc'  . ' :Commits<cr>'
+
+" fzf through git commits for the active buffer.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gb'  . ' :BCommits<cr>'
+
+" fzf through vim marks.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gm'  . ' :Marks<cr>'
+
+" fzf through vim keymappings.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gp'  . ' :Maps<cr>'
+
+" fzf through vim commands.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gd'  . ' :Commands<cr>'
+
+" fzf through lines in all loaded buffers.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gl'  . ' :Lines<cr>'
+
+" fzf through lines in the active buffer.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gbl' . ' :BLines<cr>'
+
+" fzf through active windows.
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gw'  . ' :Windows<cr>'

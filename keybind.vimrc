@@ -34,30 +34,30 @@ nnoremap <silent> <F5> :e<cr>
 " Write the current buffer by double-tapping the leader key.
 nnoremap <leader><leader> :w<cr>
 
-" Exit interactive/visual mode by hitting j and k
+" Exit interactive/visual mode by hitting j and k.
 inoremap jk <esc>
 vnoremap jk <esc>
 
-" Write file by double-tapping space.
-nnoremap <leader><leader> :w<cr>
+" Close a split by hitting sk ('split-kill').
+noremap <silent> sk <esc>:q<cr>
 
 if has('nvim')
-    " nvim specific, not needed for vim
-    " Map j and k to exiting terminal mode
+    " " nvim specific, not needed for vim.
+    " Map j and k to exiting terminal mode.
     tnoremap jk <C-\><C-n>
 
-    " Ditto with ESC
+    " Ditto with ESC.
     tnoremap <Esc> <C-\><C-n>
 
-    " Control plus HJKL to move between windows in terminal mode
+    " Control plus HJKL to move between windows in terminal mode.
     tnoremap <C-h> <C-\><C-N><C-w>h
     tnoremap <C-j> <C-\><C-N><C-w>j
     tnoremap <C-k> <C-\><C-N><C-w>k
     tnoremap <C-l> <C-\><C-N><C-w>l
 else
-    " vim specific, not needed for nvim
+    " " vim specific, not needed for nvim.
 
-    " Enable use of Alt key as modifier (sends Escape character)
+    " Enable use of Alt key as modifier (sends Escape character).
     execute "set <M-d>=\ed"
     execute "set <M-a>=\ea"
 endif

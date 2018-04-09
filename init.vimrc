@@ -29,6 +29,8 @@
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
 "   vim-rsi                                                 [RSI]
 "   vim-tmux-focus-events                                   [FOCUSEVENTS]
+"   fuzzy-find                                              [FZF]
+"   fuzzy-find vim plugin                                   [FZFVIM]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -265,12 +267,13 @@ Plug 'tpope/vim-commentary'
 "=============================================================================
 "   tabular                                                 [TABULAR]
 "=============================================================================
+" " Space-alignment of things!
 Plug 'godlygeek/tabular'
 
 "=============================================================================
 "   vim-easy-align                                          [EASYALIGN]
 "=============================================================================
-" " Align things more easily!
+" " Align things more easily! A bit more configurable than tabular.
 Plug 'junegunn/vim-easy-align'
 
 "=============================================================================
@@ -298,6 +301,19 @@ Plug 'https://github.com/tpope/vim-rsi'
 "=============================================================================
 " " Make the 'FocusGained' event, etc. work properly in tmux and the terminal.
 Plug 'tmux-plugins/vim-tmux-focus-events'
+
+"=============================================================================
+"   fuzzy-find                                              [FZF]
+"=============================================================================
+" " Search for things very speedily.
+" PlugInstall and PlugUpdate will clone fzf in ~/.fzf, run the install script.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+
+"=============================================================================
+"   fuzzy-find vim plugin                                   [FZFVIM]
+"=============================================================================
+" A 'default' fuzzyfind vim plugin, written by fuzzyfind's maintainer.
+Plug 'junegunn/fzf.vim'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
