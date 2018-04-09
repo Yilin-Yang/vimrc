@@ -88,11 +88,11 @@ execute 'nnoremap <silent> ' . DebuggerPrefix() . "o" . " :LLsession bp-save<cr>
 "-------------------------------------------------------------------------
 
 " Switch to debug mode.
-execute 'nnoremap <silent> ' . DebuggerPrefix() . "md" . " :LLmode debug<cr>"
+execute 'nnoremap          ' . DebuggerPrefix() . "md" . " :LLmode debug<cr>"
 
 " Switch to code mode.
-execute 'nnoremap <silent> ' . DebuggerPrefix() . "c" . " :LLmode code<cr>"
-execute 'nnoremap <silent> ' . DebuggerPrefix() . DebuggerKill() . " :LL process kill<cr>:LLmode code<cr>"
+execute 'nnoremap          ' . DebuggerPrefix() . "c" . " :LLmode code<cr>"
+execute 'nnoremap          ' . DebuggerPrefix() . DebuggerKill() . " :LL process kill<cr>:LLmode code<cr>"
 
 "-------------------------------------------------------------------------
 " NOTE: these mappings can't be 'nore', since they have to invoke other
@@ -131,8 +131,8 @@ nnoremap <silent> <Leader><F4> :LLstdin<cr>
 
 execute 'nnoremap <silent> ' . DebuggerContinue()   .   " :LL continue<cr>"
 execute 'nnoremap <silent> ' . DebuggerInterrupt()  .   " :LL process interrupt<cr>"
-execute 'nnoremap <silent> ' . DebuggerEvaluate()   .   " :LL print <C-R>=expand('<cword>')<cr>"
-execute 'vnoremap <silent> ' . DebuggerEvaluate()   .   " :<C-U>LL print <C-R>=lldb#util#get_selection()<cr><cr>"
+execute 'nnoremap          ' . DebuggerEvaluate()   .   " :LL print <C-R>=expand('<cword>')<cr>"
+execute 'vnoremap          ' . DebuggerEvaluate()   .   " :<C-U>LL print <C-R>=lldb#util#get_selection()<cr><cr>"
 
 " Step in.
 execute 'nnoremap <silent> ' . DebuggerStepIn()     .   " :LL step<cr>"
