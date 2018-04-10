@@ -475,19 +475,19 @@ execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gc'  . ' :Commits<cr>'
 execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gb'  . ' :BCommits<cr>'
 
 " fzf through vim marks.
-execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gm'  . ' :Marks<cr>'
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'm'  . ' :Marks<cr>'
 
 " fzf through vim keymappings.
-execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gp'  . ' :Maps<cr>'
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'p'  . ' :Maps<cr>'
 
 " fzf through vim commands.
-execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gd'  . ' :Commands<cr>'
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'd'  . ' :Commands<cr>'
 
 " fzf through lines in all loaded buffers.
-execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gl'  . ' :Lines<cr>'
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'l'  . ' :Lines<cr>'
 
 " fzf through lines in the active buffer.
-execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gbl' . ' :BLines<cr>'
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'bl' . ' :BLines<cr>'
 
 " fzf through active windows.
-execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gw'  . ' :Windows<cr>'
+execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'w'  . ' :Windows<cr>'
