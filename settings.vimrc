@@ -29,6 +29,8 @@ syntax on                           " Turn on syntax highlighting
 set background=dark                 " Make text readable on dark background
 set foldcolumn=1                    " Show a column with all folds
 set listchars=tab:│·,extends:>,precedes:<,nbsp:+
+hi SpecialKey  ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray gui=none
+hi NonText     ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray gui=none
 set list
 set nowrap                          " Don't wrap lines that are too long
 
