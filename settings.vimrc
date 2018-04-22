@@ -24,6 +24,15 @@ set completeopt=menuone,noinsert    " Show pop-up menu even when
 let g:cm_completeopt=&completeopt   " workaround to prevent overriding by
                                     " nvim-completion-manager
 
+" Spellchecking
+" Further information on vim spellfile configuration can be found here:
+"   https://vi.stackexchange.com/a/5521
+"   https://stackoverflow.com/a/40832571
+set spelllang=en_us
+set spellfile=$HOME/vimrc/spellfile/en.utf-8.add
+                                    " Use the version-controlled spellfiles
+                                    " in my vimrc repository.
+
 " Appearance
 syntax on                           " Turn on syntax highlighting
 set background=dark                 " Make text readable on dark background
