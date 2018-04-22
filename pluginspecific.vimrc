@@ -274,9 +274,14 @@ let g:LanguageClient_loadSettings = 1
 "       `make clean` first.
 "
 "       (Obviously, this only works if you have bear installed.)
+let s:cqueryArgsList = [
+    \ '~/.local/stow/cquery/bin/cquery',
+    \ '--language-server',
+    \ '--log-stdin-stdout-to-stderr']
+
 let g:LanguageClient_serverCommands = {
-    \ 'cpp': ['clangd'],
-    \ 'cpp.doxygen': ['clangd'],
+    \ 'cpp': s:cqueryArgsList,
+    \ 'cpp.doxygen': s:cqueryArgsList,
     \ 'python': ['pyls']
     \ }
 
