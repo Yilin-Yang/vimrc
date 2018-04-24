@@ -10,6 +10,24 @@ debug, since they wouldn't be familiar with where everything is.) It's meant
 mostly as a reference, in case I'm helping a classmate configure vim and need
 something to point at as I explain something.
 
+General Recommendations
+--------------------------------------------------------------------------------
+Some general vim settings (not plugins) that I find incredibly useful and am
+likely to recommend to others.
+
+### Silencing Swapback File Warnings - `settings.vimrc`
+This makes it easier to simultaneously edit or view the same text file from
+separate vim instances (e.g. if you use tmux, multiple terminal windows, etc.),
+and makes it easier to reload vim session files even when old swapback files
+still exist in the same directory. That last feature also makes [tmux-resurrect's](https://github.com/tmux-plugins/tmux-resurrect)
+vim [session restoration](https://github.com/tmux-plugins/tmux-resurrect/blob/master/docs/restoring_vim_and_neovim_sessions.md)
+work properly, which is a nice bonus.
+
+### Reload Buffers When Files Change Outside of Vim - `bufferevents.vimrc`
+gvim does this automatically, but vim instances that run in a terminal generally
+don't. This makes it substantially easier to edit the same file from several
+vim instances.
+
 An (Incomplete) List of (Hyperlinks to) Plugins That I Use
 --------------------------------------------------------------------------------
 For convenience's sake. (Not guaranteed to be current or comprehensive; see
