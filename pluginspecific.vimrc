@@ -241,6 +241,18 @@ let g:UltiSnipsJumpBackwardTrigger='<Leader><S-Tab>'
 "   current filetype. If no snippet file exists, a new file is created.'
 nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>
 
+" UltiSnips slows neovim down substantially, due to performance issues caused
+" by neovim's emulation of vim's Python API. This isn't noticeable on a native
+" Ubuntu installation, but it's a major annoyance on WSL.
+"
+" These performance problems are caused by the UltiSnips_AutoTrigger augroup,
+" as described here:
+"   https://github.com/SirVer/ultisnips/issues/593#issuecomment-151101506
+"
+" Since I don't use AutoTrigger snippets, I disable that augroup here.
+augroup UltiSnips_AutoTrigger
+    au!
+augroup END
 
 "=============================================================================
 "   LanguageClient-neovim                                   [LSP]
