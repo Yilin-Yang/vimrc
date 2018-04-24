@@ -3,18 +3,27 @@ colorscheme default " For now, all this does is trigger the autocmd for changing
                     " Neomake's highlight colors
 
 " Tab Heresy
-set expandtab                       " Spaces for indentation
-set shiftwidth=4                    " Indentation depth with << and >> commands
-set tabstop=4                       " One tab counts for four spaces
+set expandtab                       " Spaces for indentation.
+set shiftwidth=4                    " Indentation depth with << and >> commands.
+set softtabstop=-1                  " The number of columns to insert when pressing
+                                    " <Tab>. Helpful when *forced* to indent with mixed
+                                    " tabs and spaces, like *profligate scum*.
+                                    " (Negative value => use value of `shiftwidth`.)
+set tabstop=8                       " By default, most editors come configured with a
+                                    " default tab-width of 8 columns, and
+                                    " having that width set differently can
+                                    " make files written in those editors look weird.
 
 " Behavior
 set backspace=indent,eol,start      " Backspace over autoindents, line breaks,
-                                    " position at start of insert mode
-set timeoutlen=200                  " Decrease timeout for combined keymaps
-set scrolloff=20
+                                    " position at start of insert mode.
+set timeoutlen=200                  " Decrease timeout for combined keymaps.
+set scrolloff=20                    " The minimum number of lines that vim
+                                    " will keep between the cursor and the
+                                    " top/bottom of the screen when scrolling.
 set hidden                          " Allow hidden buffers.
 set visualbell                      " FOR THE LOVE OF GOD STOP BOOPING IN WSL
-set showcmd                         " See leader key in corner
+set showcmd                         " See leader key in corner.
 set lazyredraw                      " Only redraw after given command has completed
 set completeopt=menuone,noinsert    " Show pop-up menu even when
                                     " there's only one option, don't insert
@@ -34,24 +43,23 @@ set spellfile=$HOME/vimrc/spellfile/en.utf-8.add
                                     " in my vimrc repository.
 
 " Appearance
-syntax on                           " Turn on syntax highlighting
-set background=dark                 " Make text readable on dark background
-set foldcolumn=1                    " Show a column with all folds
+syntax on                           " Turn on syntax highlighting.
+set background=dark                 " Make text readable on dark background.
+set foldcolumn=1                    " Show a column with all folds.
+set nowrap                          " Don't visually wrap lines that are too long.
+set list                            " Explicitly render `listchars`.
 set listchars=tab:│·,extends:>,precedes:<,nbsp:+
-hi SpecialKey  ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray gui=none
-hi NonText     ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray gui=none
-set list
-set nowrap                          " Don't wrap lines that are too long
+    hi SpecialKey  ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
+    hi NonText     ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
 
 " Information Density
     set relativenumber              " Relative numbering!
-    set number                      " Show line numbers
-    set ruler                       " Show line lengths
-    set cursorline                  " Mark the current line
-    set cursorcolumn                " Mark the current column
+    set number                      " Show absolute line numbers.
+    set ruler                       " Show line lengths in the statusline.
+    set cursorline                  " Underline the current line.
+    set cursorcolumn                " Mark the current column.
         hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
-                                    " ^ very dark gray
-                                    "           ^ creates a cool effect
+                      " ^ bold every character that's in the same column as the cursor
 
 " Color Reference
 "   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
