@@ -49,8 +49,50 @@ set foldcolumn=1                    " Show a column with all folds.
 set nowrap                          " Don't visually wrap lines that are too long.
 set list                            " Explicitly render `listchars`.
 set listchars=tab:│·,extends:>,precedes:<,nbsp:+
-    hi SpecialKey  ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
-    hi NonText     ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
+set fillchars+=vert:│
+
+" Highlighting
+" Further information on highlight groups and highlight color values
+" can be found through:
+"   :help highlight-groups
+"   :help gui-colors
+"   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+
+    " Less obtrusive `listchars`.
+    hi SpecialKey ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
+
+    hi clear Whitespace
+    hi link Whitespace SpecialKey
+    hi clear NonText
+    hi link NonText SpecialKey
+
+    " Less obtrusive spellchecker markings.
+    hi SpellBad cterm=underline ctermfg=DarkRed ctermbg=NONE
+
+    " Less obtrusive vertical splits.
+    hi clear VertSplit
+    hi link VertSplit Delimiter
+
+    " Disable ugly gray background in visual selections.
+    hi Visual cterm=reverse
+
+    " Make folds less visually distracting.
+    hi clear Folded
+    hi link Folded Special
+
+    " Disable ugly gray background in side columns.
+    hi FoldColumn ctermbg=NONE
+    hi SignColumn ctermbg=NONE
+
+    " Make the tabline a bit more minimal.
+    hi TabLine ctermbg=NONE ctermfg=darkgray
+    hi TabLineFill cterm=NONE ctermbg=235
+    hi TabLineSel ctermfg=224
+
+    " Make the statusline a bit more minimal.
+    hi StatusLine cterm=bold,underline ctermfg=224
+    hi StatusLineNC cterm=underline ctermfg=224
+
 
 " Information Density
     set relativenumber              " Relative numbering!
@@ -60,9 +102,6 @@ set listchars=tab:│·,extends:>,precedes:<,nbsp:+
     set cursorcolumn                " Mark the current column.
         hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
                       " ^ bold every character that's in the same column as the cursor
-
-" Color Reference
-"   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 
 " Place tempfiles in a central location, naming folders by PID.
 " This *does* break some of the 'prevent simultaneous editing' enabled by
