@@ -35,16 +35,13 @@ let g:localvimrc_name=['.yvimrc', '.lvimrc']
 "=============================================================================
 "   Neomake                                                 [NEOMAKE]
 "=============================================================================
-" In normal map mode, press Ctrl-C to save buffer and run Syntastic check
-" backslash is necessary to escape pipe character
-" nnoremap <silent> <C-c> :w \| :call CloseErrorWindows() \| :Neomake \| :call Highlight() <cr>
-" nnoremap <silent> <C-c> :w \| :call CloseErrorWindows() \| :Neomake <cr>
+" In normal map mode, press Ctrl-C to save buffer and run linters.
 nnoremap <silent> <C-c> :call WriteAndLint() <cr>
 
-" In normal map mode, press Ctrl-Z to close Syntastic error window
+" In normal map mode, press Ctrl-Z to close error window.
 nnoremap <silent> <C-z> :call CloseErrorWindows() <cr>
 
-" For whatever reason, the ColorScheme event doesn't fire anymore?.
+" For whatever reason, the ColorScheme event doesn't fire anymore?
 augroup neomake_scheme
     au!
     autocmd BufWinEnter *
@@ -70,12 +67,13 @@ let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfo'}
 let g:neomake_cpp_gcc_maker = {
     \ 'exe': 'g++',
     \ 'args': [
-        \ '-fsyntax-only',
+        \ '--std=c++17',
         \ '-Wall',
         \ '-Werror',
+        \ '-Wextra',
         \ '-pedantic',
-        \ '-O1',
-        \ '--std=c++11',
+        \ '-O3',
+        \ '-DDEBUG',
         \ '-I.',
         \ '-I..'
     \ ],
@@ -126,17 +124,21 @@ let g:neomake_tex_latexmk_maker = {
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Open NerdTree if you do vim <dir>
+" Open NerdTree if you do `vim <DIR>`
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-" Close NerdTree if it's the only window open
+" Close NerdTree if it's the only window open.
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 
 " Open NerdTree with CTRL-N
 noremap <silent> <C-n> :NERDTreeToggle<cr>
 
-let NERDTreeQuitOnOpen = 1
+" Close NerdTree after opening a file from the sidebar.
+let NERDTreeQuitOnOpen=1
+
+" Enable changing the PWD from the NerdTree sidebar.
+let NERDTreeChDirMode=2
 
 "=============================================================================
 "   Tagbar                                                  [TAGBAR]
@@ -273,7 +275,6 @@ let g:LanguageClient_autoStart = 1
 
 " Load LanguageClient settings.json files when relevant.
 " This must be an absolute path; tilde expansion doesn't work.
-"let g:LanguageClient_settingsPath = '~/.config/nvim/settings.json'
 let g:LanguageClient_settingsPath = '/home/yiliny/.config/nvim/settings.json'
 let g:LanguageClient_loadSettings = 1
 
@@ -349,6 +350,7 @@ vnoremap <silent> <Leader>c :Commentary<cr>
 " Faster mapping to access Tabular Ex command.
 nnoremap t :Tabularize /
 vnoremap t :Tabularize /
+
 
 nnoremap <silent> tt :Tabularize /,<cr>
 vnoremap <silent> tt :Tabularize /,<cr>
@@ -471,11 +473,11 @@ execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'ff'  . ' :Files .<cr>'
 " Start writing a 'fuzzyfind file' command.
 execute 'nnoremap '          . FuzzyFindPrefix() . 'f'   . ' :Files '
 
-" fzf through git ls' . FuzzyFindPrefix() . 'files.
+" fzf through 'git ls files'.
 execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gf'  . ' :GFiles<cr>'
 
-" Start writing a 'git ls' . FuzzyFindPrefix() . 'files' fuzzyfind command.
-execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gf'  . ' :GFiles<cr>'
+" Start writing a 'git ls files' fuzzyfind command.
+execute 'nnoremap '          . FuzzyFindPrefix() . 'gl'  . ' :GFiles '
 
 " fzf through 'git status'.
 execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'gs'  . ' :GFiles?<cr>'
