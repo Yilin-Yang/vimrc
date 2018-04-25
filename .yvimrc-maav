@@ -1,20 +1,20 @@
-" The arguments list that will be passed to the maker
-
-
-" For use with the :Neomake command (makers that run on an individual file),
-"       it is critical that makers follow this naming convention:
-"
-"   g:neomake_{ filetype }_{ makername }_maker
 
 " MAAV formatting
-set noexpandtab                     " Tabs for indentation
-set shiftwidth=4                    " Indentation depth with << and >> commands
-set tabstop=4                       " One tab counts for four spaces
+set noexpandtab                     " Tabs for indentation.
+set shiftwidth=4                    " Indentation depth with << and >> commands.
+set tabstop=4                       " Tabs appear four spaces wide.
 
 augroup yaml_format
     au!
     autocmd BufEnter *.yaml set expandtab
 augroup end
+
+" The arguments list that will be passed to the maker.
+"
+" For use with the :Neomake command (makers that run on an individual file),
+"       it is critical that makers follow this naming convention:
+"
+"   g:neomake_{ filetype }_{ makername }_maker
 
 let g:neomake_cpp_gcc_maker = {
     \ 'exe': 'g++',

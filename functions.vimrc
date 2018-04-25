@@ -250,11 +250,12 @@ endfunction
 " PARAM:    dimension (string)  Whether to change the split's width or its
 "           height. Valid values are 'WIDTH' and 'HEIGHT'.
 " PARAM:    change (string OR float)    How much to change the window's size.
-"               change (string)             Formatted like '+5' or '-3'. Used
-"                   for incrementing/decrementing by an absolute number of
-"                   rows/cols.
+"               change (string)         Formatted like '+5' or '-3'. Used
+"                                           for incrementing/decrementing by
+"                                           an absolute number of
+"                                           rows/cols.
 "               change (float)          The window's new size, as a proportion
-"                   of vim's current displayable area.
+"                                           of vim's current displayable area.
 function! ResizeSplit(dimension, change)
     let l:command = "normal! :"  " build a resize command piece by piece
     if type(a:change) == v:t_string

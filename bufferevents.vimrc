@@ -13,5 +13,5 @@ augroup autoread
     " Notification after file change
     " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
     autocmd FileChangedShellPost *
-      \ echohl WarningMsg | echo "File changed on disk. Buffer reloaded." | echohl None
+      \ echohl WarningMsg | echo "Detected changes to a loaded file. Buffer may have been reloaded." | echohl None
 augroup END
