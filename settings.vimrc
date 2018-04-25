@@ -90,6 +90,7 @@ set fillchars+=vert:│
     hi TabLineSel ctermfg=224
 
     " Make the statusline a bit more minimal.
+    " NOTE: these are effectively disabled by vim-airline.
     hi StatusLine cterm=bold,underline ctermfg=224
     hi StatusLineNC cterm=underline ctermfg=224
 
