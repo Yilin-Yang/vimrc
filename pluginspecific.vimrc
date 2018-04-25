@@ -22,6 +22,7 @@
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
 "   ConqueGDB                                               [GDB]
 "   fuzzy-find vim plugin                                   [FZFVIM]
+"   vim-airline                                             [AIRLINE]
 "=============================================================================
 
 
@@ -510,3 +511,29 @@ execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'bl' . ' :BLines<cr>'
 
 " fzf through active windows.
 execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'w'  . ' :Windows<cr>'
+
+"=============================================================================
+"   vim-airline                                             [AIRLINE]
+"=============================================================================
+
+" Boring, But Practical.
+let g:airline_theme='monochrome'
+
+set noshowmode " Disable vim's built-in modeline.
+
+" Use vertical bar separators in the statusline.
+let g:airline_left_set='|'
+let g:airline_right_set='|'
+
+" The helpdocs claim that this makes airline faster.
+let g:airline_highlighting_cache = 1
+
+" Don't scan runtimepath for airline-compatible plugins on startup.
+let g:airline#extensions#disable_rtp_load = 1
+
+" Load vim-fugitive, but nothing else.
+let g:airline_extensions = ['branch']
+
+" Trim some gunk from the rightmost part of the statusline.
+let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}% '
+let g:airline_section_z = '%{airline#util#wrap(airline#extensions#obsession#get_status(),0)}%3p%% l:%4l%#__restore__#%#__accent_bold#/%L c:%3v'

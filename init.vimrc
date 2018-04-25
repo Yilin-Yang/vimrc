@@ -31,6 +31,7 @@
 "   vim-tmux-focus-events                                   [FOCUSEVENTS]
 "   fuzzy-find                                              [FZF]
 "   fuzzy-find vim plugin                                   [FZFVIM]
+"   vim-airline                                             [AIRLINE]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -314,6 +315,15 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "=============================================================================
 " A 'default' fuzzyfind vim plugin, written by fuzzyfind's maintainer.
 Plug 'junegunn/fzf.vim'
+
+"=============================================================================
+"   vim-airline                                             [AIRLINE]
+"=============================================================================
+" Prettier, more informative statusline.
+Plug 'vim-airline/vim-airline'
+
+" Different themes.
+Plug 'vim-airline/vim-airline-themes'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
