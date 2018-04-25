@@ -10,6 +10,9 @@ debug, since they wouldn't be familiar with where everything is.) It's meant
 mostly as a reference, in case I'm helping a classmate configure vim and need
 something to point at as I explain something.
 
+If you want to get a sense of how this repo is structured, start by looking at
+`.vimrc`.
+
 General Recommendations
 --------------------------------------------------------------------------------
 Some general vim settings (not plugins) that I find incredibly useful and am
