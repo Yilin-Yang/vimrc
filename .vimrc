@@ -1,5 +1,5 @@
-source $HOME/vimrc/init.vimrc           " vim-plug configuration, plugin settings
-source $HOME/vimrc/settings.vimrc       " Function declarations
+source $HOME/vimrc/init.vimrc           " vim-plug configuration, plugins
+source $HOME/vimrc/settings.vimrc       " General, miscellaneous vim settings
 source $HOME/vimrc/functions.vimrc      " Function declarations
 source $HOME/vimrc/keybind.vimrc        " Keybindings
 source $HOME/vimrc/filespecific.vimrc   " Filetype-specific settings
