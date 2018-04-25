@@ -7,7 +7,7 @@
 "   Ordinary                                                [ORDINARY]
 "   User Interface                                          [UI]
 "   Functions                                               [FUNCTIONS]
-"   Splits                                                  [SPLITS]
+"   Split Navigation                                        [SPLITS]
 "   Merge Conflicts                                         [MERGE_CONFLICTS]
 "=============================================================================
 
@@ -123,7 +123,7 @@ augroup markdown_specific
 augroup END
 
 "=============================================================================
-"   Splits                                                  [SPLITS]
+"   Split Navigation                                        [SPLITS]
 "=============================================================================
 
 " Ctrl + hjkl to cycle through windows!
@@ -135,12 +135,6 @@ inoremap <C-h> <C-\><C-N><C-w>hi
 inoremap <C-j> <C-\><C-N><C-w>ji
 inoremap <C-k> <C-\><C-N><C-w>ki
 inoremap <C-l> <C-\><C-N><C-w>li
-
-" Arrow keys to resize the current split buffer.
-nnoremap <silent> <Up>    :resize +5<CR>
-nnoremap <silent> <Down>  :resize -5<CR>
-nnoremap <silent> <Left>  :vertical resize -5<CR>
-nnoremap <silent> <Right> :vertical resize +5<CR>
 
 "=============================================================================
 "   Merge Conflicts                                         [MERGE_CONFLICTS]
