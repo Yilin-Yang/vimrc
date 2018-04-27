@@ -21,6 +21,9 @@ augroup END
 " Did this because `WinEnter` seems to be the first autocmd that fires late
 " enough that global options (like `foldmethod`) can take effect beforehand.
 " `WinEnter` does not fire once per buffer, hence the buffer-local flag.
+"
+" Adapted from:
+"   http://vim.wikia.com/wiki/Folding#Indent_folding_with_manual_folds
 augroup firstread
     au!
     autocmd BufReadPre * let b:firstread=1
