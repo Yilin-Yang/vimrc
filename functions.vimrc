@@ -16,6 +16,9 @@
 "   Utility                                                 [UTILITY]
 "=============================================================================
 
+" EFFECTS:  Open the given helpdoc in a vertical split.
+command! -nargs=1 H execute ":vert h <args>"
+
 " EFFECTS:  Opens the given file and jumps to the given line.
 " PARAM:    filename (string)   The filepath to the target file.
 " PARAM:    lineno (string)     The target line number in the target file.
