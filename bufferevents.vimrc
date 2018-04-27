@@ -26,7 +26,7 @@ augroup END
 "   http://vim.wikia.com/wiki/Folding#Indent_folding_with_manual_folds
 augroup firstread
     au!
-    autocmd BufReadPre * let b:firstread=1
+    autocmd BufReadPre,BufWinEnter * let b:firstread=1
 
     " Add additional commands to the if-statement below.
     autocmd WinEnter *
