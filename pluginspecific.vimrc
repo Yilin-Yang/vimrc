@@ -175,6 +175,9 @@ if has('nvim')
     augroup END
 endif
 
+" Suppress annoying completion menu messages.
+set shortmess+=c
+
 "=============================================================================
 "   vim-easytags                                            [EASYTAGS]
 "=============================================================================
