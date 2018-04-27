@@ -42,6 +42,14 @@ set spellfile=$HOME/vimrc/spellfile/en.utf-8.add
                                     " Use the version-controlled spellfiles
                                     " in my vimrc repository.
 
+" Folding
+let g:foldmethod="syntax"           " Make it easier to collapse/expand parts of
+                                    " a large text file.
+execute "set foldmethod=" . g:foldmethod
+set foldlevel=20                    " All folds default to being open.
+
+
+
 " Appearance
 syntax on                           " Turn on syntax highlighting.
 set background=dark                 " Make text readable on dark background.
