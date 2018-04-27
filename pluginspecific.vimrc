@@ -536,7 +536,7 @@ let g:airline_highlighting_cache = 1
 let g:airline#extensions#disable_rtp_load = 1
 
 " Load vim-fugitive, but nothing else.
-let g:airline_extensions = ['branch']
+let g:airline_extensions = ['branch', 'wordcount']
 
 " Trim some gunk from the rightmost part of the statusline.
 let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}% '
