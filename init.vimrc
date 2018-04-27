@@ -32,6 +32,7 @@
 "   fuzzy-find                                              [FZF]
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
+"   vim-pencil                                              [PENCIL]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -324,6 +325,12 @@ Plug 'vim-airline/vim-airline'
 
 " Different themes.
 Plug 'vim-airline/vim-airline-themes'
+
+"=============================================================================
+"   vim-pencil                                              [PENCIL]
+"=============================================================================
+" Better support for editing prose documents (e.g. markdown, TeX)
+Plug 'reedes/vim-pencil'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

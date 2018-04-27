@@ -55,6 +55,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-fugitive](https://github.com/tpope/vim-fugitive)
 * [vim-lexical](https://github.com/reedes/vim-lexical)
 * [vim-obsession](https://github.com/tpope/vim-obsession)
+* [vim-pencil](https://github.com/reedes/vim-pencil)
 * [vim-repeat](https://github.com/tpope/vim-repeat)
 * [vim-rsi](https://github.com/tpope/vim-rsi)
 * [vim-snippets](https://github.com/honza/vim-snippets)

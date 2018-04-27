@@ -23,6 +23,7 @@
 "   ConqueGDB                                               [GDB]
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
+"   vim-pencil                                              [PENCIL]
 "=============================================================================
 
 
@@ -537,3 +538,10 @@ let g:airline_extensions = ['branch']
 " Trim some gunk from the rightmost part of the statusline.
 let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}% '
 let g:airline_section_z = '%{airline#util#wrap(airline#extensions#obsession#get_status(),0)}%3p%% l:%4l%#__restore__#%#__accent_bold#/%L c:%3v'
+
+"=============================================================================
+"   vim-pencil                                              [PENCIL]
+"=============================================================================
+
+let g:pencil#textwidth = 80         " line width
+let g:pencil#joinspaces = 1         " two spaces after periods
