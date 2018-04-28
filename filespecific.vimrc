@@ -4,10 +4,10 @@
 "
 "   C++ Formatting                                          [CPP]
 "   Python Formatting                                       [PYTHON]
-"   Markdown Formatting                                     [MARKDOWN]
 "   AutoHotkey Formatting                                   [AUTOHOTKEY]
 "   TeX Formatting                                          [TEX]
 "   Snippets                                                [SNIPPETS]
+"   YAML Formatting                                         [YAML]
 "=============================================================================
 
 "=============================================================================
@@ -16,7 +16,7 @@
 
 " Set C++ specific formatting options.
 function! CppFormat()
-    set colorcolumn=81              " My personal line limit
+    setlocal colorcolumn=81         " My personal line limit
     set filetype=cpp.doxygen        " And highlight doxygen formatting
 endfunction
 
@@ -24,44 +24,27 @@ endfunction
 " .cpp files
  augroup cpp_format
     au!
-    autocmd BufEnter *.cpp              call CppFormat()
-    autocmd BufEnter *.hpp              call CppFormat()
+    autocmd BufRead *.cpp   call CppFormat()
+    autocmd BufRead *.hpp   call CppFormat()
  augroup end
 
 "=============================================================================
 "   Python Formatting                                       [PYTHON]
 "=============================================================================
 
-" TODO: make these functions script-local?
 function! PyFormat()
-    set colorcolumn=80              " PEP-standard lines are 79 characters max
+    setlocal colorcolumn=80             " PEP-standard lines are 79 characters max
 endfunction
 
 augroup py_format
     au!
-    autocmd BufEnter *.py               call PyFormat()
+    autocmd BufRead *.py    call PyFormat()
 augroup end
-
-"=============================================================================
-"   Markdown Formatting                                     [MARKDOWN]
-"=============================================================================
-
-" Set Markdown specific formatting options.
-function! MdFormat(should_format)
-    call TextWrap(a:should_format)
-endfunction
-
-" Markdown Formatting
-" .md files, .markdown files
- augroup md_format
-    au!
-    autocmd filetype markdown           call MdFormat(1)
-augroup end
-
 
 "=============================================================================
 "   TeX Formatting                                          [TEX]
 "=============================================================================
+
 function! TeXFormat()
     call EnableLexical()
     call TextWrap(1)
@@ -78,9 +61,9 @@ endfunction
 
 augroup tex_format
     au!
-    autocmd filetype tex                call TeXFormat()
-    autocmd BufEnter *.tex              set filetype=tex
-    autocmd BufLeave *.tex              call TeXUnformat()
+    autocmd filetype tex    call TeXFormat()
+    autocmd BufEnter *.tex  set filetype=tex
+    autocmd BufLeave *.tex  call TeXUnformat()
 augroup end
 
 "=============================================================================
@@ -89,12 +72,12 @@ augroup end
 
 " Set AutoHotkey specific formatting options.
 function! AhkFormat()
-    set noexpandtab
+    setlocal noexpandtab
 endfunction
 
 augroup ahk_format
-    autocmd filetype autohotkey         call AhkFormat()
-    autocmd BufEnter *.ahk              set filetype=autohotkey
+    autocmd filetype autohotkey call AhkFormat()
+    autocmd BufRead *.ahk       set filetype=autohotkey
     au!
 augroup end
 
@@ -104,5 +87,14 @@ augroup end
 
 augroup snippets_format
     au!
-    autocmd filetype snippets           set expandtab
+    autocmd filetype snippets   setlocal expandtab
 augroup end
+
+"=============================================================================
+"   YAML Formatting                                         [YAML]
+"=============================================================================
+
+augroup yaml_format
+    au!
+    autocmd filetype yaml   setlocal expandtab
+augroup END
