@@ -13,6 +13,10 @@ $DIR/llvm.sh
 # Install palantir's Python language server
 pip install --user python-language-server
 
+# Install Kuniwak/vint
+pip  install vim-vint
+pip3 install vim-vint
+
 # Install lldb for integrated debugger support
 $INSTALLCMD lldb
 

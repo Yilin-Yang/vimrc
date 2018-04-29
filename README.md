@@ -27,7 +27,7 @@ vim [session restoration](https://github.com/tmux-plugins/tmux-resurrect/blob/ma
 work properly, which is a nice bonus.
 
 ### Reload Buffers When Files Change Outside of Vim - `bufferevents.vimrc`
-gvim does this automatically, but vim instances that run in a terminal generally
+gVim does this automatically, but vim instances that run in a terminal generally
 don't. This makes it substantially easier to edit the same file from several
 vim instances.
 
@@ -60,7 +60,31 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-rsi](https://github.com/tpope/vim-rsi)
 * [vim-snippets](https://github.com/honza/vim-snippets)
 * [vim-surround](https://github.com/tpope/vim-surround)
+* [vim-textobj-sentence](https://github.com/reedes/vim-textobj-sentence)
+* [vim-textobj-user](https://github.com/kana/vim-textobj-user)
 * [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
 * [vim-unimpaired](https://github.com/tpope/vim-unimpaired)
 * [vim-vebugger](https://github.com/idanarye/vim-vebugger)
+* [vim-wordy](https://github.com/reedes/vim-wordy)
 * [vimtex](https://github.com/lervag/vimtex)
+
+Other Editing Tools
+--------------------------------------------------------------------------------
+Some additional tools that aren't packaged as vim plugins.
+
+### Language Servers
+The Language Server Protocol provides editor-agnostic IDE-like tools for
+programming, such as semantic autocompletion, identifier renaming, and
+asynchronous syntax-checking. Use with a language client, such as
+LanguageClient-neovim.
+
+* [clangd](https://clang.llvm.org/extra/clangd.html)
+* [cquery](https://github.com/cquery-project/cquery)
+* [python-language-server](https://github.com/palantir/python-language-server)
+
+### Linters
+Linters check for common coding mistakes, syntax errors, and antipatterns. Use
+from the shell, or with a linting plugin such as Neomake or ALE.
+
+* [vim-vint](https://github.com/Kuniwak/vint)
+* [yamllint](https://github.com/adrienverge/yamllint)

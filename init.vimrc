@@ -33,6 +33,9 @@
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
 "   vim-pencil                                              [PENCIL]
+"   vim-wordy                                               [WORDY]
+"   vim-textobj-user                                        [TEXTOBJ_USER]
+"   vim-textobj-sentence                                    [TEXTOBJ_SENTENCE]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -314,23 +317,42 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 "=============================================================================
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "=============================================================================
-" A 'default' fuzzyfind vim plugin, written by fuzzyfind's maintainer.
+" " A 'default' fuzzyfind vim plugin, written by fuzzyfind's maintainer.
 Plug 'junegunn/fzf.vim'
 
 "=============================================================================
 "   vim-airline                                             [AIRLINE]
 "=============================================================================
-" Prettier, more informative statusline.
+" " Prettier, more informative statusline.
 Plug 'vim-airline/vim-airline'
 
-" Different themes.
+" " Different themes.
 Plug 'vim-airline/vim-airline-themes'
 
 "=============================================================================
 "   vim-pencil                                              [PENCIL]
 "=============================================================================
-" Better support for editing prose documents (e.g. markdown, TeX)
+" " Better support for editing prose documents (e.g. markdown, TeX)
 Plug 'reedes/vim-pencil'
+
+"=============================================================================
+"   vim-wordy                                               [WORDY]
+"=============================================================================
+" " Check for word usage problems in prose writing.
+Plug 'reedes/vim-wordy'
+
+"=============================================================================
+"   vim-textobj-user                                     [TEXTOBJ_USER]
+"=============================================================================
+" " Dependency for vim-textobj-sentence.
+Plug 'kana/vim-textobj-user'
+
+"=============================================================================
+"   vim-textobj-sentence                                    [TEXTOBJ_SENTENCE]
+"=============================================================================
+" " Improve vim's built-in textobject detection (handle abbreviations, etc.)
+Plug 'reedes/vim-textobj-sentence'
+
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
