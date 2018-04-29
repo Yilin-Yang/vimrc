@@ -6,23 +6,24 @@
 "   System                                                  [SYSTEM]
 "   Ordinary                                                [ORDINARY]
 "   User Interface                                          [UI]
-"   Functions                                               [FUNCTIONS]
 "   Split Navigation                                        [SPLITS]
-"   Merge Conflicts                                         [MERGE_CONFLICTS]
 "=============================================================================
 
 "=============================================================================
 "   System                                                  [SYSTEM]
 "=============================================================================
 
-" Enable paste-mode that doesn't autotab
+" Enable paste-mode that doesn't autotab.
 set pastetoggle=<F2>
 
-" Set my preferred leader key
+" Set my preferred leader key.
 let mapleader="\<Space>"
 
-" Set my preferred local leader, primarily used with vimtex
+" Set my preferred local leader, primarily used with vimtex.
 let maplocalleader="\\"
+
+" Close multiple active splits.
+nnoremap <silent> dq :qa<cr>
 
 "=============================================================================
 "   Ordinary                                                [ORDINARY]
@@ -110,19 +111,6 @@ nnoremap <silent> <leader>l :call CloseErrorWindows()<cr>:lopen<cr>
 nnoremap <silent> <leader>q :call CloseErrorWindows()<cr>:copen<cr>
 
 "=============================================================================
-"   Functions                                               [FUNCTIONS]
-"=============================================================================
-
-" Wrap or unwrap large markdown files
-augroup markdown_specific
-    autocmd!
-    " Wrap/Unwrap Lines
-    autocmd FileType markdown
-        \ nnoremap <silent> <F3> :call WrapAll()<cr>
-        \ | nnoremap <silent> <F4> :call UnwrapAll()<cr>
-augroup END
-
-"=============================================================================
 "   Split Navigation                                        [SPLITS]
 "=============================================================================
 
@@ -135,12 +123,3 @@ inoremap <C-h> <C-\><C-N><C-w>hi
 inoremap <C-j> <C-\><C-N><C-w>ji
 inoremap <C-k> <C-\><C-N><C-w>ki
 inoremap <C-l> <C-\><C-N><C-w>li
-
-"=============================================================================
-"   Merge Conflicts                                         [MERGE_CONFLICTS]
-"=============================================================================
-
-" Resolving merge conflicts
-    nnoremap <silent> dr :call DiffgetRe()<cr>
-    nnoremap <silent> dn /<<<<<cr><C-d>N
-    nnoremap <silent> dq :call ExitMergeResolutionIfDone()<cr>

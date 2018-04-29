@@ -24,6 +24,7 @@
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
 "   vim-pencil                                              [PENCIL]
+"   vim-wordy                                               [WORDY]
 "=============================================================================
 
 
@@ -122,25 +123,28 @@ let g:neomake_tex_latexmk_maker = {
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
 "=============================================================================
-" Open NerdTree automatically if no files were specified
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+augroup NERDTree
+    au!
+    " Open NerdTree automatically if no files were specified
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-" Open NerdTree if you do `vim <DIR>`
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    " Open NerdTree if you do `vim <DIR>`
+    autocmd StdinReadPre * let s:std_in=1
+    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
 
-" Close NerdTree if it's the only window open.
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+    " Close NerdTree if it's the only window open.
+    autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+augroup END
 
 " Open NerdTree with CTRL-N
 noremap <silent> <C-n> :NERDTreeToggle<cr>
 
 " Close NerdTree after opening a file from the sidebar.
-let NERDTreeQuitOnOpen=1
+let g:NERDTreeQuitOnOpen=1
 
 " Enable changing the PWD from the NerdTree sidebar.
-let NERDTreeChDirMode=2
+let g:NERDTreeChDirMode=2
 
 "=============================================================================
 "   Tagbar                                                  [TAGBAR]
@@ -236,7 +240,7 @@ let &runtimepath.=',~/vimrc/'
 let g:UltiSnipsSnippetsDir='~/vimrc/UltiSnips'
 
 " Search the above directory for snippets files.
-let g:UltiSnipsSnippetDirectories=["UltiSnips", "~/vimrc/UltiSnips"]
+let g:UltiSnipsSnippetDirectories=['UltiSnips', '~/vimrc/UltiSnips']
 
 let g:UltiSnipsExpandTrigger='<Leader><Tab>'
 let g:UltiSnipsListSnippets='<Leader>ui'
@@ -429,7 +433,7 @@ nmap ga <Plug>(EasyAlign)
 "       n       |       'none'      |       Left-align in-and-along the
 "               |                   |       left boundary of selected text.
 "-----------------------------------------------------------------------------
-let g:easy_align_indentation = "s"
+let g:easy_align_indentation = 's'
 
 " Visual Block select all text between the next matched pair of parentheses.
 nnoremap gf /(<CR>l<C-v>/)<CR>
@@ -469,7 +473,7 @@ let g:ConqueTerm_StartMessages = 0
 "=============================================================================
 
 fu! FuzzyFindPrefix()
-    return "m"
+    return 'm'
 endf
 
 " fzf files in the PWD.
@@ -541,5 +545,20 @@ let g:airline_section_z = '%{airline#util#wrap(airline#extensions#obsession#get_
 "   vim-pencil                                              [PENCIL]
 "=============================================================================
 
+let g:pencil#autoformat = 0         " disable 'autocorrect', esp. w/ hardwrap
 let g:pencil#textwidth = 80         " line width
 let g:pencil#joinspaces = 1         " two spaces after periods
+
+augroup pencil
+    au!
+    autocmd FileType markdown,text  call Prose() | call Punctuation()
+    autocmd FileType tex            call Prose()
+augroup END
+
+"=============================================================================
+"   vim-wordy                                               [WORDY]
+"=============================================================================
+
+" Cycle through word usage checkers.
+nnoremap <leader>wn     :NextWordy<cr>
+nnoremap <leader>wp     :PrevWordy<cr>

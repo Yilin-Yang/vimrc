@@ -8,6 +8,7 @@
 "   TeX Formatting                                          [TEX]
 "   Snippets                                                [SNIPPETS]
 "   YAML Formatting                                         [YAML]
+"   Prose Formatting                                        [PROSE]
 "=============================================================================
 
 "=============================================================================
@@ -98,3 +99,33 @@ augroup yaml_format
     au!
     autocmd filetype yaml   setlocal expandtab
 augroup END
+
+"=============================================================================
+"   Prose Formatting                                        [PROSE]
+"=============================================================================
+
+" EFFECTS:  Configures the local buffer for writing/editing prose.
+" REQUIRES: reedes/vim-pencil
+"           reedes/vim-lexical
+"           reedes/vim-textobj-sentence
+"           reedes/vim-wordy
+"
+" DETAIL:   Adapted from:
+"               https://github.com/reedes/vim-pencil
+function! Prose()
+  call pencil#init()
+  call lexical#init()
+  call textobj#sentence#init()
+endfunction
+
+
+" EFFECTS:  Enables abbreviations for 'hard-to-type' punctuation marks.
+" DETAIL:   Adapted from:
+"               https://github.com/reedes/vim-pencil
+function! Punctuation()
+  " replace common punctuation
+  iabbrev <buffer> --   –
+  iabbrev <buffer> ---  —
+  iabbrev <buffer> <<   «
+  iabbrev <buffer> >>   »
+endfunction

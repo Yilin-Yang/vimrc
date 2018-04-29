@@ -60,9 +60,12 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-rsi](https://github.com/tpope/vim-rsi)
 * [vim-snippets](https://github.com/honza/vim-snippets)
 * [vim-surround](https://github.com/tpope/vim-surround)
+* [vim-textobj-sentence](https://github.com/reedes/vim-textobj-sentence)
+* [vim-textobj-user](https://github.com/kana/vim-textobj-user)
 * [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
 * [vim-unimpaired](https://github.com/tpope/vim-unimpaired)
 * [vim-vebugger](https://github.com/idanarye/vim-vebugger)
+* [vim-wordy](https://github.com/reedes/vim-wordy)
 * [vimtex](https://github.com/lervag/vimtex)
 
 Other Editing Tools
