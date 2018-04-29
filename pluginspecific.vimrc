@@ -552,6 +552,7 @@ let g:airline_section_z = '%{airline#util#wrap(airline#extensions#obsession#get_
 
 let g:pencil#textwidth = 80         " line width
 let g:pencil#joinspaces = 1         " two spaces after periods
+let g:pencil#conceallevel = 0       " disable formatting character concealment
 
 augroup pencil
     au!
