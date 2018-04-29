@@ -53,6 +53,7 @@ set foldlevel=20                    " All folds default to being open.
 " Appearance
 syntax on                           " Turn on syntax highlighting.
 set background=dark                 " Make text readable on dark background.
+set breakindent                     " Visually indent when softwrapping.
 set foldcolumn=1                    " Show a column with all folds.
 set nowrap                          " Don't visually wrap lines that are too long.
 set list                            " Explicitly render `listchars`.
