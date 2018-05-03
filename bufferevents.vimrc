@@ -2,7 +2,7 @@
 augroup buffer_stuff
     au!
     autocmd BufWritePre * call DeleteTrailing()
-augroup END
+augroup end
 
 " Trigger `autoread` when files change on disk
 " https://unix.stackexchange.com/questions/149209/refresh-changed-content-of-file-opened-in-vim/383044#383044
@@ -14,7 +14,7 @@ augroup autoread
     " https://vi.stackexchange.com/questions/13091/autocmd-event-for-autoread
     autocmd FileChangedShellPost *
       \ echohl WarningMsg | echo "Detected changes to a loaded file. Buffer may have been reloaded." | echohl None
-augroup END
+augroup end
 
 " Perform certain actions the first time a user's cursor enters a buffer.
 "
@@ -35,4 +35,4 @@ augroup firstread
     \ | endif
 
     autocmd BufLeave * if b:firstread | let b:firstread = 0 | endif
-augroup END
+augroup end
