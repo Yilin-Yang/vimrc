@@ -52,7 +52,7 @@ augroup neomake_scheme
         \ hi link NeomakeWarning Todo |
         \ hi link NeomakeInfo Statement |
         \ hi link NeomakeMessage Todo
-augroup END
+augroup end
 
 let g:neomake_open_list = 2 " Preserve cursor location on loc-list open
 let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
@@ -135,7 +135,7 @@ augroup NERDTree
 
     " Close NerdTree if it's the only window open.
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
-augroup END
+augroup end
 
 " Open NerdTree with CTRL-N
 noremap <silent> <C-n> :NERDTreeToggle<cr>
@@ -176,7 +176,7 @@ if has('nvim')
             \ 'cm_refresh_patterns': g:vimtex#re#ncm,
             \ 'cm_refresh': {'omnifunc': 'vimtex#complete#omnifunc'},
             \ })
-    augroup END
+    augroup end
 endif
 
 " Suppress annoying completion menu messages.
@@ -263,7 +263,7 @@ nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>
 " Since I don't use AutoTrigger snippets, I disable that augroup here.
 augroup UltiSnips_AutoTrigger
     au!
-augroup END
+augroup end
 
 "=============================================================================
 "   LanguageClient-neovim                                   [LSP]
@@ -558,7 +558,7 @@ augroup pencil
     au!
     autocmd FileType markdown,text  call Prose() | call Punctuation()
     autocmd FileType tex            call Prose()
-augroup END
+augroup end
 
 "=============================================================================
 "   vim-wordy                                               [WORDY]
