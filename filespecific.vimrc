@@ -4,6 +4,7 @@
 "
 "   C++ Formatting                                          [CPP]
 "   Python Formatting                                       [PYTHON]
+"   Markdown Formatting                                     [MARKDOWN]
 "   AutoHotkey Formatting                                   [AUTOHOTKEY]
 "   TeX Formatting                                          [TEX]
 "   Snippets                                                [SNIPPETS]
@@ -40,6 +41,19 @@ endfunction
 augroup py_format
     au!
     autocmd BufRead *.py    call PyFormat()
+augroup end
+
+"=============================================================================
+"   Markdown Formatting                                     [MARKDOWN]
+"=============================================================================
+
+function! MdFormat()
+    setlocal shiftwidth=2
+endfunction
+
+augroup md_format
+    au!
+    autocmd FileType markdown   call MdFormat()
 augroup end
 
 "=============================================================================
