@@ -29,8 +29,8 @@ endfunction
 " .cpp files
  augroup cpp_format
     au!
-    autocmd BufRead *.cpp   call CppFormat()
-    autocmd BufRead *.hpp   call CppFormat()
+    autocmd BufWinEnter *.cpp   call CppFormat()
+    autocmd BufWinEnter *.hpp   call CppFormat()
  augroup end
 
 "=============================================================================
@@ -44,8 +44,8 @@ endfunction
 
 augroup c_format
     au!
-    autocmd BufRead *.c     call CFormat()
-    autocmd BufRead *.h     call CFormat()
+    autocmd BufWinEnter *.c     call CFormat()
+    autocmd BufWinEnter *.h     call CFormat()
 augroup end
 
 "=============================================================================
@@ -58,7 +58,7 @@ endfunction
 
 augroup py_format
     au!
-    autocmd BufRead *.py    call PyFormat()
+    autocmd BufWinEnter *.py    call PyFormat()
 augroup end
 
 "=============================================================================
@@ -94,9 +94,9 @@ endfunction
 
 augroup tex_format
     au!
-    autocmd filetype tex    call TeXFormat()
-    autocmd BufEnter *.tex  set filetype=tex
-    autocmd BufLeave *.tex  call TeXUnformat()
+    autocmd filetype tex        call TeXFormat()
+    autocmd BufWinEnter *.tex   set filetype=tex
+    autocmd BufLeave *.tex      call TeXUnformat()
 augroup end
 
 "=============================================================================
@@ -110,7 +110,7 @@ endfunction
 
 augroup ahk_format
     autocmd filetype autohotkey call AhkFormat()
-    autocmd BufRead *.ahk       set filetype=autohotkey
+    autocmd BufWinEnter *.ahk   set filetype=autohotkey
     au!
 augroup end
 
@@ -174,8 +174,8 @@ endfunction
 
 augroup assembly_format
     au!
-    autocmd BufRead *.as    set filetype=asm
-    autocmd FileType asm    call AssemblyFormat()
+    autocmd BufWinEnter *.as    set filetype=asm
+    autocmd FileType asm        call AssemblyFormat()
 augroup end
 
 "=============================================================================
