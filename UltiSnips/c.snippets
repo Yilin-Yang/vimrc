@@ -1,0 +1,25 @@
+snippet pragma_once
+#ifndef $1_H
+#define $1_H
+
+$0
+
+#endif // $1_H
+endsnippet
+
+snippet doxygen
+/**
+ * @$1
+ */
+endsnippet
+
+snippet struct_template
+/**
+ * @brief $2
+ * @author Yilin Yang (yiliny@umich.edu)
+ */
+struct $1
+{
+    $0
+}; // $1
+endsnippet
