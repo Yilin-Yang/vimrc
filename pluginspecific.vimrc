@@ -302,6 +302,8 @@ let s:cqueryArgsList = [
     \ '--log-stdin-stdout-to-stderr']
 
 let g:LanguageClient_serverCommands = {
+    \ 'c': s:cqueryArgsList,
+    \ 'c.doxygen': s:cqueryArgsList,
     \ 'cpp': s:cqueryArgsList,
     \ 'cpp.doxygen': s:cqueryArgsList,
     \ 'python': ['pyls']

@@ -3,6 +3,7 @@
 "=============================================================================
 "
 "   C++ Formatting                                          [CPP]
+"   C Formatting                                            [C_LANG]
 "   Python Formatting                                       [PYTHON]
 "   Markdown Formatting                                     [MARKDOWN]
 "   AutoHotkey Formatting                                   [AUTOHOTKEY]
@@ -10,6 +11,8 @@
 "   Snippets                                                [SNIPPETS]
 "   YAML Formatting                                         [YAML]
 "   Prose Formatting                                        [PROSE]
+"   Assembly Formatting                                     [ASSEMBLY]
+"   Makefile Settings                                       [MAKEFILE]
 "=============================================================================
 
 "=============================================================================
@@ -29,6 +32,21 @@ endfunction
     autocmd BufRead *.cpp   call CppFormat()
     autocmd BufRead *.hpp   call CppFormat()
  augroup end
+
+"=============================================================================
+"   C Formatting                                            [C_LANG]
+"=============================================================================
+
+function! CFormat()
+    setlocal colorcolumn=81
+    set filetype=c.doxygen
+endfunction
+
+augroup c_format
+    au!
+    autocmd BufRead *.c     call CFormat()
+    autocmd BufRead *.h     call CFormat()
+augroup end
 
 "=============================================================================
 "   Python Formatting                                       [PYTHON]
@@ -143,3 +161,27 @@ function! Punctuation()
   iabbrev <buffer> <<   «
   iabbrev <buffer> >>   »
 endfunction
+
+"=============================================================================
+"   Assembly Formatting                                     [ASSEMBLY]
+"=============================================================================
+
+augroup assembly_format
+    au!
+    autocmd BufRead *.as    set filetype=asm
+augroup end
+
+"=============================================================================
+"   Makefile Settings                                       [MAKEFILE]
+"=============================================================================
+
+function! MakefileSettings()
+    setlocal tabstop=8
+    setlocal shiftwidth=8
+    setlocal noexpandtab
+endfunction
+
+augroup makefile_settings
+    au!
+    autocmd filetype make   call MakefileSettings()
+augroup end
