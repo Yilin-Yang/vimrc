@@ -297,6 +297,8 @@ let g:LanguageClient_loadSettings = 1
 "
 "       (Obviously, this only works if you have bear installed.)
 let g:LanguageClient_serverCommands = {
+    \ 'c': ['clangd'],
+    \ 'c.doxygen': ['clangd'],
     \ 'cpp': ['clangd'],
     \ 'cpp.doxygen': ['clangd'],
     \ 'python': ['pyls']
