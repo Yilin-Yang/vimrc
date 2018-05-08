@@ -166,9 +166,16 @@ endfunction
 "   Assembly Formatting                                     [ASSEMBLY]
 "=============================================================================
 
+function! AssemblyFormat()
+    setlocal shiftwidth=8
+    setlocal tabstop=8
+    setlocal expandtab
+endfunction
+
 augroup assembly_format
     au!
     autocmd BufRead *.as    set filetype=asm
+    autocmd FileType asm    call AssemblyFormat()
 augroup end
 
 "=============================================================================
