@@ -26,13 +26,15 @@ augroup end
 "   http://vim.wikia.com/wiki/Folding#Indent_folding_with_manual_folds
 augroup firstread
     au!
-    autocmd BufReadPre,BufWinEnter * let b:firstread=1
+    autocmd BufReadPre,BufWinEnter * silent let b:firstread=1
 
     " Add additional commands to the if-statement below.
+    " Use :silent! to prevent annoying error messages when opening an unnamed
+    " buffer, leaving a NERDtree buffer, etc.
     autocmd WinEnter *
-    \ if b:firstread
+    \ silent! if b:firstread
         \ | setlocal foldmethod=manual
     \ | endif
 
-    autocmd BufLeave * if b:firstread | let b:firstread = 0 | endif
+    autocmd BufLeave * silent! if b:firstread | let b:firstread = 0 | endif
 augroup end
