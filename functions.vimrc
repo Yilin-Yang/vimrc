@@ -10,6 +10,7 @@
 "   Folding                                                 [FOLDING]
 "   Text Wrapping                                           [TEXT_WRAPPING]
 "   Window Resizing                                         [WINDOW_RESIZE]
+"   Cosmetic                                                [COSMETIC]
 "=============================================================================
 
 "=============================================================================
@@ -248,8 +249,8 @@ endfunction
 "=============================================================================
 
 " EFFECTS:  Resizes the active split, along a given direction, to a provided
-"           size proportional to its current size OR by
-"           incrementing/decrementing by an absolute number of rows/cols.
+"           size proportional to its current size OR by incrementing/decrementing
+"           by an absolute number of rows/cols.
 " PARAM:    dimension (string)  Whether to change the split's width or its
 "           height. Valid values are 'WIDTH' and 'HEIGHT'.
 " PARAM:    change (string OR float)    How much to change the window's size.
@@ -298,3 +299,38 @@ endfunction
 " Resize split to a proportion of its size.
 command! -nargs=1 Rs   call ResizeSplit('HEIGHT', <args>)
 command! -nargs=1 Vrs  call ResizeSplit('WIDTH', <args>)
+
+"=============================================================================
+"   Cosmetic                                                [COSMETIC]
+"=============================================================================
+
+" EFFECTS:  Sets a colorcolumn for every column in the specified range
+"           (`[start, end]`) OR every column from `start`
+"           onwards (`[start, +inf)`).
+" PARAM:    start (v:t_number)      The first column to highlight.
+" PARAM:    end (v:t_number)        The last column to highlight (inclusive).
+"                                       Defaults to +inf (actually 255, which
+"                                       is the maximum possible value in vim.)
+" PARAM:    hi_args (v:t_string)    The highlight arguments to be applied to
+"                                       the ColorColumn highlight group
+"                                       (e.g. `ctermg=1 guibg=DarkRed`). Set
+"                                       to the null string (`''`) by default,
+"                                       which leaves ColorColumn unchanged
+"                                       from its present value.
+" DETAIL:   Taken from the following link:
+"               https://blog.hanschen.org/2012/10/24/different-background-color-in-vim-past-80-columns/
+function! ColorColumnBlock(...)
+    let a:start     = get(a:, 1, 0)
+    let a:end       = get(a:, 2, 255)
+    let a:hi_args   = get(a:, 3, '')
+
+    if a:start ==# 0
+        echoerr "No args provided to ColorColumnBlock!"
+        return
+    endif
+
+    if strlen(a:hi_args)
+        execute 'hi ColorColumn ' . a:hi_args
+    endif
+    execute 'set colorcolumn=' . join(range(a:start,a:end), ',')
+endfunction

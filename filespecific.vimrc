@@ -13,6 +13,7 @@
 "   Prose Formatting                                        [PROSE]
 "   Assembly Formatting                                     [ASSEMBLY]
 "   Makefile Settings                                       [MAKEFILE]
+"   Git Settings                                            [GIT]
 "=============================================================================
 
 "=============================================================================
@@ -21,7 +22,7 @@
 
 " Set C++ specific formatting options.
 function! CppFormat()
-    setlocal colorcolumn=81         " My personal line limit
+    call ColorColumnBlock(81)       " My personal line limit
     set filetype=cpp.doxygen        " And highlight doxygen formatting
 endfunction
 
@@ -38,7 +39,7 @@ endfunction
 "=============================================================================
 
 function! CFormat()
-    setlocal colorcolumn=81
+    call ColorColumnBlock(81)
     set filetype=c.doxygen
 endfunction
 
@@ -53,7 +54,7 @@ augroup end
 "=============================================================================
 
 function! PyFormat()
-    setlocal colorcolumn=80             " PEP-standard lines are 79 characters max
+    call ColorColumnBlock(80)       " PEP-standard lines are 79 characters max
 endfunction
 
 augroup py_format
@@ -191,4 +192,17 @@ endfunction
 augroup makefile_settings
     au!
     autocmd filetype make   call MakefileSettings()
+augroup end
+
+"=============================================================================
+"   Git Settings                                            [GIT]
+"=============================================================================
+
+function! GitSettings()
+    call ColorColumnBlock(51)   " Top line is <= 50 characters
+endfunction
+
+augroup git_format
+    au!
+    autocmd filetype git*   call GitSettings()
 augroup end

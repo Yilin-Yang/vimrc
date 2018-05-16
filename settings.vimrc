@@ -103,6 +103,8 @@ set fillchars+=vert:│
     hi StatusLine cterm=bold,underline ctermfg=224
     hi StatusLineNC cterm=underline ctermfg=224
 
+    " Darken backgrounds beyond my personal line limit.
+    hi ColorColumn ctermbg=235 guibg=DarkGray
 
 " Information Density
     set relativenumber              " Relative numbering!
