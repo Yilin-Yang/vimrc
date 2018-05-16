@@ -170,7 +170,7 @@ endfunction
 function! AssemblyFormat()
     setlocal shiftwidth=8
     setlocal tabstop=8
-    setlocal expandtab
+    setlocal noexpandtab        " appropriate to use standard tabs, here
 endfunction
 
 augroup assembly_format
