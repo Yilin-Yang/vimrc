@@ -66,6 +66,11 @@ augroup end
 "   Markdown Formatting                                     [MARKDOWN]
 "=============================================================================
 
+" Enable fold-by-heading-level in Markdown.
+" Taken from:
+"   https://vi.stackexchange.com/a/9544
+let g:markdown_folding = 1
+
 function! MdFormat()
     setlocal shiftwidth=2
 endfunction
