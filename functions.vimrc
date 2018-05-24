@@ -98,7 +98,7 @@ function! CenterTextAndPad(char)
         return
     endif
 
-    if strwidth(getline('.')) ># &textwidth
+    if strwidth(getline('.')) ># l:linewidth
         echoerr 'Line too long for centering.'
         return
     endif
@@ -112,7 +112,7 @@ function! CenterTextAndPad(char)
     execute 'normal! 2hv0' . 'r' . a:char . 'viwy'
     call setline('.', getline('.') . ' ')
 
-    while strwidth(getline('.')) <# &textwidth
+    while strwidth(getline('.')) <# l:linewidth
         call setline('.', getline('.') . a:char)
     endwhile
 
