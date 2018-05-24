@@ -24,7 +24,7 @@
 function! CppFormat()
     call ColorColumnBlock(81)       " My personal line limit
     set filetype=cpp.doxygen        " And highlight doxygen formatting
-    nnoremap <buffer> <silent> <leader>C :call CenterTextAndPad('/')<cr>
+    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
 endfunction
 
 " C++ Formatting
@@ -42,7 +42,7 @@ endfunction
 function! CFormat()
     call ColorColumnBlock(81)
     set filetype=c.doxygen
-    nnoremap <buffer> <silent> <leader>C :call CenterTextAndPad('/')<cr>
+    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
 endfunction
 
 augroup c_format
@@ -138,7 +138,7 @@ augroup end
 augroup yaml_format
     au!
     autocmd filetype yaml   setlocal expandtab
-    nnoremap <buffer> <silent> <leader>C :call CenterTextAndPad('#')<cr>
+    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
 augroup END
 
 "=============================================================================
