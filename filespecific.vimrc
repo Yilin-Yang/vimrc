@@ -24,6 +24,7 @@
 function! CppFormat()
     call ColorColumnBlock(81)       " My personal line limit
     set filetype=cpp.doxygen        " And highlight doxygen formatting
+    nnoremap <buffer> <silent> <leader>C :call CenterTextAndPad('/')<cr>
 endfunction
 
 " C++ Formatting
@@ -41,6 +42,7 @@ endfunction
 function! CFormat()
     call ColorColumnBlock(81)
     set filetype=c.doxygen
+    nnoremap <buffer> <silent> <leader>C :call CenterTextAndPad('/')<cr>
 endfunction
 
 augroup c_format
@@ -65,6 +67,11 @@ augroup end
 "=============================================================================
 "   Markdown Formatting                                     [MARKDOWN]
 "=============================================================================
+
+" Enable fold-by-heading-level in Markdown.
+" Taken from:
+"   https://vi.stackexchange.com/a/9544
+let g:markdown_folding = 1
 
 function! MdFormat()
     setlocal shiftwidth=2
@@ -131,6 +138,7 @@ augroup end
 augroup yaml_format
     au!
     autocmd filetype yaml   setlocal expandtab
+    nnoremap <buffer> <silent> <leader>C :call CenterTextAndPad('#')<cr>
 augroup END
 
 "=============================================================================

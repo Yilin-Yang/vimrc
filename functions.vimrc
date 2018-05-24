@@ -80,6 +80,49 @@ function! DeleteTrailing()
     execute 'normal! ' . eval(lines_from_top) . 'G' . '0' . eval(cols_from_left) . 'l'
 endfunction
 
+" EFFECTS:  Centers the text on the given line, surrounding it with a given
+"           character.
+" PARAM:    char (v:t_string)   The comment character with which the pad the
+"                                   the centered text. Shall be one character
+"                                   in length.
+function! CenterTextAndPad(char)
+
+    " Calculate a 'linewidth' from colorcolumn, if necessary.
+    let l:linewidth = &textwidth
+    if l:linewidth ==# 0
+        let l:linewidth = split(&colorcolumn, ',')[0] - 1
+    endif
+
+    if strlen(a:char) !=# 1
+        echoerr 'Comment character must have length 1!'
+        return
+    endif
+
+    if strwidth(getline('.')) ># &textwidth
+        echoerr 'Line too long for centering.'
+        return
+    endif
+
+    " Avoid clobbering `expandtab`, unnamed register.
+    let l:cur_indent = &expandtab
+    let l:old_contents = @"
+
+    setlocal expandtab
+    center
+    execute 'normal! 2hv0' . 'r' . a:char . 'viwy'
+    call setline('.', getline('.') . ' ')
+
+    while strwidth(getline('.')) <# &textwidth
+        call setline('.', getline('.') . a:char)
+    endwhile
+
+    if l:cur_indent | setlocal expandtab | endif
+    let @" = l:old_contents
+
+endfunction
+
+command! -nargs=1 CenterTextAndPad call CenterTextAndPad(<args>)
+
 "=============================================================================
 "   ctags                                                   [CTAGS]
 "=============================================================================
