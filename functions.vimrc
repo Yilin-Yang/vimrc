@@ -145,23 +145,17 @@ endfunction
 "=============================================================================
 
 
-" EFFECTS:  Given the function headers for Boost test cases, add curly braces,
-"           a print statement giving the name of the test, and a
-"           BOOST_CHECK_MESSAGE call before the end of the function.
-"
-"           Given the function prototypes for EECS280 style test cases, remove
+" EFFECTS:  Given the function prototypes for EECS280 style test cases, remove
 "           the semicolon, add curly braces, add a print statement giving the
 "           name of the test, and a print statement reporting test success.
 function! TestCaseAutoformat()
-    if search("BOOST")
-        " If I'm writing Boost test cases, format the function headers differently
-        %s/BOOST_AUTO_TEST_CASE(\(.*\))/BOOST_AUTO_TEST_CASE(\1)\r{\r\tBOOST_TEST_MESSAGE("\1");\r\t\r\tBOOST_CHECK_MESSAGE(, "\1 failed!");\r}\r
-    else
-        " But, if I'm just writing generic test cases for a class,
+    if match(&ft, 'cpp') !=# -1
         call search("int main")
-
         .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r\r
         normal! dk
+    elseif match(&ft, 'c') !=# -1
+        call search("int main")
+        .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tprintf("\1\\n");\r\r\tprintf("\1 PASSED\\n");\r\}\r\r
     endif
 
     retab
