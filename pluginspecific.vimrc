@@ -143,8 +143,8 @@ noremap <silent> <C-n> :NERDTreeToggle<cr>
 " Close NerdTree after opening a file from the sidebar.
 let g:NERDTreeQuitOnOpen=1
 
-" Enable changing the PWD from the NerdTree sidebar.
-let g:NERDTreeChDirMode=2
+" Don't change the PWD from the NerdTree sidebar.
+let g:NERDTreeChDirMode=0
 
 "=============================================================================
 "   Tagbar                                                  [TAGBAR]
