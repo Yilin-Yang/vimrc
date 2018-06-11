@@ -1,3 +1,5 @@
+scriptencoding utf-8
+
 " Colorscheme
 colorscheme default " For now, all this does is trigger the autocmd for changing
                     " Neomake's highlight colors
@@ -43,9 +45,9 @@ set spellfile=$HOME/vimrc/spellfile/en.utf-8.add
                                     " in my vimrc repository.
 
 " Folding
-let g:foldmethod="syntax"           " Make it easier to collapse/expand parts of
+let g:foldmethod='syntax'           " Make it easier to collapse/expand parts of
                                     " a large text file.
-execute "set foldmethod=" . g:foldmethod
+execute 'set foldmethod=' . g:foldmethod
 set foldlevel=20                    " All folds default to being open.
 
 
@@ -120,7 +122,7 @@ set fillchars+=vert:│
 " swapback files, and it makes recovering lost data a bit harder, but that's a
 " worthy price to pay in exchange for `nvim -S` calls that actually work.
 " " Taken from: https://github.com/tpope/vim-obsession/issues/18
-let vimtmp = $HOME . '/.tmp/' . getpid()
-silent! call mkdir(vimtmp, "p", 0700)
-let &backupdir=vimtmp
-let &directory=vimtmp
+let g:vimtmp = $HOME . '/.tmp/' . getpid()
+silent! call mkdir(g:vimtmp, 'p', 0700)
+let &backupdir=g:vimtmp
+let &directory=g:vimtmp
