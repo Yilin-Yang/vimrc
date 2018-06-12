@@ -67,6 +67,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-vebugger](https://github.com/idanarye/vim-vebugger)
 * [vim-wordy](https://github.com/reedes/vim-wordy)
 * [vimtex](https://github.com/lervag/vimtex)
+* [vimwiki](https://github.com/vimwiki/vimwiki)
 
 Other Editing Tools
 --------------------------------------------------------------------------------

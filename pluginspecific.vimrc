@@ -1,3 +1,4 @@
+scriptencoding utf-8
 "=============================================================================
 "                             TABLE OF CONTENTS
 "=============================================================================
@@ -25,6 +26,7 @@
 "   vim-airline                                             [AIRLINE]
 "   vim-pencil                                              [PENCIL]
 "   vim-wordy                                               [WORDY]
+"   vimwiki                                                 [VIMWIKI]
 "=============================================================================
 
 
@@ -569,3 +571,178 @@ augroup end
 " Cycle through word usage checkers.
 nnoremap <leader>wn     :NextWordy<cr>
 nnoremap <leader>wp     :PrevWordy<cr>
+
+"=============================================================================
+"   vimwiki                                                 [VIMWIKI]
+"=============================================================================
+
+"------------------------------------------------------------------------------
+" Configured partly using the following link as reference:
+"   https://www.dailydrip.com/blog/vimwiki
+"------------------------------------------------------------------------------
+
+"------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
+" USAGE NOTES:
+"   If no [count] is specified, assume a count of one (1), unless otherwise
+"   noted.
+"------------------------------------------------------------------------------
+"------------------------------------------------------------------------------
+"
+"------------------------------------------------------------------------------
+" OPENING WIKI:
+"   [count]<Leader>ww   OR  <Plug>VimwikiIndex
+"       Open the index of the [count]th wiki in g:vimwiki_list.
+"
+"   [count]<Leader>wt   OR  <Plug>VimwikiTabIndex
+"       Open the index of the [count]th wiki in g:vimwiki_list *in a new tab.*
+"
+"   <Leader>ws          OR  <Plug>VimwikiUISelect
+"       List and select available wikis in g:vimwiki_list.
+"
+"   [count]<Leader>wi   OR  <Plug>VimwikiDiaryIndex
+"       Open the diary index of the [count]th wiki in g:vimwiki_list.
+"
+"   [count]<Leader>w<Leader>w   OR  <Plug>VimwikiMakeDiaryNote
+"   [count]<Leader>w<Leader>t   OR  <Plug>VimwikiTabMakeDiaryNote
+"       Open a diary wiki-file for the current day in the [count]th wiki in
+"       g:vimwiki_list [in a new tab.]
+"
+"   [count]<Leader>w<Leader>y   OR  <Plug>VimwikiMakeYesterdayDiaryNote
+"   [count]<Leader>w<Leader>m   OR  <Plug>VimwikiMakeTomorrowDiaryNote
+"
+"------------------------------------------------------------------------------
+" NAVIGATION:
+"   <CR>                        Open or create a wiki link.
+"       :VimwikiSplitLink           Open/create a wiki link in a split.
+"       :VimwikiVSplitLink          Open/create a wiki link in a vertical split.
+"   <Backspace>                 Go back to previous wiki page.
+"   <Tab>                       Find next link in current page.
+"   <S-Tab>                     Find previous link in the current page.
+"
+"   DIARY:
+"       <C-Up>                  Open the previous day's diary.
+"       <C-Down>                Open the next day's diary.
+"
+"------------------------------------------------------------------------------
+" PAGE EDITING:
+"   <Leader>wd                  Delete current wiki page.
+"       :VimwikiDeleteLink          // ditto
+"   <Leader>wr                  Rename current wiki page.
+"       :VimwikiRenameLink          // ditto
+"   [[                          Previous header in buffer.
+"   ]]                          Next header in buffer.
+"   [=                          Previous header with same level as selected.
+"   ]=                          Next header with same level as selected.
+"   ]u                          Go one header level 'up'.
+"   [u                          // ditto
+"   +                           Create and/or decorate links.
+"
+"   LISTS:
+"       glr                     Renumber list items.
+"       gLr                     Renumber all list items in the current file.
+"
+"       <C-d>                   (insert mode) Demote current list item.
+"       <C-t>                   (insert mode) Promote current list item.
+"
+"   TABLES:
+"       gqq                     Format a table.
+"       gww                     // ditto
+"       <M-Left>                Move table column left.
+"       <M-Right>               Move table column Right.
+"
+"------------------------------------------------------------------------------
+" TEXT OBJECTS:
+"   h(eader)
+"       ih ('in header')        The text under a header.
+"       ah ('around header')    The text under a header, the header itself,
+"                                   and trailing whitespace.
+"   H(EADER!)
+"       iH                      A header's content and all of its subheaders.
+"       [count]aH               A header's content and all of its subheaders
+"                                   [up to and including the ([count] - 1)th
+"                                   generation parent of the current header],
+"                                   the header itself, and trailing whitespace.
+"   \ (cell in table?)
+"
+"   c(olumn)
+"
+"   l(ist item)
+"       il                      A list item.
+"       al                      A list item AND its children.
+"
+"------------------------------------------------------------------------------
+" LINK FORMATTING:
+"   By default, links are specified with respect to the present working
+"   directory, similar to directory navigation in a bash terminal.
+"   - The '/' prefix (as in '/index') means 'relative to the wiki root.'
+"   - The '../' prefix (as in '../index') means 'relative to the parent
+"   directory.'
+"
+"   One can link to diary entries with the following scheme:
+"       [[diary:2012-03-05]]
+"
+"   Raw URLs are also supported, e.g.
+"       https://github.com/vimwiki/vimwiki.git
+"       mailto:billymagic@gmail.com
+"
+"------------------------------------------------------------------------------
+" TEXT ANCHORS:
+"   Section headings and tags can be used as text anchors.
+"   See `:h vimwiki-anchors`.
+"
+"------------------------------------------------------------------------------
+" MISCELLANY:
+"   - `:VimwikiTOC` creates a table of contents at the top of the current file.
+"   - vimwiki has tagbar support!
+"------------------------------------------------------------------------------
+
+let g:vimwiki_list = [
+    \ {
+        \ 'path': '~/notes/',
+        \ 'syntax': 'markdown',
+        \ 'ext': '.md',
+        \ 'index': 'README',
+        \ 'auto_toc': 1,
+    \ },
+\ ]
+
+let g:vimwiki_folding = 1   " Enable content-aware folding.
+
+" Tagbar support.
+" Quote from vwtags.py:
+"   The value of ctagsargs must be one of 'default', 'markdown' or 'media',
+"   whatever syntax you use. However, if you use multiple wikis with different
+"   syntaxes, you can, as a workaround, use the value 'all' instead. Then, Tagbar
+"   will show markdown style headers as well as default/mediawiki style headers,
+"   but there might be erroneously shown headers.
+let g:tagbar_type_vimwiki = {
+    \ 'ctagstype':  'vimwiki',
+    \ 'kinds':      ['h: header'],
+    \ 'sro':        '&&&',
+    \ 'kind2scope': {'h': 'header'},
+    \ 'sort':       0,
+    \ 'ctagsbin':   '~/vimrc/misc/vwtags.py',
+    \ 'ctagsargs':  'markdown',
+\ }
+
+" Shortcut for creating a vimwiki page.
+nnoremap <Leader>v :VimwikiGoto \<BS>
+
+
+" Open a link in a vertical split.
+nmap <cr>v <Plug>VimwikiVSplitLink
+
+" Open a link in a horizontal split.
+nmap <cr>s <Plug>VimwikiSplitLink
+
+
+" Promote a list item.
+map >>  <Plug>VimwikiIncreaseLvlSingleItem
+" Promote an item and its children.
+map >>> <Plug>VimwikiIncreaseLvlWholeItem
+
+" Demote a list item.
+map <<  <Plug>VimwikiDecreaseLvlSingleItem
+" Demote a list item and its children.
+map <<< <Plug>VimwikiDecreaseLvlWholeItem

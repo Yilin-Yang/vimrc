@@ -36,6 +36,7 @@
 "   vim-wordy                                               [WORDY]
 "   vim-textobj-user                                        [TEXTOBJ_USER]
 "   vim-textobj-sentence                                    [TEXTOBJ_SENTENCE]
+"   vimwiki                                                 [VIMWIKI]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -353,6 +354,11 @@ Plug 'kana/vim-textobj-user'
 " " Improve vim's built-in textobject detection (handle abbreviations, etc.)
 Plug 'reedes/vim-textobj-sentence'
 
+"=============================================================================
+"   vimwiki                                                 [VIMWIKI]
+"=============================================================================
+" " Personal wiki and task organization for vim!
+Plug 'vimwiki/vimwiki'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
