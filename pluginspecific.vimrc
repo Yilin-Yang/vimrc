@@ -638,6 +638,9 @@ nnoremap <leader>wp     :PrevWordy<cr>
 "       glr                     Renumber list items.
 "       gLr                     Renumber all list items in the current file.
 "
+"       <C-d>                   (insert mode) Demote current list item.
+"       <C-t>                   (insert mode) Promote current list item.
+"
 "   TABLES:
 "       gqq                     Format a table.
 "       gww                     // ditto
@@ -695,6 +698,7 @@ let g:vimwiki_list = [
         \ 'path': '~/notes/',
         \ 'syntax': 'markdown',
         \ 'ext': '.md',
+        \ 'index': 'README',
         \ 'auto_toc': 1,
     \ },
 \ ]
