@@ -291,10 +291,10 @@ endfunction
 " PARAM:    dimension (string)  Whether to change the split's width or its
 "           height. Valid values are 'WIDTH' and 'HEIGHT'.
 " PARAM:    change (string OR float)    How much to change the window's size.
-"               change (string)         Formatted like '+5' or '-3'. Used
-"                                           for incrementing/decrementing by
-"                                           an absolute number of
-"                                           rows/cols.
+"               change (string)         Formatted like '+5' or '-3', *with
+"                                           quotes.* Used for
+"                                           incrementing/decrementing by an
+"                                           absolute number of rows/cols.
 "               change (float)          The window's new size, as a proportion
 "                                           of vim's current displayable area.
 function! ResizeSplit(dimension, change)
@@ -311,7 +311,7 @@ function! ResizeSplit(dimension, change)
         let l:command = l:command . "resize "
     endif
 
-    let l:match = matchstr(l:change, '^[+-]')
+    let l:match = matchstr(l:change, '[+-]')
     if l:match ==# '+' || l:match ==# '-'
         " Regex match detected a plus or minus at the start of the variable,
         " so we're incrementing/decrementing absolutely.
