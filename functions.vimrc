@@ -11,6 +11,7 @@
 "   Text Wrapping                                           [TEXT_WRAPPING]
 "   Window Resizing                                         [WINDOW_RESIZE]
 "   Cosmetic                                                [COSMETIC]
+"   Code Style                                              [STYLE]
 "=============================================================================
 
 "=============================================================================
@@ -18,13 +19,13 @@
 "=============================================================================
 
 " EFFECTS:  Open the given helpdoc in a vertical split.
-command! -nargs=1 H execute ":vert h <args>"
+command! -nargs=1 H execute ':vert h <args>'
 
 " EFFECTS:  Opens the given file and jumps to the given line.
 " PARAM:    filename (string)   The filepath to the target file.
 " PARAM:    lineno (string)     The target line number in the target file.
 function! Goto(filename, lineno)
-    execute "normal! :e " . a:filename . " | " . a:lineno . "\<cr>"
+    execute 'normal! :e ' . a:filename . ' | ' . a:lineno . '\<cr>'
 endfunction()
 command! -nargs=+ -complete=file Gt call Goto(<f-args>)
 
@@ -65,19 +66,21 @@ endfunction
 "               http://vim.wikia.com/wiki/Run_a_command_in_multiple_buffers
 "
 function! BufDoAll(command)
-  let currBuff=bufnr("%")
+  let l:curr_buff = bufnr('%')
   execute 'bufdo ' . a:command
-  execute 'buffer ' . currBuff
+  execute 'buffer ' . curr_buff
 endfunction
 command! -nargs=+ -complete=command BufDoAll call BufDoAll(<q-args>)
 
 " EFFECTS:  Deletes all trailing whitespace in the active file, returning
 "           the cursor to its old location afterwards.
 function! DeleteTrailing()
-    let cols_from_left = getpos(".")[2] - 1
-    let lines_from_top = line(".")
+    let l:old_contents = @"
+    let l:cols_from_left = getpos('.')[2] - 1
+    let l:lines_from_top = line('.')
     %s/\s\+$//e
-    execute 'normal! ' . eval(lines_from_top) . 'G' . '0' . eval(cols_from_left) . 'l'
+    execute 'normal! ' . eval(l:lines_from_top) . 'G' . '0' . eval(l:cols_from_left) . 'l'
+    let @" = l:old_contents
 endfunction
 
 " EFFECTS:  Centers the text on the given line, surrounding it with a given
@@ -149,12 +152,12 @@ endfunction
 "           the semicolon, add curly braces, add a print statement giving the
 "           name of the test, and a print statement reporting test success.
 function! TestCaseAutoformat()
-    if match(&ft, 'cpp') !=# -1
-        call search("int main")
+    if match(&filetype, 'cpp') !=# -1
+        call search('int main')
         .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r\r
         normal! dk
-    elseif match(&ft, 'c') !=# -1
-        call search("int main")
+    elseif match(&filetype, 'c') !=# -1
+        call search('int main')
         .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tprintf("\1\\n");\r\r\tprintf("\1 PASSED\\n");\r\}\r\r
     endif
 
@@ -180,8 +183,8 @@ function! DiffgetRe()
 endfunction
 
 function! ExitMergeResolutionIfDone()
-    if search("<<<<<<<") || search(">>>>>>>")
-        echoerr "Still conflicts to resolve!"
+    if search('<<<<<<<') || search('>>>>>>>')
+        echoerr 'Still conflicts to resolve!'
     else
         wq | qa
     endif
@@ -221,8 +224,8 @@ function! FoldFunctionBodies()
         setlocal foldlevel=20
     else
         " Expand the name of just this file, see what filetype it is
-        let filename = expand('%:t')
-        if match(filename, "hpp$") !=? -1 || match(filename, "h$") !=? -1
+        let l:filename = expand('%:t')
+        if match(l:filename, 'hpp$') !=? -1 || match(l:filename, 'h$') !=? -1
             setlocal foldlevel=1
         else
             setlocal foldlevel=0
@@ -239,7 +242,7 @@ endfunction
 " Returns the line number of the multiline paragraph, or zero if one wasn't
 " found.
 function! UnwrapAParagraph()
-    let lineno=search('\(^[^\n\r]\+\n\)\{2,}')
+    let l:lineno = search('\(^[^\n\r]\+\n\)\{2,}')
     "                    ^ from the start of the line,
     "                      ^ a character that isn't a newline char
     "                             ^ one or more times
@@ -248,7 +251,7 @@ function! UnwrapAParagraph()
     normal! vipJ
     " ^ press these keys in normal mode, ignoring any existing keymappings
 
-    return lineno
+    return l:lineno
 endfunction
 
 " Unwrap all text
@@ -256,19 +259,19 @@ function! UnwrapAll()
     " While there are unwrapped paragraphs, UnwrapAParagraph.
     while UnwrapAParagraph()
     endwhile
-    echo "Unwrapped all lines in file."
+    echo 'Unwrapped all lines in file.'
 endfunction
 
 function! YankUnwrapped()
     call UnwrapAll()
     normal! ggVG"+yu
-    echo "Unwrapped paragraphs yanked to clipboard."
+    echo 'Unwrapped paragraphs yanked to clipboard.'
 endfunction
 
 " Wrap all text
 function! WrapAll()
     normal! ggVGgqq
-    echo "Hard-wrapped all lines in file."
+    echo 'Hard-wrapped all lines in file.'
 endfunction
 
 " Set text wrapping value.
@@ -298,7 +301,7 @@ endfunction
 "               change (float)          The window's new size, as a proportion
 "                                           of vim's current displayable area.
 function! ResizeSplit(dimension, change)
-    let l:command = "normal! :"  " build a resize command piece by piece
+    let l:command = 'normal! :'  " build a resize command piece by piece
     if type(a:change) == v:t_string
         let l:change = a:change
     else
@@ -306,9 +309,9 @@ function! ResizeSplit(dimension, change)
     endif
 
     if a:dimension ==# 'WIDTH'
-        let l:command = l:command . "vertical resize "
+        let l:command = l:command . 'vertical resize '
     elseif a:dimension ==# 'HEIGHT'
-        let l:command = l:command . "resize "
+        let l:command = l:command . 'resize '
     endif
 
     let l:match = matchstr(l:change, '[+-]')
@@ -357,12 +360,13 @@ command! -nargs=1 Vrs  call ResizeSplit('WIDTH', <args>)
 " DETAIL:   Taken from the following link:
 "               https://blog.hanschen.org/2012/10/24/different-background-color-in-vim-past-80-columns/
 function! ColorColumnBlock(...)
+    let a:num_args  = get(a:, 0)
     let a:start     = get(a:, 1, 0)
     let a:end       = get(a:, 2, 255)
     let a:hi_args   = get(a:, 3, '')
 
-    if a:start ==# 0
-        echoerr "No args provided to ColorColumnBlock!"
+    if a:num_args ==# 0
+        echoerr 'No args provided to ColorColumnBlock!'
         return
     endif
 
@@ -370,4 +374,53 @@ function! ColorColumnBlock(...)
         execute 'hi ColorColumn ' . a:hi_args
     endif
     execute 'set colorcolumn=' . join(range(a:start,a:end), ',')
+endfunction
+
+"=============================================================================
+"   Code Style                                              [STYLE]
+"=============================================================================
+
+" EFFECTS:  Tries to reformat the current file to comply with Yilin's personal
+"           style preferences.
+" DETAIL:   As of the time of writing (2018-06-14), 'Yilin style' consists of:
+"           +  Allman style brace placement (i.e. curly brace on next line).
+"           +  Spaces for indentation instead of tabs.
+"           +* At least one space of 'breathing room' on both sides of
+"           operators (arithmetic, logical, etc.), not counting special cases
+"           like `operator[]` or `operator->`.
+"           - Snakecase variables, camelcase classes/structs/functions/etc.
+"
+"           `+` denotes a style component that this function tries to fix.
+" PARAM:    breathing_room (v:t_bool)   Whether or not to add 'breathing room'
+"                                           with an interactive substitution
+"                                           command. Defaults to `false`.
+function! AutoYilinStyle(...)
+    let a:num_args       = get(a:, 0)
+    let a:breathing_room = get(a:, 1, 0)
+
+    if match(&filetype, 'cpp') ==# -1 && match(&filetype, 'c') ==# -1
+        echoerr 'AutoYilinStyle expects C/C++ files.'
+        return
+    endif
+
+    let l:cur_line = line('.')
+
+    " Callee-save unnamed register.
+    let l:old_contents = @"
+
+    " remove kernighan and ritchie from premises
+    %s:}\s*\(else if\|else\|if\):}\r\1:e
+    %s:\(\S\)\s*{:\1\r{:e
+
+    " (Optionally) add breathing room.
+    if a:breathing_room
+        %s:\(\S\)\([-+/*=!]=\|=\|+\|-\|*\|<<\|>>\|<\|>\|?\)\(\S\):\1 \2 \3:gce
+    endif
+
+    retab
+    normal! ggVG=
+
+    let @" = l:old_contents
+    execute 'normal! ' . l:cur_line . 'G'
+
 endfunction
