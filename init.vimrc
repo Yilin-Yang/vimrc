@@ -12,7 +12,7 @@
 "   nvim-completion-manager                                 [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
-"   ConqueGDB                                               [GDB]
+"   ConqueGDB                                               [CONQUEGDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
 "   LanguageClient-neovim                                   [LSP]
@@ -199,9 +199,9 @@ if has('nvim')
 endif
 
 "=============================================================================
-"   ConqueGDB                                               [GDB]
+"   ConqueGDB                                               [CONQUEGDB]
 "=============================================================================
-Plug 'vim-scripts/Conque-GDB'
+Plug 'vim-scripts/Conque-GDB', { 'on': 'StartConqueGDB' }
 
 "=============================================================================
 "   vim-snippets                                            [SNIPPETS]
