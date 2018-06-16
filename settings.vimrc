@@ -1,10 +1,21 @@
 scriptencoding utf-8
+"=============================================================================
+"                             TABLE OF CONTENTS
+"=============================================================================
+"
+"   Tab Heresy                                              [BYTHEEMPEROR]
+"   Editor Behavior                                         [BEHAVIOR]
+"   Spellchecking                                           [SPELLCHECK]
+"   Folding                                                 [FOLDING]
+"   Appearance                                              [APPEARANCE]
+"   Highlighting                                            [HIGHLIGHTING]
+"   User Interface                                          [USER INTERFACE]
+"   System Configuration                                    [CONFIG]
+"=============================================================================
 
-" Colorscheme
-colorscheme default " For now, all this does is trigger the autocmd for changing
-                    " Neomake's highlight colors
-
-" Tab Heresy
+"=============================================================================
+"   Tab Heresy                                              [BYTHEEMPEROR]
+"=============================================================================
 set expandtab                       " Spaces for indentation.
 set shiftwidth=4                    " Indentation depth with << and >> commands.
 set softtabstop=-1                  " The number of columns to insert when pressing
@@ -16,7 +27,9 @@ set tabstop=8                       " By default, most editors come configured w
                                     " having that width set differently can
                                     " make files written in those editors look weird.
 
-" Behavior
+"=============================================================================
+"   Editor Behavior                                         [BEHAVIOR]
+"=============================================================================
 set backspace=indent,eol,start      " Backspace over autoindents, line breaks,
                                     " position at start of insert mode.
 set timeoutlen=200                  " Decrease timeout for combined keymaps.
@@ -35,24 +48,33 @@ set completeopt=menuone,noinsert    " Show pop-up menu even when
 let g:cm_completeopt=&completeopt   " workaround to prevent overriding by
                                     " nvim-completion-manager
 
-" Spellchecking
+"=============================================================================
+"   Spellchecking                                           [SPELLCHECK]
+"=============================================================================
 " Further information on vim spellfile configuration can be found here:
 "   https://vi.stackexchange.com/a/5521
 "   https://stackoverflow.com/a/40832571
+"=============================================================================
 set spelllang=en_us
 set spellfile=$HOME/vimrc/spellfile/en.utf-8.add
                                     " Use the version-controlled spellfiles
                                     " in my vimrc repository.
 
-" Folding
+"=============================================================================
+"   Folding                                                 [FOLDING]
+"=============================================================================
 let g:foldmethod='syntax'           " Make it easier to collapse/expand parts of
                                     " a large text file.
 execute 'set foldmethod=' . g:foldmethod
 set foldlevel=20                    " All folds default to being open.
 
 
+"=============================================================================
+"   Appearance                                              [APPEARANCE]
+"=============================================================================
+colorscheme default " For now, all this does is trigger the autocmd for changing
+                    " Neomake's highlight colors
 
-" Appearance
 syntax on                           " Turn on syntax highlighting.
 set background=dark                 " Make text readable on dark background.
 set breakindent                     " Visually indent when softwrapping.
@@ -62,53 +84,58 @@ set list                            " Explicitly render `listchars`.
 set listchars=tab:│·,extends:>,precedes:<,nbsp:+
 set fillchars+=vert:│
 
-" Highlighting
+"=============================================================================
+"   Highlighting                                            [HIGHLIGHTING]
+"=============================================================================
 " Further information on highlight groups and highlight color values
 " can be found through:
 "   :help highlight-groups
 "   :help gui-colors
 "   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
+"=============================================================================
 
-    " Less obtrusive `listchars`.
-    hi SpecialKey ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
+" Less obtrusive `listchars`.
+hi SpecialKey ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
 
-    hi clear Whitespace
-    hi link Whitespace SpecialKey
-    hi clear NonText
-    hi link NonText SpecialKey
+hi clear Whitespace
+hi link Whitespace SpecialKey
+hi clear NonText
+hi link NonText SpecialKey
 
-    " Less obtrusive spellchecker markings.
-    hi SpellBad cterm=underline ctermfg=DarkRed ctermbg=NONE
+" Less obtrusive spellchecker markings.
+hi SpellBad cterm=underline ctermfg=DarkRed ctermbg=NONE
 
-    " Less obtrusive vertical splits.
-    hi clear VertSplit
-    hi link VertSplit Delimiter
+" Less obtrusive vertical splits.
+hi clear VertSplit
+hi link VertSplit Delimiter
 
-    " Disable ugly gray background in visual selections.
-    hi Visual cterm=reverse
+" Disable ugly gray background in visual selections.
+hi Visual cterm=reverse
 
-    " Make folds less visually distracting.
-    hi clear Folded
-    hi link Folded Special
+" Make folds less visually distracting.
+hi clear Folded
+hi link Folded Special
 
-    " Disable ugly gray background in side columns.
-    hi FoldColumn ctermbg=NONE
-    hi SignColumn ctermbg=NONE
+" Disable ugly gray background in side columns.
+hi FoldColumn ctermbg=NONE
+hi SignColumn ctermbg=NONE
 
-    " Make the tabline a bit more minimal.
-    hi TabLine ctermbg=NONE ctermfg=darkgray
-    hi TabLineFill cterm=NONE ctermbg=235
-    hi TabLineSel ctermfg=224
+" Make the tabline a bit more minimal.
+hi TabLine ctermbg=NONE ctermfg=darkgray
+hi TabLineFill cterm=NONE ctermbg=235
+hi TabLineSel ctermfg=224
 
-    " Make the statusline a bit more minimal.
-    " NOTE: these are effectively disabled by vim-airline.
-    hi StatusLine cterm=bold,underline ctermfg=224
-    hi StatusLineNC cterm=underline ctermfg=224
+" Make the statusline a bit more minimal.
+" NOTE: these are effectively disabled by vim-airline.
+hi StatusLine cterm=bold,underline ctermfg=224
+hi StatusLineNC cterm=underline ctermfg=224
 
-    " Darken backgrounds beyond my personal line limit.
-    hi ColorColumn ctermbg=235 guibg=DarkGray
+" Darken backgrounds beyond my personal line limit.
+hi ColorColumn ctermbg=235 guibg=DarkGray
 
-" Information Density
+"=============================================================================
+"   User Interface                                          [USER INTERFACE]
+"=============================================================================
     set relativenumber              " Relative numbering!
     set number                      " Show absolute line numbers.
     set ruler                       " Show line lengths in the statusline.
@@ -117,12 +144,22 @@ set fillchars+=vert:│
         hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
                       " ^ bold every character that's in the same column as the cursor
 
+
+"=============================================================================
+"   System Configuration                                    [CONFIG]
+"=============================================================================
+
 " Place tempfiles in a central location, naming folders by PID.
-" This *does* break some of the 'prevent simultaneous editing' enabled by
-" swapback files, and it makes recovering lost data a bit harder, but that's a
-" worthy price to pay in exchange for `nvim -S` calls that actually work.
+"   This *does* break some of the 'prevent simultaneous editing' enabled by
+"   swapback files, and it makes recovering lost data a bit harder, but that's a
+"   worthy price to pay in exchange for `nvim -S` calls that actually work.
+"
 " " Taken from: https://github.com/tpope/vim-obsession/issues/18
 let g:vimtmp = $HOME . '/.tmp/' . getpid()
 silent! call mkdir(g:vimtmp, 'p', 0700)
 let &backupdir=g:vimtmp
 let &directory=g:vimtmp
+
+" Shorten startup time by explicitly specifying python path.
+let g:python_host_prog  = '/usr/bin/python'
+let g:python3_host_prog = '/usr/bin/python3'
