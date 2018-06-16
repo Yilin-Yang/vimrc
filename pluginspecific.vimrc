@@ -21,7 +21,7 @@ scriptencoding utf-8
 "   vim-lexical                                             [LEXICAL]
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
-"   ConqueGDB                                               [GDB]
+"   ConqueGDB                                               [CONQUEGDB]
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
 "   vim-pencil                                              [PENCIL]
@@ -464,7 +464,7 @@ let g:ConqueTerm_PyVersion = 3
 let g:ConqueGdb_SrcSplit = 'left' " Open source on the *left* side.
 
 " Update very frequently while I'm in insert mode.
-let g:ConqueTerm_FocusedUpdateTime = 10
+let g:ConqueTerm_FocusedUpdateTime = 100
 
 " Update very frequently while I'm not in insert mode.
 let g:ConqueTerm_UnfocusedUpdateTime = 100
