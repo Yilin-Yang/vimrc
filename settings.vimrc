@@ -105,6 +105,13 @@ hi link NonText SpecialKey
 " Less obtrusive spellchecker markings.
 hi SpellBad cterm=underline ctermfg=DarkRed ctermbg=NONE
 
+" As with steak, rare words are _better._
+" (Also, can't find an option to turn off rare word spellchecking.)
+hi clear SpellRare
+
+" Capitalization warnings trigger on the word `vim,` which makes me sad.
+set spellcapcheck=
+
 " Less obtrusive vertical splits.
 hi clear VertSplit
 hi link VertSplit Delimiter
@@ -136,13 +143,13 @@ hi ColorColumn ctermbg=235 guibg=DarkGray
 "=============================================================================
 "   User Interface                                          [USER INTERFACE]
 "=============================================================================
-    set relativenumber              " Relative numbering!
-    set number                      " Show absolute line numbers.
-    set ruler                       " Show line lengths in the statusline.
-    set cursorline                  " Underline the current line.
-    set cursorcolumn                " Mark the current column.
-        hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
-                      " ^ bold every character that's in the same column as the cursor
+set relativenumber              " Relative numbering!
+set number                      " Show absolute line numbers.
+set ruler                       " Show line lengths in the statusline.
+set cursorline                  " Underline the current line.
+set cursorcolumn                " Mark the current column.
+    hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
+                  " ^ bold every character that's in the same column as the cursor
 
 
 "=============================================================================
