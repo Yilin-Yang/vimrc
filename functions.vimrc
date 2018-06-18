@@ -408,6 +408,9 @@ function! AutoYilinStyle(...)
     " Callee-save unnamed register.
     let l:old_contents = @"
 
+    " unsquish control statements
+    %s:\(\s\)\+\(if\|else\|for\|while\|case\|switch\)(:\1\2 (:e
+
     " remove kernighan and ritchie from premises
     %s:}\s*\(else if\|else\|if\):}\r\1:e
     %s:\(\S\)\s*{:\1\r{:e
