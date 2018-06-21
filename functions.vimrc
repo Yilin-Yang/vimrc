@@ -427,3 +427,107 @@ function! AutoYilinStyle(...)
     execute 'normal! ' . l:cur_line . 'G'
 
 endfunction
+
+" EFFECTS:  Returns a string containing the user's 'indentation block,' i.e. a
+"           literal tab character if the user indents with tabs, or '    '
+"           (four spaces) if the user indents with four spaces for every
+"           press of the <Tab> key.
+" DETAIL:   In the event of 'conflict' between indentation settings (e.g. if
+"           &shiftwidth is less than &tabstop), GetIndentStyle will return the
+"           smallest nonzero value.
+"
+"           If &softtabstop is set, GetIndentStyle will prefer it value over the
+"           value of &tabstop.
+function! GetIndentStyle()
+    let l:indent_block = '' " string to return
+
+    let l:space_indent = 0
+
+    " determine the user's indentation style
+    if &expandtab
+        let l:space_indent = 1
+    else " noexpandtab
+        if &softtabstop && &softtabstop <# &tabstop
+            let l:space_indent = 1
+        else
+            let l:space_indent = 0
+        endif
+    endif
+
+    "
+    if l:space_indent ==# 0 | return "\t" | endif
+
+    " calculate indentation width
+
+    " " prefer the value of softtabstop over tabstop, if set
+    let l:tab_stop = (&softtabstop) ? &softtabstop : &tabstop
+    let l:tab_stop = (&softtabstop ==# -1) ? &shiftwidth : l:tab_stop
+
+    " " handle edge case when shiftwidth is zero
+    let l:shift_width = (&shiftwidth) ? &shiftwidth : l:tab_stop
+
+    " " calculated width
+    let l:block_width = (&expandtab) ? l:tab_stop : min([&shiftwidth, l:tab_stop])
+
+    if l:block_width <# 0
+        echoerr 'GetIndentStyle: calculated indent block size is negative? '
+            \ . '(Calculated indentation width: ' . string(l:block_width) . ')'
+        return
+    endif
+
+    while strlen(l:indent_block) <# l:block_width
+        let l:indent_block .= ' '
+    endwhile
+
+    return l:indent_block
+endfunction
+
+" EFFECTS:  Reformats the current function header to comply with Yilin's
+"           personal style preferences.
+" NOTES:    Function takes in a range (see `:help func-range`).
+" DETAIL:   As of the time of writing (2018-06-20), a properly
+"           'Yilin-formatted' function header looks like:
+"
+"           void ClassName::doSomething(
+"               int param_one,
+"               double param_two,
+"               bool param_three
+"           )
+"           {
+"               // function body
+"           }
+"
+function! HeaderYilinFormat() range
+    if match(&filetype, 'cpp') ==# -1 && match(&filetype, 'c') ==# -1
+        echoerr 'HeaderYilinFormat expects C/C++ files.'
+        return
+    endif
+
+    " Callee-save unnamed register.
+    let l:old_contents = @"
+
+    " TODO: - pull entire line range into a string
+    "       - parse out each function header
+    "       - act on each one individually, use substitution commands with
+    "       l:func_header_text
+
+    " Parse out the different components of the function header.
+    " " CONTENTS:   zero-index  -   return type
+    " "             one-index   -   function name (sans braces)
+    " "             two-index   -   all function parameters
+    " " NOTES:      - Use '*' to match return type, to handle large numbers of
+    "               template arguments.
+    "               - Use '\{-}' to match function parameters, to prevent
+    "               regex from greedily matching function headers further down
+    "               the selection.
+    " " TODO:       Handle more than one function header in the selected range.
+    let l:header_pattern = '\(.*\)\s\+\(\w\+\)(\(.\{-}\))[\s\n\r]\{-}{'
+
+    let l:func_header_list = matchlist(@y, l:header_pattern)
+    let l:func_header_text = l:func_header_list[0]
+
+
+
+    let @" = l:old_contents
+
+endfunction
