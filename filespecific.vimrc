@@ -14,6 +14,7 @@
 "   Assembly Formatting                                     [ASSEMBLY]
 "   Makefile Settings                                       [MAKEFILE]
 "   Git Settings                                            [GIT]
+"   vimwiki Settings                                        [VIMWIKI]
 "=============================================================================
 
 "=============================================================================
@@ -213,4 +214,18 @@ endfunction
 augroup git_format
     au!
     autocmd filetype git*   call GitSettings()
+augroup end
+
+"=============================================================================
+"   vimwiki Settings                                        [VIMWIKI]
+"=============================================================================
+
+function! VimwikiFormat()
+    set filetype=vimwiki
+    set syntax=markdown
+endfunction
+
+augroup vimwiki_format
+    au!
+    autocmd filetype markdown   call VimwikiFormat()
 augroup end
