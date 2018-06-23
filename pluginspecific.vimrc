@@ -726,20 +726,8 @@ let g:tagbar_type_vimwiki = {
 " Shortcut for creating a vimwiki page.
 nnoremap <Leader>v :VimwikiGoto \<BS>
 
-
 " Open a link in a vertical split.
 nmap <cr>v <Plug>VimwikiVSplitLink
 
 " Open a link in a horizontal split.
 nmap <cr>s <Plug>VimwikiSplitLink
-
-
-" Promote a list item.
-map >>  <Plug>VimwikiIncreaseLvlSingleItem
-" Promote an item and its children.
-map >>> <Plug>VimwikiIncreaseLvlWholeItem
-
-" Demote a list item.
-map <<  <Plug>VimwikiDecreaseLvlSingleItem
-" Demote a list item and its children.
-map <<< <Plug>VimwikiDecreaseLvlWholeItem

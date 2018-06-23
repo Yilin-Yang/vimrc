@@ -221,11 +221,13 @@ augroup end
 "=============================================================================
 
 function! VimwikiFormat()
-    set filetype=vimwiki
+    if (&ft !=# 'vimwiki')
+        set filetype=vimwiki
+    endif
     set syntax=markdown
 endfunction
 
 augroup vimwiki_format
     au!
-    autocmd filetype markdown   call VimwikiFormat()
+    autocmd filetype vimwiki    call VimwikiFormat()
 augroup end
