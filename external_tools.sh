@@ -11,11 +11,11 @@ $DIR/vim-plug.sh
 $DIR/llvm.sh
 
 # Install palantir's Python language server
-pip install --user python-language-server
+pip install  --user --upgrade python-language-server
 
 # Install Kuniwak/vint
-pip  install vim-vint
-pip3 install vim-vint
+pip  install --user --upgrade vim-vint
+pip3 install --user --upgrade vim-vint
 
 # Install lldb for integrated debugger support
 $INSTALLCMD lldb
