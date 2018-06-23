@@ -221,11 +221,15 @@ augroup end
 "=============================================================================
 
 function! VimwikiFormat()
-    set filetype=vimwiki
+    if (&ft !=# 'vimwiki')
+        set filetype=vimwiki
+    endif
+    " Kill vimwiki's default <Tab> bindings, which break my completion menu.
+    iunmap <buffer> <expr> <Tab>
     set syntax=markdown
 endfunction
 
 augroup vimwiki_format
     au!
-    autocmd filetype markdown   call VimwikiFormat()
+    autocmd filetype vimwiki    call VimwikiFormat()
 augroup end

@@ -159,12 +159,13 @@ nnoremap <silent> <Leader>b :TagbarToggle<cr>
 "=============================================================================
 "   nvim-completion-manager                                 [NCM]
 "=============================================================================
-if has('nvim')
-    " Insert mode tab-completion without breaking real presses of the tab key.
-    inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
+" Insert mode tab-completion without breaking real presses of the tab key.
+inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
-    " Press Enter to close the menu **and also** start a new line.
-    inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
+" Press Enter to close the menu **and also** start a new line.
+inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
+
+if has('nvim')
 
     " Enable vimtex support.
     augroup nvim_cm_setup
@@ -730,20 +731,12 @@ let g:tagbar_type_vimwiki = {
 " Shortcut for creating a vimwiki page.
 nnoremap <Leader>v :VimwikiGoto \<BS>
 
+" Replace vimwiki's default <Tab> bindings, which break my completion menu.
+nmap <Leader>wn <Plug>VimwikiNextLink
+nmap <Leader>wp <Plug>VimwikiPrevLink
 
 " Open a link in a vertical split.
 nmap <cr>v <Plug>VimwikiVSplitLink
 
 " Open a link in a horizontal split.
 nmap <cr>s <Plug>VimwikiSplitLink
-
-
-" Promote a list item.
-map >>  <Plug>VimwikiIncreaseLvlSingleItem
-" Promote an item and its children.
-map >>> <Plug>VimwikiIncreaseLvlWholeItem
-
-" Demote a list item.
-map <<  <Plug>VimwikiDecreaseLvlSingleItem
-" Demote a list item and its children.
-map <<< <Plug>VimwikiDecreaseLvlWholeItem
