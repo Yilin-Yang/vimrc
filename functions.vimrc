@@ -68,7 +68,7 @@ endfunction
 function! BufDoAll(command)
   let l:curr_buff = bufnr('%')
   execute 'bufdo ' . a:command
-  execute 'buffer ' . curr_buff
+  execute 'buffer ' . l:curr_buff
 endfunction
 command! -nargs=+ -complete=command BufDoAll call BufDoAll(<q-args>)
 
@@ -482,9 +482,8 @@ function! GetIndentStyle()
     return l:indent_block
 endfunction
 
-" EFFECTS:  Reformats the current function header to comply with Yilin's
-"           personal style preferences.
-" NOTES:    Function takes in a range (see `:help func-range`).
+" EFFECTS:  Reformats given function header to comply with Yilin's personal
+"           style preferences and returns it as a string.
 " DETAIL:   As of the time of writing (2018-06-20), a properly
 "           'Yilin-formatted' function header looks like:
 "
@@ -493,10 +492,49 @@ endfunction
 "               double param_two,
 "               bool param_three
 "           )
-"           {
-"               // function body
-"           }
 "
+function! SingleHeaderYilinFormat(header_string, indent_block)
+    " Parse out the different components of the function header.
+    " " CONTENTS:   zero-index   -  entire matched string
+    " "             one-index    -  return type
+    " "             two-index    -  function name (sans braces)
+    " "             three-index  -  all function parameters
+    " " NOTES:      - Use '*' to match return type, to handle large numbers of
+    "               template arguments.
+    "               - Use '\{-}' to match function parameters, to prevent
+    "               regex from greedily matching function headers further down
+    "               the selection.
+    let l:header_pattern = '\(\w\+\)\%(\s\|\n\)\+\(\w\+\)(\(.\{-}\))[\s\n\r]\{-}'
+
+    let l:func_header_list = matchlist(a:header_string, l:header_pattern)
+        let l:return_type = l:func_header_list[1]
+        let l:func_name   = l:func_header_list[2]
+        let l:func_params = l:func_header_list[3]
+
+    let l:formatted = l:return_type . ' ' . l:func_name . "(\n"
+
+    " Parse out function parameters into a list.
+    let l:param_list = split(l:func_params, ',')
+    let l:i = 0
+    while l:i <# len(l:param_list) && strlen(l:param_list[l:i])
+        " Trim surrounding whitespace, prepend an indentation block,
+        " then append to return string.
+        let l:formatted .= substitute(
+            \ l:param_list[l:i],
+            \ '\%(\s\|\n\)*\(\w\+\)[ ]\+\(\w\+\)\%(\s\|\n\)*',
+            \ a:indent_block . '\1 \2,\n',
+            \ '')
+        let l:i += 1
+    endwhile
+
+    " Truncate superfluous comma...
+    let l:formatted = l:formatted[:-3] . "\n)"
+    return l:formatted
+endfunction
+
+" EFFECTS:  Reformats the current function header to comply with Yilin's
+"           personal style preferences.
+" NOTES:    Function takes in a range (see `:help func-range`).
 function! HeaderYilinFormat() range
     if match(&filetype, 'cpp') ==# -1 && match(&filetype, 'c') ==# -1
         echoerr 'HeaderYilinFormat expects C/C++ files.'
@@ -506,28 +544,31 @@ function! HeaderYilinFormat() range
     " Callee-save unnamed register.
     let l:old_contents = @"
 
-    " TODO: - pull entire line range into a string
-    "       - parse out each function header
-    "       - act on each one individually, use substitution commands with
-    "       l:func_header_text
+    " Pull entire line range into the unnamed register.
+    execute string(a:firstline) . ',' . string(a:lastline) . 'yank "'
+    let l:text_in_range = @"
 
-    " Parse out the different components of the function header.
-    " " CONTENTS:   zero-index  -   return type
-    " "             one-index   -   function name (sans braces)
-    " "             two-index   -   all function parameters
-    " " NOTES:      - Use '*' to match return type, to handle large numbers of
-    "               template arguments.
-    "               - Use '\{-}' to match function parameters, to prevent
-    "               regex from greedily matching function headers further down
-    "               the selection.
-    " " TODO:       Handle more than one function header in the selected range.
-    let l:header_pattern = '\(.*\)\s\+\(\w\+\)(\(.\{-}\))[\s\n\r]\{-}{'
+    " Parse each individual function header into a list.
+    "   https://stackoverflow.com/a/34069943
+    let l:all_headers = []
+    let l:header_pattern = '\w\+\%(\s\|\n\)\+\w\+[\s\n]*(.\{-})'
+    call substitute(
+        \ l:text_in_range,
+        \ l:header_pattern,
+        \ '\=add(all_headers, submatch(0))',
+        \ 'g'
+    \ )
+    echo l:all_headers
 
-    let l:func_header_list = matchlist(@y, l:header_pattern)
-    let l:func_header_text = l:func_header_list[0]
-
-
+    let l:indent_block = GetIndentStyle()
+    for l:h in l:all_headers
+        let l:formatted = SingleHeaderYilinFormat(l:h, l:indent_block)
+        execute
+            \ '%s/'
+            \ . substitute(l:h, "[\n\r]", '\\n', 'g')
+            \ . '/'
+            \ . substitute(l:formatted, "\n", '\\r', 'g')
+    endfor
 
     let @" = l:old_contents
-
 endfunction
