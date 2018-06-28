@@ -231,6 +231,7 @@ function! VimwikiFormat()
     " Kill vimwiki's default <Tab> bindings, which break my completion menu.
     iunmap <buffer> <expr> <Tab>
     set syntax=markdown
+    setlocal nocursorline
 endfunction
 
 augroup vimwiki_format
