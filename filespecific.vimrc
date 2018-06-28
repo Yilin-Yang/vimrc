@@ -224,6 +224,10 @@ function! VimwikiFormat()
     if (&ft !=# 'vimwiki')
         set filetype=vimwiki
     endif
+    if has_key(g:plugs, 'vim-pencil')
+        " HardPencil borks some of vimwiki's list-editing commands.
+        NoPencil
+    endif
     " Kill vimwiki's default <Tab> bindings, which break my completion menu.
     iunmap <buffer> <expr> <Tab>
     set syntax=markdown
