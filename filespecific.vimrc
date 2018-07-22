@@ -5,6 +5,7 @@
 "   C++ Formatting                                          [CPP]
 "   C Formatting                                            [C_LANG]
 "   Python Formatting                                       [PYTHON]
+"   Shell Script Formatting                                 [SH]
 "   Markdown Formatting                                     [MARKDOWN]
 "   AutoHotkey Formatting                                   [AUTOHOTKEY]
 "   TeX Formatting                                          [TEX]
@@ -64,6 +65,20 @@ endfunction
 augroup py_format
     au!
     autocmd BufWinEnter *.py    call PyFormat()
+augroup end
+
+"=============================================================================
+"   Shell Script Formatting                                 [SH]
+"=============================================================================
+
+function! ShellScriptFormat()
+    call ColorColumnBlock(81)
+    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
+endfunction()
+
+augroup sh_format
+    au!
+    autocmd FileType sh         call ShellScriptFormat()
 augroup end
 
 "=============================================================================
