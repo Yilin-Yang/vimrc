@@ -39,6 +39,7 @@
 "   vimwiki                                                 [VIMWIKI]
 "   diffconflicts                                           [DIFFCONFLICTS]
 "   winresizer                                              [WINRESIZER]
+"   vim-abolish                                             [ABOLISH]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -373,6 +374,12 @@ Plug 'whiteinge/diffconflicts'
 "=============================================================================
 " " More easily resize splits.
 Plug 'simeji/winresizer'
+
+"=============================================================================
+"   vim-abolish                                             [ABOLISH]
+"=============================================================================
+" " Capitalization-/Suffix-/Pluralization-/etc. aware search-and-replace.
+Plug 'tpope/vim-abolish'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

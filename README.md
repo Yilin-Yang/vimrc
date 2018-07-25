@@ -48,6 +48,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [localvimrc](https://github.com/embear/vim-localvimrc)
 * [neomake](https://github.com/neomake/neomake)
 * [tabular](https://github.com/godlygeek/tabular)
+* [vim-abolish](https://github.com/tpope/vim-abolish)
 * [vim-airline](https://github.com/vim-airline/vim-airline)
 * [vim-commentary](https://github.com/tpope/vim-commentary)
 * [vim-easy-align](https://github.com/junegunn/vim-easy-align)
