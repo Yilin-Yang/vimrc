@@ -28,6 +28,7 @@ scriptencoding utf-8
 "   vim-wordy                                               [WORDY]
 "   vimwiki                                                 [VIMWIKI]
 "   diffconflicts                                           [DIFFCONFLICTS]
+"   winresizer                                              [WINRESIZER]
 "=============================================================================
 
 
@@ -751,3 +752,16 @@ nnoremap <expr> <silent> d?
 
 " Write and close multiple active splits.
 nnoremap <silent> dq :wall<cr>:qall<cr>
+
+"=============================================================================
+"   winresizer                                              [WINRESIZER]
+"=============================================================================
+
+" NOTE: `:help ascii` to print the keycode of the key under the cursor
+let g:winresizer_keycode_finish = 100 " d
+
+nnoremap <leader>wr :WinResizerStartResize<cr>
+nnoremap <leader>wm :WinResizerStartMove<cr>
+
+" Slightly more granular vertical resize control.
+let g:winresizer_vert_resize = 5

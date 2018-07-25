@@ -38,6 +38,7 @@
 "   vim-textobj-sentence                                    [TEXTOBJ_SENTENCE]
 "   vimwiki                                                 [VIMWIKI]
 "   diffconflicts                                           [DIFFCONFLICTS]
+"   winresizer                                              [WINRESIZER]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -366,6 +367,12 @@ Plug 'vimwiki/vimwiki'
 "=============================================================================
 " " Easy, intuitive two-way git diffs!
 Plug 'whiteinge/diffconflicts'
+
+"=============================================================================
+"   winresizer                                              [WINRESIZER]
+"=============================================================================
+" " More easily resize splits.
+Plug 'simeji/winresizer'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
