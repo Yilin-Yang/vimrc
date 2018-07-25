@@ -69,6 +69,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-wordy](https://github.com/reedes/vim-wordy)
 * [vimtex](https://github.com/lervag/vimtex)
 * [vimwiki](https://github.com/vimwiki/vimwiki)
+* [winresizer](https://github.com/simeji/winresizer)
 
 Other Editing Tools
 --------------------------------------------------------------------------------
