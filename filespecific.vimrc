@@ -15,6 +15,7 @@
 "   Makefile Settings                                       [MAKEFILE]
 "   Git Settings                                            [GIT]
 "   vimwiki Settings                                        [VIMWIKI]
+"   Startup Settings                                        [STARTUP]
 "=============================================================================
 
 "=============================================================================
@@ -216,6 +217,7 @@ augroup git_format
     autocmd filetype git*   call GitSettings()
 augroup end
 
+
 "=============================================================================
 "   vimwiki Settings                                        [VIMWIKI]
 "=============================================================================
@@ -237,4 +239,22 @@ endfunction
 augroup vimwiki_format
     au!
     autocmd filetype vimwiki    call VimwikiFormat()
+augroup end
+
+"=============================================================================
+"   Startup Settings                                        [STARTUP]
+"=============================================================================
+
+" Disable spellchecking when running a vimdiff, to prevent overlapping
+" highlighting making text unreadable.
+function! StartupSettings()
+    if &diff
+        set nospell
+    else
+    endif
+endfunction
+
+augroup startup_settings
+    au!
+    autocmd VimEnter *      call StartupSettings()
 augroup end

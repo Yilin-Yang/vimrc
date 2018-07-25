@@ -140,6 +140,10 @@ hi StatusLineNC cterm=underline ctermfg=224
 " Darken backgrounds beyond my personal line limit.
 hi ColorColumn ctermbg=235 guibg=DarkGray
 
+" Better color contrast in vimdiffs, with my wonky terminal colorschemes.
+" " dark red background in difftext
+hi DiffText ctermbg=1
+
 "=============================================================================
 "   User Interface                                          [USER INTERFACE]
 "=============================================================================
