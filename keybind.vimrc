@@ -85,7 +85,8 @@ nnoremap L 40l
     nnoremap <silent> <M-c> :tabclose<cr>
 
     " Alt + H to clear highlights and error windows
-    nnoremap <silent> <M-h> :call CloseErrorWindows()<cr>:noh<cr>:echo "Cleared highlights."<cr>
+    nnoremap <silent> <M-h> :call CloseErrorWindows()<cr>:noh<cr>
+        \ :echo "Cleared highlights."<cr>
 
     " Number row zero and +/- to open and close tabs
     nnoremap <silent> 0= :tabnew<cr>:NERDTreeToggle<cr>
@@ -100,6 +101,11 @@ nnoremap <leader>w vipJgqq
 
 " Sort the highlighted lines.
 vnoremap <silent> <leader>s :sort<cr>
+
+" Start a search command for a regex pattern *only* within the current window.
+" " Taken from:
+" "     https://www.reddit.com/r/vim/comments/8mrwu3/search_in_part_of_file/dzpwjtn/
+nnoremap <expr> z/ '/\%(\%>'.(line('w0')-1).'l\%<'.(line('w$')+1).'l\)\&'
 
 "=============================================================================
 "   User Interface                                          [UI]
