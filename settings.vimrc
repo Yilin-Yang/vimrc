@@ -119,9 +119,9 @@ hi link VertSplit Delimiter
 " Disable ugly gray background in visual selections.
 hi Visual cterm=reverse
 
-" Make folds less visually distracting.
+" Make folds less visually distracting, but still visually distinct.
 hi clear Folded
-hi link Folded Special
+hi Folded ctermfg=81 guifg=#ff80ff
 
 " Disable ugly gray background in side columns.
 hi FoldColumn ctermbg=NONE
@@ -146,7 +146,7 @@ hi ColorColumn ctermbg=235 guibg=DarkGray
 set relativenumber              " Relative numbering!
 set number                      " Show absolute line numbers.
 set ruler                       " Show line lengths in the statusline.
-set cursorline                  " Underline the current line.
+set nocursorline                " Don't underline the current line.
 set cursorcolumn                " Mark the current column.
     hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
                   " ^ bold every character that's in the same column as the cursor

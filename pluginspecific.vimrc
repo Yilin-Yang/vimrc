@@ -524,8 +524,8 @@ execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'w'  . ' :Windows<cr>'
 "   vim-airline                                             [AIRLINE]
 "=============================================================================
 
-" Boring, But Practical.
-let g:airline_theme='monochrome'
+" Colorful and visually distinct, but in a tasteful way.
+let g:airline_theme='wombat'
 
 set noshowmode " Disable vim's built-in modeline.
 
@@ -539,7 +539,7 @@ let g:airline_highlighting_cache = 1
 " Don't scan runtimepath for airline-compatible plugins on startup.
 let g:airline#extensions#disable_rtp_load = 1
 
-" Load vim-fugitive, but nothing else.
+" Load vim-fugitive, and a markdown wordcounter, but nothing else.
 let g:airline_extensions = ['branch', 'wordcount']
 
 " Trim some gunk from the rightmost part of the statusline.
