@@ -41,6 +41,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [ReplaceWithRegister](https://github.com/vim-scripts/ReplaceWithRegister)
 * [Tagbar](https://github.com/majutsushi/tagbar	)
 * [UltiSnips](https://github.com/SirVer/ultisnips)
+* [diffconflicts](https://github.com/whiteinge/diffconflicts)
 * [fuzzyfind-vim](https://github.com/junegunn/fzf.vim)
 * [fuzzyfind](https://github.com/junegunn/fzf)
 * [lldb](https://github.com/dbgx/lldb.nvim)

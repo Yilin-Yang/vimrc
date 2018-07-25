@@ -27,6 +27,7 @@ scriptencoding utf-8
 "   vim-pencil                                              [PENCIL]
 "   vim-wordy                                               [WORDY]
 "   vimwiki                                                 [VIMWIKI]
+"   diffconflicts                                           [DIFFCONFLICTS]
 "=============================================================================
 
 
@@ -736,3 +737,17 @@ nmap <cr>v <Plug>VimwikiVSplitLink
 
 " Open a link in a horizontal split.
 nmap <cr>s <Plug>VimwikiSplitLink
+
+"=============================================================================
+"   diffconflicts                                           [DIFFCONFLICTS]
+"=============================================================================
+
+" Show diffconflicts history, iff vim is running as a diffconflicts mergetool.
+nnoremap <expr> <silent> d?
+    \ DiffconflictsActive() ?
+        \ ":DiffConflictsShowHistory<cr>"
+        \ :
+        \ ':echoerr "vim is not running as a git mergetool. No history to show."<cr>'
+
+" Write and close multiple active splits.
+nnoremap <silent> dq :wall<cr>:qall<cr>

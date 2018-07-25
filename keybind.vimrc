@@ -17,13 +17,10 @@
 set pastetoggle=<F2>
 
 " Set my preferred leader key.
-let mapleader="\<Space>"
+let g:mapleader="\<Space>"
 
 " Set my preferred local leader, primarily used with vimtex.
-let maplocalleader="\\"
-
-" Close multiple active splits.
-nnoremap <silent> dq :qa<cr>
+let g:maplocalleader="\\"
 
 "=============================================================================
 "   Ordinary                                                [ORDINARY]
