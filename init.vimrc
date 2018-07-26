@@ -37,6 +37,14 @@
 "   vim-textobj-user                                        [TEXTOBJ_USER]
 "   vim-textobj-sentence                                    [TEXTOBJ_SENTENCE]
 "   vimwiki                                                 [VIMWIKI]
+"   diffconflicts                                           [DIFFCONFLICTS]
+"   winresizer                                              [WINRESIZER]
+"   vim-abolish                                             [ABOLISH]
+"   vim-gitgutter                                           [GITGUTTER]
+"   vim-eunuch                                              [EUNUCH]
+"   quick-scope                                             [QUICKSCOPE]
+"   gv.vim                                                  [GVVIM]
+"   vim-indent-object                                       [INDENTOBJECT]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -359,6 +367,80 @@ Plug 'reedes/vim-textobj-sentence'
 "=============================================================================
 " " Personal wiki and task organization for vim!
 Plug 'vimwiki/vimwiki'
+
+"=============================================================================
+"   diffconflicts                                           [DIFFCONFLICTS]
+"=============================================================================
+" " Easy, intuitive two-way git diffs!
+Plug 'whiteinge/diffconflicts'
+
+"=============================================================================
+"   winresizer                                              [WINRESIZER]
+"=============================================================================
+" " More easily resize splits.
+Plug 'simeji/winresizer'
+
+"=============================================================================
+"   vim-abolish                                             [ABOLISH]
+"=============================================================================
+" " Capitalization-/Suffix-/Pluralization-/etc. aware search-and-replace.
+Plug 'tpope/vim-abolish'
+
+"=============================================================================
+"   vim-gitgutter                                           [GITGUTTER]
+"=============================================================================
+" " Display git diffs in the sign column.
+Plug 'airblade/vim-gitgutter'
+
+"=============================================================================
+"   vim-eunuch                                              [EUNUCH]
+"=============================================================================
+" Commands that make working on Unix systems more pleasant.
+"
+" USAGE:
+"   :Delete         Delete a buffer and the file on disk simultaneously.
+"   :Unlink         Like :Delete, but keeps the now empty buffer.
+"   :Move           Rename a buffer and the file on disk simultaneously.
+"   :Rename         Like :Move, but relative to the current file's
+"                       containing directory.
+"   :Chmod          Change the permissions of the current file.
+"   :Mkdir          Create a directory, defaulting to the parent of the
+"                       current file.
+"
+"   :Cfind          Run find and load the results into the quickfix list.
+"   :Clocate        Run locate and load the results into the quickfix list.
+"
+"   :Lfind          Like above, but use the location list.
+"   :Llocate        Like above, but use the location list.
+"   :Wall           Write every open window. Handy for kicking off tools
+"                       like guard.
+"   :SudoWrite      Write a privileged file with sudo.
+"   :SudoEdit       Edit a privileged file with sudo.
+"=============================================================================
+Plug 'tpope/vim-eunuch'
+
+"=============================================================================
+"   quick-scope                                             [QUICKSCOPE]
+"=============================================================================
+" " Highlight targets for character motions.
+Plug 'unblevable/quick-scope'
+
+"=============================================================================
+"   gv.vim                                                  [GVVIM]
+"=============================================================================
+" " Detailed commit history browser.
+Plug 'junegunn/gv.vim'
+
+"=============================================================================
+"   vim-indent-object                                       [INDENTOBJECT]
+"=============================================================================
+" " Define a new text object (`i`) representing an indentation level.
+" USAGE:
+"   <count>ai       line Above + Indentation block
+"   <count>ii       Inside Indentation block
+"   <count>aI       line Above + Indentation block + line below
+"=============================================================================
+Plug 'michaeljsmith/vim-indent-object'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

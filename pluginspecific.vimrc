@@ -27,6 +27,10 @@ scriptencoding utf-8
 "   vim-pencil                                              [PENCIL]
 "   vim-wordy                                               [WORDY]
 "   vimwiki                                                 [VIMWIKI]
+"   diffconflicts                                           [DIFFCONFLICTS]
+"   winresizer                                              [WINRESIZER]
+"   vim-gitgutter                                           [GITGUTTER]
+"   quick-scope                                             [QUICKSCOPE]
 "=============================================================================
 
 
@@ -529,8 +533,8 @@ execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'w'  . ' :Windows<cr>'
 "   vim-airline                                             [AIRLINE]
 "=============================================================================
 
-" Boring, But Practical.
-let g:airline_theme='monochrome'
+" Colorful and visually distinct, but in a tasteful way.
+let g:airline_theme='wombat'
 
 set noshowmode " Disable vim's built-in modeline.
 
@@ -544,7 +548,7 @@ let g:airline_highlighting_cache = 1
 " Don't scan runtimepath for airline-compatible plugins on startup.
 let g:airline#extensions#disable_rtp_load = 1
 
-" Load vim-fugitive, but nothing else.
+" Load vim-fugitive, and a markdown wordcounter, but nothing else.
 let g:airline_extensions = ['branch', 'wordcount']
 
 " Trim some gunk from the rightmost part of the statusline.
@@ -740,3 +744,54 @@ nmap <cr>v <Plug>VimwikiVSplitLink
 
 " Open a link in a horizontal split.
 nmap <cr>s <Plug>VimwikiSplitLink
+
+"=============================================================================
+"   diffconflicts                                           [DIFFCONFLICTS]
+"=============================================================================
+
+" Show diffconflicts history, iff vim is running as a diffconflicts mergetool.
+nnoremap <expr> <silent> d?
+    \ DiffconflictsActive() ?
+        \ ":DiffConflictsShowHistory<cr>"
+        \ :
+        \ ':echoerr "vim is not running as a git mergetool. No history to show."<cr>'
+
+" Write and close multiple active splits.
+nnoremap <silent> dq :wall<cr>:qall<cr>
+
+"=============================================================================
+"   winresizer                                              [WINRESIZER]
+"=============================================================================
+
+" NOTE: `:help ascii` to print the keycode of the key under the cursor
+let g:winresizer_keycode_finish = 100 " d
+
+nnoremap <leader>wr :WinResizerStartResize<cr>
+nnoremap <leader>wm :WinResizerStartMove<cr>
+
+" Slightly more granular vertical resize control.
+let g:winresizer_vert_resize = 5
+
+"=============================================================================
+"   vim-gitgutter                                           [GITGUTTER]
+"=============================================================================
+
+" Preserve my highlighting settings for the sign column.
+let g:gitgutter_override_sign_column_highlight = 0
+
+"=============================================================================
+"   quick-scope                                             [QUICKSCOPE]
+"=============================================================================
+
+" Only activate highlighting after pressing these keys.
+let g:qs_highlight_on_keys = ['f', 'F']
+
+augroup quickscope_highlight
+    hi clear QuickScopePrimary
+    hi clear QuickScopeSecondary
+
+    " Bold and underline, and color in bright purple.
+    " Color more brightly for a 'primary' match.
+    hi QuickScopePrimary cterm=bold,underline ctermfg=219
+    hi QuickScopeSecondary cterm=bold,underline ctermfg=129
+augroup end
