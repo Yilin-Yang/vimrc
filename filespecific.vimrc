@@ -201,20 +201,27 @@ endfunction
 
 augroup makefile_settings
     au!
-    autocmd filetype make   call MakefileSettings()
+    autocmd filetype make       call MakefileSettings()
 augroup end
 
 "=============================================================================
 "   Git Settings                                            [GIT]
 "=============================================================================
 
-function! GitSettings()
-    call ColorColumnBlock(51)   " Top line is <= 50 characters
+function! GitCommitSettings()
+    augroup git_colorcolumn
+        au!
+        " Subject line is <= 50 characters long.
+        " Body is <= 72 characters wide.
+        autocmd BufEnter,CursorHold,CursorHoldI,CursorMoved,CursorMovedI,FocusGained
+            \ <buffer>
+            \ execute 'call ColorColumnBlock(' . ( line('.') ==# 1 ? '51)' : '73)' )
+    augroup end
 endfunction
 
-augroup git_format
+augroup gitcommit_format
     au!
-    autocmd filetype git*   call GitSettings()
+    autocmd filetype gitcommit  call GitCommitSettings()
 augroup end
 
 
@@ -223,7 +230,7 @@ augroup end
 "=============================================================================
 
 function! VimwikiFormat()
-    if (&ft !=# 'vimwiki')
+    if (&filetype !=# 'vimwiki')
         set filetype=vimwiki
     endif
     if has_key(g:plugs, 'vim-pencil')
