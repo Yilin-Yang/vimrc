@@ -1,5 +1,9 @@
 Yilin Yang's Personal `.vimrc`
 ================================================================================
+
+**This repository has been moved to GitHub.** I won't be pushing further updates
+to this specific repo. New changes can be found [here.](https://github.com/Yilin-Yang/vimrc)
+
 A public repository containing my [(neo)](https://neovim.io/)vim configuration,
 as well as the shell scripts that I use to install it onto new machines.
 
