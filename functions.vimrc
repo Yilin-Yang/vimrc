@@ -76,10 +76,14 @@ command! -nargs=+ -complete=command BufDoAll call BufDoAll(<q-args>)
 "           the cursor to its old location afterwards.
 function! DeleteTrailing()
     let l:old_contents = @"
+    let l:old_search = @/
+
     let l:cols_from_left = getpos('.')[2] - 1
     let l:lines_from_top = line('.')
     %s/\s\+$//e
+
     execute 'normal! ' . eval(l:lines_from_top) . 'G' . '0' . eval(l:cols_from_left) . 'l'
+    let @/ = l:old_search
     let @" = l:old_contents
 endfunction
 
@@ -135,22 +139,22 @@ command! -nargs=1 CenterTextAndPad call CenterTextAndPad(<args>)
 " DETAILS:  Taken from:
 "               https://gist.github.com/romainl/eae0a260ab9c135390c30cd370c20cd7
 function! Redir(cmd)
-    for win in range(1, winnr('$'))
-        if getwinvar(win, 'scratch')
-            execute win . 'windo close'
+    for l:win in range(1, winnr('$'))
+        if getwinvar(l:win, 'scratch')
+            execute l:win . 'windo close'
         endif
     endfor
-    if a:cmd =~ '^!'
+    if a:cmd =~# '^!'
         execute "let output = system('" . substitute(a:cmd, '^!', '', '') . "')"
     else
-        redir => output
+        redir => l:output
         execute a:cmd
-        redir END
+        redir end
     endif
     vnew
     let w:scratch = 1
     setlocal nobuflisted buftype=nofile bufhidden=wipe noswapfile
-    call setline(1, split(output, "\n"))
+    call setline(1, split(l:output, "\n"))
 endfunction
 
 command! -nargs=1 Redir silent call Redir(<f-args>)
@@ -181,6 +185,9 @@ endfunction
 "           the semicolon, add curly braces, add a print statement giving the
 "           name of the test, and a print statement reporting test success.
 function! TestCaseAutoformat()
+    let l:old_contents = @"
+    let l:old_search = @/
+
     if match(&filetype, 'cpp') !=# -1
         call search('int main')
         .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r\r
@@ -191,6 +198,10 @@ function! TestCaseAutoformat()
     endif
 
     retab
+
+    let @/ = l:old_search
+    let @" = l:old_contents
+
     noh " stop highlighting matched function headers after the above call
 endfunction
 command! -nargs=0 Tca call TestCaseAutoformat()
@@ -456,8 +467,9 @@ function! AutoYilinStyle(...)
 
     let l:cur_line = line('.')
 
-    " Callee-save unnamed register.
+    " Callee-save unnamed register, search register.
     let l:old_contents = @"
+    let l:old_search = @/
 
     " unsquish control statements
     %s:\(\s\)\+\(if\|else\|for\|while\|case\|switch\)(:\1\2 (:e
@@ -474,6 +486,7 @@ function! AutoYilinStyle(...)
     retab
     normal! ggVG=
 
+    let @/ = l:old_search
     let @" = l:old_contents
     execute 'normal! ' . l:cur_line . 'G'
 
@@ -592,8 +605,9 @@ function! HeaderYilinFormat() range
         return
     endif
 
-    " Callee-save unnamed register.
+    " Callee-save unnamed register, search register.
     let l:old_contents = @"
+    let l:old_search = @/
 
     " Pull entire line range into the unnamed register.
     execute string(a:firstline) . ',' . string(a:lastline) . 'yank "'
@@ -621,5 +635,6 @@ function! HeaderYilinFormat() range
             \ . substitute(l:formatted, "\n", '\\r', 'g')
     endfor
 
+    let @/ = l:old_search
     let @" = l:old_contents
 endfunction
