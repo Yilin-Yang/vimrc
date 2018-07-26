@@ -33,6 +33,7 @@ set tabstop=8                       " By default, most editors come configured w
 set backspace=indent,eol,start      " Backspace over autoindents, line breaks,
                                     " position at start of insert mode.
 set timeoutlen=200                  " Decrease timeout for combined keymaps.
+set updatetime=100                  " More frequent swapbacks, CursorHold procs
 set scrolloff=20                    " The minimum number of lines that vim
                                     " will keep between the cursor and the
                                     " top/bottom of the screen when scrolling.
@@ -43,6 +44,9 @@ set lazyredraw                      " Only redraw after given command has comple
 set completeopt=menuone,noinsert    " Show pop-up menu even when
                                     " there's only one option, don't insert
                                     " text without user input.
+if has('nvim')
+    set inccommand=nosplit          " Show command effects incrementally.
+endif
 
 
 let g:cm_completeopt=&completeopt   " workaround to prevent overriding by
@@ -143,6 +147,10 @@ hi ColorColumn ctermbg=235 guibg=DarkGray
 " Better color contrast in vimdiffs, with my wonky terminal colorschemes.
 " " dark red background in difftext
 hi DiffText ctermbg=1
+
+" ditto, for error messages
+hi clear Error
+hi link Error ErrorMsg
 
 "=============================================================================
 "   User Interface                                          [USER INTERFACE]

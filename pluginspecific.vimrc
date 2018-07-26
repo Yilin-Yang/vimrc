@@ -29,6 +29,8 @@ scriptencoding utf-8
 "   vimwiki                                                 [VIMWIKI]
 "   diffconflicts                                           [DIFFCONFLICTS]
 "   winresizer                                              [WINRESIZER]
+"   vim-gitgutter                                           [GITGUTTER]
+"   quick-scope                                             [QUICKSCOPE]
 "=============================================================================
 
 
@@ -765,3 +767,27 @@ nnoremap <leader>wm :WinResizerStartMove<cr>
 
 " Slightly more granular vertical resize control.
 let g:winresizer_vert_resize = 5
+
+"=============================================================================
+"   vim-gitgutter                                           [GITGUTTER]
+"=============================================================================
+
+" Preserve my highlighting settings for the sign column.
+let g:gitgutter_override_sign_column_highlight = 0
+
+"=============================================================================
+"   quick-scope                                             [QUICKSCOPE]
+"=============================================================================
+
+" Only activate highlighting after pressing these keys.
+let g:qs_highlight_on_keys = ['f', 'F']
+
+augroup quickscope_highlight
+    hi clear QuickScopePrimary
+    hi clear QuickScopeSecondary
+
+    " Bold and underline, and color in bright purple.
+    " Color more brightly for a 'primary' match.
+    hi QuickScopePrimary cterm=bold,underline ctermfg=219
+    hi QuickScopeSecondary cterm=bold,underline ctermfg=129
+augroup end
