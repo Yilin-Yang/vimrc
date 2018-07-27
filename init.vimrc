@@ -45,6 +45,7 @@
 "   quick-scope                                             [QUICKSCOPE]
 "   gv.vim                                                  [GVVIM]
 "   vim-indent-object                                       [INDENTOBJECT]
+"   vader.vim                                               [VADER]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -441,6 +442,12 @@ Plug 'junegunn/gv.vim'
 "   <count>aI       line Above + Indentation block + line below
 "=============================================================================
 Plug 'michaeljsmith/vim-indent-object'
+
+"=============================================================================
+"   vader.vim                                               [VADER]
+"=============================================================================
+" " Test case framework for vim plugins.
+Plug 'junegunn/vader.vim'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

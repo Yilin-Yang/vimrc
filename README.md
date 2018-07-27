@@ -50,6 +50,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [neomake](https://github.com/neomake/neomake)
 * [quick-scope](https://github.com/unblevable/quick-scope)
 * [tabular](https://github.com/godlygeek/tabular)
+* [vader.vim](https://github.com/junegunn/vader.vim)
 * [vim-abolish](https://github.com/tpope/vim-abolish)
 * [vim-airline](https://github.com/vim-airline/vim-airline)
 * [vim-commentary](https://github.com/tpope/vim-commentary)
