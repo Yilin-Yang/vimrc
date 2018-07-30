@@ -553,7 +553,9 @@ function! GetIndentStyle()
     return l:indent_block
 endfunction
 
-" REQUIRES: It is suggested that the current file be a C/C++ file.
+" REQUIRES: - It is suggested that the current file be a C/C++ file.
+"           - Given file has already been `retab`d to this user's preferred
+"           indentation style.
 " EFFECTS:  Reformats parenthesis-enclosed (`(...[etc.]...)`) text as follows:
 "               int foo(int bar, double boo, string gar);
 "
@@ -569,8 +571,9 @@ endfunction
 "                                       The character to prepend onto the
 "                                       start of each newly created line.
 "                                       Defaults to a nullstring.
-function! ReformatMultilineParentheses(...) range
-    let a:continuation_character = get(a:, 1)
+function! ReformatMultilineParentheses(...) range abort
+    let a:num_args = get(a:, 0)
+    let a:continuation_character = a:num_args ? get(a:, 1) : ''
 
     " Callee-save unnamed register, search register.
     let l:old_contents = @"
@@ -592,27 +595,27 @@ function! ReformatMultilineParentheses(...) range
 
     " search pattern for function headers, function calls that are broken
     " across multiple lines.
-    let l:search_pattern = '\m^\t[a-zA-Z].*\S([)]\@!'
+    let l:search_pattern = '\m^'.GetIndentStyle().'\{-}[a-zA-Z].\{-}\S([)]\@!'
 
     " Break after the opening parenthesis.
-    execute a:firstline.','.a:lastline
+    execute 'silent '.a:firstline.','.a:lastline
         \ . 'g:'.l:search_pattern.':s/'.l:search_pattern.'/&\r'.l:marker
 
     let l:lastline = a:lastline + line('$') - l:buflen_start
 
     " Break just before the closing parenthesis.
-    execute a:firstline.','.l:lastline
-        \ . 'g:'.l:marker.':s/\m)[\s;]\{-}$/\r&'
+    execute 'silent '.a:firstline.','.l:lastline
+        \ . 'g:'.l:marker.':s/\m)[\s;]\{-}$/\r&/e'
 
     let l:lastline = a:lastline + line('$') - l:buflen_start
 
-    execute a:firstline.','.l:lastline
-        \ . 'g:'.l:marker.':s/\m, */'.a:continuation_character.'&\r/g'
+    execute 'silent '.a:firstline.','.l:lastline
+        \ . 'g:'.l:marker.':s/\m, \+/'.a:continuation_character.'&\r/ge'
 
     let l:lastline = a:lastline + line('$') - l:buflen_start
 
     " delete the marker
-    execute '%s/'.l:marker.'//g'
+    execute 'silent '.'silent %s/'.l:marker.'//ge'
 
     " NOTE: substitution command adds new lines to the file, so recalculate
     "       the value of a:lastline
@@ -621,7 +624,7 @@ function! ReformatMultilineParentheses(...) range
     let l:lastline   = a:lastline + l:num_new
 
     " Filter given range through `=` operator.
-    execute 'normal! ' . a:firstline . 'GV' . l:lastline . 'G='
+    execute 'silent '.'normal! ' . a:firstline . 'GV' . l:lastline . 'G='
 
     " Restore old values.
     let &cinoptions=l:cinoptions
