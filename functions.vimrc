@@ -159,6 +159,17 @@ endfunction
 
 command! -nargs=1 Redir silent call Redir(<f-args>)
 
+" EFFECTS:  Counts the total number of times that the given search pattern
+"           occurs in the given range `[a:start, a:end]`.
+" DETAILS:  Adapted from:
+"               https://vi.stackexchange.com/a/6984
+function! Count(start, end, pattern) abort
+    redir => l:count
+        silent execute a:start.','.a:end.'s/' . a:pattern . '//gn'
+    redir end
+    return strpart(l:count, 0, stridx(l:count, " "))
+endfunction
+
 "=============================================================================
 "   ctags                                                   [CTAGS]
 "=============================================================================
@@ -457,7 +468,6 @@ endfunction
 "                                           with an interactive substitution
 "                                           command. Defaults to `false`.
 function! AutoYilinStyle(...)
-    let a:num_args       = get(a:, 0)
     let a:breathing_room = get(a:, 1, 0)
 
     if match(&filetype, 'cpp') ==# -1 && match(&filetype, 'c') ==# -1
@@ -469,22 +479,19 @@ function! AutoYilinStyle(...)
 
     " Callee-save unnamed register, search register.
     let l:old_contents = @"
-    let l:old_search = @/
+    let l:old_search   = @/
 
     " unsquish control statements
-    %s:\(\s\)\+\(if\|else\|for\|while\|case\|switch\)(:\1\2 (:e
+    %s:\m\(\s\)\+\(if\|else\|for\|while\|case\|switch\)(:\1\2 (:e
 
     " remove kernighan and ritchie from premises
-    %s:}\s*\(else if\|else\|if\):}\r\1:e
-    %s:\(\S\)\s*{:\1\r{:e
+    %s:\m}\s*\(else if\|else\|if\):}\r\1:e
+    %s:\m\(\S\)\s*{:\1\r{:e
 
     " (Optionally) add breathing room.
     if a:breathing_room
-        %s:\(\S\)\([-+/*=!]=\|=\|+\|-\|*\|<<\|>>\|<\|>\|?\)\(\S\):\1 \2 \3:gce
+        %s:\m\(\S\)\([-+/*=!]=\|=\|+\|-\|*\|<<\|>>\|<\|>\|?\)\(\S\):\1 \2 \3:gce
     endif
-
-    retab
-    normal! ggVG=
 
     let @/ = l:old_search
     let @" = l:old_contents
@@ -546,94 +553,54 @@ function! GetIndentStyle()
     return l:indent_block
 endfunction
 
-" EFFECTS:  Reformats given function header to comply with Yilin's personal
-"           style preferences and returns it as a string.
-" DETAIL:   As of the time of writing (2018-06-20), a properly
-"           'Yilin-formatted' function header looks like:
+" REQUIRES: It is suggested that the current file be a C/C++ file.
+" EFFECTS:  Reformats parenthesis-enclosed (`(...[etc.]...)`) text as follows:
+"               int foo(int bar, double boo, string gar);
 "
-"           void ClassName::doSomething(
-"               int param_one,
-"               double param_two,
-"               bool param_three
-"           )
+"               // converts to...
 "
-function! SingleHeaderYilinFormat(header_string, indent_block)
-    " Parse out the different components of the function header.
-    " " CONTENTS:   zero-index   -  entire matched string
-    " "             one-index    -  return type
-    " "             two-index    -  function name (sans braces)
-    " "             three-index  -  all function parameters
-    " " NOTES:      - Use '*' to match return type, to handle large numbers of
-    "               template arguments.
-    "               - Use '\{-}' to match function parameters, to prevent
-    "               regex from greedily matching function headers further down
-    "               the selection.
-    let l:header_pattern = '\(\w\+\)\%(\s\|\n\)\+\(\w\+\)(\(.\{-}\))[\s\n\r]\{-}'
-
-    let l:func_header_list = matchlist(a:header_string, l:header_pattern)
-        let l:return_type = l:func_header_list[1]
-        let l:func_name   = l:func_header_list[2]
-        let l:func_params = l:func_header_list[3]
-
-    let l:formatted = l:return_type . ' ' . l:func_name . "(\n"
-
-    " Parse out function parameters into a list.
-    let l:param_list = split(l:func_params, ',')
-    let l:i = 0
-    while l:i <# len(l:param_list) && strlen(l:param_list[l:i])
-        " Trim surrounding whitespace, prepend an indentation block,
-        " then append to return string.
-        let l:formatted .= substitute(
-            \ l:param_list[l:i],
-            \ '\%(\s\|\n\)*\(\w\+\)[ ]\+\(\w\+\)\%(\s\|\n\)*',
-            \ a:indent_block . '\1 \2,\n',
-            \ '')
-        let l:i += 1
-    endwhile
-
-    " Truncate superfluous comma...
-    let l:formatted = l:formatted[:-3] . "\n)"
-    return l:formatted
-endfunction
-
-" EFFECTS:  Reformats the current function header to comply with Yilin's
-"           personal style preferences.
+"               int foo(int bar,
+"                       double boo,
+"                       string gar);
 " NOTES:    Function takes in a range (see `:help func-range`).
-function! HeaderYilinFormat() range
-    if match(&filetype, 'cpp') ==# -1 && match(&filetype, 'c') ==# -1
-        echoerr 'HeaderYilinFormat expects C/C++ files.'
-        return
-    endif
+" PARAM:    continuation_character      (v:t_string)
+"                                       The character to prepend onto the
+"                                       start of each newly created line.
+"                                       Defaults to a nullstring.
+function! ReformatMultilineParentheses(...) range
+    let a:continuation_character = get(a:, 1)
 
     " Callee-save unnamed register, search register.
     let l:old_contents = @"
-    let l:old_search = @/
+    let l:old_search   = @/
 
-    " Pull entire line range into the unnamed register.
-    execute string(a:firstline) . ',' . string(a:lastline) . 'yank "'
-    let l:text_in_range = @"
+    " Clear equalprg.
+    let l:equalprg = &equalprg
+    set equalprg=
 
-    " Parse each individual function header into a list.
-    "   https://stackoverflow.com/a/34069943
-    let l:all_headers = []
-    let l:header_pattern = '\w\+\%(\s\|\n\)\+\w\+[\s\n]*(.\{-})'
-    call substitute(
-        \ l:text_in_range,
-        \ l:header_pattern,
-        \ '\=add(all_headers, submatch(0))',
-        \ 'g'
-    \ )
-    echo l:all_headers
+    " Set cinoptions appropriately.
+    let l:cinoptions = &cinoptions
+    set cinoptions=
+    set cinoptions=L-1,:0,g0,+0,N0,t0,(0,Ws,m1
 
-    let l:indent_block = GetIndentStyle()
-    for l:h in l:all_headers
-        let l:formatted = SingleHeaderYilinFormat(l:h, l:indent_block)
-        execute
-            \ '%s/'
-            \ . substitute(l:h, "[\n\r]", '\\n', 'g')
-            \ . '/'
-            \ . substitute(l:formatted, "\n", '\\r', 'g')
-    endfor
+    let l:buflen_start = line('$')
+
+    " Split function calls and function headers across multiple lines.
+    execute string(a:firstline).','.string(a:lastline)
+        \ . 'g:\m^\t[a-zA-Z].*\S(:s/\m, */'.a:continuation_character.'&\r/g'
+
+    " NOTE: substitution command adds new lines to the file, so recalculate
+    "       the value of a:lastline
+    let l:buflen_end = line('$')
+    let l:num_new    = l:buflen_end - l:buflen_start
+    let l:lastline   = string(a:lastline + l:num_new)
+
+    " Filter given range through `=` operator.
+    execute 'normal! ' . a:firstline . 'GV' . l:lastline . 'G='
+
+    " Restore old values.
+    let &cinoptions=l:cinoptions
+    let &equalprg=l:equalprg
 
     let @/ = l:old_search
     let @" = l:old_contents

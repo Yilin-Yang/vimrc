@@ -107,6 +107,9 @@ nnoremap <leader>w vipJgqq
 " Sort the highlighted lines.
 vnoremap <silent> <leader>s :sort<cr>
 
+" Reformat text that lay within parentheses (function calls, headers...)
+vnoremap <silent> <leader>f :call ReformatMultilineParentheses()<cr>
+
 " Start a search command for a regex pattern *only* within the current window.
 " " Taken from:
 " "     https://www.reddit.com/r/vim/comments/8mrwu3/search_in_part_of_file/dzpwjtn/
