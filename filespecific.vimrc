@@ -48,10 +48,25 @@ function! CFormat()
     nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
 endfunction
 
+" EFFECTS:  Determine whether the file is a C++ or a C header and call the
+"           appropriate formatting function.
+function! DetermineCppHeaderFormat()
+    let l:line_no =
+        \ search(
+            \ '\(namespace\)\|\(class\)\|\(public\)\|\(private\)\|\(protected\)',
+            \ 'ncw')
+    if l:line_no
+        call CppFormat()
+    else
+        call CFormat()
+    endif
+endfunction
+
+
 augroup c_format
     au!
     autocmd BufWinEnter *.c     call CFormat()
-    autocmd BufWinEnter *.h     call CFormat()
+    autocmd BufWinEnter *.h     call DetermineCppHeaderFormat()
 augroup end
 
 "=============================================================================
