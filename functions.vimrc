@@ -595,7 +595,7 @@ function! ReformatMultilineParentheses(...) range abort
 
     " search pattern for function headers, function calls that are broken
     " across multiple lines.
-    let l:search_pattern = '\m^'.GetIndentStyle().'\{-}[a-zA-Z].\{-}\S([)]\@!'
+    let l:search_pattern = '\m^[ \t]\{-}[a-zA-Z].\{-}\S([)]\@!'
 
     " Break after the opening parenthesis.
     execute 'silent '.a:firstline.','.a:lastline
