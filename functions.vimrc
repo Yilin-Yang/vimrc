@@ -559,9 +559,11 @@ endfunction
 "
 "               // converts to...
 "
-"               int foo(int bar,
-"                       double boo,
-"                       string gar);
+"               int foo(
+"                   int bar,
+"                   double boo,
+"                   string gar
+"               );
 " NOTES:    Function takes in a range (see `:help func-range`).
 " PARAM:    continuation_character      (v:t_string)
 "                                       The character to prepend onto the
@@ -585,15 +587,38 @@ function! ReformatMultilineParentheses(...) range
 
     let l:buflen_start = line('$')
 
-    " Split function calls and function headers across multiple lines.
-    execute string(a:firstline).','.string(a:lastline)
-        \ . 'g:\m^\t[a-zA-Z].*\S(:s/\m, */'.a:continuation_character.'&\r/g'
+    " arbitrary string that should never reasonably appear in a normal file
+    let l:marker = '😍😉😃😂😍😮🙄😢😬🤑'
+
+    " search pattern for function headers, function calls that are broken
+    " across multiple lines.
+    let l:search_pattern = '\m^\t[a-zA-Z].*\S([)]\@!'
+
+    " Break after the opening parenthesis.
+    execute a:firstline.','.a:lastline
+        \ . 'g:'.l:search_pattern.':s/'.l:search_pattern.'/&\r'.l:marker
+
+    let l:lastline = a:lastline + line('$') - l:buflen_start
+
+    " Break just before the closing parenthesis.
+    execute a:firstline.','.l:lastline
+        \ . 'g:'.l:marker.':s/\m)[\s;]\{-}$/\r&'
+
+    let l:lastline = a:lastline + line('$') - l:buflen_start
+
+    execute a:firstline.','.l:lastline
+        \ . 'g:'.l:marker.':s/\m, */'.a:continuation_character.'&\r/g'
+
+    let l:lastline = a:lastline + line('$') - l:buflen_start
+
+    " delete the marker
+    execute '%s/'.l:marker.'//g'
 
     " NOTE: substitution command adds new lines to the file, so recalculate
     "       the value of a:lastline
     let l:buflen_end = line('$')
     let l:num_new    = l:buflen_end - l:buflen_start
-    let l:lastline   = string(a:lastline + l:num_new)
+    let l:lastline   = a:lastline + l:num_new
 
     " Filter given range through `=` operator.
     execute 'normal! ' . a:firstline . 'GV' . l:lastline . 'G='
