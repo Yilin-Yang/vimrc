@@ -102,6 +102,26 @@ let g:neomake_sh_shellcheck_maker = {
     \ 'short_name'      : 'SC',
 \ }
 
+" **** Vader Syntax Checker ****
+let g:neomake_vader_enabled_makers = ['vint']
+let g:neomake_vader_vint_maker = {
+    \ 'exe': 'vint',
+    \ 'args': [
+         \ '--style-problem',
+         \ '--no-color',
+         \ '-f',
+         \ '{file_path}:{line_number}:{column_number}:{severity}:{description} ({policy_name})',
+    \ ],
+    \ 'errorformat': '%I%f:%l:%c:style_problem:%m,'
+    \   .'%f:%l:%c:%t%*[^:]:E%n: %m,'
+    \   .'%f:%l:%c:%t%*[^:]:%m',
+    \ 'output_stream': 'stdout',
+    \ 'postprocess': {
+    \   'fn': function('neomake#postprocess#generic_length'),
+    \   'pattern': '\v%(^:|%([^:]+: ))\zs(\S+)',
+    \ },
+\ }
+
 " **** TeX Syntax Checker ****
 
 " -c:   clean regeneratable files
