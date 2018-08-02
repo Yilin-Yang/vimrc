@@ -78,11 +78,10 @@ function! DeleteTrailing()
     let l:old_contents = @"
     let l:old_search = @/
 
-    let l:cols_from_left = getpos('.')[2] - 1
-    let l:lines_from_top = line('.')
+    let l:cur_pos = getcurpos()
     %s/\s\+$//e
+    call setpos('.', l:cur_pos)
 
-    execute 'normal! ' . eval(l:lines_from_top) . 'G' . '0' . eval(l:cols_from_left) . 'l'
     let @/ = l:old_search
     let @" = l:old_contents
 endfunction
