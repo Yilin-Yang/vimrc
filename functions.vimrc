@@ -1,3 +1,4 @@
+scriptencoding utf-8
 "=============================================================================
 "                             TABLE OF CONTENTS
 "=============================================================================
@@ -166,7 +167,20 @@ function! Count(start, end, pattern) abort
     redir => l:count
         silent execute a:start.','.a:end.'s/' . a:pattern . '//gn'
     redir end
-    return strpart(l:count, 0, stridx(l:count, " "))
+    return strpart(l:count, 0, stridx(l:count, ' '))
+endfunction
+
+" EFFECTS:  Starts running vim's built-in profiler.
+function! StartProfile(...) abort
+    let a:outfile = get(a:, 1, 'profile.log')
+    execute 'profile start ' . a:outfile
+    profile func *
+    profile file *
+endfunction
+
+" EFFECTS:  Pauses profiling.
+function! StopProfile() abort
+    profile pause
 endfunction
 
 "=============================================================================
