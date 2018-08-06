@@ -143,8 +143,8 @@ function! TeXFormat()
 endfunction
 
 function! TeXUnformat()
-    iunmap <leader>`
-    iunmap <leader>'
+    silent! iunmap <leader>`
+    silent! iunmap <leader>'
 endfunction
 
 augroup tex_format
