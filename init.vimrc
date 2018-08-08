@@ -46,6 +46,7 @@
 "   gv.vim                                                  [GVVIM]
 "   vim-indent-object                                       [INDENTOBJECT]
 "   vader.vim                                               [VADER]
+"   vim-markbar                                             [MARKBAR]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -448,6 +449,12 @@ Plug 'michaeljsmith/vim-indent-object'
 "=============================================================================
 " " Test case framework for vim plugins.
 Plug 'junegunn/vader.vim'
+
+"=============================================================================
+"   vim-markbar                                             [MARKBAR]
+"=============================================================================
+" " See all of your marks in a sidebar.
+Plug 'Yilin-Yang/vim-markbar', { 'branch': 'dev' }
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

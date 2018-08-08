@@ -31,6 +31,7 @@ scriptencoding utf-8
 "   winresizer                                              [WINRESIZER]
 "   vim-gitgutter                                           [GITGUTTER]
 "   quick-scope                                             [QUICKSCOPE]
+"   vim-markbar                                             [MARKBAR]
 "=============================================================================
 
 
@@ -811,3 +812,11 @@ augroup quickscope_highlight
     hi QuickScopePrimary cterm=bold,underline ctermfg=219
     hi QuickScopeSecondary cterm=bold,underline ctermfg=129
 augroup end
+
+"=============================================================================
+"   vim-markbar                                             [MARKBAR]
+"=============================================================================
+
+map <leader>m <Plug>ToggleMarkbar
+
+let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
