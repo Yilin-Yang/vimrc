@@ -152,6 +152,10 @@ hi DiffText ctermbg=1
 hi clear Error
 hi link Error ErrorMsg
 
+" ditto, for spelling warnings
+hi SpellLocal ctermbg=23
+hi SpellCap ctermbg=21
+
 "=============================================================================
 "   User Interface                                          [USER INTERFACE]
 "=============================================================================
