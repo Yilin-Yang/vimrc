@@ -45,7 +45,7 @@ set cinoptions+=L-1,:0,g0,+0,N0,t0,(0,Ws,m1
 function! CppFormat()
     call ColorColumnBlock(81)       " My personal line limit
     set filetype=cpp.doxygen        " And highlight doxygen formatting
-    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
+    noremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
 endfunction
 
 " C++ Formatting
@@ -60,7 +60,7 @@ endfunction
 function! CFormat()
     call ColorColumnBlock(81)
     set filetype=c.doxygen
-    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
+    noremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
 endfunction
 
 " EFFECTS:  Determine whether the file is a C++ or a C header and call the
@@ -103,7 +103,7 @@ augroup end
 
 function! ShellScriptFormat()
     call ColorColumnBlock(81)
-    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
+    noremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
 endfunction()
 
 augroup sh_format
@@ -185,7 +185,7 @@ augroup end
 augroup yaml_format
     au!
     autocmd filetype yaml   setlocal expandtab
-    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
+    noremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
 augroup END
 
 "=============================================================================
