@@ -234,7 +234,10 @@ Plug 'SirVer/ultisnips'
 " " Enables neovim support for Language Server Protocol.
 " Requires neovim.
 if has('nvim')
-    Plug 'autozimu/LanguageClient-neovim'
+    Plug 'autozimu/LanguageClient-neovim', {
+        \ 'branch': 'next',
+        \ 'do': 'bash install.sh',
+    \ }
 endif
 
 "=============================================================================
