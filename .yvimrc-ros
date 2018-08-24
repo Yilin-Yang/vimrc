@@ -1,0 +1,57 @@
+set expandtab
+set shiftwidth=2
+
+augroup ros_format
+    au!
+    autocmd BufEnter *.world  set filetype=xml
+    autocmd BufEnter *.launch set filetype=xml
+    autocmd BufEnter *.rviz   set filetype=yaml
+augroup end
+
+augroup c_format
+    au!
+    autocmd BufEnter *.h call CppFormat()
+augroup end
+
+let g:neomake_cpp_gcc_maker = {
+    \ 'exe': 'g++',
+    \ 'args': [
+        \ '-fsyntax-only',
+        \ '-Wall',
+        \ '-Wextra',
+        \ '-Wno-narrowing',
+        \ '-pedantic',
+        \ '-pthread',
+        \ '-DDEBUG',
+        \ '-DNDEBUG',
+        \ '--std=c++17',
+        \ '-g',
+        \ '-fPIC',
+        \ '-I.',
+        \ '-I..',
+        \ '-I../..',
+        \ '-I../../..',
+        \ '-I../include',
+        \ '-I/home/yiliny/maav/gazebo/catkin_ws/devel/include',
+        \ '-isystem',
+            \ '/home/yiliny/maav/gazebo/',
+        \ '-isystem',
+            \ '/usr/include/opencv',
+        \ '-isystem',
+            \ '/usr/include/eigen3',
+        \ '-isystem',
+            \ '/usr/local/include/zcm',
+        \ '-isystem',
+            \ '/usr/include/bullet',
+        \ '-isystem',
+            \ '/opt/ros/kinetic/include',
+        \ '-isystem', '/home/yiliny/maav/gazebo',
+        \ '-isystem', '/usr/include/gazebo-7',
+        \ '-isystem', '/usr/include/sdformat-4.4',
+        \ '-isystem', '/usr/include/ignition/math2',
+        \ '-isystem', '/usr/include/OGRE',
+        \ '-isystem', '/usr/include/OGRE/Terrain',
+        \ '-isystem', '/usr/include/OGRE/Paging',
+        \ '-I/home/yiliny/maav/gazebo/plugins'
+    \ ],
+\ }

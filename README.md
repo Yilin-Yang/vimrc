@@ -54,6 +54,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [neomake](https://github.com/neomake/neomake)
 * [quick-scope](https://github.com/unblevable/quick-scope)
 * [tabular](https://github.com/godlygeek/tabular)
+* [vader.vim](https://github.com/junegunn/vader.vim)
 * [vim-abolish](https://github.com/tpope/vim-abolish)
 * [vim-airline](https://github.com/vim-airline/vim-airline)
 * [vim-commentary](https://github.com/tpope/vim-commentary)
@@ -80,6 +81,12 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vimtex](https://github.com/lervag/vimtex)
 * [vimwiki](https://github.com/vimwiki/vimwiki)
 * [winresizer](https://github.com/simeji/winresizer)
+
+Plugins That I Wrote
+--------------------------------------------------------------------------------
+`>:D`
+
+* [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
 
 Other Editing Tools
 --------------------------------------------------------------------------------

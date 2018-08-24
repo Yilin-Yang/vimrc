@@ -2,9 +2,9 @@
 "                             TABLE OF CONTENTS
 "=============================================================================
 "
-"   C++ Formatting                                          [CPP]
-"   C Formatting                                            [C_LANG]
+"   C/C++ Formatting                                        [C_CPP]
 "   Python Formatting                                       [PYTHON]
+"   Shell Script Formatting                                 [SH]
 "   Markdown Formatting                                     [MARKDOWN]
 "   AutoHotkey Formatting                                   [AUTOHOTKEY]
 "   TeX Formatting                                          [TEX]
@@ -19,14 +19,33 @@
 "=============================================================================
 
 "=============================================================================
-"   C++ Formatting                                          [CPP]
+"   C/C++ Formatting                                        [C_CPP]
 "=============================================================================
+
+" Set indentation options for C/C++.
+" See `:help cinoptions-values` for more information. 'Starts in column 1'
+"   means that the given item will have exactly zero indentation.
+" LEGEND: (changes from default, which are given in `:h cinoptions`)
+"   L-1 :   Place jump labels in column 1.
+"   :0  :   Zero additional indentation after `switch` statements.
+"   g0  :   Scope declarations (`public`, `private`, etc.) go in column 1.
+"   +0  :   Continuation lines receive no additional indentation relative to
+"               the previous line.
+"   N0  :   Zero additional indentation for code inside namespaces.
+"   t0  :   Function return types go in column 1, if they're on another line.
+"   (0  :   No additional indentation for multiline if statements.
+"   Ws  :   When breaking apart unclosed parentheses across multiple lines
+"           (e.g. a multiline function call), indent by `shiftwidth`.
+"   m1  :   Lines that start with closing parentheses are aligned with the
+"           first character of the line with the matching opening parentheses.
+
+set cinoptions+=L-1,:0,g0,+0,N0,t0,(0,Ws,m1
 
 " Set C++ specific formatting options.
 function! CppFormat()
     call ColorColumnBlock(81)       " My personal line limit
     set filetype=cpp.doxygen        " And highlight doxygen formatting
-    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
+    noremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
 endfunction
 
 " C++ Formatting
@@ -37,20 +56,32 @@ endfunction
     autocmd BufWinEnter *.hpp   call CppFormat()
  augroup end
 
-"=============================================================================
-"   C Formatting                                            [C_LANG]
-"=============================================================================
 
 function! CFormat()
     call ColorColumnBlock(81)
     set filetype=c.doxygen
-    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
+    noremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
 endfunction
+
+" EFFECTS:  Determine whether the file is a C++ or a C header and call the
+"           appropriate formatting function.
+function! DetermineCppHeaderFormat()
+    let l:line_no =
+        \ search(
+            \ '\(namespace\)\|\(class\)\|\(public\)\|\(private\)\|\(protected\)',
+            \ 'ncw')
+    if l:line_no
+        call CppFormat()
+    else
+        call CFormat()
+    endif
+endfunction
+
 
 augroup c_format
     au!
     autocmd BufWinEnter *.c     call CFormat()
-    autocmd BufWinEnter *.h     call CFormat()
+    autocmd BufWinEnter *.h     call DetermineCppHeaderFormat()
 augroup end
 
 "=============================================================================
@@ -64,6 +95,20 @@ endfunction
 augroup py_format
     au!
     autocmd BufWinEnter *.py    call PyFormat()
+augroup end
+
+"=============================================================================
+"   Shell Script Formatting                                 [SH]
+"=============================================================================
+
+function! ShellScriptFormat()
+    call ColorColumnBlock(81)
+    noremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
+endfunction()
+
+augroup sh_format
+    au!
+    autocmd FileType sh         call ShellScriptFormat()
 augroup end
 
 "=============================================================================
@@ -98,8 +143,8 @@ function! TeXFormat()
 endfunction
 
 function! TeXUnformat()
-    iunmap <leader>`
-    iunmap <leader>'
+    silent! iunmap <leader>`
+    silent! iunmap <leader>'
 endfunction
 
 augroup tex_format
@@ -140,7 +185,7 @@ augroup end
 augroup yaml_format
     au!
     autocmd filetype yaml   setlocal expandtab
-    nnoremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
+    noremap <buffer> <silent> <leader>e :call CenterTextAndPad('#')<cr>
 augroup END
 
 "=============================================================================
@@ -238,7 +283,7 @@ function! VimwikiFormat()
         NoPencil
     endif
     " Kill vimwiki's default <Tab> bindings, which break my completion menu.
-    iunmap <buffer> <expr> <Tab>
+    silent! iunmap <buffer> <expr> <Tab>
     set syntax=markdown
     setlocal nocursorline
 endfunction
