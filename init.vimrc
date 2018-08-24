@@ -205,7 +205,7 @@ Plug 'xolox/vim-easytags'
 "-----------------------------------------------------------------------------
 " " IDE-like debugger integration for vim.
 if has('nvim')
-    Plug 'dbgx/lldb.nvim'
+    " Plug 'dbgx/lldb.nvim'
 endif
 
 "=============================================================================

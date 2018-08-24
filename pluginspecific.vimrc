@@ -324,11 +324,12 @@ let g:LanguageClient_loadSettings = 1
 "       `make clean` first.
 "
 "       (Obviously, this only works if you have bear installed.)
+let s:cquery = '/home/yiliny/.local/stow/cquery/bin/cquery'
 let g:LanguageClient_serverCommands = {
-    \ 'c': ['clangd'],
-    \ 'c.doxygen': ['clangd'],
-    \ 'cpp': ['clangd'],
-    \ 'cpp.doxygen': ['clangd'],
+    \ 'c': [s:cquery],
+    \ 'c.doxygen': [s:cquery],
+    \ 'cpp': [s:cquery],
+    \ 'cpp.doxygen': [s:cquery],
     \ 'python': ['pyls']
     \ }
 
