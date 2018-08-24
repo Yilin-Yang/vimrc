@@ -180,5 +180,5 @@ let &backupdir=g:vimtmp
 let &directory=g:vimtmp
 
 " Shorten startup time by explicitly specifying python path.
-let g:python_host_prog  = '/usr/bin/python'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog = '/home/yiliny/.local/bin/python'
+let g:python3_host_prog = '/home/yiliny/.local/bin/python3'
