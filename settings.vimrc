@@ -33,7 +33,7 @@ set tabstop=8                       " By default, most editors come configured w
 set backspace=indent,eol,start      " Backspace over autoindents, line breaks,
                                     " position at start of insert mode.
 set timeoutlen=200                  " Decrease timeout for combined keymaps.
-set updatetime=100                  " More frequent swapbacks, CursorHold procs
+set updatetime=1000                 " More frequent swapbacks, CursorHold procs
 set scrolloff=20                    " The minimum number of lines that vim
                                     " will keep between the cursor and the
                                     " top/bottom of the screen when scrolling.
@@ -151,6 +151,10 @@ hi DiffText ctermbg=1
 " ditto, for error messages
 hi clear Error
 hi link Error ErrorMsg
+
+" ditto, for spelling warnings
+hi SpellLocal ctermbg=23
+hi SpellCap ctermbg=21
 
 "=============================================================================
 "   User Interface                                          [USER INTERFACE]

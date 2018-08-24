@@ -78,6 +78,12 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vimwiki](https://github.com/vimwiki/vimwiki)
 * [winresizer](https://github.com/simeji/winresizer)
 
+Plugins That I Wrote
+--------------------------------------------------------------------------------
+`>:D`
+
+* [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
+
 Other Editing Tools
 --------------------------------------------------------------------------------
 Some additional tools that aren't packaged as vim plugins.

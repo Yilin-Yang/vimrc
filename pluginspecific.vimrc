@@ -31,6 +31,7 @@ scriptencoding utf-8
 "   winresizer                                              [WINRESIZER]
 "   vim-gitgutter                                           [GITGUTTER]
 "   quick-scope                                             [QUICKSCOPE]
+"   vim-markbar                                             [MARKBAR]
 "=============================================================================
 
 
@@ -100,6 +101,26 @@ let g:neomake_sh_shellcheck_maker = {
     \ 'exe'             : 'shellcheck',
     \ 'output_stream'   : 'stdout',
     \ 'short_name'      : 'SC',
+\ }
+
+" **** Vader Syntax Checker ****
+let g:neomake_vader_enabled_makers = ['vint']
+let g:neomake_vader_vint_maker = {
+    \ 'exe': 'vint',
+    \ 'args': [
+         \ '--style-problem',
+         \ '--no-color',
+         \ '-f',
+         \ '{file_path}:{line_number}:{column_number}:{severity}:{description} ({policy_name})',
+    \ ],
+    \ 'errorformat': '%I%f:%l:%c:style_problem:%m,'
+    \   .'%f:%l:%c:%t%*[^:]:E%n: %m,'
+    \   .'%f:%l:%c:%t%*[^:]:%m',
+    \ 'output_stream': 'stdout',
+    \ 'postprocess': {
+    \   'fn': function('neomake#postprocess#generic_length'),
+    \   'pattern': '\v%(^:|%([^:]+: ))\zs(\S+)',
+    \ },
 \ }
 
 " **** TeX Syntax Checker ****
@@ -795,3 +816,11 @@ augroup quickscope_highlight
     hi QuickScopePrimary cterm=bold,underline ctermfg=219
     hi QuickScopeSecondary cterm=bold,underline ctermfg=129
 augroup end
+
+"=============================================================================
+"   vim-markbar                                             [MARKBAR]
+"=============================================================================
+
+map <leader>m <Plug>ToggleMarkbar
+
+let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
