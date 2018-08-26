@@ -40,7 +40,7 @@
 "   diffconflicts                                           [DIFFCONFLICTS]
 "   winresizer                                              [WINRESIZER]
 "   vim-abolish                                             [ABOLISH]
-"   vim-gitgutter                                           [GITGUTTER]
+"   vim-signify                                             [SIGNIFY]
 "   vim-eunuch                                              [EUNUCH]
 "   quick-scope                                             [QUICKSCOPE]
 "   gv.vim                                                  [GVVIM]
@@ -392,10 +392,10 @@ Plug 'simeji/winresizer'
 Plug 'tpope/vim-abolish'
 
 "=============================================================================
-"   vim-gitgutter                                           [GITGUTTER]
+"   vim-signify                                             [SIGNIFY]
 "=============================================================================
-" " Display git diffs in the sign column.
-Plug 'airblade/vim-gitgutter'
+" " Display version-control diffs (e.g. git) in the sign column.
+Plug 'mhinz/vim-signify'
 
 "=============================================================================
 "   vim-eunuch                                              [EUNUCH]

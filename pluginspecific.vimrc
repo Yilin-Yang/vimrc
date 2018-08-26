@@ -29,7 +29,7 @@ scriptencoding utf-8
 "   vimwiki                                                 [VIMWIKI]
 "   diffconflicts                                           [DIFFCONFLICTS]
 "   winresizer                                              [WINRESIZER]
-"   vim-gitgutter                                           [GITGUTTER]
+"   vim-signify                                             [SIGNIFY]
 "   quick-scope                                             [QUICKSCOPE]
 "   vim-markbar                                             [MARKBAR]
 "=============================================================================
@@ -790,11 +790,35 @@ nnoremap <leader>wm :WinResizerStartMove<cr>
 let g:winresizer_vert_resize = 5
 
 "=============================================================================
-"   vim-gitgutter                                           [GITGUTTER]
+"   vim-signify                                             [SIGNIFY]
 "=============================================================================
+" Specify the version control systems that I actually use.
+let g:signify_vcs_list = [ 'git', 'svn' ]
 
-" Preserve my highlighting settings for the sign column.
-let g:gitgutter_override_sign_column_highlight = 0
+let g:signify_realtime = 1
+" Make sure to disable realtime autowrite on CursorHold and CursorHoldI.
+let g:signify_cursorhold_normal = 0
+let g:signify_cursorhold_insert = 0
+
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '-'
+let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = '~'
+let g:signify_sign_changedelete      = g:signify_sign_change
+
+nnoremap <leader>gt :SignifyToggle<cr>
+nnoremap <leader>gf :SignifyFold!<cr>
+nnoremap <leader>gd :SignifyDiff<cr>
+
+highlight SignifySignAdd    cterm=bold  ctermbg=none  ctermfg=119
+highlight SignifySignDelete cterm=bold  ctermbg=none  ctermfg=167
+highlight SignifySignChange cterm=bold  ctermbg=none  ctermfg=227
+
+augroup signify_refresh
+    au!
+    autocmd BufEnter   * SignifyRefresh
+    autocmd CursorHold * SignifyRefresh
+augroup end
 
 "=============================================================================
 "   quick-scope                                             [QUICKSCOPE]
