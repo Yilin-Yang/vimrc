@@ -47,6 +47,7 @@
 "   vim-indent-object                                       [INDENTOBJECT]
 "   vader.vim                                               [VADER]
 "   vim-markbar                                             [MARKBAR]
+"   vim-peekaboo                                            [PEEKABOO]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -458,6 +459,12 @@ Plug 'junegunn/vader.vim'
 "=============================================================================
 " " See all of your marks in a sidebar.
 Plug 'Yilin-Yang/vim-markbar', { 'branch': 'dev' }
+
+"=============================================================================
+"   vim-peekaboo                                            [PEEKABOO]
+"=============================================================================
+" " See the contents of your registers in the sidebar when appropriate.
+Plug 'junegunn/vim-peekaboo'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
