@@ -844,3 +844,4 @@ augroup end
 map <leader>m <Plug>ToggleMarkbar
 
 let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let g:markbar_section_separation = 0
