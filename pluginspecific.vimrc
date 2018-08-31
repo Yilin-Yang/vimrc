@@ -32,6 +32,7 @@ scriptencoding utf-8
 "   vim-signify                                             [SIGNIFY]
 "   quick-scope                                             [QUICKSCOPE]
 "   vim-markbar                                             [MARKBAR]
+"   vim-illuminate                                          [ILLUMINATE]
 "=============================================================================
 
 
@@ -845,3 +846,18 @@ map <leader>m <Plug>ToggleMarkbar
 
 let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_section_separation = 0
+
+"=============================================================================
+"   vim-illuminate                                          [ILLUMINATE]
+"=============================================================================
+
+let g:Illuminate_ftblacklist = [
+    \ 'nerdtree',
+    \ 'markbar',
+    \ 'tagbar',
+    \ 'help'
+\ ]
+
+let g:Illuminate_highlightUnderCursor = 0
+
+hi illuminatedWord cterm=bold,underline gui=bold,underline
