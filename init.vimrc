@@ -48,6 +48,7 @@
 "   vader.vim                                               [VADER]
 "   vim-markbar                                             [MARKBAR]
 "   vim-peekaboo                                            [PEEKABOO]
+"   vim-illuminate                                          [ILLUMINATE]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -465,6 +466,12 @@ Plug 'Yilin-Yang/vim-markbar', { 'branch': 'dev' }
 "=============================================================================
 " " See the contents of your registers in the sidebar when appropriate.
 Plug 'junegunn/vim-peekaboo'
+
+"=============================================================================
+"   vim-illuminate                                          [ILLUMINATE]
+"=============================================================================
+" " Highlight other occurrences of the word under the cursor.
+Plug 'RRethy/vim-illuminate'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
