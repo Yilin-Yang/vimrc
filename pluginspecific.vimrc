@@ -587,7 +587,7 @@ let g:pencil#conceallevel = 0       " disable formatting character concealment
 
 augroup pencil
     au!
-    autocmd FileType markdown,text  call Prose() | call Punctuation()
+    autocmd FileType markdown,text  call Prose()
     autocmd FileType tex            call Prose()
 augroup end
 
