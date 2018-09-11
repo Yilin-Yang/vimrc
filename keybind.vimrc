@@ -40,6 +40,11 @@ nnoremap <silent> <F5> :e<cr>
 " Write the current buffer by double-tapping the leader key.
 nnoremap <leader><leader> :w<cr>
 
+" `cd` into the directory of the current buffer.
+" " Taken from the following link, with slight modifications:
+" "     https://www.reddit.com/r/vim/comments/8k4p6v/what_are_your_best_mappings/dz4s39k/
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
 " Exit interactive/visual mode by hitting j and k.
 inoremap jk <esc>
 vnoremap jk <esc>
@@ -114,6 +119,13 @@ vnoremap <silent> <leader>f :call ReformatMultilineParentheses()<cr>
 " " Taken from:
 " "     https://www.reddit.com/r/vim/comments/8mrwu3/search_in_part_of_file/dzpwjtn/
 nnoremap <expr> z/ '/\%(\%>'.(line('w0')-1).'l\%<'.(line('w$')+1).'l\)\&'
+
+" Replace the word currently under the cursor. Mash `.` to continue
+" substituting instances of this word.
+" " Taken from:
+" "     https://www.reddit.com/r/vim/comments/8k4p6v/what_are_your_best_mappings/dz5aoi9/
+nnoremap <Leader>x /\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn
+nnoremap <Leader>X ?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN
 
 "=============================================================================
 "   User Interface                                          [UI]
