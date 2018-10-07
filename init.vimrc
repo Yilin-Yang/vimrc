@@ -49,6 +49,7 @@
 "   vim-markbar                                             [MARKBAR]
 "   vim-peekaboo                                            [PEEKABOO]
 "   vim-illuminate                                          [ILLUMINATE]
+"   traces.vim                                              [TRACES]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -472,6 +473,14 @@ Plug 'junegunn/vim-peekaboo'
 "=============================================================================
 " " Highlight other occurrences of the word under the cursor.
 Plug 'RRethy/vim-illuminate'
+
+"=============================================================================
+"   traces.vim                                              [TRACES]
+"=============================================================================
+" " inccommand, but for ordinary vim.
+if !has('nvim')
+    Plug 'markonm/traces.vim'
+endif
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
