@@ -333,21 +333,21 @@ let g:LanguageClient_serverCommands = {
     \ 'python': ['pyls']
     \ }
 
-" Show type info and short doc of identifier under cursor.
-nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
+" " Show type info and short doc of identifier under cursor.
+" nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
 
-" Goto definition of identifier.
-nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
+" " Goto definition of identifier.
+" nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
 
-" Rename the identifier under the cursor.
-" NOTE: requires `set hidden`
-nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()<cr>
+" " Rename the identifier under the cursor.
+" " NOTE: requires `set hidden`
+" nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()<cr>
 
-" List the symbols in the current document.
-nnoremap <silent> <Leader>ps :call LanguageClient_textDocument_documentSymbol()<cr>
+" " List the symbols in the current document.
+" nnoremap <silent> <Leader>ps :call LanguageClient_textDocument_documentSymbol()<cr>
 
-" List all references of the identifier under the cursor.
-nnoremap <silent> <Leader>pf :call LanguageClient_textDocument_references()<cr>
+" " List all references of the identifier under the cursor.
+" nnoremap <silent> <Leader>pf :call LanguageClient_textDocument_references()<cr>
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
