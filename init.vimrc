@@ -5,11 +5,11 @@
 "   localvimrc                                              [LOCALVIMRC]
 "   Fugitive                                                [FUGITIVE]
 "   vim-surround                                            [SURROUND]
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
-"   nvim-completion-manager                                 [NCM]
+"   ncm2                                                    [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   ConqueGDB                                               [CONQUEGDB]
@@ -49,6 +49,7 @@
 "   vim-markbar                                             [MARKBAR]
 "   vim-peekaboo                                            [PEEKABOO]
 "   vim-illuminate                                          [ILLUMINATE]
+"   traces.vim                                              [TRACES]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -143,11 +144,11 @@ Plug 'tpope/vim-surround'
 
 
 "=============================================================================
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " Asynchronous syntax checker.
-Plug 'neomake/neomake'
+" " Asynchronous linting as you type.
+Plug 'w0rp/ale'
 
 "=============================================================================
 "   vimtex                                                  [VIMTEX]
@@ -180,17 +181,29 @@ Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
 
 "=============================================================================
-"   nvim-completion-manager                                 [NCM]
+"   ncm2                                                    [NCM]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Asynchronous autocompletion that's less bloated than YouCompleteMe and
-" better written/maintained than deoplete. Requires neovim.
-if has('nvim')
-    Plug 'roxma/nvim-completion-manager'
-endif
+" better written/maintained than deoplete.
+Plug 'ncm2/ncm2'
 
-" " Dependency for vim-easytags.
-Plug 'xolox/vim-misc'
+    " " Dependency for ncm2.
+    Plug 'roxma/nvim-yarp'
+
+    " " Compatibility layer for nvim rpc client. Only needed in vim8.
+    Plug 'roxma/vim-hug-neovim-rpc'
+
+"-----------------------------------------------------------------------------
+" COMPLETION SOURCES
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+
+Plug 'ncm2/ncm2-ultisnips'
+
+Plug 'ncm2/ncm2-vim'
+    Plug 'Shougo/neco-vim'
 
 "=============================================================================
 "   vim-easytags                                            [EASYTAGS]
@@ -200,6 +213,9 @@ Plug 'xolox/vim-misc'
 " This variable has to be set before loading the plugin.
 let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
 Plug 'xolox/vim-easytags'
+
+" " Dependency for vim-easytags.
+Plug 'xolox/vim-misc'
 
 "=============================================================================
 "   lldb.nvim                                                    [LLDB]
@@ -459,7 +475,7 @@ Plug 'junegunn/vader.vim'
 "   vim-markbar                                             [MARKBAR]
 "=============================================================================
 " " See all of your marks in a sidebar.
-Plug 'Yilin-Yang/vim-markbar', { 'branch': 'dev' }
+Plug 'Yilin-Yang/vim-markbar'
 
 "=============================================================================
 "   vim-peekaboo                                            [PEEKABOO]
@@ -472,6 +488,14 @@ Plug 'junegunn/vim-peekaboo'
 "=============================================================================
 " " Highlight other occurrences of the word under the cursor.
 Plug 'RRethy/vim-illuminate'
+
+"=============================================================================
+"   traces.vim                                              [TRACES]
+"=============================================================================
+" " inccommand, but for ordinary vim.
+if !has('nvim')
+    Plug 'markonm/traces.vim'
+endif
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
