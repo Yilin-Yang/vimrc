@@ -8,7 +8,7 @@ scriptencoding utf-8
 "   Neomake                                                 [NEOMAKE]
 "   NerdTree                                                [NERDTREE]
 "   Tagbar                                                  [TAGBAR]
-"   nvim-completion-manager                                 [NCM]
+"   ncm2                                                    [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
@@ -183,30 +183,38 @@ nnoremap <silent> <Leader>g :TagbarOpenAutoClose<cr>
 nnoremap <silent> <Leader>b :TagbarToggle<cr>
 
 "=============================================================================
-"   nvim-completion-manager                                 [NCM]
+"   ncm2                                                    [NCM]
 "=============================================================================
+" enable ncm2 for all buffers
+autocmd BufEnter * call ncm2#enable_for_buffer()
+
 " Insert mode tab-completion without breaking real presses of the tab key.
 inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
 " Press Enter to close the menu **and also** start a new line.
 inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
-if has('nvim')
-
-    " Enable vimtex support.
-    augroup nvim_cm_setup
-      autocmd!
-      autocmd User CmSetup call cm#register_source({
-            \ 'name' : 'vimtex',
-            \ 'priority': 8,
-            \ 'scoping': 1,
-            \ 'scopes': ['tex'],
-            \ 'abbreviation': 'tex',
-            \ 'cm_refresh_patterns': g:vimtex#re#ncm,
-            \ 'cm_refresh': {'omnifunc': 'vimtex#complete#omnifunc'},
-            \ })
-    augroup end
-endif
+" Enable vimtex support.
+augroup cm_setup
+    au!
+    " from: https://github.com/ncm2/ncm2/pull/23#issue-201444472
+    autocmd User Ncm2Plugin call ncm2#register_source({
+        \ 'name' : 'vimtex',
+        \ 'priority': 1,
+        \ 'subscope_enable': 1,
+        \ 'complete_length': 1,
+        \ 'scope': ['tex'],
+        \ 'matcher': {'name': 'combine',
+        \           'matchers': [
+        \               {'name': 'abbrfuzzy', 'key': 'menu'},
+        \               {'name': 'prefix', 'key': 'word'},
+        \           ]},
+        \ 'mark': 'tex',
+        \ 'word_pattern': '\w+',
+        \ 'complete_pattern': g:vimtex#re#ncm,
+        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
+    \ })
+augroup end
 
 " Suppress annoying completion menu messages.
 set shortmess+=c

@@ -9,7 +9,7 @@
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
-"   nvim-completion-manager                                 [NCM]
+"   ncm2                                                    [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   ConqueGDB                                               [CONQUEGDB]
@@ -181,17 +181,29 @@ Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
 
 "=============================================================================
-"   nvim-completion-manager                                 [NCM]
+"   ncm2                                                    [NCM]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Asynchronous autocompletion that's less bloated than YouCompleteMe and
-" better written/maintained than deoplete. Requires neovim.
-if has('nvim')
-    Plug 'roxma/nvim-completion-manager'
-endif
+" better written/maintained than deoplete.
+Plug 'ncm2/ncm2'
 
-" " Dependency for vim-easytags.
-Plug 'xolox/vim-misc'
+    " " Dependency for ncm2.
+    Plug 'roxma/nvim-yarp'
+
+    " " Compatibility layer for nvim rpc client. Only needed in vim8.
+    Plug 'roxma/vim-hug-neovim-rpc'
+
+"-----------------------------------------------------------------------------
+" COMPLETION SOURCES
+Plug 'ncm2/ncm2-bufword'
+Plug 'ncm2/ncm2-tmux'
+Plug 'ncm2/ncm2-path'
+
+Plug 'ncm2/ncm2-ultisnips'
+
+Plug 'ncm2/ncm2-vim'
+    Plug 'Shougo/neco-vim'
 
 "=============================================================================
 "   vim-easytags                                            [EASYTAGS]
@@ -201,6 +213,9 @@ Plug 'xolox/vim-misc'
 " This variable has to be set before loading the plugin.
 let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
 Plug 'xolox/vim-easytags'
+
+" " Dependency for vim-easytags.
+Plug 'xolox/vim-misc'
 
 "=============================================================================
 "   lldb.nvim                                                    [LLDB]
