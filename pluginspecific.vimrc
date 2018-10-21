@@ -5,7 +5,7 @@ scriptencoding utf-8
 "
 "
 "   localvimrc                                              [LOCALVIMRC]
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "   NerdTree                                                [NERDTREE]
 "   Tagbar                                                  [TAGBAR]
 "   ncm2                                                    [NCM]
@@ -44,109 +44,17 @@ let g:localvimrc_sandbox=0
 let g:localvimrc_name=['.yvimrc', '.lvimrc']
 
 "=============================================================================
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "=============================================================================
-" In normal map mode, press Ctrl-C to save buffer and run linters.
-nnoremap <silent> <C-c> :call WriteAndLint() <cr>
+hi ALEWarning cterm=underline ctermfg=164
 
-" In normal map mode, press Ctrl-Z to close error window.
-nnoremap <silent> <C-z> :call CloseErrorWindows() <cr>
+let g:ale_sign_error = 'X>'
+let g:ale_sign_warning = 'W>'
+let g:ale_sign_info = 'I>'
+let g:ale_sign_style_error = 'SX'
+let g:ale_sign_style_warning = 'S>'
 
-" For whatever reason, the ColorScheme event doesn't fire anymore?
-augroup neomake_scheme
-    au!
-    autocmd BufWinEnter *
-        \ hi link NeomakeError Error |
-        \ hi link NeomakeWarning Todo |
-        \ hi link NeomakeInfo Statement |
-        \ hi link NeomakeMessage Todo
-augroup end
-
-let g:neomake_open_list = 2 " Preserve cursor location on loc-list open
-let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
-let g:neomake_warning_sign = {
-     \   'text': '⚠',
-     \   'texthl': 'NeomakeWarning',
-     \ }
-let g:neomake_message_sign = {
-      \   'text': '➤',
-      \   'texthl': 'NeomakeMessage',
-      \ }
-let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfo'}
-
-" **** GCC Syntax Checker ****
-let g:neomake_cpp_gcc_maker = {
-    \ 'exe': 'g++',
-    \ 'args': [
-        \ '--std=c++17',
-        \ '-Wall',
-        \ '-Werror',
-        \ '-Wextra',
-        \ '-pedantic',
-        \ '-O3',
-        \ '-DDEBUG',
-        \ '-I.',
-        \ '-I..'
-    \ ],
-\ }
-let g:neomake_cpp_enabled_makers = ['gcc']
-
-" **** bash Syntax Checker ****
-" Redefined to remove -x flag, which causes errors.
-let g:neomake_sh_shellcheck_maker = {
-    \ 'append_file'     : 1,
-    \ 'args'            : ['-fgcc'],
-    \ 'auto_enabled'    : 1,
-    \ 'cwd'             : '%:h',
-    \ 'errorformat'     : '%f:%l:%c: %trror: %m [SC%n],%f:%l:%c: %tarning: %m [SC%n],%I%f:%l:%c: Note: %m [SC%n] ',
-    \ 'exe'             : 'shellcheck',
-    \ 'output_stream'   : 'stdout',
-    \ 'short_name'      : 'SC',
-\ }
-
-" **** Vader Syntax Checker ****
-let g:neomake_vader_enabled_makers = ['vint']
-let g:neomake_vader_vint_maker = {
-    \ 'exe': 'vint',
-    \ 'args': [
-         \ '--style-problem',
-         \ '--no-color',
-         \ '-f',
-         \ '{file_path}:{line_number}:{column_number}:{severity}:{description} ({policy_name})',
-    \ ],
-    \ 'errorformat': '%I%f:%l:%c:style_problem:%m,'
-    \   .'%f:%l:%c:%t%*[^:]:E%n: %m,'
-    \   .'%f:%l:%c:%t%*[^:]:%m',
-    \ 'output_stream': 'stdout',
-    \ 'postprocess': {
-    \   'fn': function('neomake#postprocess#generic_length'),
-    \   'pattern': '\v%(^:|%([^:]+: ))\zs(\S+)',
-    \ },
-\ }
-
-" **** TeX Syntax Checker ****
-
-" -c:   clean regeneratable files
-" -cd:  change-dir to the source file before processing
-" -f:   continue processing after errors
-" -g:   force reprocessing, even if no changes were made
-" -pvc: preview file continuously
-let g:neomake_tex_latexmk_maker = {
-    \ 'exe' : 'latexmk',
-    \ 'args' : [
-    \   '-c',
-    \   '-cd',
-    \   '-f',
-    \   '-g',
-    \   '-pdf',
-    \   '-pvc',
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \ ],
-\ }
-
-
+let g:ale_cpp_gcc_options = '--std=c++17 -Wall -Werror -Wextra -pedantic -O3 -DDEBUG -I. -I..'
 
 "=============================================================================
 "   NerdTree                                                [NERDTREE]

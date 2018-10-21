@@ -5,7 +5,7 @@
 "   localvimrc                                              [LOCALVIMRC]
 "   Fugitive                                                [FUGITIVE]
 "   vim-surround                                            [SURROUND]
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
@@ -144,11 +144,11 @@ Plug 'tpope/vim-surround'
 
 
 "=============================================================================
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " Asynchronous syntax checker.
-Plug 'neomake/neomake'
+" " Asynchronous linting as you type.
+Plug 'w0rp/ale'
 
 "=============================================================================
 "   vimtex                                                  [VIMTEX]
