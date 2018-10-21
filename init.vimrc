@@ -475,7 +475,7 @@ Plug 'junegunn/vader.vim'
 "   vim-markbar                                             [MARKBAR]
 "=============================================================================
 " " See all of your marks in a sidebar.
-Plug 'Yilin-Yang/vim-markbar', { 'branch': 'dev' }
+Plug 'Yilin-Yang/vim-markbar'
 
 "=============================================================================
 "   vim-peekaboo                                            [PEEKABOO]
