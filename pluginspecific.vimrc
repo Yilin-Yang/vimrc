@@ -246,8 +246,10 @@ let g:LanguageClient_serverCommands = {
     \ 'c.doxygen': ['clangd'],
     \ 'cpp': ['clangd'],
     \ 'cpp.doxygen': ['clangd'],
-    \ 'python': ['pyls']
-    \ }
+    \ 'python': ['pyls'],
+    \ 'javascript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
+    \ 'typescript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
+\ }
 
 " Show type info and short doc of identifier under cursor.
 nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
