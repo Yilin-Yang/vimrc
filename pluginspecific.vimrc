@@ -704,6 +704,9 @@ let g:winresizer_keycode_finish = 100 " d
 nnoremap <leader>wr :WinResizerStartResize<cr>
 nnoremap <leader>wm :WinResizerStartMove<cr>
 
+" unmap winresizer start key
+silent! nunmap <C-e>
+
 " Slightly more granular vertical resize control.
 let g:winresizer_vert_resize = 5
 
