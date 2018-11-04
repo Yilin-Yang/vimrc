@@ -251,8 +251,10 @@ let g:LanguageClient_serverCommands = {
     \ 'c.doxygen': s:cqueryArgsList,
     \ 'cpp': s:cqueryArgsList,
     \ 'cpp.doxygen': s:cqueryArgsList,
-    \ 'python': ['pyls']
-    \ }
+    \ 'python': ['pyls'],
+    \ 'javascript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
+    \ 'typescript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
+\ }
 
 " Show type info and short doc of identifier under cursor.
 nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
@@ -705,6 +707,9 @@ let g:winresizer_keycode_finish = 100 " d
 
 nnoremap <leader>wr :WinResizerStartResize<cr>
 nnoremap <leader>wm :WinResizerStartMove<cr>
+
+" unmap winresizer start key
+silent! nunmap <C-e>
 
 " Slightly more granular vertical resize control.
 let g:winresizer_vert_resize = 5
