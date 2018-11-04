@@ -145,3 +145,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+" Workaround for <C-H> <--> <BS> aliasing in some terminals
+nnoremap <BS>  <C-w>h
