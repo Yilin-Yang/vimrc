@@ -200,7 +200,7 @@ Plug 'ncm2/ncm2-bufword'
 Plug 'ncm2/ncm2-tmux'
 Plug 'ncm2/ncm2-path'
 
-Plug 'ncm2/ncm2-ultisnips'
+" Plug 'ncm2/ncm2-ultisnips'
 
 Plug 'ncm2/ncm2-vim'
     Plug 'Shougo/neco-vim'
@@ -243,7 +243,7 @@ Plug 'honza/vim-snippets'
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Snippets engine that uses Python and neocomplete.
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 "=============================================================================
 "   LanguageClient-neovim                                   [LSP]
