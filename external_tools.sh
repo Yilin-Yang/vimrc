@@ -31,7 +31,7 @@ $INSTALLCMD shellcheck
 $INSTALLCMD cppcheck
 
 # Install ctags
-$INSTALLCMD exuberant-ctags
+$DIR/ctags.sh
 
 # Install vimtex dependencies
 $INSTALLCMD latexmk
