@@ -50,6 +50,8 @@
 "   vim-peekaboo                                            [PEEKABOO]
 "   vim-illuminate                                          [ILLUMINATE]
 "   traces.vim                                              [TRACES]
+"   editorconfig-vim                                        [EDITORCFG]
+"   typescript-vim                                          [TS-VIM]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -496,6 +498,18 @@ Plug 'RRethy/vim-illuminate'
 if !has('nvim')
     Plug 'markonm/traces.vim'
 endif
+
+"=============================================================================
+"   editorconfig-vim                                        [EDITORCFG]
+"=============================================================================
+" " Load editorconfig settings in git repositories.
+Plug 'editorconfig/editorconfig-vim'
+
+"=============================================================================
+"   typescript-vim                                          [TS-VIM]
+"=============================================================================
+" " Syntax highlighting, filetype support for TypeScript.
+Plug 'leafgarland/typescript-vim'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
