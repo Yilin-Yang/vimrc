@@ -16,7 +16,16 @@ pip2 install --user --upgrade neovim
 pip3 install --user --upgrade neovim
 
 # Symlink nvim's config folders to my ordinary vim config
-mkdir ~/.config
-mkdir ~/.config/nvim
+mkdir -p ~/.config
+mkdir -p ~/.config/nvim
+mkdir -p ~/.local/share/nvim/site
 ln -s ~/.vim ~/.config/nvim
 ln -s ~/.vimrc ~/.config/nvim/init.vim
+
+FTPLUGIN_FOLDER=~/.local/share/nvim/site/ftplugin
+if [ -e $FTPLUGIN_FOLDER ]; then
+    mv $FTPLUGIN_FOLDER $FTPLUGIN_FOLDER.bak
+elif [ -h $FTPLUGIN_FOLDER ]; then
+    rm $FTPLUGIN_FOLDER
+fi
+ln -s ~/.vim/ftplugin ~/.config/nvim/site
