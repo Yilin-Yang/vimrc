@@ -247,6 +247,8 @@ let g:LanguageClient_serverCommands = {
     \ 'cpp': ['clangd'],
     \ 'cpp.doxygen': ['clangd'],
     \ 'python': ['pyls'],
+    \ 'html': ['node', '/home/yiliny/js/vscode-html-languageserver-bin/dist/htmlServerMain.js', '--stdio'],
+    \ 'css': ['node', '/home/yiliny/js/vscode-css-languageserver-bin/dist/cssServerMain.js', '--stdio'],
     \ 'javascript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
     \ 'typescript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
 \ }
