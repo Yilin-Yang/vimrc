@@ -171,7 +171,6 @@ set cursorcolumn                " Mark the current column.
 "=============================================================================
 "   System Configuration                                    [CONFIG]
 "=============================================================================
-
 " Place tempfiles in a central location, naming folders by PID.
 "   This *does* break some of the 'prevent simultaneous editing' enabled by
 "   swapback files, and it makes recovering lost data a bit harder, but that's a
