@@ -52,6 +52,8 @@
 "   traces.vim                                              [TRACES]
 "   editorconfig-vim                                        [EDITORCFG]
 "   typescript-vim                                          [TS-VIM]
+"   vim-signature                                           [SIGNATURE]
+"   dapper.nvim                                             [DAPPER]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -510,6 +512,18 @@ Plug 'editorconfig/editorconfig-vim'
 "=============================================================================
 " " Syntax highlighting, filetype support for TypeScript.
 Plug 'leafgarland/typescript-vim'
+
+"=============================================================================
+"   vim-signature                                           [SIGNATURE]
+"=============================================================================
+" " Display marks in the sign column.
+Plug 'kshenoy/vim-signature'
+
+"=============================================================================
+"   dapper.nvim                                             [DAPPER]
+"=============================================================================
+" " Debug adapter protocol implementation for neovim.
+Plug 'git@bitbucket.org:yiliny/dapper.nvim'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

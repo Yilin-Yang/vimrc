@@ -69,6 +69,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-pencil](https://github.com/reedes/vim-pencil)
 * [vim-repeat](https://github.com/tpope/vim-repeat)
 * [vim-rsi](https://github.com/tpope/vim-rsi)
+* [vim-signature](https://github.com/kshenoy/vim-signature)
 * [vim-signify](https://github.com/mhinz/vim-signify)
 * [vim-snippets](https://github.com/honza/vim-snippets)
 * [vim-surround](https://github.com/tpope/vim-surround)
@@ -87,6 +88,7 @@ Plugins That I Wrote
 `>:D`
 
 * [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
+* dapper.nvim
 
 Other Editing Tools
 --------------------------------------------------------------------------------
