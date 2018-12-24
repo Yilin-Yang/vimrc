@@ -39,6 +39,7 @@ FOLDERS="
     after
     ftplugin
     ftdetect
+    indent
 "
 removeOrBackupDir "$HOME/.vim" "$DIR" "$FOLDERS"
 
