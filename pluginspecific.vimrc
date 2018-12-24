@@ -259,6 +259,9 @@ nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
 " Goto definition of identifier.
 nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
 
+" Explain the error under the cursor.
+nnoremap <silent> <Leader>pe :call LanguageClient#explainErrorAtPoint()<cr>
+
 " Rename the identifier under the cursor.
 " NOTE: requires `set hidden`
 nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()<cr>
