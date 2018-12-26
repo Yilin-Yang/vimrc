@@ -17,7 +17,7 @@ scriptencoding utf-8
 "   Tab Heresy                                              [BYTHEEMPEROR]
 "=============================================================================
 set expandtab                       " Spaces for indentation.
-set shiftwidth=4                    " Indentation depth with << and >> commands.
+set shiftwidth=2                    " Indentation depth with << and >> commands.
 set softtabstop=-1                  " The number of columns to insert when pressing
                                     " <Tab>. Helpful when *forced* to indent with mixed
                                     " tabs and spaces, like *profligate scum*.
