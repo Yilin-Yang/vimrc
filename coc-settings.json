@@ -1,7 +1,7 @@
 {
   "coc.preferences.timeout": 5000,
   "coc.preferences.noselect": false,
-  "coc.preferences.preferCompleteThanJumpPlaceholder": false,
+  "coc.preferences.preferCompleteThanJumpPlaceholder": true,
   "coc.preferences.localityBonus": true,
   "coc.preferences.acceptSuggestionOnCommitCharacter": false,
   "coc.preferences.diagnostic.displayByAle": false,
