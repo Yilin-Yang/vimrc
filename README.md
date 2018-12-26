@@ -37,10 +37,10 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 `init.vimrc` for all plugins I'm currently using.)
 
 * [BufExplorer](https://github.com/jlanzarotta/bufexplorer)
-* [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim)
 * [ReplaceWithRegister](https://github.com/vim-scripts/ReplaceWithRegister)
 * [Tagbar](https://github.com/majutsushi/tagbar	)
 * [UltiSnips](https://github.com/SirVer/ultisnips)
+* [coc.nvim](https://github.com/neoclide/coc.nvim)
 * [diffconflicts](https://github.com/whiteinge/diffconflicts)
 * [editorconfig-vim](https://github.com/editorconfig/editorconfig-vim)
 * [fuzzyfind-vim](https://github.com/junegunn/fzf.vim)

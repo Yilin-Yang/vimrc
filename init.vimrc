@@ -9,13 +9,12 @@
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
-"   ncm2                                                    [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   ConqueGDB                                               [CONQUEGDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "   BufExplorer                                             [BUFFER]
 "   vim-vebugger                                            [VEBUGGER]
 "   vimproc                                                 [VIMPROC]
@@ -185,31 +184,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
 
 "=============================================================================
-"   ncm2                                                    [NCM]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Asynchronous autocompletion that's less bloated than YouCompleteMe and
-" better written/maintained than deoplete.
-Plug 'ncm2/ncm2'
-
-    " " Dependency for ncm2.
-    Plug 'roxma/nvim-yarp'
-
-    " " Compatibility layer for nvim rpc client. Only needed in vim8.
-    Plug 'roxma/vim-hug-neovim-rpc'
-
-"-----------------------------------------------------------------------------
-" COMPLETION SOURCES
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
-
-Plug 'ncm2/ncm2-ultisnips'
-
-Plug 'ncm2/ncm2-vim'
-    Plug 'Shougo/neco-vim'
-
-"=============================================================================
 "   vim-easytags                                            [EASYTAGS]
 "=============================================================================
 "-----------------------------------------------------------------------------
@@ -250,17 +224,25 @@ Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 
 "=============================================================================
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " Enables neovim support for Language Server Protocol.
-" Requires neovim.
-if has('nvim')
-    Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-    \ }
-endif
+" " IntelliSense in neovim!.
+Plug 'neoclide/coc.nvim', {
+    \ 'tag': '*',
+    \ 'do': { -> coc#util#install() },
+\ }
+
+Plug 'neoclide/coc-sources'
+Plug 'neoclide/coc-neco'
+    Plug 'Shougo/neco-vim'
+
+function! InstallCoCExtensions() abort
+  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-pyls coc-json coc-html coc-css
+
+  " coc-sources extensions
+  CocInstall coc-ultisnips
+endfunction
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
