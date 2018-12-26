@@ -230,7 +230,7 @@ Plug 'SirVer/ultisnips'
 " " IntelliSense in neovim!.
 Plug 'neoclide/coc.nvim', {
     \ 'tag': '*',
-    \ 'do': { -> coc#util#install() },
+    \ 'do': 'yarn install',
 \ }
 
 Plug 'neoclide/coc-sources'
