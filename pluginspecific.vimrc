@@ -199,6 +199,7 @@ nmap <leader>pc <Plug>(coc-codelens-action)
 nmap <leader>pr <Plug>(coc-rename)
 
 " Jump between problems.
+nmap <leader>S <Plug>(coc-diagnostic-info)
 nmap <leader>n <Plug>(coc-diagnostic-next)
 nmap <leader>N <Plug>(coc-diagnostic-prev)
 
