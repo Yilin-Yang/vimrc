@@ -185,9 +185,6 @@ inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 " Press Enter to close the menu **and also** start a new line.
 inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
-" Suppress annoying completion menu messages.
-set shortmess+=c
-
 " Hop between snippet placeholders!
 let g:coc_snippet_next = '<Tab>'
 let g:coc_snippet_prev = '<S-Tab>'
