@@ -7,5 +7,12 @@
   "coc.preferences.diagnostic.displayByAle": false,
   "coc.preferences.formatOnType": true,
   "coc.preferences.codeLens.enable": true,
-  "coc.preferences.autoTrigger": "always"
+  "coc.preferences.autoTrigger": "always",
+  "languageserver": {
+    "clangd": {
+      "command": "clangd",
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["c", "cpp", "c.doxygen", "cpp.doxygen", "objc", "objcpp"]
+    }
+  }
 }
