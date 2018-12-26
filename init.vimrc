@@ -9,13 +9,12 @@
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
-"   ncm2                                                    [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   ConqueGDB                                               [CONQUEGDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "   BufExplorer                                             [BUFFER]
 "   vim-vebugger                                            [VEBUGGER]
 "   vimproc                                                 [VIMPROC]
@@ -50,6 +49,10 @@
 "   vim-peekaboo                                            [PEEKABOO]
 "   vim-illuminate                                          [ILLUMINATE]
 "   traces.vim                                              [TRACES]
+"   editorconfig-vim                                        [EDITORCFG]
+"   typescript-vim                                          [TS-VIM]
+"   vim-signature                                           [SIGNATURE]
+"   dapper.nvim                                             [DAPPER]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -181,31 +184,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
 
 "=============================================================================
-"   ncm2                                                    [NCM]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Asynchronous autocompletion that's less bloated than YouCompleteMe and
-" better written/maintained than deoplete.
-Plug 'ncm2/ncm2'
-
-    " " Dependency for ncm2.
-    Plug 'roxma/nvim-yarp'
-
-    " " Compatibility layer for nvim rpc client. Only needed in vim8.
-    Plug 'roxma/vim-hug-neovim-rpc'
-
-"-----------------------------------------------------------------------------
-" COMPLETION SOURCES
-Plug 'ncm2/ncm2-bufword'
-Plug 'ncm2/ncm2-tmux'
-Plug 'ncm2/ncm2-path'
-
-" Plug 'ncm2/ncm2-ultisnips'
-
-Plug 'ncm2/ncm2-vim'
-    Plug 'Shougo/neco-vim'
-
-"=============================================================================
 "   vim-easytags                                            [EASYTAGS]
 "=============================================================================
 "-----------------------------------------------------------------------------
@@ -246,17 +224,25 @@ Plug 'honza/vim-snippets'
 " Plug 'SirVer/ultisnips'
 
 "=============================================================================
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " Enables neovim support for Language Server Protocol.
-" Requires neovim.
-if has('nvim')
-    Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-    \ }
-endif
+" " IntelliSense in neovim!.
+Plug 'neoclide/coc.nvim', {
+    \ 'tag': '*',
+    \ 'do': 'yarn install',
+\ }
+
+Plug 'neoclide/coc-sources'
+Plug 'neoclide/coc-neco'
+    Plug 'Shougo/neco-vim'
+
+function! InstallCoCExtensions() abort
+  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-pyls coc-json coc-html coc-css
+
+  " coc-sources extensions
+  CocInstall coc-ultisnips
+endfunction
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -496,6 +482,30 @@ Plug 'RRethy/vim-illuminate'
 if !has('nvim')
     Plug 'markonm/traces.vim'
 endif
+
+"=============================================================================
+"   editorconfig-vim                                        [EDITORCFG]
+"=============================================================================
+" " Load editorconfig settings in git repositories.
+Plug 'editorconfig/editorconfig-vim'
+
+"=============================================================================
+"   typescript-vim                                          [TS-VIM]
+"=============================================================================
+" " Syntax highlighting, filetype support for TypeScript.
+Plug 'leafgarland/typescript-vim'
+
+"=============================================================================
+"   vim-signature                                           [SIGNATURE]
+"=============================================================================
+" " Display marks in the sign column.
+Plug 'kshenoy/vim-signature'
+
+"=============================================================================
+"   dapper.nvim                                             [DAPPER]
+"=============================================================================
+" " Debug adapter protocol implementation for neovim.
+Plug 'git@bitbucket.org:yiliny/dapper.nvim'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

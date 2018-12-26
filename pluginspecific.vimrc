@@ -8,11 +8,10 @@ scriptencoding utf-8
 "   Asynchronous Lint Engine                                [ALE]
 "   NerdTree                                                [NERDTREE]
 "   Tagbar                                                  [TAGBAR]
-"   ncm2                                                    [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "   BufExplorer                                             [BUFFER]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
@@ -56,6 +55,10 @@ let g:ale_sign_style_warning = 'S>'
 
 let g:ale_cpp_gcc_options = '--std=c++17 -Wall -Werror -Wextra -pedantic -O3 -DDEBUG -I. -I..'
 
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 0
+
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
 "=============================================================================
@@ -89,43 +92,6 @@ let g:NERDTreeChDirMode=0
 " Will open Tagbar, jump to it, and close after choosing a tag.
 nnoremap <silent> <Leader>g :TagbarOpenAutoClose<cr>
 nnoremap <silent> <Leader>b :TagbarToggle<cr>
-
-"=============================================================================
-"   ncm2                                                    [NCM]
-"=============================================================================
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-
-" Insert mode tab-completion without breaking real presses of the tab key.
-inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
-
-" Press Enter to close the menu **and also** start a new line.
-inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
-
-" Enable vimtex support.
-augroup cm_setup
-    au!
-    " from: https://github.com/ncm2/ncm2/pull/23#issue-201444472
-    autocmd User Ncm2Plugin call ncm2#register_source({
-        \ 'name' : 'vimtex',
-        \ 'priority': 1,
-        \ 'subscope_enable': 1,
-        \ 'complete_length': 1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'combine',
-        \           'matchers': [
-        \               {'name': 'abbrfuzzy', 'key': 'menu'},
-        \               {'name': 'prefix', 'key': 'word'},
-        \           ]},
-        \ 'mark': 'tex',
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-    \ })
-augroup end
-
-" Suppress annoying completion menu messages.
-set shortmess+=c
 
 "=============================================================================
 "   vim-easytags                                            [EASYTAGS]
@@ -211,61 +177,44 @@ augroup UltiSnips_AutoTrigger
 augroup end
 
 "=============================================================================
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "=============================================================================
-" Debugging Notes
-" https://github.com/autozimu/LanguageClient-neovim/issues/72
-"
-" TROUBLESHOOTING: If the C++ LSP doesn't work, try the following:
-" 1) Verify that nvim has registered all active remote plugins. (:CheckHealth,
-"    :UpdateRemotePlugins).
-" 2) Make sure that the active directory contains `compile_commands.json`.
-" 3) Make sure that you've installed clang-6.0 (or later) as well as
-"    clang-tools-6.0 (or later), and that you've used update-alternatives to
-"    make the clang symlinks point to those new executables.
+" Insert mode tab-completion without breaking real presses of the tab key.
+inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+" Press Enter to close the menu **and also** start a new line.
+inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
-" Load LanguageClient settings.json files when relevant.
-" This must be an absolute path; tilde expansion doesn't work.
-let g:LanguageClient_settingsPath = '/home/yiliny/.config/nvim/settings.json'
-let g:LanguageClient_loadSettings = 1
+" Suppress annoying completion menu messages.
+set shortmess+=c
 
-" NOTE: clangd requires that `compile_commands.json` exist in the current
-"       directory or a parent directory!
-"
-"       Running `bear make` on a Makefile-based project will allow bear
-"       to capture the compilation commands used and generate a matching
-"       JSON file. If `compile_commands.json` is empty, try running
-"       `make clean` first.
-"
-"       (Obviously, this only works if you have bear installed.)
-let g:LanguageClient_serverCommands = {
-    \ 'c': ['clangd'],
-    \ 'c.doxygen': ['clangd'],
-    \ 'cpp': ['clangd'],
-    \ 'cpp.doxygen': ['clangd'],
-    \ 'python': ['pyls'],
-    \ 'javascript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
-    \ 'typescript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
-\ }
+" Hop between snippet placeholders!
+let g:coc_snippet_next = '<Tab>'
+let g:coc_snippet_prev = '<S-Tab>'
 
-" Show type info and short doc of identifier under cursor.
-nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
+" CodeLens!
+nmap <leader>pc <Plug>(coc-codelens-action)
 
-" Goto definition of identifier.
-nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
+" Rename symbol.
+nmap <leader>pr <Plug>(coc-rename)
 
-" Rename the identifier under the cursor.
-" NOTE: requires `set hidden`
-nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()<cr>
+" Jump between problems.
+nmap <leader>n <Plug>(coc-diagnostic-next)
+nmap <leader>N <Plug>(coc-diagnostic-prev)
 
-" List the symbols in the current document.
-nnoremap <silent> <Leader>ps :call LanguageClient_textDocument_documentSymbol()<cr>
+" Jump to...
+nmap <leader>t  <Plug>(coc-definition)
+nmap <leader>td <Plug>(coc-type-definition)
+nmap <leader>ti <Plug>(coc-implementation)
+nmap <leader>sr <Plug>(coc-references)
 
-" List all references of the identifier under the cursor.
-nnoremap <silent> <Leader>pf :call LanguageClient_textDocument_references()<cr>
+" Autoformat!
+nmap <leader>f  <Plug>(coc-format-selected)
+vmap <leader>f  <Plug>(coc-format-selected)
+
+" Display diagnostics in airline.
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -737,8 +686,8 @@ highlight SignifySignChange cterm=bold  ctermbg=none  ctermfg=227
 
 augroup signify_refresh
     au!
-    autocmd BufEnter   * SignifyRefresh
-    autocmd CursorHold * SignifyRefresh
+    "autocmd BufEnter   * SignifyRefresh
+    "autocmd CursorHold * SignifyRefresh
 augroup end
 
 "=============================================================================
