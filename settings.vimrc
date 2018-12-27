@@ -41,6 +41,10 @@ set hidden                          " Allow hidden buffers.
 set visualbell                      " FOR THE LOVE OF GOD STOP BOOPING IN WSL
 set showcmd                         " See leader key in corner.
 set lazyredraw                      " Only redraw after given command has completed
+set shortmess=aoOtTF                " Abbreviate commandline text.
+set noshowcmd                       " Stop 'hit-enter' prompts caused by coc,
+                                    " at the expense of losing visual mode
+                                    " 'size of selection' readouts.
 set completeopt=menuone,noinsert    " Show pop-up menu even when
                                     " there's only one option, don't insert
                                     " text without user input.
