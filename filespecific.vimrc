@@ -4,6 +4,7 @@ scriptencoding utf-8
 "=============================================================================
 "
 "   C/C++ Formatting                                        [C_CPP]
+"   JavaScript Formatting                                   [JS]
 "   Prose Formatting                                        [PROSE]
 "   Startup Settings                                        [STARTUP]
 "=============================================================================
@@ -24,13 +25,21 @@ scriptencoding utf-8
 "           the previous line of `2 * shiftwidth`.
 "   N0  :   Zero additional indentation for code inside namespaces.
 "   t0  :   Function return types go in column 1, if they're on another line.
-"   (0  :   No additional indentation for multiline if statements.
+"   (2s :   Indent multiline unclosed parens by `(2 * shiftwidth)`.
 "   W2s :   When breaking apart unclosed parentheses across multiple lines
 "           (e.g. a multiline function call), indent by `2 * shiftwidth`.
 "   m1  :   Lines that start with closing parentheses are aligned with the
 "           first character of the line with the matching opening parentheses.
 function! CPPIndent()
-    setlocal cinoptions+=L-1,:0,g0,+2s,N0,t0,(0,W2s,m1
+    setlocal cinoptions+=L-1,:0,g0,+2s,N0,t0,(2s,W2s,m1
+endfunction
+
+"=============================================================================
+"   JavaScript Formatting                                   [JS]
+"=============================================================================
+function! JSIndent()
+    call CPPIndent()
+    setlocal cinoptions+=L0
 endfunction
 
 "=============================================================================
