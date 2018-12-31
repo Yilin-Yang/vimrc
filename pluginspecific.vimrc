@@ -208,7 +208,7 @@ nmap <leader>sr <Plug>(coc-references)
 
 " Autoformat!
 nmap <leader>f  <Plug>(coc-format-selected)
-vmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
 
 " Display diagnostics in airline.
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
@@ -247,18 +247,18 @@ let g:EasyMotion_smartcase = 1
 "=============================================================================
 " Easier keymappings that use <Leader> instead of 'g'.
 nmap <Leader>c gc
-vnoremap <silent> <Leader>c :Commentary<cr>
+xnoremap <silent> <Leader>c :Commentary<cr>
 
 "=============================================================================
 "   tabular                                                 [TABULAR]
 "=============================================================================
 " Faster mapping to access Tabular Ex command.
 nnoremap t :Tabularize /
-vnoremap t :Tabularize /
+xnoremap t :Tabularize /
 
 
 nnoremap <silent> tt :Tabularize /,<cr>
-vnoremap <silent> tt :Tabularize /,<cr>
+xnoremap <silent> tt :Tabularize /,<cr>
 
 "=============================================================================
 "   vim-lexical                                             [LEXICAL]
@@ -278,7 +278,7 @@ endfunction
 "   vim-easy-align                                          [EASYALIGN]
 "=============================================================================
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
+xmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
@@ -713,6 +713,7 @@ map <leader>m <Plug>ToggleMarkbar
 
 let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 let g:markbar_section_separation = 0
+let g:markbar_explicitly_remap_mark_mappings = v:true
 
 "=============================================================================
 "   vim-illuminate                                          [ILLUMINATE]
