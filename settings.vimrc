@@ -17,7 +17,7 @@ scriptencoding utf-8
 "   Tab Heresy                                              [BYTHEEMPEROR]
 "=============================================================================
 set expandtab                       " Spaces for indentation.
-set shiftwidth=4                    " Indentation depth with << and >> commands.
+set shiftwidth=2                    " Indentation depth with << and >> commands.
 set softtabstop=-1                  " The number of columns to insert when pressing
                                     " <Tab>. Helpful when *forced* to indent with mixed
                                     " tabs and spaces, like *profligate scum*.
@@ -41,6 +41,10 @@ set hidden                          " Allow hidden buffers.
 set visualbell                      " FOR THE LOVE OF GOD STOP BOOPING IN WSL
 set showcmd                         " See leader key in corner.
 set lazyredraw                      " Only redraw after given command has completed
+set shortmess=aoOtTF                " Abbreviate commandline text.
+set noshowcmd                       " Stop 'hit-enter' prompts caused by coc,
+                                    " at the expense of losing visual mode
+                                    " 'size of selection' readouts.
 set completeopt=menuone,noinsert    " Show pop-up menu even when
                                     " there's only one option, don't insert
                                     " text without user input.
@@ -171,7 +175,6 @@ set cursorcolumn                " Mark the current column.
 "=============================================================================
 "   System Configuration                                    [CONFIG]
 "=============================================================================
-
 " Place tempfiles in a central location, naming folders by PID.
 "   This *does* break some of the 'prevent simultaneous editing' enabled by
 "   swapback files, and it makes recovering lost data a bit harder, but that's a
