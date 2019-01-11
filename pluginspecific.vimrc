@@ -186,8 +186,8 @@ inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
 " Hop between snippet placeholders!
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
+let g:coc_snippet_next = '<C-n>'
+let g:coc_snippet_prev = '<C-m>'
 
 " CodeLens!
 nmap <leader>pc <Plug>(coc-codelens-action)
