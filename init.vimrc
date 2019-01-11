@@ -13,7 +13,6 @@
 "   Tagbar                                                  [TAGBAR]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
-"   ConqueGDB                                               [CONQUEGDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
 "   coc.nvim                                                [COC]
@@ -220,11 +219,6 @@ Plug 'xolox/vim-misc'
 if has('nvim')
     Plug 'dbgx/lldb.nvim'
 endif
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-Plug 'vim-scripts/Conque-GDB', { 'on': 'StartConqueGDB' }
 
 "=============================================================================
 "   vim-snippets                                            [SNIPPETS]

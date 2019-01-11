@@ -5,7 +5,6 @@
 "   GENERAL                                                 [GENERAL]
 "
 "   lldb                                                    [LLDB]
-"   ConqueGDB                                               [CONQUEGDB]
 "   vim-vebugger                                            [VEBUGGER]
 "=============================================================================
 
@@ -148,49 +147,6 @@ let g:lldb#sign#pc_symbol='->'
 
 "-------------------------------------------------------------------------
 endfunction " StartLLDB
-
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-
-" Run the program.
-" DEFAULT: let g:ConqueGdb_Run = g:ConqueGdb_Leader . 'r'
-
-function! StartConqueGDB()
-"-------------------------------------------------------------------------
-" Set ConqueGDB leader key.
-let g:ConqueGdb_Leader      = DebuggerPrefix()
-
-" Continue execution.
-let g:ConqueGdb_Continue    = DebuggerContinue()
-
-let g:ConqueGdb_Next        = DebuggerStepOver()
-
-let g:ConqueGdb_Step        = DebuggerStepIn()
-let g:ConqueGdb_Print       = DebuggerEvaluate()
-let g:ConqueGdb_ToggleBreak = DebuggerSetBreakpoint()
-let g:ConqueTerm_SendVisKey = DebuggerToStdin()
-let g:ConqueTerm_ToggleKey  = DebuggerPrefix() . 'p'
-
-
-" Starts GDB debugger session.
-execute 'nnoremap ' . DebuggerPrefix() . 'd'
-    \ . ' :ConqueGdb -d . --args ' . expand('%:r')
-
-execute 'nnoremap ' . DebuggerPrefix() . 's' . ' :ConqueGdbCommand '
-
-execute 'nnoremap ' . DebuggerPrefix() . DebuggerKill() . ' :ConqueGdbCommand q<cr>:ConqueGDBDelete<cr>'
-
-" This shouldn't be necessary (should be handled by vim-plug's lazy-load),
-" but lazy-loading doesn't seem to work without it.
-call plug#load('Conque-GDB')
-"-------------------------------------------------------------------------
-endfunction " StartConqueGDB
-
-" Start ConqueGDB with a command rather than a function call.
-command! -nargs=0 StartConqueGDB call StartConqueGDB()
-
 
 "=============================================================================
 "   vim-vebugger                                            [VEBUGGER]
