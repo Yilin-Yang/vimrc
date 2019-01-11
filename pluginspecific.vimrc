@@ -20,7 +20,6 @@ scriptencoding utf-8
 "   vim-lexical                                             [LEXICAL]
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
-"   ConqueGDB                                               [CONQUEGDB]
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
 "   vim-pencil                                              [PENCIL]
@@ -32,6 +31,7 @@ scriptencoding utf-8
 "   quick-scope                                             [QUICKSCOPE]
 "   vim-markbar                                             [MARKBAR]
 "   vim-illuminate                                          [ILLUMINATE]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 
@@ -208,7 +208,7 @@ nmap <leader>sr <Plug>(coc-references)
 
 " Autoformat!
 nmap <leader>f  <Plug>(coc-format-selected)
-vmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
 
 " Display diagnostics in airline.
 let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
@@ -247,18 +247,18 @@ let g:EasyMotion_smartcase = 1
 "=============================================================================
 " Easier keymappings that use <Leader> instead of 'g'.
 nmap <Leader>c gc
-vnoremap <silent> <Leader>c :Commentary<cr>
+xnoremap <silent> <Leader>c :Commentary<cr>
 
 "=============================================================================
 "   tabular                                                 [TABULAR]
 "=============================================================================
 " Faster mapping to access Tabular Ex command.
 nnoremap t :Tabularize /
-vnoremap t :Tabularize /
+xnoremap t :Tabularize /
 
 
 nnoremap <silent> tt :Tabularize /,<cr>
-vnoremap <silent> tt :Tabularize /,<cr>
+xnoremap <silent> tt :Tabularize /,<cr>
 
 "=============================================================================
 "   vim-lexical                                             [LEXICAL]
@@ -278,7 +278,7 @@ endfunction
 "   vim-easy-align                                          [EASYALIGN]
 "=============================================================================
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
+xmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
@@ -341,28 +341,6 @@ nnoremap gf /(<CR>l<C-v>/)<CR>
 xmap <leader>r  <Plug>ReplaceWithRegisterVisual
 nmap <leader>rr <Plug>ReplaceWithRegisterLine
 nmap <leader>r  <Plug>ReplaceWithRegisterOperator
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-
-" Continue updating Conque buffers after switching to another buffer.
-let g:ConqueTerm_ReadUnfocused = 1
-
-" Try to use the Python3 interface, which I presume is better?
-let g:ConqueTerm_PyVersion = 3
-
-" Open the GDB terminal on the right side of the screen.
-let g:ConqueGdb_SrcSplit = 'left' " Open source on the *left* side.
-
-" Update very frequently while I'm in insert mode.
-let g:ConqueTerm_FocusedUpdateTime = 100
-
-" Update very frequently while I'm not in insert mode.
-let g:ConqueTerm_UnfocusedUpdateTime = 100
-
-" Disable start warnings.
-let g:ConqueTerm_StartMessages = 0
 
 "=============================================================================
 "   fuzzy-find vim plugin                                   [FZFVIM]
@@ -711,8 +689,10 @@ augroup end
 
 map <leader>m <Plug>ToggleMarkbar
 
-let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let g:markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let g:markbar_peekaboo_marks_to_display = "'\"(){}.[]<>^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let g:markbar_section_separation = 0
+let g:markbar_explicitly_remap_mark_mappings = v:true
 
 "=============================================================================
 "   vim-illuminate                                          [ILLUMINATE]
@@ -728,3 +708,8 @@ let g:Illuminate_ftblacklist = [
 let g:Illuminate_highlightUnderCursor = 0
 
 hi illuminatedWord cterm=bold,underline gui=bold,underline
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+nnoremap <C-z> :MundoToggle<cr>

@@ -2,6 +2,8 @@
 "                             TABLE OF CONTENTS
 "=============================================================================
 "
+"   vim-maktaba                                             [MAKTABA]
+"   vim-glaive                                              [GLAIVE]
 "   localvimrc                                              [LOCALVIMRC]
 "   Fugitive                                                [FUGITIVE]
 "   vim-surround                                            [SURROUND]
@@ -11,7 +13,6 @@
 "   Tagbar                                                  [TAGBAR]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
-"   ConqueGDB                                               [CONQUEGDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
 "   coc.nvim                                                [COC]
@@ -53,6 +54,7 @@
 "   typescript-vim                                          [TS-VIM]
 "   vim-signature                                           [SIGNATURE]
 "   dapper.nvim                                             [DAPPER]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -76,6 +78,20 @@ set nocompatible        " non-compatible with basic vi
 "#############################################################################
 
 call plug#begin('~/.vim/bundle')
+
+"=============================================================================
+"   vim-maktaba                                             [MAKTABA]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Consistent plugin design, by Google.
+Plug 'Google/vim-maktaba'
+
+"=============================================================================
+"   vim-glaive                                              [GLAIVE]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Consistent plugin configuration, by Google.
+Plug 'Google/vim-glaive'
 
 "=============================================================================
 "   localvimrc                                              [LOCALVIMRC]
@@ -203,11 +219,6 @@ Plug 'xolox/vim-misc'
 if has('nvim')
     Plug 'dbgx/lldb.nvim'
 endif
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-Plug 'vim-scripts/Conque-GDB', { 'on': 'StartConqueGDB' }
 
 "=============================================================================
 "   vim-snippets                                            [SNIPPETS]
@@ -506,6 +517,12 @@ Plug 'kshenoy/vim-signature'
 "=============================================================================
 " " Debug adapter protocol implementation for neovim.
 Plug 'git@bitbucket.org:yiliny/dapper.nvim'
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+" " Visualize the vim undo tree.
+Plug 'simnalamburt/vim-mundo'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
