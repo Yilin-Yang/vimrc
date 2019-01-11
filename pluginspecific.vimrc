@@ -711,7 +711,7 @@ augroup end
 
 map <leader>m <Plug>ToggleMarkbar
 
-let g:markbar_marks_to_display = "'\"(){}.[]<>^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let g:markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let g:markbar_peekaboo_marks_to_display = "'\"(){}.[]<>^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let g:markbar_section_separation = 0
 let g:markbar_explicitly_remap_mark_mappings = v:true
