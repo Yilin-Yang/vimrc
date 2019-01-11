@@ -32,6 +32,7 @@ scriptencoding utf-8
 "   quick-scope                                             [QUICKSCOPE]
 "   vim-markbar                                             [MARKBAR]
 "   vim-illuminate                                          [ILLUMINATE]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 
@@ -730,3 +731,8 @@ let g:Illuminate_ftblacklist = [
 let g:Illuminate_highlightUnderCursor = 0
 
 hi illuminatedWord cterm=bold,underline gui=bold,underline
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+nnoremap <C-z> :MundoToggle<cr>

@@ -55,6 +55,7 @@
 "   typescript-vim                                          [TS-VIM]
 "   vim-signature                                           [SIGNATURE]
 "   dapper.nvim                                             [DAPPER]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -522,6 +523,12 @@ Plug 'kshenoy/vim-signature'
 "=============================================================================
 " " Debug adapter protocol implementation for neovim.
 Plug 'git@bitbucket.org:yiliny/dapper.nvim'
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+" " Visualize the vim undo tree.
+Plug 'simnalamburt/vim-mundo'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

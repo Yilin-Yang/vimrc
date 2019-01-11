@@ -64,6 +64,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-fugitive](https://github.com/tpope/vim-fugitive)
 * [vim-indent-object](https://github.com/michaeljsmith/vim-indent-object)
 * [vim-lexical](https://github.com/reedes/vim-lexical)
+* [vim-mundo](https://github.com/simnalamburt/vim-mundo)
 * [vim-obsession](https://github.com/tpope/vim-obsession)
 * [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
 * [vim-pencil](https://github.com/reedes/vim-pencil)
