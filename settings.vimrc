@@ -175,16 +175,9 @@ set cursorcolumn                " Mark the current column.
 "=============================================================================
 "   System Configuration                                    [CONFIG]
 "=============================================================================
-" Place tempfiles in a central location, naming folders by PID.
-"   This *does* break some of the 'prevent simultaneous editing' enabled by
-"   swapback files, and it makes recovering lost data a bit harder, but that's a
-"   worthy price to pay in exchange for `nvim -S` calls that actually work.
-"
-" " Taken from: https://github.com/tpope/vim-obsession/issues/18
-let g:vimtmp = $HOME . '/.tmp/' . getpid()
-silent! call mkdir(g:vimtmp, 'p', 0700)
-let &backupdir=g:vimtmp
-let &directory=g:vimtmp
+" I literally never use swapfiles, and I habitually save my files every
+" fifteen seconds or so.
+set noswapfile
 
 " Shorten startup time by explicitly specifying python path.
 let g:python_host_prog  = '/usr/bin/python'
