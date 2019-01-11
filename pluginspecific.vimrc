@@ -136,6 +136,8 @@ nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
 " Enable folding of documents by LaTeX structure.
 let g:vimtex_fold_enabled=1
 
+" Disable opening the quickfix window during continuous compilation.
+let g:vimtex_quickfix_enabled=0
 
 "=============================================================================
 "   UltiSnips                                               [ULTISNIPS]
