@@ -2,20 +2,20 @@
 "                             TABLE OF CONTENTS
 "=============================================================================
 "
+"   vim-maktaba                                             [MAKTABA]
+"   vim-glaive                                              [GLAIVE]
 "   localvimrc                                              [LOCALVIMRC]
 "   Fugitive                                                [FUGITIVE]
 "   vim-surround                                            [SURROUND]
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
 "   Tagbar                                                  [TAGBAR]
-"   nvim-completion-manager                                 [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
-"   ConqueGDB                                               [CONQUEGDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "   BufExplorer                                             [BUFFER]
 "   vim-vebugger                                            [VEBUGGER]
 "   vimproc                                                 [VIMPROC]
@@ -40,13 +40,21 @@
 "   diffconflicts                                           [DIFFCONFLICTS]
 "   winresizer                                              [WINRESIZER]
 "   vim-abolish                                             [ABOLISH]
-"   vim-gitgutter                                           [GITGUTTER]
+"   vim-signify                                             [SIGNIFY]
 "   vim-eunuch                                              [EUNUCH]
 "   quick-scope                                             [QUICKSCOPE]
 "   gv.vim                                                  [GVVIM]
 "   vim-indent-object                                       [INDENTOBJECT]
 "   vader.vim                                               [VADER]
 "   vim-markbar                                             [MARKBAR]
+"   vim-peekaboo                                            [PEEKABOO]
+"   vim-illuminate                                          [ILLUMINATE]
+"   traces.vim                                              [TRACES]
+"   editorconfig-vim                                        [EDITORCFG]
+"   typescript-vim                                          [TS-VIM]
+"   vim-signature                                           [SIGNATURE]
+"   dapper.nvim                                             [DAPPER]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -70,6 +78,20 @@ set nocompatible        " non-compatible with basic vi
 "#############################################################################
 
 call plug#begin('~/.vim/bundle')
+
+"=============================================================================
+"   vim-maktaba                                             [MAKTABA]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Consistent plugin design, by Google.
+Plug 'Google/vim-maktaba'
+
+"=============================================================================
+"   vim-glaive                                              [GLAIVE]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Consistent plugin configuration, by Google.
+Plug 'Google/vim-glaive'
 
 "=============================================================================
 "   localvimrc                                              [LOCALVIMRC]
@@ -141,11 +163,11 @@ Plug 'tpope/vim-surround'
 
 
 "=============================================================================
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " Asynchronous syntax checker.
-Plug 'neomake/neomake'
+" " Asynchronous linting as you type.
+Plug 'w0rp/ale'
 
 "=============================================================================
 "   vimtex                                                  [VIMTEX]
@@ -178,19 +200,6 @@ Plug 'tpope/vim-unimpaired'
 Plug 'majutsushi/tagbar'
 
 "=============================================================================
-"   nvim-completion-manager                                 [NCM]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Asynchronous autocompletion that's less bloated than YouCompleteMe and
-" better written/maintained than deoplete. Requires neovim.
-if has('nvim')
-    Plug 'roxma/nvim-completion-manager'
-endif
-
-" " Dependency for vim-easytags.
-Plug 'xolox/vim-misc'
-
-"=============================================================================
 "   vim-easytags                                            [EASYTAGS]
 "=============================================================================
 "-----------------------------------------------------------------------------
@@ -198,6 +207,9 @@ Plug 'xolox/vim-misc'
 " This variable has to be set before loading the plugin.
 let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
 Plug 'xolox/vim-easytags'
+
+" " Dependency for vim-easytags.
+Plug 'xolox/vim-misc'
 
 "=============================================================================
 "   lldb.nvim                                                    [LLDB]
@@ -207,11 +219,6 @@ Plug 'xolox/vim-easytags'
 if has('nvim')
     " Plug 'dbgx/lldb.nvim'
 endif
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-Plug 'vim-scripts/Conque-GDB', { 'on': 'StartConqueGDB' }
 
 "=============================================================================
 "   vim-snippets                                            [SNIPPETS]
@@ -228,17 +235,25 @@ Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 
 "=============================================================================
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " Enables neovim support for Language Server Protocol.
-" Requires neovim.
-if has('nvim')
-    Plug 'autozimu/LanguageClient-neovim', {
-        \ 'branch': 'next',
-        \ 'do': 'bash install.sh',
-    \ }
-endif
+" " IntelliSense in neovim!.
+Plug 'neoclide/coc.nvim', {
+    \ 'tag': '*',
+    \ 'do': 'yarn install',
+\ }
+
+Plug 'neoclide/coc-sources'
+Plug 'neoclide/coc-neco'
+    Plug 'Shougo/neco-vim'
+
+function! InstallCoCExtensions() abort
+  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-pyls coc-json coc-html coc-css
+
+  " coc-sources extensions
+  CocInstall coc-ultisnips
+endfunction
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -392,10 +407,10 @@ Plug 'simeji/winresizer'
 Plug 'tpope/vim-abolish'
 
 "=============================================================================
-"   vim-gitgutter                                           [GITGUTTER]
+"   vim-signify                                             [SIGNIFY]
 "=============================================================================
-" " Display git diffs in the sign column.
-Plug 'airblade/vim-gitgutter'
+" " Display version-control diffs (e.g. git) in the sign column.
+Plug 'mhinz/vim-signify'
 
 "=============================================================================
 "   vim-eunuch                                              [EUNUCH]
@@ -458,6 +473,56 @@ Plug 'junegunn/vader.vim'
 "=============================================================================
 " " See all of your marks in a sidebar.
 Plug 'Yilin-Yang/vim-markbar'
+
+"=============================================================================
+"   vim-peekaboo                                            [PEEKABOO]
+"=============================================================================
+" " See the contents of your registers in the sidebar when appropriate.
+Plug 'junegunn/vim-peekaboo'
+
+"=============================================================================
+"   vim-illuminate                                          [ILLUMINATE]
+"=============================================================================
+" " Highlight other occurrences of the word under the cursor.
+Plug 'RRethy/vim-illuminate'
+
+"=============================================================================
+"   traces.vim                                              [TRACES]
+"=============================================================================
+" " inccommand, but for ordinary vim.
+if !has('nvim')
+    Plug 'markonm/traces.vim'
+endif
+
+"=============================================================================
+"   editorconfig-vim                                        [EDITORCFG]
+"=============================================================================
+" " Load editorconfig settings in git repositories.
+Plug 'editorconfig/editorconfig-vim'
+
+"=============================================================================
+"   typescript-vim                                          [TS-VIM]
+"=============================================================================
+" " Syntax highlighting, filetype support for TypeScript.
+Plug 'leafgarland/typescript-vim'
+
+"=============================================================================
+"   vim-signature                                           [SIGNATURE]
+"=============================================================================
+" " Display marks in the sign column.
+Plug 'kshenoy/vim-signature'
+
+"=============================================================================
+"   dapper.nvim                                             [DAPPER]
+"=============================================================================
+" " Debug adapter protocol implementation for neovim.
+Plug 'git@bitbucket.org:yiliny/dapper.nvim'
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+" " Visualize the vim undo tree.
+Plug 'simnalamburt/vim-mundo'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

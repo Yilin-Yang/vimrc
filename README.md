@@ -41,11 +41,12 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 `init.vimrc` for all plugins I'm currently using.)
 
 * [BufExplorer](https://github.com/jlanzarotta/bufexplorer)
-* [LanguageClient-neovim](https://github.com/autozimu/LanguageClient-neovim)
 * [ReplaceWithRegister](https://github.com/vim-scripts/ReplaceWithRegister)
 * [Tagbar](https://github.com/majutsushi/tagbar	)
 * [UltiSnips](https://github.com/SirVer/ultisnips)
+* [coc.nvim](https://github.com/neoclide/coc.nvim)
 * [diffconflicts](https://github.com/whiteinge/diffconflicts)
+* [editorconfig-vim](https://github.com/editorconfig/editorconfig-vim)
 * [fuzzyfind-vim](https://github.com/junegunn/fzf.vim)
 * [fuzzyfind](https://github.com/junegunn/fzf)
 * [gv.vim](https://github.com/junegunn/gv.vim)
@@ -54,6 +55,8 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [neomake](https://github.com/neomake/neomake)
 * [quick-scope](https://github.com/unblevable/quick-scope)
 * [tabular](https://github.com/godlygeek/tabular)
+* [traces.vim](https://github.com/markonm/traces.vim)
+* [typescript-vim](https://github.com/leafgarland/typescript-vim)
 * [vader.vim](https://github.com/junegunn/vader.vim)
 * [vim-abolish](https://github.com/tpope/vim-abolish)
 * [vim-airline](https://github.com/vim-airline/vim-airline)
@@ -63,13 +66,18 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-easytags](https://github.com/xolox/vim-easytags)
 * [vim-eunuch](https://github.com/tpope/vim-eunuch)
 * [vim-fugitive](https://github.com/tpope/vim-fugitive)
-* [vim-gitgutter](https://github.com/airblade/vim-gitgutter)
+* [vim-glaive](https://github.com/google/vim-glaive)
 * [vim-indent-object](https://github.com/michaeljsmith/vim-indent-object)
 * [vim-lexical](https://github.com/reedes/vim-lexical)
+* [vim-maktaba](https://github.com/google/vim-maktaba)
+* [vim-mundo](https://github.com/simnalamburt/vim-mundo)
 * [vim-obsession](https://github.com/tpope/vim-obsession)
+* [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
 * [vim-pencil](https://github.com/reedes/vim-pencil)
 * [vim-repeat](https://github.com/tpope/vim-repeat)
 * [vim-rsi](https://github.com/tpope/vim-rsi)
+* [vim-signature](https://github.com/kshenoy/vim-signature)
+* [vim-signify](https://github.com/mhinz/vim-signify)
 * [vim-snippets](https://github.com/honza/vim-snippets)
 * [vim-surround](https://github.com/tpope/vim-surround)
 * [vim-textobj-sentence](https://github.com/reedes/vim-textobj-sentence)
@@ -87,6 +95,7 @@ Plugins That I Wrote
 `>:D`
 
 * [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
+* dapper.nvim
 
 Other Editing Tools
 --------------------------------------------------------------------------------

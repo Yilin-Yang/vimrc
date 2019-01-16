@@ -40,6 +40,11 @@ nnoremap <silent> <F5> :e<cr>
 " Write the current buffer by double-tapping the leader key.
 nnoremap <leader><leader> :w<cr>
 
+" `cd` into the directory of the current buffer.
+" " Taken from the following link, with slight modifications:
+" "     https://www.reddit.com/r/vim/comments/8k4p6v/what_are_your_best_mappings/dz4s39k/
+nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+
 " Exit interactive/visual mode by hitting j and k.
 inoremap jk <esc>
 vnoremap jk <esc>
@@ -108,12 +113,19 @@ nnoremap <leader>w vipJgqq
 vnoremap <silent> <leader>s :sort<cr>
 
 " Reformat text that lay within parentheses (function calls, headers...)
-vnoremap <silent> <leader>f :call ReformatMultilineParentheses()<cr>
+" vnoremap <silent> <leader>f :call ReformatMultilineParentheses()<cr>
 
 " Start a search command for a regex pattern *only* within the current window.
 " " Taken from:
 " "     https://www.reddit.com/r/vim/comments/8mrwu3/search_in_part_of_file/dzpwjtn/
 nnoremap <expr> z/ '/\%(\%>'.(line('w0')-1).'l\%<'.(line('w$')+1).'l\)\&'
+
+" Replace the word currently under the cursor. Mash `.` to continue
+" substituting instances of this word.
+" " Taken from:
+" "     https://www.reddit.com/r/vim/comments/8k4p6v/what_are_your_best_mappings/dz5aoi9/
+nnoremap <Leader>x /\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgn
+nnoremap <Leader>X ?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN
 
 "=============================================================================
 "   User Interface                                          [UI]
@@ -133,3 +145,6 @@ nnoremap <C-k> <C-w>k
 nnoremap <C-j> <C-w>j
 nnoremap <C-h> <C-w>h
 nnoremap <C-l> <C-w>l
+
+" Workaround for <C-H> <--> <BS> aliasing in some terminals
+nnoremap <BS>  <C-w>h

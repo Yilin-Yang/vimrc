@@ -1,0 +1,18 @@
+{
+  "coc.preferences.timeout": 5000,
+  "coc.preferences.noselect": false,
+  "coc.preferences.preferCompleteThanJumpPlaceholder": true,
+  "coc.preferences.localityBonus": true,
+  "coc.preferences.acceptSuggestionOnCommitCharacter": false,
+  "coc.preferences.diagnostic.displayByAle": false,
+  "coc.preferences.formatOnType": false,
+  "coc.preferences.codeLens.enable": true,
+  "coc.preferences.autoTrigger": "always",
+  "languageserver": {
+    "clangd": {
+      "command": "clangd",
+      "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["c", "cpp", "c.doxygen", "cpp.doxygen", "objc", "objcpp"]
+    }
+  }
+}

@@ -5,10 +5,10 @@
 source "`dirname $0`/global_constants.sh"
 
 # Install vim-plug
-$DIR/vim-plug.sh
+"$DIR/vim-plug.sh"
 
 # Install recent clang version for LSP support
-$DIR/llvm.sh
+"$DIR/llvm.sh"
 
 # Install palantir's Python language server
 pip install  --user --upgrade python-language-server
@@ -31,7 +31,7 @@ $INSTALLCMD shellcheck
 $INSTALLCMD cppcheck
 
 # Install ctags
-$INSTALLCMD exuberant-ctags
+"$DIR/ctags.sh"
 
 # Install vimtex dependencies
 $INSTALLCMD latexmk

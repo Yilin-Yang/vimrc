@@ -5,14 +5,13 @@ scriptencoding utf-8
 "
 "
 "   localvimrc                                              [LOCALVIMRC]
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "   NerdTree                                                [NERDTREE]
 "   Tagbar                                                  [TAGBAR]
-"   nvim-completion-manager                                 [NCM]
 "   vim-easytags                                            [EASYTAGS]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "   BufExplorer                                             [BUFFER]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
@@ -21,7 +20,6 @@ scriptencoding utf-8
 "   vim-lexical                                             [LEXICAL]
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
-"   ConqueGDB                                               [CONQUEGDB]
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
 "   vim-pencil                                              [PENCIL]
@@ -29,9 +27,11 @@ scriptencoding utf-8
 "   vimwiki                                                 [VIMWIKI]
 "   diffconflicts                                           [DIFFCONFLICTS]
 "   winresizer                                              [WINRESIZER]
-"   vim-gitgutter                                           [GITGUTTER]
+"   vim-signify                                             [SIGNIFY]
 "   quick-scope                                             [QUICKSCOPE]
 "   vim-markbar                                             [MARKBAR]
+"   vim-illuminate                                          [ILLUMINATE]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 
@@ -43,109 +43,21 @@ let g:localvimrc_sandbox=0
 let g:localvimrc_name=['.yvimrc', '.lvimrc']
 
 "=============================================================================
-"   Neomake                                                 [NEOMAKE]
+"   Asynchronous Lint Engine                                [ALE]
 "=============================================================================
-" In normal map mode, press Ctrl-C to save buffer and run linters.
-nnoremap <silent> <C-c> :call WriteAndLint() <cr>
+hi ALEWarning cterm=underline ctermfg=164
 
-" In normal map mode, press Ctrl-Z to close error window.
-nnoremap <silent> <C-z> :call CloseErrorWindows() <cr>
+let g:ale_sign_error = 'X>'
+let g:ale_sign_warning = 'W>'
+let g:ale_sign_info = 'I>'
+let g:ale_sign_style_error = 'SX'
+let g:ale_sign_style_warning = 'S>'
 
-" For whatever reason, the ColorScheme event doesn't fire anymore?
-augroup neomake_scheme
-    au!
-    autocmd BufWinEnter *
-        \ hi link NeomakeError Error |
-        \ hi link NeomakeWarning Todo |
-        \ hi link NeomakeInfo Statement |
-        \ hi link NeomakeMessage Todo
-augroup end
+let g:ale_cpp_gcc_options = '--std=c++17 -Wall -Werror -Wextra -pedantic -O3 -DDEBUG -I. -I..'
 
-let g:neomake_open_list = 2 " Preserve cursor location on loc-list open
-let g:neomake_error_sign = {'text': '✖', 'texthl': 'NeomakeError'}
-let g:neomake_warning_sign = {
-     \   'text': '⚠',
-     \   'texthl': 'NeomakeWarning',
-     \ }
-let g:neomake_message_sign = {
-      \   'text': '➤',
-      \   'texthl': 'NeomakeMessage',
-      \ }
-let g:neomake_info_sign = {'text': 'ℹ', 'texthl': 'NeomakeInfo'}
-
-" **** GCC Syntax Checker ****
-let g:neomake_cpp_gcc_maker = {
-    \ 'exe': 'g++',
-    \ 'args': [
-        \ '--std=c++17',
-        \ '-Wall',
-        \ '-Werror',
-        \ '-Wextra',
-        \ '-pedantic',
-        \ '-O3',
-        \ '-DDEBUG',
-        \ '-I.',
-        \ '-I..'
-    \ ],
-\ }
-let g:neomake_cpp_enabled_makers = ['gcc']
-
-" **** bash Syntax Checker ****
-" Redefined to remove -x flag, which causes errors.
-let g:neomake_sh_shellcheck_maker = {
-    \ 'append_file'     : 1,
-    \ 'args'            : ['-fgcc'],
-    \ 'auto_enabled'    : 1,
-    \ 'cwd'             : '%:h',
-    \ 'errorformat'     : '%f:%l:%c: %trror: %m [SC%n],%f:%l:%c: %tarning: %m [SC%n],%I%f:%l:%c: Note: %m [SC%n] ',
-    \ 'exe'             : 'shellcheck',
-    \ 'output_stream'   : 'stdout',
-    \ 'short_name'      : 'SC',
-\ }
-
-" **** Vader Syntax Checker ****
-let g:neomake_vader_enabled_makers = ['vint']
-let g:neomake_vader_vint_maker = {
-    \ 'exe': 'vint',
-    \ 'args': [
-         \ '--style-problem',
-         \ '--no-color',
-         \ '-f',
-         \ '{file_path}:{line_number}:{column_number}:{severity}:{description} ({policy_name})',
-    \ ],
-    \ 'errorformat': '%I%f:%l:%c:style_problem:%m,'
-    \   .'%f:%l:%c:%t%*[^:]:E%n: %m,'
-    \   .'%f:%l:%c:%t%*[^:]:%m',
-    \ 'output_stream': 'stdout',
-    \ 'postprocess': {
-    \   'fn': function('neomake#postprocess#generic_length'),
-    \   'pattern': '\v%(^:|%([^:]+: ))\zs(\S+)',
-    \ },
-\ }
-
-" **** TeX Syntax Checker ****
-
-" -c:   clean regeneratable files
-" -cd:  change-dir to the source file before processing
-" -f:   continue processing after errors
-" -g:   force reprocessing, even if no changes were made
-" -pvc: preview file continuously
-let g:neomake_tex_latexmk_maker = {
-    \ 'exe' : 'latexmk',
-    \ 'args' : [
-    \   '-c',
-    \   '-cd',
-    \   '-f',
-    \   '-g',
-    \   '-pdf',
-    \   '-pvc',
-    \   '-verbose',
-    \   '-file-line-error',
-    \   '-synctex=1',
-    \ ],
-\ }
-
-
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 0
 
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
@@ -180,35 +92,6 @@ let g:NERDTreeChDirMode=0
 " Will open Tagbar, jump to it, and close after choosing a tag.
 nnoremap <silent> <Leader>g :TagbarOpenAutoClose<cr>
 nnoremap <silent> <Leader>b :TagbarToggle<cr>
-
-"=============================================================================
-"   nvim-completion-manager                                 [NCM]
-"=============================================================================
-" Insert mode tab-completion without breaking real presses of the tab key.
-inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
-
-" Press Enter to close the menu **and also** start a new line.
-inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
-
-if has('nvim')
-
-    " Enable vimtex support.
-    augroup nvim_cm_setup
-      autocmd!
-      autocmd User CmSetup call cm#register_source({
-            \ 'name' : 'vimtex',
-            \ 'priority': 8,
-            \ 'scoping': 1,
-            \ 'scopes': ['tex'],
-            \ 'abbreviation': 'tex',
-            \ 'cm_refresh_patterns': g:vimtex#re#ncm,
-            \ 'cm_refresh': {'omnifunc': 'vimtex#complete#omnifunc'},
-            \ })
-    augroup end
-endif
-
-" Suppress annoying completion menu messages.
-set shortmess+=c
 
 "=============================================================================
 "   vim-easytags                                            [EASYTAGS]
@@ -253,6 +136,8 @@ nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
 " Enable folding of documents by LaTeX structure.
 let g:vimtex_fold_enabled=1
 
+" Disable opening the quickfix window during continuous compilation.
+let g:vimtex_quickfix_enabled=0
 
 "=============================================================================
 "   UltiSnips                                               [ULTISNIPS]
@@ -294,60 +179,42 @@ augroup UltiSnips_AutoTrigger
 augroup end
 
 "=============================================================================
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "=============================================================================
-" Debugging Notes
-" https://github.com/autozimu/LanguageClient-neovim/issues/72
-"
-" TROUBLESHOOTING: If the C++ LSP doesn't work, try the following:
-" 1) Verify that nvim has registered all active remote plugins. (:CheckHealth,
-"    :UpdateRemotePlugins).
-" 2) Make sure that the active directory contains `compile_commands.json`.
-" 3) Make sure that you've installed clang-6.0 (or later) as well as
-"    clang-tools-6.0 (or later), and that you've used update-alternatives to
-"    make the clang symlinks point to those new executables.
+" Insert mode tab-completion without breaking real presses of the tab key.
+inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+" Press Enter to close the menu **and also** start a new line.
+inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
-" Load LanguageClient settings.json files when relevant.
-" This must be an absolute path; tilde expansion doesn't work.
-let g:LanguageClient_settingsPath = '/home/yiliny/.config/nvim/settings.json'
-let g:LanguageClient_loadSettings = 1
+" Hop between snippet placeholders!
+let g:coc_snippet_next = '<C-n>'
+let g:coc_snippet_prev = '<C-m>'
 
-" NOTE: clangd requires that `compile_commands.json` exist in the current
-"       directory or a parent directory!
-"
-"       Running `bear make` on a Makefile-based project will allow bear
-"       to capture the compilation commands used and generate a matching
-"       JSON file. If `compile_commands.json` is empty, try running
-"       `make clean` first.
-"
-"       (Obviously, this only works if you have bear installed.)
-let s:cquery = '/home/yiliny/.local/stow/cquery/bin/cquery'
-let g:LanguageClient_serverCommands = {
-    \ 'c': [s:cquery],
-    \ 'c.doxygen': [s:cquery],
-    \ 'cpp': [s:cquery],
-    \ 'cpp.doxygen': [s:cquery],
-    \ 'python': ['pyls']
-    \ }
+" CodeLens!
+nmap <leader>pc <Plug>(coc-codelens-action)
 
-" Show type info and short doc of identifier under cursor.
-nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
+" Rename symbol.
+nmap <leader>pr <Plug>(coc-rename)
 
-" Goto definition of identifier.
-nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
+" Jump between problems.
+nmap <leader>S <Plug>(coc-diagnostic-info)
+nmap <leader>n <Plug>(coc-diagnostic-next)
+nmap <leader>N <Plug>(coc-diagnostic-prev)
 
-" Rename the identifier under the cursor.
-" NOTE: requires `set hidden`
-nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()<cr>
+" Jump to...
+nmap <leader>t  <Plug>(coc-definition)
+nmap <leader>td <Plug>(coc-type-definition)
+nmap <leader>ti <Plug>(coc-implementation)
+nmap <leader>sr <Plug>(coc-references)
 
-" List the symbols in the current document.
-nnoremap <silent> <Leader>ps :call LanguageClient_textDocument_documentSymbol()<cr>
+" Autoformat!
+nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
 
-" List all references of the identifier under the cursor.
-nnoremap <silent> <Leader>pf :call LanguageClient_textDocument_references()<cr>
+" Display diagnostics in airline.
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -382,18 +249,18 @@ let g:EasyMotion_smartcase = 1
 "=============================================================================
 " Easier keymappings that use <Leader> instead of 'g'.
 nmap <Leader>c gc
-vnoremap <silent> <Leader>c :Commentary<cr>
+xnoremap <silent> <Leader>c :Commentary<cr>
 
 "=============================================================================
 "   tabular                                                 [TABULAR]
 "=============================================================================
 " Faster mapping to access Tabular Ex command.
 nnoremap t :Tabularize /
-vnoremap t :Tabularize /
+xnoremap t :Tabularize /
 
 
 nnoremap <silent> tt :Tabularize /,<cr>
-vnoremap <silent> tt :Tabularize /,<cr>
+xnoremap <silent> tt :Tabularize /,<cr>
 
 "=============================================================================
 "   vim-lexical                                             [LEXICAL]
@@ -413,7 +280,7 @@ endfunction
 "   vim-easy-align                                          [EASYALIGN]
 "=============================================================================
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
+xmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
@@ -476,28 +343,6 @@ nnoremap gf /(<CR>l<C-v>/)<CR>
 xmap <leader>r  <Plug>ReplaceWithRegisterVisual
 nmap <leader>rr <Plug>ReplaceWithRegisterLine
 nmap <leader>r  <Plug>ReplaceWithRegisterOperator
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-
-" Continue updating Conque buffers after switching to another buffer.
-let g:ConqueTerm_ReadUnfocused = 1
-
-" Try to use the Python3 interface, which I presume is better?
-let g:ConqueTerm_PyVersion = 3
-
-" Open the GDB terminal on the right side of the screen.
-let g:ConqueGdb_SrcSplit = 'left' " Open source on the *left* side.
-
-" Update very frequently while I'm in insert mode.
-let g:ConqueTerm_FocusedUpdateTime = 100
-
-" Update very frequently while I'm not in insert mode.
-let g:ConqueTerm_UnfocusedUpdateTime = 100
-
-" Disable start warnings.
-let g:ConqueTerm_StartMessages = 0
 
 "=============================================================================
 "   fuzzy-find vim plugin                                   [FZFVIM]
@@ -583,8 +428,7 @@ let g:pencil#conceallevel = 0       " disable formatting character concealment
 
 augroup pencil
     au!
-    autocmd FileType markdown,text  call Prose() | call Punctuation()
-    autocmd FileType tex            call Prose()
+    autocmd FileType markdown,text  call Prose()
 augroup end
 
 "=============================================================================
@@ -787,15 +631,42 @@ let g:winresizer_keycode_finish = 100 " d
 nnoremap <leader>wr :WinResizerStartResize<cr>
 nnoremap <leader>wm :WinResizerStartMove<cr>
 
+" unmap winresizer start key
+silent! nunmap <C-e>
+
 " Slightly more granular vertical resize control.
 let g:winresizer_vert_resize = 5
 
 "=============================================================================
-"   vim-gitgutter                                           [GITGUTTER]
+"   vim-signify                                             [SIGNIFY]
 "=============================================================================
+" Specify the version control systems that I actually use.
+let g:signify_vcs_list = [ 'git', 'svn' ]
 
-" Preserve my highlighting settings for the sign column.
-let g:gitgutter_override_sign_column_highlight = 0
+let g:signify_realtime = 1
+" Make sure to disable realtime autowrite on CursorHold and CursorHoldI.
+let g:signify_cursorhold_normal = 0
+let g:signify_cursorhold_insert = 0
+
+let g:signify_sign_add               = '+'
+let g:signify_sign_delete            = '-'
+let g:signify_sign_delete_first_line = '‾'
+let g:signify_sign_change            = '~'
+let g:signify_sign_changedelete      = g:signify_sign_change
+
+nnoremap <leader>gt :SignifyToggle<cr>
+nnoremap <leader>gf :SignifyFold!<cr>
+nnoremap <leader>gd :SignifyDiff<cr>
+
+highlight SignifySignAdd    cterm=bold  ctermbg=none  ctermfg=119
+highlight SignifySignDelete cterm=bold  ctermbg=none  ctermfg=167
+highlight SignifySignChange cterm=bold  ctermbg=none  ctermfg=227
+
+augroup signify_refresh
+    au!
+    "autocmd BufEnter   * SignifyRefresh
+    "autocmd CursorHold * SignifyRefresh
+augroup end
 
 "=============================================================================
 "   quick-scope                                             [QUICKSCOPE]
@@ -820,4 +691,27 @@ augroup end
 
 map <leader>m <Plug>ToggleMarkbar
 
-let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let g:markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let g:markbar_peekaboo_marks_to_display = "'\"(){}.[]<>^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let g:markbar_section_separation = 0
+let g:markbar_explicitly_remap_mark_mappings = v:true
+
+"=============================================================================
+"   vim-illuminate                                          [ILLUMINATE]
+"=============================================================================
+
+let g:Illuminate_ftblacklist = [
+    \ 'nerdtree',
+    \ 'markbar',
+    \ 'tagbar',
+    \ 'help'
+\ ]
+
+let g:Illuminate_highlightUnderCursor = 0
+
+hi illuminatedWord cterm=bold,underline gui=bold,underline
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+nnoremap <C-z> :MundoToggle<cr>
