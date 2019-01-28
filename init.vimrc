@@ -516,7 +516,11 @@ Plug 'kshenoy/vim-signature'
 "   dapper.nvim                                             [DAPPER]
 "=============================================================================
 " " Debug adapter protocol implementation for neovim.
-Plug 'git@bitbucket.org:yiliny/dapper.nvim'
+Plug 'Yilin-Yang/dapper.nvim'
+
+  Plug 'Yilin-Yang/VSCrib.vim'
+
+  Plug 'Yilin-Yang/TypeVim'
 
 "=============================================================================
 "   vim-mundo                                               [MUNDO]
