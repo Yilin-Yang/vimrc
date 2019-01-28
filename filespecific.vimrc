@@ -20,7 +20,7 @@ scriptencoding utf-8
 " LEGEND:   (changes from default, which are given in `:h cinoptions`)
 "   L-1 :   Place jump labels (for `goto` statements) in column 1.
 "   :0  :   Zero additional indentation after `switch` statements.
-"   g0  :   Scope declarations (`public`, `private`, etc.) go in column 1.
+"   g1  :   Scope declarations (`public`, `private`, etc.) are indented 1 space.
 "   +2s :   Continuation lines receive an additional indentation relative to
 "           the previous line of `2 * shiftwidth`.
 "   N0  :   Zero additional indentation for code inside namespaces.
@@ -31,7 +31,7 @@ scriptencoding utf-8
 "   m1  :   Lines that start with closing parentheses are aligned with the
 "           first character of the line with the matching opening parentheses.
 function! CPPIndent()
-    setlocal cinoptions+=L-1,:0,g0,+2s,N0,t0,(2s,W2s,m1
+    setlocal cinoptions+=L-1,:0,g1,+2s,N0,t0,(2s,W2s,m1
 endfunction
 
 "=============================================================================

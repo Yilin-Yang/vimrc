@@ -1,3 +1,9 @@
+snippet commentblock
+""
+" $1
+" @throws $2
+endsnippet
+
 snippet type_check
 function! $1#$2#CheckType(object) abort
   if type(a:object) !=# v:t_dict || !has_key(a:object, 'TYPE') || !has_key(a:object['TYPE'], '$2')
