@@ -11,6 +11,6 @@ endfunction
 augroup c_detect
     au!
     autocmd BufNewFile,BufRead *.c  set filetype=c.doxygen
-    autocmd BufNewFile,BufRead *.h
-        \ execute 'set filetype='. IsCPPHeader() ? 'cpp.doxygen' : 'c.doxygen'
+    " autocmd BufNewFile,BufRead *.h
+        " \ execute 'set filetype='. IsCPPHeader() ? 'cpp.doxygen' : 'c.doxygen'
 augroup end
