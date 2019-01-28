@@ -255,12 +255,9 @@ xnoremap <silent> <Leader>c :Commentary<cr>
 "   tabular                                                 [TABULAR]
 "=============================================================================
 " Faster mapping to access Tabular Ex command.
-nnoremap t :Tabularize /
-xnoremap t :Tabularize /
+xnoremap <leader>t :Tabularize /
 
-
-nnoremap <silent> tt :Tabularize /,<cr>
-xnoremap <silent> tt :Tabularize /,<cr>
+xnoremap <silent> <leader>tt :Tabularize /,<cr>
 
 "=============================================================================
 "   vim-lexical                                             [LEXICAL]
