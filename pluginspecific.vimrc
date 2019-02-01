@@ -7,8 +7,6 @@ scriptencoding utf-8
 "   localvimrc                                              [LOCALVIMRC]
 "   Asynchronous Lint Engine                                [ALE]
 "   NerdTree                                                [NERDTREE]
-"   Tagbar                                                  [TAGBAR]
-"   vim-easytags                                            [EASYTAGS]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
 "   coc.nvim                                                [COC]
@@ -84,51 +82,6 @@ let g:NERDTreeQuitOnOpen=1
 
 " Don't change the PWD from the NerdTree sidebar.
 let g:NERDTreeChDirMode=0
-
-"=============================================================================
-"   Tagbar                                                  [TAGBAR]
-"=============================================================================
-" Open an informational bar showing ctags for the current file.
-" Will open Tagbar, jump to it, and close after choosing a tag.
-nnoremap <silent> <Leader>g :TagbarOpenAutoClose<cr>
-nnoremap <silent> <Leader>b :TagbarToggle<cr>
-
-"=============================================================================
-"   vim-easytags                                            [EASYTAGS]
-"=============================================================================
-
-" General Settings
-    let g:easytags_file = '~/.tags'     " Store tags in the home directory.
-    let g:easytags_auto_highlight = 0   " Disable tag highlighting.
-
-" Performance Settings
-    let g:easytags_async = 1            " Generate tags asynchronously.
-    "let g:easytags_python_enabled = 1   " Use faster Python syntax highlighter.
-
-"   With this setup, it's actually a bad idea to turn this option on.
-"       I ran :UpdateTags inside of /usr, and the tags file it generated was
-"   over a gibibyte (GiB) in size.
-"       It's probably okay to turn this on in a local .vimrc, especially
-"   with asynchronous execution, but if you turn it on globally, you run
-"   the risk of making your global tags file unusably large.
-"
-" let g:easytags_autorecurse = 1      " Generate tags for all subdirs as well.
-
-" Recursively generate tags for the current file, and everything in
-"   subdirectories below.
-nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
-
-" Update Frequency
-
-    "let g:easytags_on_cursorhold = 1    " Run :UpdateTags whenever idle.
-
-    " Try to trigger this all the time. Wasteful multithreading HO!
-    "let g:easytags_always_enabled = 1   " HA HA HA HA HAAAAAAAA
-    let g:easytags_events = [
-        \ 'BufWritePost',
-        \ 'BufEnter',
-        \ 'BufLeave'
-    \ ]
 
 "=============================================================================
 "   vimtex                                                  [VIMTEX]
