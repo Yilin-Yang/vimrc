@@ -42,7 +42,6 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 
 * [BufExplorer](https://github.com/jlanzarotta/bufexplorer)
 * [ReplaceWithRegister](https://github.com/vim-scripts/ReplaceWithRegister)
-* [Tagbar](https://github.com/majutsushi/tagbar	)
 * [UltiSnips](https://github.com/SirVer/ultisnips)
 * [coc.nvim](https://github.com/neoclide/coc.nvim)
 * [diffconflicts](https://github.com/whiteinge/diffconflicts)
@@ -63,7 +62,6 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-commentary](https://github.com/tpope/vim-commentary)
 * [vim-easy-align](https://github.com/junegunn/vim-easy-align)
 * [vim-easymotion](https://github.com/easymotion/vim-easymotion)
-* [vim-easytags](https://github.com/xolox/vim-easytags)
 * [vim-eunuch](https://github.com/tpope/vim-eunuch)
 * [vim-fugitive](https://github.com/tpope/vim-fugitive)
 * [vim-glaive](https://github.com/google/vim-glaive)

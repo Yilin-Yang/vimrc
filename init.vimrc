@@ -10,8 +10,6 @@
 "   Asynchronous Lint Engine                                [ALE]
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
-"   Tagbar                                                  [TAGBAR]
-"   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
@@ -191,25 +189,6 @@ Plug 'scrooloose/nerdtree'
 "
 " See documentation here: ~/.vim/bundle/vim-unimpaired/doc/unpaired.txt
 Plug 'tpope/vim-unimpaired'
-
-"=============================================================================
-"   Tagbar                                                  [TAGBAR]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Create a bar that shows you ctags for the current file.
-Plug 'majutsushi/tagbar'
-
-"=============================================================================
-"   vim-easytags                                            [EASYTAGS]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Automatic tag generation for whatever file I'm using!
-" This variable has to be set before loading the plugin.
-let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
-Plug 'xolox/vim-easytags'
-
-" " Dependency for vim-easytags.
-Plug 'xolox/vim-misc'
 
 "=============================================================================
 "   lldb.nvim                                                    [LLDB]
@@ -516,7 +495,11 @@ Plug 'kshenoy/vim-signature'
 "   dapper.nvim                                             [DAPPER]
 "=============================================================================
 " " Debug adapter protocol implementation for neovim.
-Plug 'git@bitbucket.org:yiliny/dapper.nvim'
+Plug 'Yilin-Yang/dapper.nvim'
+
+  Plug 'Yilin-Yang/VSCrib.vim'
+
+  Plug 'Yilin-Yang/TypeVim'
 
 "=============================================================================
 "   vim-mundo                                               [MUNDO]

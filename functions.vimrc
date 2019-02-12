@@ -214,11 +214,11 @@ function! TestCaseAutoformat()
 
     if match(&filetype, 'cpp') !=# -1
         call search('int main')
-        .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tcout << "\1" << endl;\r\r\tcout << "\1 PASSED" << endl;\r\}\r\r
+        .,$s/void \(\<\w\+\>\)();\n/void \1() {\r  cout << "\1" << endl;\r\r  cout << "\1 PASSED" << endl;\r\}\r\r
         normal! dk
     elseif match(&filetype, 'c') !=# -1
         call search('int main')
-        .,$s/void \(\<\w\+\>\)();\n/void \1()\r{\r\tprintf("\1\\n");\r\r\tprintf("\1 PASSED\\n");\r\}\r\r
+        .,$s/void \(\<\w\+\>\)();\n/void \1() {\r  printf("\1\\n");\r\r  printf("\1 PASSED\\n");\r\}\r\r
     endif
 
     retab
@@ -460,6 +460,22 @@ function! ColorColumnBlock(...)
         execute 'hi ColorColumn ' . a:hi_args
     endif
     execute 'set colorcolumn=' . join(range(a:start,a:end), ',')
+endfunction
+
+" EFFECTS:  Highlights trailing whitespace.
+" PARAM:    high_grp  (v:t_string)  The highlight group to apply to detected
+"                                       trailing whitespace. If empty, stops
+"                                       highlighting trailing whitespace.
+function! HighlightTrailing(high_grp) abort
+    call maktaba#ensure#IsString(a:high_grp)
+    " initialize the highlight group
+    highlight TrailingWhitespace ctermbg=red
+    hi clear TrailingWhitespace
+    if empty(a:high_grp)
+      return
+    endif
+    execute 'hi link TrailingWhitespace ' . a:high_grp
+    match TrailingWhitespace /\s\+$/
 endfunction
 
 "=============================================================================
