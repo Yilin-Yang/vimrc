@@ -217,22 +217,22 @@ Plug 'SirVer/ultisnips'
 "   coc.nvim                                                [COC]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " IntelliSense in neovim!.
-Plug 'neoclide/coc.nvim', {
-    \ 'tag': '*',
-    \ 'do': 'yarn install',
-\ }
+" " " IntelliSense in neovim!.
+" Plug 'neoclide/coc.nvim', {
+"     \ 'tag': '*',
+"     \ 'do': 'yarn install',
+" \ }
 
-Plug 'neoclide/coc-sources'
-Plug 'neoclide/coc-neco'
-    Plug 'Shougo/neco-vim'
+" Plug 'neoclide/coc-sources'
+" Plug 'neoclide/coc-neco'
+"     Plug 'Shougo/neco-vim'
 
-function! InstallCoCExtensions() abort
-  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-pyls coc-json coc-html coc-css
+" function! InstallCoCExtensions() abort
+"   CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-pyls coc-json coc-html coc-css
 
-  " coc-sources extensions
-  CocInstall coc-ultisnips
-endfunction
+"   " coc-sources extensions
+"   CocInstall coc-ultisnips
+" endfunction
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
