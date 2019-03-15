@@ -7,12 +7,9 @@ scriptencoding utf-8
 "   localvimrc                                              [LOCALVIMRC]
 "   Asynchronous Lint Engine                                [ALE]
 "   NerdTree                                                [NERDTREE]
-"   Tagbar                                                  [TAGBAR]
-"   ncm2                                                    [NCM]
-"   vim-easytags                                            [EASYTAGS]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "   BufExplorer                                             [BUFFER]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
@@ -21,7 +18,6 @@ scriptencoding utf-8
 "   vim-lexical                                             [LEXICAL]
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
-"   ConqueGDB                                               [CONQUEGDB]
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
 "   vim-pencil                                              [PENCIL]
@@ -33,6 +29,7 @@ scriptencoding utf-8
 "   quick-scope                                             [QUICKSCOPE]
 "   vim-markbar                                             [MARKBAR]
 "   vim-illuminate                                          [ILLUMINATE]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 
@@ -55,6 +52,10 @@ let g:ale_sign_style_error = 'SX'
 let g:ale_sign_style_warning = 'S>'
 
 let g:ale_cpp_gcc_options = '--std=c++17 -Wall -Werror -Wextra -pedantic -O3 -DDEBUG -I. -I..'
+
+let g:ale_lint_on_text_changed = 'normal'
+let g:ale_lint_on_insert_leave = 1
+let g:ale_lint_on_enter = 0
 
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
@@ -83,93 +84,13 @@ let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeChDirMode=0
 
 "=============================================================================
-"   Tagbar                                                  [TAGBAR]
-"=============================================================================
-" Open an informational bar showing ctags for the current file.
-" Will open Tagbar, jump to it, and close after choosing a tag.
-nnoremap <silent> <Leader>g :TagbarOpenAutoClose<cr>
-nnoremap <silent> <Leader>b :TagbarToggle<cr>
-
-"=============================================================================
-"   ncm2                                                    [NCM]
-"=============================================================================
-" enable ncm2 for all buffers
-autocmd BufEnter * call ncm2#enable_for_buffer()
-
-" Insert mode tab-completion without breaking real presses of the tab key.
-inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
-
-" Press Enter to close the menu **and also** start a new line.
-inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
-
-" Enable vimtex support.
-augroup cm_setup
-    au!
-    " from: https://github.com/ncm2/ncm2/pull/23#issue-201444472
-    autocmd User Ncm2Plugin call ncm2#register_source({
-        \ 'name' : 'vimtex',
-        \ 'priority': 1,
-        \ 'subscope_enable': 1,
-        \ 'complete_length': 1,
-        \ 'scope': ['tex'],
-        \ 'matcher': {'name': 'combine',
-        \           'matchers': [
-        \               {'name': 'abbrfuzzy', 'key': 'menu'},
-        \               {'name': 'prefix', 'key': 'word'},
-        \           ]},
-        \ 'mark': 'tex',
-        \ 'word_pattern': '\w+',
-        \ 'complete_pattern': g:vimtex#re#ncm,
-        \ 'on_complete': ['ncm2#on_complete#omni', 'vimtex#complete#omnifunc'],
-    \ })
-augroup end
-
-" Suppress annoying completion menu messages.
-set shortmess+=c
-
-"=============================================================================
-"   vim-easytags                                            [EASYTAGS]
-"=============================================================================
-
-" General Settings
-    let g:easytags_file = '~/.tags'     " Store tags in the home directory.
-    let g:easytags_auto_highlight = 0   " Disable tag highlighting.
-
-" Performance Settings
-    let g:easytags_async = 1            " Generate tags asynchronously.
-    "let g:easytags_python_enabled = 1   " Use faster Python syntax highlighter.
-
-"   With this setup, it's actually a bad idea to turn this option on.
-"       I ran :UpdateTags inside of /usr, and the tags file it generated was
-"   over a gibibyte (GiB) in size.
-"       It's probably okay to turn this on in a local .vimrc, especially
-"   with asynchronous execution, but if you turn it on globally, you run
-"   the risk of making your global tags file unusably large.
-"
-" let g:easytags_autorecurse = 1      " Generate tags for all subdirs as well.
-
-" Recursively generate tags for the current file, and everything in
-"   subdirectories below.
-nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
-
-" Update Frequency
-
-    "let g:easytags_on_cursorhold = 1    " Run :UpdateTags whenever idle.
-
-    " Try to trigger this all the time. Wasteful multithreading HO!
-    "let g:easytags_always_enabled = 1   " HA HA HA HA HAAAAAAAA
-    let g:easytags_events = [
-        \ 'BufWritePost',
-        \ 'BufEnter',
-        \ 'BufLeave'
-    \ ]
-
-"=============================================================================
 "   vimtex                                                  [VIMTEX]
 "=============================================================================
 " Enable folding of documents by LaTeX structure.
 let g:vimtex_fold_enabled=1
 
+" Disable opening the quickfix window during continuous compilation.
+let g:vimtex_quickfix_enabled=0
 
 "=============================================================================
 "   UltiSnips                                               [ULTISNIPS]
@@ -211,66 +132,42 @@ augroup UltiSnips_AutoTrigger
 augroup end
 
 "=============================================================================
-"   LanguageClient-neovim                                   [LSP]
+"   coc.nvim                                                [COC]
 "=============================================================================
-" Debugging Notes
-" https://github.com/autozimu/LanguageClient-neovim/issues/72
-"
-" TROUBLESHOOTING: If the C++ LSP doesn't work, try the following:
-" 1) Verify that nvim has registered all active remote plugins. (:CheckHealth,
-"    :UpdateRemotePlugins).
-" 2) Make sure that the active directory contains `compile_commands.json`.
-" 3) Make sure that you've installed clang-6.0 (or later) as well as
-"    clang-tools-6.0 (or later), and that you've used update-alternatives to
-"    make the clang symlinks point to those new executables.
+" Insert mode tab-completion without breaking real presses of the tab key.
+inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
-" Automatically start language servers.
-let g:LanguageClient_autoStart = 1
+" Press Enter to close the menu **and also** start a new line.
+inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
-" Load LanguageClient settings.json files when relevant.
-" This must be an absolute path; tilde expansion doesn't work.
-let g:LanguageClient_settingsPath = '/home/yiliny/.config/nvim/settings.json'
-let g:LanguageClient_loadSettings = 1
+" Hop between snippet placeholders!
+let g:coc_snippet_next = '<C-n>'
+let g:coc_snippet_prev = '<C-m>'
 
-" NOTE: clangd requires that `compile_commands.json` exist in the current
-"       directory or a parent directory!
-"
-"       Running `bear make` on a Makefile-based project will allow bear
-"       to capture the compilation commands used and generate a matching
-"       JSON file. If `compile_commands.json` is empty, try running
-"       `make clean` first.
-"
-"       (Obviously, this only works if you have bear installed.)
-let s:cqueryArgsList = [
-    \ '~/.local/stow/cquery/bin/cquery',
-    \ '--language-server',
-    \ '--log-stdin-stdout-to-stderr']
+" CodeLens!
+nmap <leader>pc <Plug>(coc-codelens-action)
 
-let g:LanguageClient_serverCommands = {
-    \ 'c': s:cqueryArgsList,
-    \ 'c.doxygen': s:cqueryArgsList,
-    \ 'cpp': s:cqueryArgsList,
-    \ 'cpp.doxygen': s:cqueryArgsList,
-    \ 'python': ['pyls'],
-    \ 'javascript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
-    \ 'typescript': ['node', '/home/yiliny/js/javascript-typescript-langserver/lib/language-server-stdio'],
-\ }
+" Rename symbol.
+nmap <leader>pr <Plug>(coc-rename)
 
-" Show type info and short doc of identifier under cursor.
-nnoremap <silent> <Leader>s :call LanguageClient_textDocument_hover()<cr>
+" Jump between problems.
+nmap <leader>S <Plug>(coc-diagnostic-info)
+nmap <leader>n <Plug>(coc-diagnostic-next)
+nmap <leader>N <Plug>(coc-diagnostic-prev)
 
-" Goto definition of identifier.
-nnoremap <silent> <Leader>t :call LanguageClient_textDocument_definition()<cr>
+" Jump to...
+nmap <leader>t  <Plug>(coc-definition)
+nmap <leader>td <Plug>(coc-type-definition)
+nmap <leader>ti <Plug>(coc-implementation)
+nmap <leader>sr <Plug>(coc-references)
 
-" Rename the identifier under the cursor.
-" NOTE: requires `set hidden`
-nnoremap <silent> <Leader>pr :call LanguageClient_textDocument_rename()<cr>
+" Autoformat!
+nmap <leader>f  <Plug>(coc-format-selected)
+xmap <leader>f  <Plug>(coc-format-selected)
 
-" List the symbols in the current document.
-nnoremap <silent> <Leader>ps :call LanguageClient_textDocument_documentSymbol()<cr>
-
-" List all references of the identifier under the cursor.
-nnoremap <silent> <Leader>pf :call LanguageClient_textDocument_references()<cr>
+" Display diagnostics in airline.
+let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
+let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -305,18 +202,15 @@ let g:EasyMotion_smartcase = 1
 "=============================================================================
 " Easier keymappings that use <Leader> instead of 'g'.
 nmap <Leader>c gc
-vnoremap <silent> <Leader>c :Commentary<cr>
+xnoremap <silent> <Leader>c :Commentary<cr>
 
 "=============================================================================
 "   tabular                                                 [TABULAR]
 "=============================================================================
 " Faster mapping to access Tabular Ex command.
-nnoremap t :Tabularize /
-vnoremap t :Tabularize /
+xnoremap <leader>t :Tabularize /
 
-
-nnoremap <silent> tt :Tabularize /,<cr>
-vnoremap <silent> tt :Tabularize /,<cr>
+xnoremap <silent> <leader>tt :Tabularize /,<cr>
 
 "=============================================================================
 "   vim-lexical                                             [LEXICAL]
@@ -336,7 +230,7 @@ endfunction
 "   vim-easy-align                                          [EASYALIGN]
 "=============================================================================
 " Start interactive EasyAlign in visual mode (e.g. vip<Enter>)
-vmap <Enter> <Plug>(EasyAlign)
+xmap <Enter> <Plug>(EasyAlign)
 
 " Start interactive EasyAlign for a motion/text object (e.g. gaip)
 nmap ga <Plug>(EasyAlign)
@@ -399,28 +293,6 @@ nnoremap gf /(<CR>l<C-v>/)<CR>
 xmap <leader>r  <Plug>ReplaceWithRegisterVisual
 nmap <leader>rr <Plug>ReplaceWithRegisterLine
 nmap <leader>r  <Plug>ReplaceWithRegisterOperator
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-
-" Continue updating Conque buffers after switching to another buffer.
-let g:ConqueTerm_ReadUnfocused = 1
-
-" Try to use the Python3 interface, which I presume is better?
-let g:ConqueTerm_PyVersion = 3
-
-" Open the GDB terminal on the right side of the screen.
-let g:ConqueGdb_SrcSplit = 'left' " Open source on the *left* side.
-
-" Update very frequently while I'm in insert mode.
-let g:ConqueTerm_FocusedUpdateTime = 100
-
-" Update very frequently while I'm not in insert mode.
-let g:ConqueTerm_UnfocusedUpdateTime = 100
-
-" Disable start warnings.
-let g:ConqueTerm_StartMessages = 0
 
 "=============================================================================
 "   fuzzy-find vim plugin                                   [FZFVIM]
@@ -741,8 +613,8 @@ highlight SignifySignChange cterm=bold  ctermbg=none  ctermfg=227
 
 augroup signify_refresh
     au!
-    autocmd BufEnter   * SignifyRefresh
-    autocmd CursorHold * SignifyRefresh
+    "autocmd BufEnter   * SignifyRefresh
+    "autocmd CursorHold * SignifyRefresh
 augroup end
 
 "=============================================================================
@@ -768,8 +640,10 @@ augroup end
 
 map <leader>m <Plug>ToggleMarkbar
 
-let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let g:markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let g:markbar_peekaboo_marks_to_display = "'\"(){}.[]<>^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let g:markbar_section_separation = 0
+let g:markbar_explicitly_remap_mark_mappings = v:true
 
 "=============================================================================
 "   vim-illuminate                                          [ILLUMINATE]
@@ -785,3 +659,8 @@ let g:Illuminate_ftblacklist = [
 let g:Illuminate_highlightUnderCursor = 0
 
 hi illuminatedWord cterm=bold,underline gui=bold,underline
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+nnoremap <C-z> :MundoToggle<cr>

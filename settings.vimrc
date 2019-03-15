@@ -17,7 +17,7 @@ scriptencoding utf-8
 "   Tab Heresy                                              [BYTHEEMPEROR]
 "=============================================================================
 set expandtab                       " Spaces for indentation.
-set shiftwidth=4                    " Indentation depth with << and >> commands.
+set shiftwidth=2                    " Indentation depth with << and >> commands.
 set softtabstop=-1                  " The number of columns to insert when pressing
                                     " <Tab>. Helpful when *forced* to indent with mixed
                                     " tabs and spaces, like *profligate scum*.
@@ -41,6 +41,7 @@ set hidden                          " Allow hidden buffers.
 set visualbell                      " FOR THE LOVE OF GOD STOP BOOPING IN WSL
 set showcmd                         " See leader key in corner.
 set lazyredraw                      " Only redraw after given command has completed
+set shortmess=aoOtTF                " Abbreviate commandline text.
 set completeopt=menuone,noinsert    " Show pop-up menu even when
                                     " there's only one option, don't insert
                                     " text without user input.
@@ -171,18 +172,14 @@ set cursorcolumn                " Mark the current column.
 "=============================================================================
 "   System Configuration                                    [CONFIG]
 "=============================================================================
-
-" Place tempfiles in a central location, naming folders by PID.
-"   This *does* break some of the 'prevent simultaneous editing' enabled by
-"   swapback files, and it makes recovering lost data a bit harder, but that's a
-"   worthy price to pay in exchange for `nvim -S` calls that actually work.
-"
-" " Taken from: https://github.com/tpope/vim-obsession/issues/18
-let g:vimtmp = $HOME . '/.tmp/' . getpid()
-silent! call mkdir(g:vimtmp, 'p', 0700)
-let &backupdir=g:vimtmp
-let &directory=g:vimtmp
+" I literally never use swapfiles, and I habitually save my files every
+" fifteen seconds or so.
+set noswapfile
 
 " Shorten startup time by explicitly specifying python path.
 let g:python_host_prog  = '/usr/bin/python'
 let g:python3_host_prog = '/usr/bin/python3'
+
+" Enable persistent undo so that undo history persists across vim sessions
+set undofile
+set undodir=~/.vim/undo

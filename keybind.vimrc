@@ -113,7 +113,7 @@ nnoremap <leader>w vipJgqq
 vnoremap <silent> <leader>s :sort<cr>
 
 " Reformat text that lay within parentheses (function calls, headers...)
-vnoremap <silent> <leader>f :call ReformatMultilineParentheses()<cr>
+" vnoremap <silent> <leader>f :call ReformatMultilineParentheses()<cr>
 
 " Start a search command for a regex pattern *only* within the current window.
 " " Taken from:
