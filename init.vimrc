@@ -2,16 +2,15 @@
 "                             TABLE OF CONTENTS
 "=============================================================================
 "
+"   vim-maktaba                                             [MAKTABA]
+"   vim-glaive                                              [GLAIVE]
 "   localvimrc                                              [LOCALVIMRC]
 "   Fugitive                                                [FUGITIVE]
 "   vim-surround                                            [SURROUND]
 "   Asynchronous Lint Engine                                [ALE]
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
-"   Tagbar                                                  [TAGBAR]
-"   vim-easytags                                            [EASYTAGS]
 "   lldb                                                    [LLDB]
-"   ConqueGDB                                               [CONQUEGDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
 "   coc.nvim                                                [COC]
@@ -53,6 +52,7 @@
 "   typescript-vim                                          [TS-VIM]
 "   vim-signature                                           [SIGNATURE]
 "   dapper.nvim                                             [DAPPER]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -76,6 +76,20 @@ set nocompatible        " non-compatible with basic vi
 "#############################################################################
 
 call plug#begin('~/.vim/bundle')
+
+"=============================================================================
+"   vim-maktaba                                             [MAKTABA]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Consistent plugin design, by Google.
+Plug 'Google/vim-maktaba'
+
+"=============================================================================
+"   vim-glaive                                              [GLAIVE]
+"=============================================================================
+"-----------------------------------------------------------------------------
+" " Consistent plugin configuration, by Google.
+Plug 'Google/vim-glaive'
 
 "=============================================================================
 "   localvimrc                                              [LOCALVIMRC]
@@ -177,25 +191,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-unimpaired'
 
 "=============================================================================
-"   Tagbar                                                  [TAGBAR]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Create a bar that shows you ctags for the current file.
-Plug 'majutsushi/tagbar'
-
-"=============================================================================
-"   vim-easytags                                            [EASYTAGS]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Automatic tag generation for whatever file I'm using!
-" This variable has to be set before loading the plugin.
-let g:easytags_include_members = 1  " Generate tags for struct/class *members*.
-Plug 'xolox/vim-easytags'
-
-" " Dependency for vim-easytags.
-Plug 'xolox/vim-misc'
-
-"=============================================================================
 "   lldb.nvim                                                    [LLDB]
 "=============================================================================
 "-----------------------------------------------------------------------------
@@ -203,11 +198,6 @@ Plug 'xolox/vim-misc'
 if has('nvim')
     Plug 'dbgx/lldb.nvim'
 endif
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-Plug 'vim-scripts/Conque-GDB', { 'on': 'StartConqueGDB' }
 
 "=============================================================================
 "   vim-snippets                                            [SNIPPETS]
@@ -505,7 +495,17 @@ Plug 'kshenoy/vim-signature'
 "   dapper.nvim                                             [DAPPER]
 "=============================================================================
 " " Debug adapter protocol implementation for neovim.
-Plug 'git@bitbucket.org:yiliny/dapper.nvim'
+Plug 'Yilin-Yang/dapper.nvim'
+
+  Plug 'Yilin-Yang/VSCrib.vim'
+
+  Plug 'Yilin-Yang/TypeVim'
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+" " Visualize the vim undo tree.
+Plug 'simnalamburt/vim-mundo'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

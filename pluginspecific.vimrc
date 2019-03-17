@@ -7,8 +7,6 @@ scriptencoding utf-8
 "   localvimrc                                              [LOCALVIMRC]
 "   Asynchronous Lint Engine                                [ALE]
 "   NerdTree                                                [NERDTREE]
-"   Tagbar                                                  [TAGBAR]
-"   vim-easytags                                            [EASYTAGS]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
 "   coc.nvim                                                [COC]
@@ -20,7 +18,6 @@ scriptencoding utf-8
 "   vim-lexical                                             [LEXICAL]
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
-"   ConqueGDB                                               [CONQUEGDB]
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   vim-airline                                             [AIRLINE]
 "   vim-pencil                                              [PENCIL]
@@ -32,6 +29,7 @@ scriptencoding utf-8
 "   quick-scope                                             [QUICKSCOPE]
 "   vim-markbar                                             [MARKBAR]
 "   vim-illuminate                                          [ILLUMINATE]
+"   vim-mundo                                               [MUNDO]
 "=============================================================================
 
 
@@ -86,56 +84,13 @@ let g:NERDTreeQuitOnOpen=1
 let g:NERDTreeChDirMode=0
 
 "=============================================================================
-"   Tagbar                                                  [TAGBAR]
-"=============================================================================
-" Open an informational bar showing ctags for the current file.
-" Will open Tagbar, jump to it, and close after choosing a tag.
-nnoremap <silent> <Leader>g :TagbarOpenAutoClose<cr>
-nnoremap <silent> <Leader>b :TagbarToggle<cr>
-
-"=============================================================================
-"   vim-easytags                                            [EASYTAGS]
-"=============================================================================
-
-" General Settings
-    let g:easytags_file = '~/.tags'     " Store tags in the home directory.
-    let g:easytags_auto_highlight = 0   " Disable tag highlighting.
-
-" Performance Settings
-    let g:easytags_async = 1            " Generate tags asynchronously.
-    "let g:easytags_python_enabled = 1   " Use faster Python syntax highlighter.
-
-"   With this setup, it's actually a bad idea to turn this option on.
-"       I ran :UpdateTags inside of /usr, and the tags file it generated was
-"   over a gibibyte (GiB) in size.
-"       It's probably okay to turn this on in a local .vimrc, especially
-"   with asynchronous execution, but if you turn it on globally, you run
-"   the risk of making your global tags file unusably large.
-"
-" let g:easytags_autorecurse = 1      " Generate tags for all subdirs as well.
-
-" Recursively generate tags for the current file, and everything in
-"   subdirectories below.
-nnoremap <silent> <Leader>tu :UpdateGlobalTags<cr>
-
-" Update Frequency
-
-    "let g:easytags_on_cursorhold = 1    " Run :UpdateTags whenever idle.
-
-    " Try to trigger this all the time. Wasteful multithreading HO!
-    "let g:easytags_always_enabled = 1   " HA HA HA HA HAAAAAAAA
-    let g:easytags_events = [
-        \ 'BufWritePost',
-        \ 'BufEnter',
-        \ 'BufLeave'
-    \ ]
-
-"=============================================================================
 "   vimtex                                                  [VIMTEX]
 "=============================================================================
 " Enable folding of documents by LaTeX structure.
 let g:vimtex_fold_enabled=1
 
+" Disable opening the quickfix window during continuous compilation.
+let g:vimtex_quickfix_enabled=0
 
 "=============================================================================
 "   UltiSnips                                               [ULTISNIPS]
@@ -186,8 +141,8 @@ inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
 " Hop between snippet placeholders!
-let g:coc_snippet_next = '<Tab>'
-let g:coc_snippet_prev = '<S-Tab>'
+let g:coc_snippet_next = '<C-n>'
+let g:coc_snippet_prev = '<C-m>'
 
 " CodeLens!
 nmap <leader>pc <Plug>(coc-codelens-action)
@@ -253,12 +208,9 @@ xnoremap <silent> <Leader>c :Commentary<cr>
 "   tabular                                                 [TABULAR]
 "=============================================================================
 " Faster mapping to access Tabular Ex command.
-nnoremap t :Tabularize /
-xnoremap t :Tabularize /
+xnoremap <leader>t :Tabularize /
 
-
-nnoremap <silent> tt :Tabularize /,<cr>
-xnoremap <silent> tt :Tabularize /,<cr>
+xnoremap <silent> <leader>tt :Tabularize /,<cr>
 
 "=============================================================================
 "   vim-lexical                                             [LEXICAL]
@@ -341,28 +293,6 @@ nnoremap gf /(<CR>l<C-v>/)<CR>
 xmap <leader>r  <Plug>ReplaceWithRegisterVisual
 nmap <leader>rr <Plug>ReplaceWithRegisterLine
 nmap <leader>r  <Plug>ReplaceWithRegisterOperator
-
-"=============================================================================
-"   ConqueGDB                                               [CONQUEGDB]
-"=============================================================================
-
-" Continue updating Conque buffers after switching to another buffer.
-let g:ConqueTerm_ReadUnfocused = 1
-
-" Try to use the Python3 interface, which I presume is better?
-let g:ConqueTerm_PyVersion = 3
-
-" Open the GDB terminal on the right side of the screen.
-let g:ConqueGdb_SrcSplit = 'left' " Open source on the *left* side.
-
-" Update very frequently while I'm in insert mode.
-let g:ConqueTerm_FocusedUpdateTime = 100
-
-" Update very frequently while I'm not in insert mode.
-let g:ConqueTerm_UnfocusedUpdateTime = 100
-
-" Disable start warnings.
-let g:ConqueTerm_StartMessages = 0
 
 "=============================================================================
 "   fuzzy-find vim plugin                                   [FZFVIM]
@@ -711,7 +641,8 @@ augroup end
 
 map <leader>m <Plug>ToggleMarkbar
 
-let g:markbar_marks_to_display = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+let g:markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let g:markbar_peekaboo_marks_to_display = "'\"(){}.[]<>^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let g:markbar_section_separation = 0
 let g:markbar_explicitly_remap_mark_mappings = v:true
 
@@ -729,3 +660,8 @@ let g:Illuminate_ftblacklist = [
 let g:Illuminate_highlightUnderCursor = 0
 
 hi illuminatedWord cterm=bold,underline gui=bold,underline
+
+"=============================================================================
+"   vim-mundo                                               [MUNDO]
+"=============================================================================
+nnoremap <C-z> :MundoToggle<cr>

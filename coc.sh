@@ -6,6 +6,7 @@ source "`dirname $0`/global_constants.sh"
 
 # Install yarn, if not already installed
 if [ ! "`which yarn`" ]; then
+  curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -
   curl --compressed -o- -L https://yarnpkg.com/install.sh | bash
 fi
 
@@ -30,3 +31,6 @@ fi
 
 # Symlink the coc-settings JSON file
 ln -s "$DIR/coc-settings.json" ~/.vim
+
+# Create coc configuration directory
+mkdir -p ~/.config/coc
