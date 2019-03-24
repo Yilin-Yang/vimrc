@@ -5,6 +5,8 @@
 
 source "`dirname $0`/global_constants.sh"
 
+$INSTALLCMD libjsonrpccpp-dev
+
 cd /tmp
 git clone --recursive https://github.com/cquery-project/cquery.git
 cd cquery
