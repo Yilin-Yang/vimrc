@@ -31,3 +31,6 @@ fi
 
 # Symlink the coc-settings JSON file
 ln -s "$DIR/coc-settings.json" ~/.vim
+
+# Create coc configuration directory
+mkdir -p ~/.config/coc

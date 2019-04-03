@@ -34,6 +34,12 @@ function! CPPIndent()
     setlocal cinoptions+=L-1,:0,g1,+2s,N0,t0,(2s,W2s,m1
 endfunction
 
+augroup cpp_detect
+    autocmd BufNewFile,BufRead *.cpp     set filetype=cpp.doxygen
+    autocmd BufNewFile,BufRead *.hpp     set filetype=cpp.doxygen
+    autocmd BufNewFile,BufRead *.h       set filetype=cpp.doxygen
+augroup end
+
 "=============================================================================
 "   JavaScript Formatting                                   [JS]
 "=============================================================================

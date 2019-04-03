@@ -11,9 +11,8 @@
   "languageserver": {
     "cquery": {
       "command": "/home/yiliny/.local/stow/cquery/bin/cquery",
-      "args": ["--log-file=/tmp/cq.log"],
-      "filetypes": ["c", "cpp", "c.doxygen", "cpp.doxygen"],
       "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
+      "filetypes": ["c", "cpp", "c.doxygen", "cpp.doxygen", "objc", "objcpp"],
       "initializationOptions": {
         "cacheDirectory": "/tmp/cquery"
       }
