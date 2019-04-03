@@ -107,6 +107,21 @@ hi link Whitespace SpecialKey
 hi clear NonText
 hi link NonText SpecialKey
 
+" Use a dark pop-up menu background for readable language server errors
+hi clear Pmenu
+hi Pmenu ctermbg=232 ctermfg=15 cterm=bold
+hi clear PmenuSel
+hi PmenuSel ctermbg=232 ctermfg=75 cterm=bold,underline
+hi PmenuSbar ctermbg=236
+
+if exists('&pumblend')
+  set pumblend=1
+endif
+
+" Distinguish the TermCursor from matched parentheses.
+hi clear MatchParen
+hi MatchParen ctermbg=130
+
 " Less obtrusive spellchecker markings.
 hi SpellBad cterm=underline ctermfg=DarkRed ctermbg=NONE
 
