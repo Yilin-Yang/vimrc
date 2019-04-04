@@ -30,6 +30,7 @@ scriptencoding utf-8
 "   vim-markbar                                             [MARKBAR]
 "   vim-illuminate                                          [ILLUMINATE]
 "   vim-mundo                                               [MUNDO]
+"   vim-syncopate                                           [SYNCOPATE]
 "=============================================================================
 
 
@@ -665,3 +666,10 @@ hi illuminatedWord cterm=bold,underline gui=bold,underline
 "   vim-mundo                                               [MUNDO]
 "=============================================================================
 nnoremap <C-z> :MundoToggle<cr>
+
+"=============================================================================
+"   vim-syncopate                                           [SYNCOPATE]
+"=============================================================================
+" <Leader><   (the following motion, etc.)
+" <Leader><>  (to yank the whole buffer, or your selection in visual mode)
+Glaive syncopate plugin[mappings]

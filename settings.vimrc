@@ -77,8 +77,8 @@ set foldlevel=20                    " All folds default to being open.
 "=============================================================================
 "   Appearance                                              [APPEARANCE]
 "=============================================================================
-colorscheme default " For now, all this does is trigger the autocmd for changing
-                    " Neomake's highlight colors
+" colorscheme default " For now, all this does is trigger the autocmd for changing
+"                     Neomake's highlight colors
 
 syntax on                           " Turn on syntax highlighting.
 set background=dark                 " Make text readable on dark background.
