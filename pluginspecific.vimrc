@@ -58,6 +58,8 @@ let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
 let g:ale_lint_on_enter = 0
 
+let g:ale_python_auto_pipenv = 1
+
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
 "=============================================================================
@@ -65,11 +67,15 @@ augroup NERDTree
     au!
     " Open NerdTree automatically if no files were specified
     autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    if !exists('g:gui_oni')
+      autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+    endif
 
     " Open NerdTree if you do `vim <DIR>`
     autocmd StdinReadPre * let s:std_in=1
-    autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    if !exists('g:gui_oni')
+      autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in") | exe 'NERDTree' argv()[0] | wincmd p | ene | endif
+    endif
 
     " Close NerdTree if it's the only window open.
     autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
@@ -672,7 +678,7 @@ nnoremap <C-z> :MundoToggle<cr>
 "=============================================================================
 " <Leader><   (the following motion, etc.)
 " <Leader><>  (to yank the whole buffer, or your selection in visual mode)
-Glaive syncopate colorscheme='shine' clear_bg=1
+Glaive syncopate colorscheme='morning' clear_bg=1
 
 xnoremap <leader><> :call SyncopateExportToClipboard()<cr>
 
