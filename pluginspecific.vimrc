@@ -678,4 +678,14 @@ nnoremap <C-z> :MundoToggle<cr>
 "=============================================================================
 " <Leader><   (the following motion, etc.)
 " <Leader><>  (to yank the whole buffer, or your selection in visual mode)
-Glaive syncopate plugin[mappings]
+Glaive syncopate colorscheme='shine' clear_bg=1
+
+xnoremap <leader><> :call SyncopateExportToClipboard()<cr>
+
+function! SyncopateExportToClipboard() range
+  execute a:firstline.','.a:lastline.'SyncopateExportToClipboard'
+
+  " doesn't seem to update Windows clipboard through VcXsrv without this
+  " line
+  let @+=@+
+endfunction

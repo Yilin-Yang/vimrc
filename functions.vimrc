@@ -172,8 +172,8 @@ endfunction
 
 " EFFECTS:  Starts running vim's built-in profiler.
 function! StartProfile(...) abort
-    let a:outfile = get(a:, 1, 'profile.log')
-    execute 'profile start ' . a:outfile
+    let l:outfile = get(a:, 1, 'profile.log')
+    execute 'profile start ' . l:outfile
     profile func *
     profile file *
 endfunction
@@ -446,20 +446,20 @@ command! -nargs=1 Vrs  call ResizeSplit('WIDTH', <args>)
 " DETAIL:   Taken from the following link:
 "               https://blog.hanschen.org/2012/10/24/different-background-color-in-vim-past-80-columns/
 function! ColorColumnBlock(...)
-    let a:num_args  = get(a:, 0)
-    let a:start     = get(a:, 1, 0)
-    let a:end       = get(a:, 2, 255)
-    let a:hi_args   = get(a:, 3, '')
+    let l:num_args  = get(a:, 0)
+    let l:start     = get(a:, 1, 0)
+    let l:end       = get(a:, 2, 255)
+    let l:hi_args   = get(a:, 3, '')
 
-    if a:num_args ==# 0
+    if l:num_args ==# 0
         echoerr 'No args provided to ColorColumnBlock!'
         return
     endif
 
-    if strlen(a:hi_args)
-        execute 'hi ColorColumn ' . a:hi_args
+    if strlen(l:hi_args)
+        execute 'hi ColorColumn ' . l:hi_args
     endif
-    execute 'set colorcolumn=' . join(range(a:start,a:end), ',')
+    execute 'set colorcolumn=' . join(range(l:start,l:end), ',')
 endfunction
 
 " EFFECTS:  Highlights trailing whitespace.
@@ -497,7 +497,7 @@ endfunction
 "                                           with an interactive substitution
 "                                           command. Defaults to `false`.
 function! AutoYilinStyle(...)
-    let a:breathing_room = get(a:, 1, 0)
+    let l:breathing_room = get(a:, 1, 0)
 
     if match(&filetype, 'cpp') ==# -1 && match(&filetype, 'c') ==# -1
         echoerr 'AutoYilinStyle expects C/C++ files.'
@@ -518,7 +518,7 @@ function! AutoYilinStyle(...)
     %s:\m\(\S\)\s*{:\1\r{:e
 
     " (Optionally) add breathing room.
-    if a:breathing_room
+    if l:breathing_room
         %s:\m\(\S\)\([-+/*=!]=\|=\|+\|-\|*\|<<\|>>\|<\|>\|?\)\(\S\):\1 \2 \3:gce
     endif
 
@@ -601,8 +601,8 @@ endfunction
 "                                       start of each newly created line.
 "                                       Defaults to a nullstring.
 function! ReformatMultilineParentheses(...) range abort
-    let a:num_args = get(a:, 0)
-    let a:continuation_character = a:num_args ? get(a:, 1) : ''
+    let l:num_args = get(a:, 0)
+    let l:continuation_character = l:num_args ? get(a:, 1) : ''
 
     " Callee-save unnamed register, search register.
     let l:old_contents = @"
@@ -639,7 +639,7 @@ function! ReformatMultilineParentheses(...) range abort
     let l:lastline = a:lastline + line('$') - l:buflen_start
 
     execute 'silent '.a:firstline.','.l:lastline
-        \ . 'g:'.l:marker.':s/\m, \+/'.a:continuation_character.'&\r/ge'
+        \ . 'g:'.l:marker.':s/\m, \+/'.l:continuation_character.'&\r/ge'
 
     let l:lastline = a:lastline + line('$') - l:buflen_start
 
