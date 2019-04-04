@@ -74,6 +74,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [vim-signify](https://github.com/mhinz/vim-signify)
 * [vim-snippets](https://github.com/honza/vim-snippets)
 * [vim-surround](https://github.com/tpope/vim-surround)
+* [vim-syncopate](https://github.com/google/vim-syncopate)
 * [vim-textobj-sentence](https://github.com/reedes/vim-textobj-sentence)
 * [vim-textobj-user](https://github.com/kana/vim-textobj-user)
 * [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
