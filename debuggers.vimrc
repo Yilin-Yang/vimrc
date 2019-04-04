@@ -181,7 +181,7 @@ function! StartVebugger(debugger, test_exe, ...)
 " Set breakpoint on current line.
 execute 'nnoremap '          . DebuggerSetBreakpoint() . ' :VBGtoggleBreakpointThisLine<cr>'
 
-" Prompt user for text to se nd to the terminal.
+" Prompt user for text to send to the terminal.
 execute 'nnoremap '          . DebuggerToStdin()       . ' :VBGrawWrite<cr>'
 execute 'vnoremap '          . DebuggerToStdin()       . ' :VBGrawWriteSelectedText<cr>'
 
