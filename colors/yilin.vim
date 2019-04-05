@@ -34,7 +34,7 @@ endif
 
 " Distinguish the TermCursor from matched parentheses.
 hi clear MatchParen
-hi MatchParen ctermbg=130
+hi MatchParen cterm=bold,underline
 
 " Less obtrusive spellchecker markings.
 hi SpellBad cterm=underline ctermfg=DarkRed ctermbg=NONE
