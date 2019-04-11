@@ -531,7 +531,7 @@ let g:vimwiki_list = [
     \ },
 \ ]
 
-let g:vimwiki_folding = 1       " Enable content-aware folding.
+let g:vimwiki_folding = 'expr'  " Enable content-aware folding.
 let g:vimwiki_global_ext = 0    " Disable vimwiki filetype outside of ~/notes.
 
 " Tagbar support.
