@@ -53,6 +53,7 @@
 "   vim-signature                                           [SIGNATURE]
 "   dapper.nvim                                             [DAPPER]
 "   vim-mundo                                               [MUNDO]
+"   vim-syncopate                                           [SYNCOPATE]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -507,9 +508,17 @@ Plug 'Yilin-Yang/dapper.nvim'
 " " Visualize the vim undo tree.
 Plug 'simnalamburt/vim-mundo'
 
+"=============================================================================
+"   vim-syncopate                                           [SYNCOPATE]
+"=============================================================================
+" " Syntax-highlighted copy paste.
+Plug 'google/vim-syncopate'
+
 "#############################################################################
 " " All of your Plugins must be added before the following line.
 call plug#end()           " required.
+
+call glaive#Install()     " allow glaive configuration past this point
 
 "#############################################################################
 "#############################################################################
