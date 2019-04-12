@@ -177,8 +177,8 @@ set cursorcolumn                " Mark the current column.
 set noswapfile
 
 " Shorten startup time by explicitly specifying python path.
-let g:python_host_prog  = '/usr/bin/python2'
-let g:python3_host_prog = '/usr/bin/python3'
+let g:python_host_prog  = '/usr/um/python-2.7.13/bin/python'
+let g:python3_host_prog = $HOME.'/.local/bin/python3'
 
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
