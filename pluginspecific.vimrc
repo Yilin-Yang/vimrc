@@ -671,7 +671,7 @@ hi illuminatedWord cterm=bold,underline gui=bold,underline
 "=============================================================================
 "   vim-mundo                                               [MUNDO]
 "=============================================================================
-nnoremap <C-z> :MundoToggle<cr>
+nnoremap U :MundoToggle<cr>
 
 "=============================================================================
 "   vim-syncopate                                           [SYNCOPATE]
