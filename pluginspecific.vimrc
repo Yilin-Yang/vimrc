@@ -223,7 +223,7 @@ xnoremap <silent> <leader>tt :Tabularize /,<cr>
 "   vim-lexical                                             [LEXICAL]
 "=============================================================================
 
-let g:lexical#spellfile = ['~/.local/share/nvim/site/spell/en.utf-8.add',]
+let g:lexical#spellfile = [&spellfile]
 let g:lexical#dictionary = ['~/vimrc/dictionary/english.dict',]
 let g:lexical#thesaurus = ['~/vimrc/thesaurus/mthesaur.txt',]
 
