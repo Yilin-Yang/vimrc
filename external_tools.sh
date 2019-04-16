@@ -14,6 +14,7 @@ source "`dirname $0`/global_constants.sh"
 pip install  --user --upgrade python-language-server
 
 # Install lua-lsp (https://github.com/Alloyed/lua-lsp)
+# note: $HOME/.luarocks/bin must be in $PATH
 $INSTALLCMD luarocks
 luarocks --local install --server=http://luarocks.org/dev lua-lsp
 luarocks --local install luacheck
