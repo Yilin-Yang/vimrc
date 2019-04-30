@@ -77,8 +77,7 @@ set foldlevel=20                    " All folds default to being open.
 "=============================================================================
 "   Appearance                                              [APPEARANCE]
 "=============================================================================
-colorscheme default " For now, all this does is trigger the autocmd for changing
-                    " Neomake's highlight colors
+colorscheme yilin
 
 syntax on                           " Turn on syntax highlighting.
 set background=dark                 " Make text readable on dark background.
@@ -90,74 +89,6 @@ set listchars=tab:│·,extends:>,precedes:<,nbsp:+
 set fillchars+=vert:│
 
 "=============================================================================
-"   Highlighting                                            [HIGHLIGHTING]
-"=============================================================================
-" Further information on highlight groups and highlight color values
-" can be found through:
-"   :help highlight-groups
-"   :help gui-colors
-"   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
-"=============================================================================
-
-" Less obtrusive `listchars`.
-hi SpecialKey ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
-
-hi clear Whitespace
-hi link Whitespace SpecialKey
-hi clear NonText
-hi link NonText SpecialKey
-
-" Less obtrusive spellchecker markings.
-hi SpellBad cterm=underline ctermfg=DarkRed ctermbg=NONE
-
-" As with steak, rare words are _better._
-" (Also, can't find an option to turn off rare word spellchecking.)
-hi clear SpellRare
-
-" Capitalization warnings trigger on the word `vim,` which makes me sad.
-set spellcapcheck=
-
-" Less obtrusive vertical splits.
-hi clear VertSplit
-hi link VertSplit Delimiter
-
-" Disable ugly gray background in visual selections.
-hi Visual cterm=reverse
-
-" Make folds less visually distracting, but still visually distinct.
-hi clear Folded
-hi Folded ctermfg=81 guifg=#ff80ff
-
-" Disable ugly gray background in side columns.
-hi FoldColumn ctermbg=NONE
-hi SignColumn ctermbg=NONE
-
-" Make the tabline a bit more minimal.
-hi TabLine ctermbg=NONE ctermfg=darkgray
-hi TabLineFill cterm=NONE ctermbg=235
-hi TabLineSel ctermfg=224
-
-" Make the statusline a bit more minimal.
-" NOTE: these are effectively disabled by vim-airline.
-hi StatusLine cterm=bold,underline ctermfg=224
-hi StatusLineNC cterm=underline ctermfg=224
-
-" Darken backgrounds beyond my personal line limit.
-hi ColorColumn ctermbg=235 guibg=DarkGray
-
-" Better color contrast in vimdiffs, with my wonky terminal colorschemes.
-" " dark red background in difftext
-hi DiffText ctermbg=1
-
-" ditto, for error messages
-hi clear Error
-hi link Error ErrorMsg
-
-" ditto, for spelling warnings
-hi SpellLocal ctermbg=23
-hi SpellCap ctermbg=21
-
-"=============================================================================
 "   User Interface                                          [USER INTERFACE]
 "=============================================================================
 set relativenumber              " Relative numbering!
@@ -165,9 +96,6 @@ set number                      " Show absolute line numbers.
 set ruler                       " Show line lengths in the statusline.
 set nocursorline                " Don't underline the current line.
 set cursorcolumn                " Mark the current column.
-    hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
-                  " ^ bold every character that's in the same column as the cursor
-
 
 "=============================================================================
 "   System Configuration                                    [CONFIG]
