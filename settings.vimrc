@@ -80,6 +80,7 @@ set foldlevel=20                    " All folds default to being open.
 colorscheme yilin
 
 syntax on                           " Turn on syntax highlighting.
+syntax sync fromstart               " Highlight from the start of the buffer.
 set background=dark                 " Make text readable on dark background.
 set breakindent                     " Visually indent when softwrapping.
 set foldcolumn=1                    " Show a column with all folds.
