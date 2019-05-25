@@ -12,6 +12,8 @@ $INSTALLCMD neovim
 # Enable python remote plugin support in nvim
 $INSTALLCMD python-pip
 $INSTALLCMD python3-pip
+$INSTALLCMD python-dev
+$INSTALLCMD python2-dev
 pip2 install --user --upgrade pynvim
 pip3 install --user --upgrade pynvim
 
