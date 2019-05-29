@@ -29,7 +29,7 @@
 "   vim-tmux-focus-events                                   [FOCUSEVENTS]
 "   fuzzy-find                                              [FZF]
 "   fuzzy-find vim plugin                                   [FZFVIM]
-"   vim-airline                                             [AIRLINE]
+"   lightline.vim                                           [LIGHTLINE]
 "   vim-pencil                                              [PENCIL]
 "   vim-wordy                                               [WORDY]
 "   vim-textobj-user                                        [TEXTOBJ_USER]
@@ -212,7 +212,7 @@ Plug 'honza/vim-snippets'
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Snippets engine that uses Python and neocomplete.
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 "=============================================================================
 "   coc.nvim                                                [COC]
@@ -330,13 +330,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 "=============================================================================
-"   vim-airline                                             [AIRLINE]
+"   lightline.vim                                           [LIGHTLINE]
 "=============================================================================
 " " Prettier, more informative statusline.
-Plug 'vim-airline/vim-airline'
-
-" " Different themes.
-Plug 'vim-airline/vim-airline-themes'
+" Also significantly faster than vim-airline.
+ Plug 'itchyny/lightline.vim'
 
 "=============================================================================
 "   vim-pencil                                              [PENCIL]
@@ -458,7 +456,7 @@ Plug 'Yilin-Yang/vim-markbar'
 "   vim-peekaboo                                            [PEEKABOO]
 "=============================================================================
 " " See the contents of your registers in the sidebar when appropriate.
-Plug 'junegunn/vim-peekaboo'
+" Plug 'junegunn/vim-peekaboo'
 
 "=============================================================================
 "   vim-illuminate                                          [ILLUMINATE]
