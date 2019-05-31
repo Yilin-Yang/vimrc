@@ -1,4 +1,4 @@
-if has_key(g:plugs, 'vim-pencil')
+if exists('g:plugs') && has_key(g:plugs, 'vim-pencil')
     " HardPencil borks some of vimwiki's list-editing commands.
     NoPencil
 endif
