@@ -334,7 +334,7 @@ Plug 'junegunn/fzf.vim'
 "=============================================================================
 " " Prettier, more informative statusline.
 " Also significantly faster than vim-airline.
- Plug 'itchyny/lightline.vim'
+Plug 'itchyny/lightline.vim'
 
 "=============================================================================
 "   vim-pencil                                              [PENCIL]

@@ -347,8 +347,7 @@ execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'w'  . ' :Windows<cr>'
 "=============================================================================
 "   lightline.vim                                           [LIGHTLINE]
 "=============================================================================
-let g:lightline = {
-  \ 'colorscheme': 'jellybeans',
+call extend(g:lightline, {
   \ 'enable': {
   \   'statusline': 1,
   \   'tabline': 0,
@@ -364,10 +363,10 @@ let g:lightline = {
   \   'charvaluehex': '0x%B',
   \ },
   \ 'component_function': {
-  \   'gitbranch': 'fugitive#head',
+  \   'gitbranch': 'fugitive#Head',
   \   'wordcount': 'GetWordcount',
   \ },
-  \ }
+  \ })
 
 function! GetWordcount() abort
   let l:wc_dict = wordcount()

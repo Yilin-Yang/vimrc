@@ -77,6 +77,10 @@ set foldlevel=20                    " All folds default to being open.
 "=============================================================================
 "   Appearance                                              [APPEARANCE]
 "=============================================================================
+" " need to set lightline colorscheme before setting |:colorscheme|
+let g:lightline = {}
+let g:lightline.colorscheme = 'wombat'
+
 colorscheme yilin
 
 syntax on                           " Turn on syntax highlighting.
