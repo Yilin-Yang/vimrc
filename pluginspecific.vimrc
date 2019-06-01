@@ -19,7 +19,7 @@ scriptencoding utf-8
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
 "   fuzzy-find vim plugin                                   [FZFVIM]
-"   vim-airline                                             [AIRLINE]
+"   lightline.vim                                           [LIGHTLINE]
 "   vim-pencil                                              [PENCIL]
 "   vim-wordy                                               [WORDY]
 "   vimwiki                                                 [VIMWIKI]
@@ -171,10 +171,6 @@ nmap <leader>sr <Plug>(coc-references)
 " Autoformat!
 nmap <leader>f  <Plug>(coc-format-selected)
 xmap <leader>f  <Plug>(coc-format-selected)
-
-" Display diagnostics in airline.
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -349,30 +345,49 @@ execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'bl' . ' :BLines<cr>'
 execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'w'  . ' :Windows<cr>'
 
 "=============================================================================
-"   vim-airline                                             [AIRLINE]
+"   lightline.vim                                           [LIGHTLINE]
 "=============================================================================
+call extend(g:lightline, {
+  \ 'enable': {
+  \   'statusline': 1,
+  \   'tabline': 0,
+  \   },
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ],
+  \              [ 'wordcount', 'fileformat', 'fileencoding', 'filetype'] ],
+  \ },
+  \ 'component': {
+  \   'charvaluehex': '0x%B',
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#Head',
+  \   'wordcount': 'GetWordcount',
+  \ },
+  \ })
 
-" Colorful and visually distinct, but in a tasteful way.
-let g:airline_theme='wombat'
+function! GetWordcount() abort
+  let l:wc_dict = wordcount()
+  let l:ft = &filetype
+  if has_key(g:wordcount_enabled_fts, &filetype)
+    return printf('%d words', l:wc_dict.words)
+  else
+    return ''
+  endif
+endfunction
+let g:wordcount_enabled_fts = {
+    \ 'help': 1,
+    \ 'text': 1,
+    \ 'markdown': 1,
+    \ 'tex': 1,
+    \ }
+
+" coc diagnostics in lightline
+let g:lightline.component_function.cocstatus = 'coc#status'
 
 set noshowmode " Disable vim's built-in modeline.
-
-" Use vertical bar separators in the statusline.
-let g:airline_left_set='|'
-let g:airline_right_set='|'
-
-" The helpdocs claim that this makes airline faster.
-let g:airline_highlighting_cache = 1
-
-" Don't scan runtimepath for airline-compatible plugins on startup.
-let g:airline#extensions#disable_rtp_load = 1
-
-" Load vim-fugitive, and a markdown wordcounter, but nothing else.
-let g:airline_extensions = ['branch', 'wordcount']
-
-" Trim some gunk from the rightmost part of the statusline.
-let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}% '
-let g:airline_section_z = '%{airline#util#wrap(airline#extensions#obsession#get_status(),0)}%3p%% l:%4l%#__restore__#%#__accent_bold#/%L c:%3v'
 
 "=============================================================================
 "   vim-pencil                                              [PENCIL]

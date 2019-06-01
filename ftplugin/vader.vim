@@ -1,1 +1,1 @@
-call HighlightTrailing('ErrorMsg')
+if exists('*HighlightTrailing') | call HighlightTrailing('ErrorMsg') | endif

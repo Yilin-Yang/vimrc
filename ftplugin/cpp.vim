@@ -1,4 +1,4 @@
-call ColorColumnBlock(81)       " My personal line limit
+if exists('*ColorColumnBlock') | call ColorColumnBlock(81) | endif
 noremap <buffer> <silent> <leader>e :call CenterTextAndPad('/')<cr>
 call CPPIndent()
 ALEDisable
