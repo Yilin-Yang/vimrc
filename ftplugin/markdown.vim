@@ -4,3 +4,7 @@
 let g:markdown_folding = 1
 setlocal commentstring=<!--%s-->
 setlocal shiftwidth=2
+
+if exists(':ALEDisable')
+  ALEDisable
+endif

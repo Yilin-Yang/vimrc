@@ -6,3 +6,7 @@ endif
 silent! iunmap <buffer> <expr> <Tab>
 silent! unmap  <buffer> <BS>
 set syntax=markdown
+
+if exists(':ALEDisable')
+  ALEDisable
+endif
