@@ -4,4 +4,5 @@ if exists('g:plugs') && has_key(g:plugs, 'vim-pencil')
 endif
 " Kill vimwiki's default <Tab> bindings, which break my completion menu.
 silent! iunmap <buffer> <expr> <Tab>
+silent! unmap  <buffer> <BS>
 set syntax=markdown
