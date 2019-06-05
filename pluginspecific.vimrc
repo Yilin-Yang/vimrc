@@ -60,6 +60,10 @@ let g:ale_lint_on_enter = 0
 
 let g:ale_python_auto_pipenv = 1
 
+" to fix the slowneses caused by calls to executable() inside of
+" ale#engine#IsExecutable().
+let g:ale_cache_executable_check_failures = 1
+
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
 "=============================================================================
