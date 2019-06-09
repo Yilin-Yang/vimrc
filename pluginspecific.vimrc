@@ -107,7 +107,7 @@ let g:vimtex_quickfix_enabled=0
 let g:UltiSnipsEditSplit='context'
 
 " Append the UltiSnips directory in the ~/vimrc folder to runtimepath.
-let &runtimepath.=',~/vimrc/'
+let &runtimepath.=','.$HOME.'/vimrc/'
 
 " Store snippets files in the vimrc repository.
 let g:UltiSnipsSnippetsDir='~/vimrc/UltiSnips'
@@ -141,6 +141,9 @@ augroup end
 "=============================================================================
 "   coc.nvim                                                [COC]
 "=============================================================================
+" Refresh COC mappings in the current buffer
+nnoremap <F4> :CocDisable<cr>:CocEnable<cr>
+
 " Insert mode tab-completion without breaking real presses of the tab key.
 inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
