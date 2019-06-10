@@ -1,7 +1,7 @@
 " Buffer events
 augroup buffer_stuff
     au!
-    autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
+    " autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
 augroup end
 
 " Trigger `autoread` when files change on disk
