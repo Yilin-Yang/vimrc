@@ -469,10 +469,14 @@ nnoremap <leader>wp     :PrevWordy<cr>
 "
 "------------------------------------------------------------------------------
 " PAGE EDITING:
+"
+"   (these mappings have been disabled in ftplugin/vimwiki.vim)
 "   <Leader>wd                  Delete current wiki page.
 "       :VimwikiDeleteLink          // ditto
 "   <Leader>wr                  Rename current wiki page.
 "       :VimwikiRenameLink          // ditto
+"   (end notice)
+"
 "   [[                          Previous header in buffer.
 "   ]]                          Next header in buffer.
 "   [=                          Previous header with same level as selected.
