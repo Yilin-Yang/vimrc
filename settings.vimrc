@@ -8,8 +8,7 @@ scriptencoding utf-8
 "   Spellchecking                                           [SPELLCHECK]
 "   Folding                                                 [FOLDING]
 "   Appearance                                              [APPEARANCE]
-"   Highlighting                                            [HIGHLIGHTING]
-"   User Interface                                          [USER INTERFACE]
+"   User Interface                                          [USER_INTERFACE]
 "   System Configuration                                    [CONFIG]
 "=============================================================================
 
@@ -96,7 +95,7 @@ set fillchars+=vert:│
 call HighlightTrailing('ErrorMsg')  " Highlight trailing whitespace.
 
 "=============================================================================
-"   User Interface                                          [USER INTERFACE]
+"   User Interface                                          [USER_INTERFACE]
 "=============================================================================
 set relativenumber              " Relative numbering!
 set number                      " Show absolute line numbers.
