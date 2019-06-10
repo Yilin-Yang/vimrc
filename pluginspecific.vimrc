@@ -151,6 +151,12 @@ inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 let g:coc_snippet_next = '<C-n>'
 let g:coc_snippet_prev = '<C-m>'
 
+" Show documentation when hovering the cursor over a symbol
+augroup coc_hover
+  au!
+  autocmd CursorHold * call CocAction('doHover')
+augroup end
+
 " CodeLens!
 nmap <leader>pc <Plug>(coc-codelens-action)
 
