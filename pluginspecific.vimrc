@@ -157,6 +157,8 @@ augroup coc_hover
   autocmd CursorHold * call CocAction('doHover')
 augroup end
 
+nnoremap <F4> :CocDisable<cr>:CocEnable<cr>:echo 'Restarted coc.nvim.'<cr>
+
 " CodeLens!
 nmap <leader>pc <Plug>(coc-codelens-action)
 
@@ -291,9 +293,6 @@ nmap ga <Plug>(EasyAlign)
 "               |                   |       left boundary of selected text.
 "-----------------------------------------------------------------------------
 let g:easy_align_indentation = 's'
-
-" Visual Block select all text between the next matched pair of parentheses.
-nnoremap gf /(<CR>l<C-v>/)<CR>
 
 "=============================================================================
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
