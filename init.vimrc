@@ -229,7 +229,7 @@ Plug 'neoclide/coc-neco'
     Plug 'Shougo/neco-vim'
 
 function! InstallCoCExtensions() abort
-  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-pyls coc-json coc-html coc-css
+  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-python coc-json coc-html coc-css
 
   " coc-sources extensions
   CocInstall coc-ultisnips
