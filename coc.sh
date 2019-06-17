@@ -13,6 +13,7 @@ fi
 # Install Watchman, to notify language servers of updates to watched source
 # files, using the following link: https://medium.com/@vonchristian/how-to-setup-watchman-on-ubuntu-16-04-53196cc0227c
 if [ ! "`which watchman`" ]; then
+  $INSTALLCMD libssl-ocaml-dev
   cd /tmp
   git clone https://github.com/facebook/watchman.git
   cd watchman/
