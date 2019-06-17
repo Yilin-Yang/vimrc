@@ -77,9 +77,14 @@ set foldlevel=20                    " All folds default to being open.
 "=============================================================================
 "   Appearance                                              [APPEARANCE]
 "=============================================================================
+" " need to set lightline colorscheme before setting |:colorscheme|
+let g:lightline = {}
+let g:lightline.colorscheme = 'wombat'
+
 colorscheme yilin
 
 syntax on                           " Turn on syntax highlighting.
+syntax sync fromstart               " Highlight from the start of the buffer.
 set background=dark                 " Make text readable on dark background.
 set breakindent                     " Visually indent when softwrapping.
 set foldcolumn=1                    " Show a column with all folds.
@@ -87,6 +92,8 @@ set nowrap                          " Don't visually wrap lines that are too lon
 set list                            " Explicitly render `listchars`.
 set listchars=tab:│·,extends:>,precedes:<,nbsp:+
 set fillchars+=vert:│
+
+call HighlightTrailing('ErrorMsg')  " Highlight trailing whitespace.
 
 "=============================================================================
 "   User Interface                                          [USER INTERFACE]

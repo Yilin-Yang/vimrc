@@ -23,9 +23,9 @@ hi link NonText SpecialKey
 
 " Use a dark pop-up menu background for readable language server errors
 hi clear Pmenu
-hi Pmenu ctermbg=232 ctermfg=15 cterm=bold
+hi Pmenu ctermbg=17 ctermfg=15
 hi clear PmenuSel
-hi PmenuSel ctermbg=232 ctermfg=75 cterm=bold,underline
+hi PmenuSel ctermbg=18 ctermfg=45 cterm=bold,underline
 hi PmenuSbar ctermbg=236
 
 if exists('&pumblend')
@@ -34,7 +34,7 @@ endif
 
 " Distinguish the TermCursor from matched parentheses.
 hi clear MatchParen
-hi MatchParen ctermbg=130
+hi MatchParen cterm=bold,underline
 
 " Less obtrusive spellchecker markings.
 hi SpellBad cterm=underline ctermfg=DarkRed ctermbg=NONE

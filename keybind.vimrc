@@ -40,10 +40,12 @@ nnoremap <silent> <F5> :e<cr>
 " Write the current buffer by double-tapping the leader key.
 nnoremap <leader><leader> :w<cr>
 
-" `cd` into the directory of the current buffer.
+" cd into the directory of the current buffer.
 " " Taken from the following link, with slight modifications:
 " "     https://www.reddit.com/r/vim/comments/8k4p6v/what_are_your_best_mappings/dz4s39k/
-nnoremap <leader>cd :cd %:p:h<CR>:pwd<CR>
+nnoremap <leader>tcd :tcd %:p:h<CR>:pwd<CR>
+nnoremap <leader>lcd :lcd %:p:h<CR>:pwd<CR>
+nnoremap <leader>cd  :cd  %:p:h<CR>:pwd<CR>
 
 " Exit interactive/visual mode by hitting j and k.
 inoremap jk <esc>
@@ -102,6 +104,18 @@ nnoremap L 40l
     nnoremap <silent> 0= :tabnew<cr>:NERDTreeToggle<cr>
     nnoremap <silent> 0- :tabclose<cr>
 
+" Remap all 'uppercase Alt mappings' to lowercase equivalents, because Windows
+" Terminal's Alt+[Key] produces the uppercase rather than lowercase even when
+" Shift is not held.
+function! s:RemapAltCapsToLower() abort
+  let l:caps = 'ABCDEFHIJKLMNOPQRSTUVWXYZ'
+  let l:i = 0 | while l:i <# len(l:caps)
+    let l:cap = l:caps[l:i]
+    execute printf('nmap <M-%s> <M-%s>', l:cap, tolower(l:cap))
+  let l:i += 1 | endwhile
+endfunction
+call s:RemapAltCapsToLower()
+
 " Exit the rabbit hole
 " " (If you dug too deep into a location list, etc.)
 nnoremap <silent> <leader>^ :e#1<cr>
@@ -111,9 +125,6 @@ nnoremap <leader>w vipJgqq
 
 " Sort the highlighted lines.
 vnoremap <silent> <leader>s :sort<cr>
-
-" Reformat text that lay within parentheses (function calls, headers...)
-" vnoremap <silent> <leader>f :call ReformatMultilineParentheses()<cr>
 
 " Start a search command for a regex pattern *only* within the current window.
 " " Taken from:

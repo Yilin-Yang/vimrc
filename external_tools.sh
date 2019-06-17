@@ -13,6 +13,12 @@ source "`dirname $0`/global_constants.sh"
 # Install palantir's Python language server
 pip install  --user --upgrade python-language-server
 
+# Install lua-lsp (https://github.com/Alloyed/lua-lsp)
+# note: $HOME/.luarocks/bin must be in $PATH
+$INSTALLCMD luarocks lua5.1
+luarocks --local install --server=http://luarocks.org/dev lua-lsp
+luarocks --local install luacheck
+
 # Install Kuniwak/vint
 pip  install --user --upgrade vim-vint
 pip3 install --user --upgrade vim-vint

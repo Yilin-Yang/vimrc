@@ -19,7 +19,7 @@ scriptencoding utf-8
 "   vim-easy-align                                          [EASYALIGN]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
 "   fuzzy-find vim plugin                                   [FZFVIM]
-"   vim-airline                                             [AIRLINE]
+"   lightline.vim                                           [LIGHTLINE]
 "   vim-pencil                                              [PENCIL]
 "   vim-wordy                                               [WORDY]
 "   vimwiki                                                 [VIMWIKI]
@@ -107,7 +107,7 @@ let g:vimtex_quickfix_enabled=0
 let g:UltiSnipsEditSplit='context'
 
 " Append the UltiSnips directory in the ~/vimrc folder to runtimepath.
-let &runtimepath.=',~/vimrc/'
+let &runtimepath.=','.$HOME.'/vimrc/'
 
 " Store snippets files in the vimrc repository.
 let g:UltiSnipsSnippetsDir='~/vimrc/UltiSnips'
@@ -141,6 +141,9 @@ augroup end
 "=============================================================================
 "   coc.nvim                                                [COC]
 "=============================================================================
+" Refresh COC mappings in the current buffer
+nnoremap <F4> :CocDisable<cr>:CocEnable<cr>
+
 " Insert mode tab-completion without breaking real presses of the tab key.
 inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
@@ -150,6 +153,14 @@ inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 " Hop between snippet placeholders!
 let g:coc_snippet_next = '<C-n>'
 let g:coc_snippet_prev = '<C-m>'
+
+" Show documentation when hovering the cursor over a symbol
+augroup coc_hover
+  au!
+  autocmd CursorHold * call CocAction('doHover')
+augroup end
+
+nnoremap <F4> :CocDisable<cr>:CocEnable<cr>:echo 'Restarted coc.nvim.'<cr>
 
 " CodeLens!
 nmap <leader>pc <Plug>(coc-codelens-action)
@@ -171,10 +182,6 @@ nmap <leader>sr <Plug>(coc-references)
 " Autoformat!
 nmap <leader>f  <Plug>(coc-format-selected)
 xmap <leader>f  <Plug>(coc-format-selected)
-
-" Display diagnostics in airline.
-let g:airline_section_error = '%{airline#util#wrap(airline#extensions#coc#get_error(),0)}'
-let g:airline_section_warning = '%{airline#util#wrap(airline#extensions#coc#get_warning(),0)}'
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -223,7 +230,7 @@ xnoremap <silent> <leader>tt :Tabularize /,<cr>
 "   vim-lexical                                             [LEXICAL]
 "=============================================================================
 
-let g:lexical#spellfile = ['~/.local/share/nvim/site/spell/en.utf-8.add',]
+let g:lexical#spellfile = [&spellfile]
 let g:lexical#dictionary = ['~/vimrc/dictionary/english.dict',]
 let g:lexical#thesaurus = ['~/vimrc/thesaurus/mthesaur.txt',]
 
@@ -290,9 +297,6 @@ nmap ga <Plug>(EasyAlign)
 "-----------------------------------------------------------------------------
 let g:easy_align_indentation = 's'
 
-" Visual Block select all text between the next matched pair of parentheses.
-nnoremap gf /(<CR>l<C-v>/)<CR>
-
 "=============================================================================
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
 "=============================================================================
@@ -349,30 +353,49 @@ execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'bl' . ' :BLines<cr>'
 execute 'nnoremap <silent> ' . FuzzyFindPrefix() . 'w'  . ' :Windows<cr>'
 
 "=============================================================================
-"   vim-airline                                             [AIRLINE]
+"   lightline.vim                                           [LIGHTLINE]
 "=============================================================================
+call extend(g:lightline, {
+  \ 'enable': {
+  \   'statusline': 1,
+  \   'tabline': 0,
+  \   },
+  \ 'active': {
+  \   'left': [ [ 'mode', 'paste' ],
+  \             [ 'gitbranch', 'cocstatus', 'readonly', 'filename', 'modified' ] ],
+  \   'right': [ [ 'lineinfo' ],
+  \              [ 'percent' ],
+  \              [ 'wordcount', 'fileformat', 'fileencoding', 'filetype'] ],
+  \ },
+  \ 'component': {
+  \   'charvaluehex': '0x%B',
+  \ },
+  \ 'component_function': {
+  \   'gitbranch': 'fugitive#Head',
+  \   'wordcount': 'GetWordcount',
+  \ },
+  \ })
 
-" Colorful and visually distinct, but in a tasteful way.
-let g:airline_theme='wombat'
+function! GetWordcount() abort
+  let l:wc_dict = wordcount()
+  let l:ft = &filetype
+  if has_key(g:wordcount_enabled_fts, &filetype)
+    return printf('%d words', l:wc_dict.words)
+  else
+    return ''
+  endif
+endfunction
+let g:wordcount_enabled_fts = {
+    \ 'help': 1,
+    \ 'text': 1,
+    \ 'markdown': 1,
+    \ 'tex': 1,
+    \ }
+
+" coc diagnostics in lightline
+let g:lightline.component_function.cocstatus = 'coc#status'
 
 set noshowmode " Disable vim's built-in modeline.
-
-" Use vertical bar separators in the statusline.
-let g:airline_left_set='|'
-let g:airline_right_set='|'
-
-" The helpdocs claim that this makes airline faster.
-let g:airline_highlighting_cache = 1
-
-" Don't scan runtimepath for airline-compatible plugins on startup.
-let g:airline#extensions#disable_rtp_load = 1
-
-" Load vim-fugitive, and a markdown wordcounter, but nothing else.
-let g:airline_extensions = ['branch', 'wordcount']
-
-" Trim some gunk from the rightmost part of the statusline.
-let g:airline_section_x = '%{airline#util#wrap(airline#parts#filetype(),0)}% '
-let g:airline_section_z = '%{airline#util#wrap(airline#extensions#obsession#get_status(),0)}%3p%% l:%4l%#__restore__#%#__accent_bold#/%L c:%3v'
 
 "=============================================================================
 "   vim-pencil                                              [PENCIL]
@@ -450,10 +473,14 @@ nnoremap <leader>wp     :PrevWordy<cr>
 "
 "------------------------------------------------------------------------------
 " PAGE EDITING:
+"
+"   (these mappings have been disabled in ftplugin/vimwiki.vim)
 "   <Leader>wd                  Delete current wiki page.
 "       :VimwikiDeleteLink          // ditto
 "   <Leader>wr                  Rename current wiki page.
 "       :VimwikiRenameLink          // ditto
+"   (end notice)
+"
 "   [[                          Previous header in buffer.
 "   ]]                          Next header in buffer.
 "   [=                          Previous header with same level as selected.
@@ -531,7 +558,7 @@ let g:vimwiki_list = [
     \ },
 \ ]
 
-let g:vimwiki_folding = 1       " Enable content-aware folding.
+let g:vimwiki_folding = 'expr'  " Enable content-aware folding.
 let g:vimwiki_global_ext = 0    " Disable vimwiki filetype outside of ~/notes.
 
 " Tagbar support.
@@ -671,14 +698,14 @@ hi illuminatedWord cterm=bold,underline gui=bold,underline
 "=============================================================================
 "   vim-mundo                                               [MUNDO]
 "=============================================================================
-nnoremap <C-z> :MundoToggle<cr>
+nnoremap U :MundoToggle<cr>
 
 "=============================================================================
 "   vim-syncopate                                           [SYNCOPATE]
 "=============================================================================
 " <Leader><   (the following motion, etc.)
 " <Leader><>  (to yank the whole buffer, or your selection in visual mode)
-Glaive syncopate colorscheme='shine' clear_bg=1
+Glaive syncopate colorscheme='morning' clear_bg=1
 
 xnoremap <leader><> :call SyncopateExportToClipboard()<cr>
 
