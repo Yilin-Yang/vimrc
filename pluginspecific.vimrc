@@ -44,7 +44,20 @@ let g:localvimrc_name=['.yvimrc', '.lvimrc']
 "=============================================================================
 "   Asynchronous Lint Engine                                [ALE]
 "=============================================================================
-hi ALEWarning cterm=underline ctermfg=164
+hi ALEWarning cterm=underline
+
+hi clear ALEErrorSign
+hi clear ALEInfoSign
+hi clear ALEStyleErrorSign
+hi clear ALEWarningSign
+
+hi ALEErrorSign ctermfg=9
+hi ALEInfoSign ctermfg=12
+hi ALEStyleErrorSign ctermfg=14
+hi ALEWarningSign ctermfg=11
+
+if !exists('g:ale_linters') | let g:ale_linters = {} | endif
+let g:ale_linters.python = ['mypy', 'pycodestyle', 'pylint']
 
 let g:ale_sign_error = 'X>'
 let g:ale_sign_warning = 'W>'
@@ -56,7 +69,7 @@ let g:ale_cpp_gcc_options = '--std=c++17 -Wall -Werror -Wextra -pedantic -O3 -DD
 
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 
 let g:ale_python_auto_pipenv = 1
 
