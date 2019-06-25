@@ -174,7 +174,7 @@ let g:coc_snippet_prev = '<C-m>'
 " Show documentation when hovering the cursor over a symbol
 augroup coc_hover
   au!
-  autocmd CursorHold * call CocAction('doHover')
+  autocmd CursorHold * silent! call CocAction('doHover')
 augroup end
 
 nnoremap <F4> :CocDisable<cr>:CocEnable<cr>:echo 'Restarted coc.nvim.'<cr>
