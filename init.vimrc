@@ -54,6 +54,7 @@
 "   dapper.nvim                                             [DAPPER]
 "   vim-mundo                                               [MUNDO]
 "   vim-syncopate                                           [SYNCOPATE]
+"   plantuml-previewer.vim                                  [PLANTUML]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -511,6 +512,16 @@ Plug 'simnalamburt/vim-mundo'
 "=============================================================================
 " " Syntax-highlighted copy paste.
 Plug 'google/vim-syncopate'
+
+"=============================================================================
+"   plantuml-previewer.vim                                  [PLANTUML]
+"=============================================================================
+" " Preview PlantUML diagrams.
+Plug 'weirongxu/plantuml-previewer.vim'
+
+  Plug 'tyru/open-browser.vim'
+
+  Plug 'https://github.com/aklt/plantuml-syntax'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

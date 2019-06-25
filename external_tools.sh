@@ -43,3 +43,6 @@ $INSTALLCMD cppcheck
 
 # Install vimtex dependencies
 $INSTALLCMD latexmk
+
+# Install plantuml dependencies
+$INSTALLCMD java graphviz
