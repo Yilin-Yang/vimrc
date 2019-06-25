@@ -22,14 +22,6 @@ let g:mapleader="\<Space>"
 " Set my preferred local leader, primarily used with vimtex.
 let g:maplocalleader="\\"
 
-if has('nvim')
-    " Enable use of Ctrl-Backspace to 'delete a word'.
-    " NOTE: this only works because neovim handles keycodes differently; it
-    "       will not work properly on standard vim.
-    inoremap <C-h> <C-w>
-    cnoremap <C-h> <C-w>
-endif
-
 "=============================================================================
 "   Ordinary                                                [ORDINARY]
 "=============================================================================
