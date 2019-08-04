@@ -21,5 +21,6 @@
       "command": "lua-lsp",
       "filetypes": ["lua"]
     }
-  }
+  },
+  "python.jediEnabled": false
 }

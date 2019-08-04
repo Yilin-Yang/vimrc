@@ -48,6 +48,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [lldb](https://github.com/dbgx/lldb.nvim)
 * [localvimrc](https://github.com/embear/vim-localvimrc)
 * [neomake](https://github.com/neomake/neomake)
+* [plantuml-previewer.vim](https://github.com/weirongxu/plantuml-previewer.vim)
 * [quick-scope](https://github.com/unblevable/quick-scope)
 * [tabular](https://github.com/godlygeek/tabular)
 * [traces.vim](https://github.com/markonm/traces.vim)

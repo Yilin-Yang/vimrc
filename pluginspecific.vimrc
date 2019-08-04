@@ -44,7 +44,20 @@ let g:localvimrc_name=['.yvimrc', '.lvimrc']
 "=============================================================================
 "   Asynchronous Lint Engine                                [ALE]
 "=============================================================================
-hi ALEWarning cterm=underline ctermfg=164
+hi ALEWarning cterm=underline
+
+hi clear ALEErrorSign
+hi clear ALEInfoSign
+hi clear ALEStyleErrorSign
+hi clear ALEWarningSign
+
+hi ALEErrorSign ctermfg=9
+hi ALEInfoSign ctermfg=12
+hi ALEStyleErrorSign ctermfg=14
+hi ALEWarningSign ctermfg=11
+
+if !exists('g:ale_linters') | let g:ale_linters = {} | endif
+let g:ale_linters.python = ['mypy', 'pycodestyle', 'pylint']
 
 let g:ale_sign_error = 'X>'
 let g:ale_sign_warning = 'W>'
@@ -56,9 +69,13 @@ let g:ale_cpp_gcc_options = '--std=c++17 -Wall -Werror -Wextra -pedantic -O3 -DD
 
 let g:ale_lint_on_text_changed = 'normal'
 let g:ale_lint_on_insert_leave = 1
-let g:ale_lint_on_enter = 0
+let g:ale_lint_on_enter = 1
 
 let g:ale_python_auto_pipenv = 1
+
+" to fix the slowneses caused by calls to executable() inside of
+" ale#engine#IsExecutable().
+let g:ale_cache_executable_check_failures = 1
 
 "=============================================================================
 "   NerdTree                                                [NERDTREE]
@@ -107,7 +124,7 @@ let g:vimtex_quickfix_enabled=0
 let g:UltiSnipsEditSplit='context'
 
 " Append the UltiSnips directory in the ~/vimrc folder to runtimepath.
-let &runtimepath.=',~/vimrc/'
+let &runtimepath.=','.$HOME.'/vimrc/'
 
 " Store snippets files in the vimrc repository.
 let g:UltiSnipsSnippetsDir='~/vimrc/UltiSnips'
@@ -141,6 +158,9 @@ augroup end
 "=============================================================================
 "   coc.nvim                                                [COC]
 "=============================================================================
+" Refresh COC mappings in the current buffer
+nnoremap <F4> :CocDisable<cr>:CocEnable<cr>
+
 " Insert mode tab-completion without breaking real presses of the tab key.
 inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
@@ -150,6 +170,14 @@ inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 " Hop between snippet placeholders!
 let g:coc_snippet_next = '<C-n>'
 let g:coc_snippet_prev = '<C-m>'
+
+" Show documentation when hovering the cursor over a symbol
+augroup coc_hover
+  au!
+  autocmd CursorHold * silent! call CocAction('doHover')
+augroup end
+
+nnoremap <F4> :CocDisable<cr>:CocEnable<cr>:echo 'Restarted coc.nvim.'<cr>
 
 " CodeLens!
 nmap <leader>pc <Plug>(coc-codelens-action)
@@ -285,9 +313,6 @@ nmap ga <Plug>(EasyAlign)
 "               |                   |       left boundary of selected text.
 "-----------------------------------------------------------------------------
 let g:easy_align_indentation = 's'
-
-" Visual Block select all text between the next matched pair of parentheses.
-nnoremap gf /(<CR>l<C-v>/)<CR>
 
 "=============================================================================
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
@@ -465,10 +490,14 @@ nnoremap <leader>wp     :PrevWordy<cr>
 "
 "------------------------------------------------------------------------------
 " PAGE EDITING:
+"
+"   (these mappings have been disabled in ftplugin/vimwiki.vim)
 "   <Leader>wd                  Delete current wiki page.
 "       :VimwikiDeleteLink          // ditto
 "   <Leader>wr                  Rename current wiki page.
 "       :VimwikiRenameLink          // ditto
+"   (end notice)
+"
 "   [[                          Previous header in buffer.
 "   ]]                          Next header in buffer.
 "   [=                          Previous header with same level as selected.

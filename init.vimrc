@@ -54,6 +54,7 @@
 "   dapper.nvim                                             [DAPPER]
 "   vim-mundo                                               [MUNDO]
 "   vim-syncopate                                           [SYNCOPATE]
+"   plantuml-previewer.vim                                  [PLANTUML]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -229,7 +230,7 @@ Plug 'neoclide/coc-neco'
     Plug 'Shougo/neco-vim'
 
 function! InstallCoCExtensions() abort
-  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-pyls coc-json coc-html coc-css
+  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-python coc-json coc-html coc-css
 
   " coc-sources extensions
   CocInstall coc-ultisnips
@@ -511,6 +512,16 @@ Plug 'simnalamburt/vim-mundo'
 "=============================================================================
 " " Syntax-highlighted copy paste.
 Plug 'google/vim-syncopate'
+
+"=============================================================================
+"   plantuml-previewer.vim                                  [PLANTUML]
+"=============================================================================
+" " Preview PlantUML diagrams.
+Plug 'weirongxu/plantuml-previewer.vim'
+
+  Plug 'tyru/open-browser.vim'
+
+  Plug 'https://github.com/aklt/plantuml-syntax'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

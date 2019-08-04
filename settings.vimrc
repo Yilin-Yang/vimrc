@@ -93,6 +93,8 @@ set list                            " Explicitly render `listchars`.
 set listchars=tab:│·,extends:>,precedes:<,nbsp:+
 set fillchars+=vert:│
 
+call HighlightTrailing('ErrorMsg')  " Highlight trailing whitespace.
+
 "=============================================================================
 "   User Interface                                          [USER INTERFACE]
 "=============================================================================
