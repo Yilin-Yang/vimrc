@@ -221,7 +221,7 @@ Plug 'honza/vim-snippets'
 "-----------------------------------------------------------------------------
 " " IntelliSense in neovim!.
 Plug 'neoclide/coc.nvim', {
-    \ 'tag': '*',
+    \ 'branch': 'master',
     \ 'do': 'yarn install',
 \ }
 
