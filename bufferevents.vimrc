@@ -1,7 +1,56 @@
+""
+" Return a dict between window settings to be modified and their current values.
+"
+" {vars_and_new_vals} is a list of key-value pairs: the setting to be
+" modified, and its new value (which is ignored).
+function! WindowState(vars_and_new_vals) abort
+  " get only the setting names
+  let l:vars = map(copy(a:vars_and_new_vals), 'v:val[0]')
+  call map(l:vars, '"&".v:val')
+  let l:state = {}
+  let l:winnr = winnr()
+  for l:var in l:vars
+    let l:state[l:var] = getwinvar(l:winnr, l:var)
+  endfor
+  return l:state
+endfunction
+
+""
+" Save the current values of window settings, change those variables as we
+" wish, but store the old values as a window variable.
+function! LeaveWindow() abort
+  let l:to_set = [
+      \ ['number', 0],
+      \ ['relativenumber', 0],
+      \ ['foldcolumn', 0],
+      \ ['signcolumn', 'auto:1'],
+      \ ]
+  let w:winstate = WindowState(l:to_set)
+  let l:winnr = winnr()
+  for [l:setting, l:val] in l:to_set
+    call setwinvar(l:winnr, '&'.l:setting, l:val)
+  endfor
+endfunction
+
+""
+" Restore old window settings to the values they had before we left.
+function! ReenterWindow() abort
+  if !exists('w:winstate')
+    return
+  endif
+  let l:winnr = winnr()
+  for [l:setting, l:val] in items(w:winstate)
+    call setwinvar(l:winnr, l:setting, l:val)
+  endfor
+  unlet w:winstate
+endfunction
+
 " Buffer events
 augroup buffer_stuff
     au!
     autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
+    autocmd WinLeave * call LeaveWindow()
+    autocmd WinEnter * call ReenterWindow()
 augroup end
 
 " Trigger `autoread` when files change on disk

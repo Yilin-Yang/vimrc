@@ -1,4 +1,6 @@
-call EnableLexical()
+if exists('*EnableLexical')
+  call EnableLexical()
+endif
 setlocal textwidth=80
 
 " Opening double quote.

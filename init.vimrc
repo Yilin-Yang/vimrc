@@ -29,7 +29,7 @@
 "   vim-tmux-focus-events                                   [FOCUSEVENTS]
 "   fuzzy-find                                              [FZF]
 "   fuzzy-find vim plugin                                   [FZFVIM]
-"   vim-airline                                             [AIRLINE]
+"   lightline.vim                                           [LIGHTLINE]
 "   vim-pencil                                              [PENCIL]
 "   vim-wordy                                               [WORDY]
 "   vim-textobj-user                                        [TEXTOBJ_USER]
@@ -54,6 +54,7 @@
 "   dapper.nvim                                             [DAPPER]
 "   vim-mundo                                               [MUNDO]
 "   vim-syncopate                                           [SYNCOPATE]
+"   plantuml-previewer.vim                                  [PLANTUML]
 "=============================================================================
 
 set nocompatible        " non-compatible with basic vi
@@ -212,28 +213,28 @@ Plug 'honza/vim-snippets'
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Snippets engine that uses Python and neocomplete.
-Plug 'SirVer/ultisnips'
+" Plug 'SirVer/ultisnips'
 
 "=============================================================================
 "   coc.nvim                                                [COC]
 "=============================================================================
 "-----------------------------------------------------------------------------
-" " " IntelliSense in neovim!.
-" Plug 'neoclide/coc.nvim', {
-"     \ 'tag': '*',
-"     \ 'do': 'yarn install',
-" \ }
+" " IntelliSense in neovim!.
+Plug 'neoclide/coc.nvim', {
+    \ 'branch': 'master',
+    \ 'do': 'yarn install',
+\ }
 
-" Plug 'neoclide/coc-sources'
-" Plug 'neoclide/coc-neco'
-"     Plug 'Shougo/neco-vim'
+Plug 'neoclide/coc-sources'
+Plug 'neoclide/coc-neco'
+    Plug 'Shougo/neco-vim'
 
-" function! InstallCoCExtensions() abort
-"   CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-pyls coc-json coc-html coc-css
+function! InstallCoCExtensions() abort
+  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-python coc-json coc-html coc-css
 
-"   " coc-sources extensions
-"   CocInstall coc-ultisnips
-" endfunction
+  " coc-sources extensions
+  CocInstall coc-ultisnips
+endfunction
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -330,13 +331,11 @@ Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 
 "=============================================================================
-"   vim-airline                                             [AIRLINE]
+"   lightline.vim                                           [LIGHTLINE]
 "=============================================================================
 " " Prettier, more informative statusline.
-Plug 'vim-airline/vim-airline'
-
-" " Different themes.
-Plug 'vim-airline/vim-airline-themes'
+" Also significantly faster than vim-airline.
+Plug 'itchyny/lightline.vim'
 
 "=============================================================================
 "   vim-pencil                                              [PENCIL]
@@ -458,7 +457,7 @@ Plug 'Yilin-Yang/vim-markbar'
 "   vim-peekaboo                                            [PEEKABOO]
 "=============================================================================
 " " See the contents of your registers in the sidebar when appropriate.
-Plug 'junegunn/vim-peekaboo'
+" Plug 'junegunn/vim-peekaboo'
 
 "=============================================================================
 "   vim-illuminate                                          [ILLUMINATE]
@@ -513,6 +512,16 @@ Plug 'simnalamburt/vim-mundo'
 "=============================================================================
 " " Syntax-highlighted copy paste.
 Plug 'google/vim-syncopate'
+
+"=============================================================================
+"   plantuml-previewer.vim                                  [PLANTUML]
+"=============================================================================
+" " Preview PlantUML diagrams.
+Plug 'weirongxu/plantuml-previewer.vim'
+
+  Plug 'tyru/open-browser.vim'
+
+  Plug 'https://github.com/aklt/plantuml-syntax'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
