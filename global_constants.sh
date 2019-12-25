@@ -6,3 +6,6 @@ PIPINSTALL="pip3 install --user --upgrade"
 
 # Start from Home Folder
 cd ~/
+
+# trap CTRL-C, have it terminate everything
+trap "echo 'Terminated script.' && exit 0" SIGINT

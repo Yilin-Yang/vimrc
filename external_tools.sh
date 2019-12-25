@@ -4,12 +4,6 @@
 
 source "$(dirname $0)/global_constants.sh"
 
-# Install vim-plug
-"$DIR/vim-plug.sh"
-
-# Install recent clang version for LSP support
-"$DIR/llvm.sh"
-
 # Install palantir's Python language server
 $PIPINSTALL python-language-server
 $PIPINSTALL mypy
