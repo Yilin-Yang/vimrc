@@ -21,6 +21,10 @@ hi link Whitespace SpecialKey
 hi clear NonText
 hi link NonText SpecialKey
 
+" brighter magenta to override dark fuchsia of my terminal colorscheme, which
+" is hard to read against my terminal background
+hi Constant ctermfg=201
+
 " Use a dark pop-up menu background for readable language server errors
 hi clear Pmenu
 hi Pmenu ctermbg=17 ctermfg=15
