@@ -56,6 +56,9 @@ hi ALEInfoSign ctermfg=12
 hi ALEStyleErrorSign ctermfg=14
 hi ALEWarningSign ctermfg=11
 
+hi clear ALEError
+hi ALEError cterm=underline
+
 if !exists('g:ale_linters') | let g:ale_linters = {} | endif
 let g:ale_linters.python = ['mypy', 'pycodestyle', 'pylint']
 
