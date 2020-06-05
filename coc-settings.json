@@ -9,18 +9,16 @@
   "coc.preferences.codeLens.enable": true,
   "coc.preferences.autoTrigger": "always",
   "languageserver": {
-    "cquery": {
-      "command": "/home/yiliny/.local/stow/cquery/bin/cquery",
+    "clangd": {
+      "command": "clangd",
       "rootPatterns": ["compile_flags.txt", "compile_commands.json", ".vim/", ".git/", ".hg/"],
-      "filetypes": ["c", "cpp", "c.doxygen", "cpp.doxygen", "objc", "objcpp"],
-      "initializationOptions": {
-        "cacheDirectory": "/tmp/cquery"
-      }
+      "filetypes": ["c", "cpp", "c.doxygen", "cpp.doxygen", "objc", "objcpp"]
     },
     "lua": {
       "command": "lua-lsp",
       "filetypes": ["lua"]
     }
   },
-  "python.jediEnabled": false
+  "python.jediEnabled": false,
+  "tsserver.log": "verbose"
 }
