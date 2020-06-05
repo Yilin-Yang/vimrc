@@ -10,8 +10,9 @@ let g:colors_name = 'yilin'
 "   https://upload.wikimedia.org/wikipedia/commons/1/15/Xterm_256color_chart.svg
 "=============================================================================
 
-hi CursorColumn cterm=bold ctermbg=NONE ctermfg=white guibg=NONE guifg=white
+hi CursorColumn cterm=bold ctermbg=16 ctermfg=white guibg=NONE guifg=white
               " ^ bold every character that's in the same column as the cursor
+                         " ^ hard black background, without terminal transparency
 
 " Less obtrusive `listchars`.
 hi SpecialKey ctermbg=NONE ctermfg=darkgray guibg=bg guifg=darkgray
