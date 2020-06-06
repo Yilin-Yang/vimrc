@@ -13,7 +13,7 @@
 "   lldb                                                    [LLDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
-"   coc.nvim                                                [COC]
+"   nvim-lsp                                                [LSP]
 "   BufExplorer                                             [BUFFER]
 "   vim-vebugger                                            [VEBUGGER]
 "   vimproc                                                 [VIMPROC]
@@ -213,27 +213,19 @@ Plug 'honza/vim-snippets'
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " Snippets engine that uses Python and neocomplete.
-" Plug 'SirVer/ultisnips'
+Plug 'SirVer/ultisnips'
 
 "=============================================================================
-"   coc.nvim                                                [COC]
+"   nvim-lsp                                                [LSP]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " IntelliSense in neovim!.
-Plug 'neoclide/coc.nvim', {
-    \ 'branch': 'master',
-    \ 'do': 'yarn install',
-\ }
+Plug 'neovim/nvim-lsp'
 
-Plug 'neoclide/coc-sources'
-Plug 'neoclide/coc-neco'
-    Plug 'Shougo/neco-vim'
-
-function! InstallCoCExtensions() abort
-  CocInstall coc-tsserver coc-tslint coc-yaml coc-java coc-python coc-json coc-html coc-css
-
-  " coc-sources extensions
-  CocInstall coc-ultisnips
+function! InstallLSPExtensions() abort
+  for l:server in ['tsserver', 'vimls', 'yamlls', 'jsonls', 'bashls', 'ccls', 'cssls', 'util']
+    execute 'LspInstall '.l:server
+  endfor
 endfunction
 
 "=============================================================================

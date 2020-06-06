@@ -90,3 +90,11 @@ hi link Error ErrorMsg
 " ditto, for spelling warnings
 hi SpellLocal ctermbg=23
 hi SpellCap ctermbg=21
+
+"=============================================================================
+" Language Server Protocol
+"=============================================================================
+
+hi LspDiagnosticsError ctermfg=200
+hi LspDiagnosticsWarning ctermfg=227
+hi LspDiagnosticInformation ctermfg=159

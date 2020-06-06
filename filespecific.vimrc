@@ -38,6 +38,9 @@ augroup cpp_detect
     autocmd BufNewFile,BufRead *.cpp     set filetype=cpp.doxygen
     autocmd BufNewFile,BufRead *.hpp     set filetype=cpp.doxygen
     autocmd BufNewFile,BufRead *.h       set filetype=cpp.doxygen
+
+    autocmd filetype cpp.* setlocal omnifunc=v:lua.vim.lsp.omnifunc
+    autocmd filetype c.* setlocal omnifunc=v:lua.vim.lsp.omnifunc
 augroup end
 
 "=============================================================================

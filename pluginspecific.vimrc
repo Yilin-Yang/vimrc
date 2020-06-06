@@ -9,7 +9,7 @@ scriptencoding utf-8
 "   NerdTree                                                [NERDTREE]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
-"   coc.nvim                                                [COC]
+"   nvim-lsp                                                [LSP]
 "   BufExplorer                                             [BUFFER]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
@@ -162,10 +162,17 @@ augroup UltiSnips_AutoTrigger
 augroup end
 
 "=============================================================================
-"   coc.nvim                                                [COC]
+"   nvim-lsp                                                [LSP]
 "=============================================================================
-" Refresh COC mappings in the current buffer
-nnoremap <F4> :CocDisable<cr>:CocEnable<cr>
+lua << EOF
+require'nvim_lsp'.clangd.setup{
+  settings = {
+    name = 'clangd';
+    cmd = { "clangd", "--background-index" };
+    filetypes = { "c", "cpp", "cc", "objc", "objcpp" };
+  }
+}
+EOF
 
 " Insert mode tab-completion without breaking real presses of the tab key.
 inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
@@ -173,34 +180,22 @@ inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 " Press Enter to close the menu **and also** start a new line.
 inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
-" Hop between snippet placeholders!
-let g:coc_snippet_next = '<C-n>'
-let g:coc_snippet_prev = '<C-m>'
+" Show hover information for the given symbol.
+nnoremap <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
 
-" Show documentation when hovering the cursor over a symbol
-augroup coc_hover
-  au!
-  autocmd CursorHold * silent! call CocAction('doHover')
-augroup end
-
-nnoremap <F4> :CocDisable<cr>:CocEnable<cr>:echo 'Restarted coc.nvim.'<cr>
-
-" CodeLens!
-nmap <leader>pc <Plug>(coc-codelens-action)
+" Show signature help.
+nnoremap <leader>hs <cmd>lua vim.lsp.buf.signature_help()<CR>
+" Show type definition.
+nnoremap <leader>ht <cmd>lua vim.lsp.buf.signature_help()<CR>
 
 " Rename symbol.
-nmap <leader>pr <Plug>(coc-rename)
-
-" Jump between problems.
-nmap <leader>S <Plug>(coc-diagnostic-info)
-nmap <leader>n <Plug>(coc-diagnostic-next)
-nmap <leader>N <Plug>(coc-diagnostic-prev)
+nnoremap <leader>pr <cmd>lua vim.lsp.buf.rename()<CR>
 
 " Jump to...
-nmap <leader>t  <Plug>(coc-definition)
-nmap <leader>td <Plug>(coc-type-definition)
-nmap <leader>ti <Plug>(coc-implementation)
-nmap <leader>sr <Plug>(coc-references)
+nnoremap <leader>t  <cmd>lua vim.lsp.buf.declaration()<CR>
+nnoremap <leader>td <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>ti <cmd>lua vim.lsp.buf.implementation()<CR>
+nnoremap <leader>sr <cmd>lua vim.lsp.buf.references()<CR>
 
 " Autoformat!
 nmap <leader>f  <Plug>(coc-format-selected)
