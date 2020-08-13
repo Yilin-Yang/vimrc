@@ -3,11 +3,22 @@ scriptencoding utf-8
 "                             TABLE OF CONTENTS
 "=============================================================================
 "
+"   Language Server Protocol                                [LSP]
 "   C/C++ Formatting                                        [C_CPP]
 "   JavaScript Formatting                                   [JS]
 "   Prose Formatting                                        [PROSE]
 "   Startup Settings                                        [STARTUP]
 "=============================================================================
+
+"=============================================================================
+"   Language Server Protocol                                [LSP]
+"=============================================================================
+
+augroup lsp_stuff
+    autocmd filetype cpp.*  EnableLSP
+    autocmd filetype c.*    EnableLSP
+    autocmd filetype xml    EnableLSP
+augroup end
 
 "=============================================================================
 "   C/C++ Formatting                                        [C_CPP]
@@ -38,9 +49,6 @@ augroup cpp_detect
     autocmd BufNewFile,BufRead *.cpp     set filetype=cpp.doxygen
     autocmd BufNewFile,BufRead *.hpp     set filetype=cpp.doxygen
     autocmd BufNewFile,BufRead *.h       set filetype=cpp.doxygen
-
-    autocmd filetype cpp.*  EnableLSP
-    autocmd filetype c.*    EnableLSP
 augroup end
 
 "=============================================================================

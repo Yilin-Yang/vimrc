@@ -32,3 +32,6 @@ $INSTALLCMD latexmk
 
 # Install plantuml dependencies
 $INSTALLCMD graphviz
+
+# Install lemminx language server for XML
+"$DIR/xml.sh"
