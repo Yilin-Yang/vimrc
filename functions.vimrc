@@ -13,6 +13,7 @@ scriptencoding utf-8
 "   Window Resizing                                         [WINDOW_RESIZE]
 "   Cosmetic                                                [COSMETIC]
 "   Code Style                                              [STYLE]
+"   Code Smarts                                             [SMARTS]
 "=============================================================================
 
 "=============================================================================
@@ -662,3 +663,18 @@ function! ReformatMultilineParentheses(...) range abort
     let @/ = l:old_search
     let @" = l:old_contents
 endfunction
+
+
+"=============================================================================
+"   Code Smarts                                             [SMARTS]
+"=============================================================================
+
+" EFFECTS:  Enables nvim-lsp for the current buffer.
+function! EnableLSPCurrentBuffer() abort
+   setlocal omnifunc=v:lua.vim.lsp.omnifunc
+
+    " open omnifunc by double-pressing tab
+    inoremap <buffer> <Tab><Tab> <C-x><C-o>
+endfunction
+
+command! -nargs=0 EnableLSP call EnableLSPCurrentBuffer()
