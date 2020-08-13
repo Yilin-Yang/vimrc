@@ -673,8 +673,8 @@ endfunction
 function! EnableLSPCurrentBuffer() abort
    setlocal omnifunc=v:lua.vim.lsp.omnifunc
 
-    " open omnifunc by double-pressing tab
-    inoremap <buffer> <Tab><Tab> <C-x><C-o>
+    " open omnifunc by pressing shift-tab
+    inoremap <buffer> <S-Tab> <C-x><C-o>
 endfunction
 
 command! -nargs=0 EnableLSP call EnableLSPCurrentBuffer()
