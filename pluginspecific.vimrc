@@ -119,6 +119,9 @@ let g:vimtex_fold_enabled=1
 " Disable opening the quickfix window during continuous compilation.
 let g:vimtex_quickfix_enabled=0
 
+" Stop error messages on startup.
+let g:tex_flavor = 'latex'
+
 "=============================================================================
 "   UltiSnips                                               [ULTISNIPS]
 "=============================================================================
