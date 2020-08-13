@@ -4,10 +4,8 @@
 
 source "$(dirname $0)/global_constants.sh"
 
-# Install palantir's Python language server
-$PIPINSTALL python-language-server
+# Install mypy, for static type checking
 $PIPINSTALL mypy
-$PIPINSTALL pyls-mypy
 
 # Install lua-lsp (https://github.com/Alloyed/lua-lsp)
 # note: $HOME/.luarocks/bin must be in $PATH
@@ -19,9 +17,6 @@ luarocks --local install luacheck
 pip  install --user --upgrade vim-vint
 pip3 install --user --upgrade vim-vint
 
-# Install lldb for integrated debugger support
-$INSTALLCMD lldb
-
 # Install yamllint
 #   Should work automatically with syntastic and neomake
 $INSTALLCMD yamllint
@@ -32,11 +27,8 @@ $INSTALLCMD shellcheck
 # Install cppcheck, for clang checking
 $INSTALLCMD cppcheck
 
-# Install ctags
-"$DIR/ctags.sh"
-
 # Install vimtex dependencies
 $INSTALLCMD latexmk
 
 # Install plantuml dependencies
-$INSTALLCMD java graphviz
+$INSTALLCMD graphviz

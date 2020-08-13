@@ -7,7 +7,6 @@ source "`dirname $0`/global_constants.sh"
 "$DIR/vim-plug.sh"        # install vim-plug
 "$DIR/external_tools.sh"  # install some dependencies
 "$DIR/neovim.sh"          # install neovim
-"$DIR/coc.sh"             # install CoC
 
 if [ -f ~/.vimrc ]; then
     mv ~/.vimrc ~/.vimrc.bak
@@ -22,6 +21,3 @@ ln -s "$DIR/.vimrc" ~/.vimrc
 
 # Run PluginInstall
 nvim -c 'PlugInstall' -c 'qa!'
-
-# Run CocInstall
-nvim -c 'call InstallCoCExtensions()' -c 'qa!'
