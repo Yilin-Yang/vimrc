@@ -15,8 +15,6 @@
 "   UltiSnips                                               [ULTISNIPS]
 "   nvim-lsp                                                [LSP]
 "   BufExplorer                                             [BUFFER]
-"   vim-vebugger                                            [VEBUGGER]
-"   vimproc                                                 [VIMPROC]
 "   vim-obsession                                           [OBSESSION]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
@@ -55,9 +53,8 @@
 "   vim-mundo                                               [MUNDO]
 "   vim-syncopate                                           [SYNCOPATE]
 "   plantuml-previewer.vim                                  [PLANTUML]
+"   completion-nvim                                         [COMPLETION]
 "=============================================================================
-
-set nocompatible        " non-compatible with basic vi
 
 " Basic Plug Commands:
 " PlugInstall [name ...] [#threads]     Install plugins
@@ -233,19 +230,6 @@ endfunction
 "=============================================================================
 " " Navigate open buffers.
 Plug 'jlanzarotta/bufexplorer'
-
-"=============================================================================
-"   vim-vebugger                                            [VEBUGGER]
-"=============================================================================
-" " More modular debugger frontend for Vim.
-" Requires Shougo/vimproc for async support. Grr, shake fist.
-Plug 'idanarye/vim-vebugger'
-
-"=============================================================================
-"   vimproc                                                 [VIMPROC]
-"=============================================================================
-" " Asynchronous job support. Required by vim-vebugger.
-Plug 'Shougo/vimproc.vim', { 'do': 'make' }
 
 "=============================================================================
 "   vim-obsession                                           [OBSESSION]
@@ -484,16 +468,6 @@ Plug 'leafgarland/typescript-vim'
 Plug 'kshenoy/vim-signature'
 
 "=============================================================================
-"   dapper.nvim                                             [DAPPER]
-"=============================================================================
-" " Debug adapter protocol implementation for neovim.
-Plug 'Yilin-Yang/dapper.nvim'
-
-  Plug 'Yilin-Yang/VSCrib.vim'
-
-  Plug 'Yilin-Yang/TypeVim'
-
-"=============================================================================
 "   vim-mundo                                               [MUNDO]
 "=============================================================================
 " " Visualize the vim undo tree.
@@ -514,6 +488,13 @@ Plug 'weirongxu/plantuml-previewer.vim'
   Plug 'tyru/open-browser.vim'
 
   Plug 'https://github.com/aklt/plantuml-syntax'
+
+
+"=============================================================================
+"   completion-nvim                                         [COMPLETION]
+"=============================================================================
+" " Lightweight autocompletion framework for use with neovim's integrated LSP.
+Plug 'nvim-lua/completion-nvim'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
