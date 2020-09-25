@@ -31,5 +31,6 @@ FOLDERS="
     ftplugin
     ftdetect
     indent
+    lua
 "
 removeOrBackupDir "$HOME/.vim" "$DIR" "$FOLDERS"

@@ -164,43 +164,17 @@ augroup end
 "=============================================================================
 "   nvim-lsp                                                [LSP]
 "=============================================================================
-lua << EOF
-local nvim_lsp = require'nvim_lsp'
-local configs = require'nvim_lsp/configs'
-
-nvim_lsp.clangd.setup{
-  settings = {
-    name = 'clangd';
-    cmd = { "clangd", "--background-index" };
-    filetypes = { "c", "cpp", "cc", "objc", "objcpp" };
-  }
-}
-
--- TODO the `if not nvim_lsp.foo_lsp then` from the nvim-lsp README doesn't
--- seem to be valid lua?
-configs.lemminx = {
-  default_config = {
-    cmd = { "java", "-jar", "/home/yiliny/vimrc/org.eclipse.lemminx-uber.jar" };
-    filetypes = { "xml" };
-    root_dir = function(fname)
-      return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
-    end;
-    settings = {}
-  };
-}
-
-nvim_lsp.lemminx.setup{
-  settings = {
-    name = "lemminx";
-  }
-}
-EOF
+" Register Lua setup code.
+lua require'lsp'
 
 " Insert mode tab-completion without breaking real presses of the tab key.
 inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
 
 " Press Enter to close the menu **and also** start a new line.
 inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
+
+" Shift-Tab to manually trigger popup menu.
+inoremap <S-Tab> <C-x><C-o>
 
 " Show hover information for the given symbol.
 nnoremap <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
@@ -756,3 +730,14 @@ function! SyncopateExportToClipboard() range
   " line
   let @+=@+
 endfunction
+
+"=============================================================================
+"   completion-nvim                                         [COMPLETION]
+"=============================================================================
+" Use completion-nvim in every buffer.
+augroup completion_nvim
+  au!
+  autocmd BufEnter * lua require'completion'.on_attach()
+augroup end
+
+lua require'completion'.addCompletionSource('vimtex', require'vimtex'.complete_item)
