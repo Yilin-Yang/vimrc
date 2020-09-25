@@ -446,7 +446,7 @@ command! -nargs=1 Vrs  call ResizeSplit('WIDTH', <args>)
 "                                       from its present value.
 " DETAIL:   Taken from the following link:
 "               https://blog.hanschen.org/2012/10/24/different-background-color-in-vim-past-80-columns/
-function! ColorColumnBlock(...)
+function! ColorColumnBlock(...) abort
     let l:num_args  = get(a:, 0)
     let l:start     = get(a:, 1, 0)
     let l:end       = get(a:, 2, 255)
