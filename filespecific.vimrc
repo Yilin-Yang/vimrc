@@ -88,6 +88,17 @@ function! Punctuation()
   iabbrev <buffer> >>   »
 endfunction
 
+" EFFECTS:  Compile the current file into an HTML file,
+"           `~/windows_files/Desktop/foo.html`.
+" REQUIRES: The current file is a valid markdown file. `~/windows_files` is
+"           symlinked to the user's Windows home directory.
+function! MarkdownThis()
+  let l:fname = expand('%')
+  let l:cmd = '!markdown '.l:fname.' > ~/windows_files/Desktop/foo.html'
+  "echo l:cmd
+  execute l:cmd
+endfunction
+
 "=============================================================================
 "   Startup Settings                                        [STARTUP]
 "=============================================================================

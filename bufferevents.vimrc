@@ -51,6 +51,7 @@ augroup buffer_stuff
     autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
     autocmd WinLeave * call LeaveWindow()
     autocmd WinEnter * call ReenterWindow()
+    autocmd FileType markdown nnoremap <buffer> <localleader>ll :call MarkdownThis()<cr>
 augroup end
 
 " Trigger `autoread` when files change on disk
