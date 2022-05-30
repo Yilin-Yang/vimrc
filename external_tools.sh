@@ -4,8 +4,14 @@
 
 source "$(dirname $0)/global_constants.sh"
 
+# Install python3-venv, dependency for coq_nvim
+$INSTALLCMD python3-venv
+
 # Install mypy, for static type checking
 $PIPINSTALL mypy
+
+# Install Python LSP
+$PIPINSTALL python-lsp-server
 
 # Install lua-lsp (https://github.com/Alloyed/lua-lsp)
 # note: $HOME/.luarocks/bin must be in $PATH
@@ -32,6 +38,14 @@ $INSTALLCMD latexmk
 
 # Install plantuml dependencies
 $INSTALLCMD graphviz
+
+# Install vim-language-server
+$YARNINSTALL vim-language-server
+
+$YARNINSTALL bash-language-server
+
+# html, css, json, eslint
+$YARNINSTALL vscode-langservers-extracted
 
 # Install lemminx language server for XML
 "$DIR/xml.sh"

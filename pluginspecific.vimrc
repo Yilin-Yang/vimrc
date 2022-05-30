@@ -9,7 +9,7 @@ scriptencoding utf-8
 "   NerdTree                                                [NERDTREE]
 "   vimtex                                                  [VIMTEX]
 "   UltiSnips                                               [ULTISNIPS]
-"   nvim-lsp                                                [LSP]
+"   nvim-lspconfig                                          [LSP]
 "   BufExplorer                                             [BUFFER]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
@@ -58,6 +58,10 @@ hi ALEWarningSign ctermfg=11
 
 hi clear ALEError
 hi ALEError cterm=underline
+
+let g:ale_linter_aliases = {
+  \ 'vader': 'vim',
+\ }
 
 if !exists('g:ale_linters') | let g:ale_linters = {} | endif
 let g:ale_linters.python = ['mypy', 'pycodestyle', 'pylint']
@@ -162,7 +166,7 @@ augroup UltiSnips_AutoTrigger
 augroup end
 
 "=============================================================================
-"   nvim-lsp                                                [LSP]
+"   nvim-lspconfig                                          [LSP]
 "=============================================================================
 " Register Lua setup code.
 lua require'lsp'
@@ -194,8 +198,8 @@ nnoremap <leader>ti <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>sr <cmd>lua vim.lsp.buf.references()<CR>
 
 " Autoformat!
-nmap <leader>f  <Plug>(coc-format-selected)
-xmap <leader>f  <Plug>(coc-format-selected)
+" nmap <leader>f  <cmd>lua vim.lsp.buf.range_formatting()<CR>
+" xmap <leader>f  <cmd>lua vim.lsp.buf.range_formatting()<CR>
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -401,9 +405,10 @@ function! GetWordcount() abort
 endfunction
 let g:wordcount_enabled_fts = {
     \ 'help': 1,
-    \ 'text': 1,
     \ 'markdown': 1,
     \ 'tex': 1,
+    \ 'text': 1,
+    \ 'vimwiki': 1,
     \ }
 
 " coc diagnostics in lightline

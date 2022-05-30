@@ -663,18 +663,3 @@ function! ReformatMultilineParentheses(...) range abort
     let @/ = l:old_search
     let @" = l:old_contents
 endfunction
-
-
-"=============================================================================
-"   Code Smarts                                             [SMARTS]
-"=============================================================================
-
-" EFFECTS:  Enables nvim-lsp for the current buffer.
-function! EnableLSPCurrentBuffer() abort
-   setlocal omnifunc=v:lua.vim.lsp.omnifunc
-
-    " open omnifunc by pressing shift-tab
-    inoremap <buffer> <S-Tab> <C-x><C-o>
-endfunction
-
-command! -nargs=0 EnableLSP call EnableLSPCurrentBuffer()

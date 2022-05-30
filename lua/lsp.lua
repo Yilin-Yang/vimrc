@@ -1,7 +1,16 @@
-local nvim_lsp = require'nvim_lsp'
-local configs = require'nvim_lsp/configs'
+local lspconfig = require'lspconfig'
+local configs = require'lspconfig.configs'
 
-nvim_lsp.clangd.setup{
+lspconfig.bashls.setup{}
+
+lspconfig.jsonls.setup{}
+lspconfig.cssls.setup{}
+lspconfig.html.setup{}
+
+lspconfig.vimls.setup{}
+lspconfig.pylsp.setup{}
+
+lspconfig.clangd.setup{
   settings = {
     name = 'clangd';
     cmd = { "clangd", "--background-index" };
@@ -14,13 +23,13 @@ configs.lemminx = {
     cmd = { "java", "-jar", "/home/yiliny/vimrc/org.eclipse.lemminx-uber.jar" };
     filetypes = { "xml" };
     root_dir = function(fname)
-      return nvim_lsp.util.find_git_ancestor(fname) or vim.loop.os_homedir()
+      return lspconfig.util.find_git_ancestor(fname) or vim.loop.os_homedir()
     end;
     settings = {}
   };
 }
 
-nvim_lsp.lemminx.setup{
+lspconfig.lemminx.setup{
   settings = {
     name = "lemminx";
   }

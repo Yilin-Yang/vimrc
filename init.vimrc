@@ -13,7 +13,7 @@
 "   lldb                                                    [LLDB]
 "   vim-snippets                                            [SNIPPETS]
 "   UltiSnips                                               [ULTISNIPS]
-"   nvim-lsp                                                [LSP]
+"   nvim-lspconfig                                          [LSP]
 "   BufExplorer                                             [BUFFER]
 "   vim-obsession                                           [OBSESSION]
 "   vim-repeat                                              [REPEAT]
@@ -213,17 +213,11 @@ Plug 'honza/vim-snippets'
 Plug 'SirVer/ultisnips'
 
 "=============================================================================
-"   nvim-lsp                                                [LSP]
+"   nvim-lspconfig                                          [LSP]
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " IntelliSense in neovim!.
-Plug 'neovim/nvim-lsp'
-
-function! InstallLSPExtensions() abort
-  for l:server in ['tsserver', 'vimls', 'yamlls', 'jsonls', 'bashls', 'ccls', 'cssls', 'util']
-    execute 'LspInstall '.l:server
-  endfor
-endfunction
+Plug 'neovim/nvim-lspconfig'
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -291,7 +285,7 @@ Plug 'https://github.com/tpope/vim-rsi'
 "   vim-tmux-focus-events                                   [FOCUSEVENTS]
 "=============================================================================
 " " Make the 'FocusGained' event, etc. work properly in tmux and the terminal.
-Plug 'tmux-plugins/vim-tmux-focus-events'
+" Plug 'tmux-plugins/vim-tmux-focus-events'
 
 "=============================================================================
 "   fuzzy-find                                              [FZF]
