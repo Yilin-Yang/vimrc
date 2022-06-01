@@ -31,6 +31,7 @@ scriptencoding utf-8
 "   vim-illuminate                                          [ILLUMINATE]
 "   vim-mundo                                               [MUNDO]
 "   vim-syncopate                                           [SYNCOPATE]
+"   coq_nvim                                                [COMPLETION]
 "=============================================================================
 
 
@@ -169,13 +170,10 @@ augroup end
 "   nvim-lspconfig                                          [LSP]
 "=============================================================================
 " Register Lua setup code.
-lua require'lsp'
+if has('nvim')
+    lua require'lsp'
+endif
 
-" Insert mode tab-completion without breaking real presses of the tab key.
-inoremap <expr><tab> pumvisible() ? "\<C-y>" : "\<tab>"
-
-" Press Enter to close the menu **and also** start a new line.
-inoremap <expr> <cr> pumvisible() ? "\<C-e>\<cr>" : "\<cr>"
 
 " Shift-Tab to manually trigger popup menu.
 inoremap <S-Tab> <C-x><C-o>
@@ -737,12 +735,22 @@ function! SyncopateExportToClipboard() range
 endfunction
 
 "=============================================================================
-"   completion-nvim                                         [COMPLETION]
+"   coq_nvim                                                [COMPLETION]
 "=============================================================================
-" Use completion-nvim in every buffer.
-augroup completion_nvim
-  au!
-  autocmd BufEnter * lua require'completion'.on_attach()
-augroup end
+let g:coq_settings = {
+    \ 'auto_start': 'shut-up',
+    \ 'keymap': {
+      \ 'recommended': v:false,
+      \ 'jump_to_mark': '',
+      \ 'manual_complete': '<C-space>',
+    \ }
+\ }
 
-lua require'completion'.addCompletionSource('vimtex', require'vimtex'.complete_item)
+" pop-up menu mappiings
+inoremap <silent><expr> <tab>   pumvisible() ? "\<C-y>" : "\<tab>"
+inoremap <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
+inoremap <silent><expr> <C-c>   pumvisible() ? "\<C-e><C-c>" : "\<C-c>"
+inoremap <silent><expr> <BS>    pumvisible() ? "\<C-e><BS>"  : "\<BS>"
+inoremap <silent><expr> <CR>    pumvisible() ? (complete_info().selected == -1 ? "\<C-e><CR>" : "\<C-y>") : "\<CR>"
+" ino <silent><expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
+" ino <silent><expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<BS>"

@@ -39,7 +39,7 @@ For convenience's sake. (Not guaranteed to be current or comprehensive; see
 * [BufExplorer](https://github.com/jlanzarotta/bufexplorer)
 * [ReplaceWithRegister](https://github.com/vim-scripts/ReplaceWithRegister)
 * [UltiSnips](https://github.com/SirVer/ultisnips)
-* [coc.nvim](https://github.com/neoclide/coc.nvim)
+* [coq\_nvim](https://github.com/ms-jpq/coq_nvim)
 * [diffconflicts](https://github.com/whiteinge/diffconflicts)
 * [editorconfig-vim](https://github.com/editorconfig/editorconfig-vim)
 * [fuzzyfind-vim](https://github.com/junegunn/fzf.vim)

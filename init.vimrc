@@ -53,7 +53,7 @@
 "   vim-mundo                                               [MUNDO]
 "   vim-syncopate                                           [SYNCOPATE]
 "   plantuml-previewer.vim                                  [PLANTUML]
-"   completion-nvim                                         [COMPLETION]
+"   coq_nvim                                                [COMPLETION]
 "=============================================================================
 
 " Basic Plug Commands:
@@ -217,7 +217,9 @@ Plug 'SirVer/ultisnips'
 "=============================================================================
 "-----------------------------------------------------------------------------
 " " IntelliSense in neovim!.
-Plug 'neovim/nvim-lspconfig'
+if has('nvim')
+    Plug 'neovim/nvim-lspconfig'
+endif
 
 "=============================================================================
 "   BufExplorer                                             [BUFFER]
@@ -485,10 +487,11 @@ Plug 'weirongxu/plantuml-previewer.vim'
 
 
 "=============================================================================
-"   completion-nvim                                         [COMPLETION]
+"   coq_nvim                                                [COMPLETION]
 "=============================================================================
-" " Lightweight autocompletion framework for use with neovim's integrated LSP.
-Plug 'nvim-lua/completion-nvim'
+" " Fast autocompletion.
+Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
