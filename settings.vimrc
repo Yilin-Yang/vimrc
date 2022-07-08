@@ -118,3 +118,10 @@ let g:python3_host_prog = '/usr/bin/python3'
 " Enable persistent undo so that undo history persists across vim sessions
 set undofile
 set undodir=~/.vim/undo
+
+" For persistent mark names in vim-markbar.
+if has('nvim')
+    set shada+=!
+else
+    set viminfo+=!
+endif

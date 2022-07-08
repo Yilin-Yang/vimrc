@@ -183,8 +183,6 @@ nnoremap <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
 
 " Show signature help.
 nnoremap <leader>hs <cmd>lua vim.lsp.buf.signature_help()<CR>
-" Show type definition.
-nnoremap <leader>ht <cmd>lua vim.lsp.buf.signature_help()<CR>
 
 " Rename symbol.
 nnoremap <leader>pr <cmd>lua vim.lsp.buf.rename()<CR>
@@ -192,6 +190,7 @@ nnoremap <leader>pr <cmd>lua vim.lsp.buf.rename()<CR>
 " Jump to...
 nnoremap <leader>t  <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <leader>td <cmd>lua vim.lsp.buf.definition()<CR>
+nnoremap <leader>ttd <cmd>lua vim.lsp.buf.type_definition()<CR>
 nnoremap <leader>ti <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>sr <cmd>lua vim.lsp.buf.references()<CR>
 
@@ -693,9 +692,11 @@ augroup end
 map <leader>m <Plug>ToggleMarkbar
 
 let g:markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-let g:markbar_peekaboo_marks_to_display = "'\"(){}.[]<>^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+let g:markbar_peekaboo_marks_to_display = "'\".abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
 let g:markbar_section_separation = 0
 let g:markbar_explicitly_remap_mark_mappings = v:true
+
+let g:markbar_force_clear_shared_data_on_delmark = v:true
 
 "=============================================================================
 "   vim-illuminate                                          [ILLUMINATE]

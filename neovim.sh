@@ -6,13 +6,11 @@
 
 source "`dirname $0`/global_constants.sh"
 
+$INSTALLCMD neovim
 
 # Enable python remote plugin support in nvim
-$INSTALLCMD python-pip
 $INSTALLCMD python3-pip
-$INSTALLCMD python-dev
-$INSTALLCMD python2-dev
-pip2 install --user --upgrade pynvim
+$INSTALLCMD python3-dev
 pip3 install --user --upgrade pynvim
 
 # Symlink nvim's config folders to my ordinary vim config

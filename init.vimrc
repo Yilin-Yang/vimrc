@@ -54,6 +54,7 @@
 "   vim-syncopate                                           [SYNCOPATE]
 "   plantuml-previewer.vim                                  [PLANTUML]
 "   coq_nvim                                                [COMPLETION]
+"   vim-scriptease                                          [SCRIPTEASE]
 "=============================================================================
 
 " Basic Plug Commands:
@@ -490,8 +491,15 @@ Plug 'weirongxu/plantuml-previewer.vim'
 "   coq_nvim                                                [COMPLETION]
 "=============================================================================
 " " Fast autocompletion.
-Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
-" Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+if has('nvim')
+    Plug 'ms-jpq/coq_nvim', {'branch': 'coq'}
+    Plug 'ms-jpq/coq.artifacts', {'branch': 'artifacts'}
+endif
+
+"=============================================================================
+"   vim-scriptease                                          [SCRIPTEASE]
+"=============================================================================
+Plug 'tpope/vim-scriptease'
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.
