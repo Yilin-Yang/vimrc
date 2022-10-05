@@ -50,9 +50,6 @@ if has('nvim')
 endif
 
 
-let g:cm_completeopt=&completeopt   " workaround to prevent overriding by
-                                    " nvim-completion-manager
-
 "=============================================================================
 "   Spellchecking                                           [SPELLCHECK]
 "=============================================================================

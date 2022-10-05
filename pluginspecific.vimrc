@@ -176,7 +176,7 @@ endif
 
 
 " Shift-Tab to manually trigger popup menu.
-inoremap <S-Tab> <C-x><C-o>
+inoremap <S-Tab> <C-x><C-u>
 
 " Show hover information for the given symbol.
 nnoremap <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
