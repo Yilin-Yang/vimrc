@@ -51,7 +51,9 @@ augroup buffer_stuff
     autocmd VimEnter * EditorConfigReload
     autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
     autocmd WinLeave * call LeaveWindow()
-    autocmd WinEnter * call ReenterWindow()
+    " also on BufEnter, so that opening an unfocused buffer in a new tab will
+    " reapply focused settings
+    autocmd BufEnter,WinEnter * call ReenterWindow()
     autocmd FileType markdown nnoremap <buffer> <localleader>ll :call MarkdownThis()<cr>
 augroup end
 
