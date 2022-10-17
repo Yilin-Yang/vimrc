@@ -10,12 +10,8 @@
 "   Asynchronous Lint Engine                                [ALE]
 "   vimtex                                                  [VIMTEX]
 "   vim-unimpaired                                          [UNIMPAIRED]
-"   lldb                                                    [LLDB]
-"   vim-snippets                                            [SNIPPETS]
-"   UltiSnips                                               [ULTISNIPS]
 "   nvim-lspconfig                                          [LSP]
 "   BufExplorer                                             [BUFFER]
-"   vim-obsession                                           [OBSESSION]
 "   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
 "   vim-commentary                                          [COMMENTARY]
@@ -24,14 +20,11 @@
 "   vim-lexical                                             [LEXICAL]
 "   ReplaceWithRegister                                     [REPLACEREGISTER]
 "   vim-rsi                                                 [RSI]
-"   vim-tmux-focus-events                                   [FOCUSEVENTS]
 "   fuzzy-find                                              [FZF]
 "   fuzzy-find vim plugin                                   [FZFVIM]
 "   lightline.vim                                           [LIGHTLINE]
 "   vim-pencil                                              [PENCIL]
 "   vim-wordy                                               [WORDY]
-"   vim-textobj-user                                        [TEXTOBJ_USER]
-"   vim-textobj-sentence                                    [TEXTOBJ_SENTENCE]
 "   vimwiki                                                 [VIMWIKI]
 "   diffconflicts                                           [DIFFCONFLICTS]
 "   winresizer                                              [WINRESIZER]
@@ -39,18 +32,12 @@
 "   vim-signify                                             [SIGNIFY]
 "   vim-eunuch                                              [EUNUCH]
 "   quick-scope                                             [QUICKSCOPE]
-"   gv.vim                                                  [GVVIM]
-"   vim-indent-object                                       [INDENTOBJECT]
 "   vader.vim                                               [VADER]
 "   vim-markbar                                             [MARKBAR]
-"   vim-peekaboo                                            [PEEKABOO]
 "   vim-illuminate                                          [ILLUMINATE]
 "   traces.vim                                              [TRACES]
 "   editorconfig-vim                                        [EDITORCFG]
-"   typescript-vim                                          [TS-VIM]
 "   vim-signature                                           [SIGNATURE]
-"   dapper.nvim                                             [DAPPER]
-"   vim-mundo                                               [MUNDO]
 "   vim-syncopate                                           [SYNCOPATE]
 "   plantuml-previewer.vim                                  [PLANTUML]
 "   coq_nvim                                                [COMPLETION]
@@ -191,29 +178,6 @@ Plug 'scrooloose/nerdtree'
 Plug 'tpope/vim-unimpaired'
 
 "=============================================================================
-"   lldb.nvim                                                    [LLDB]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " IDE-like debugger integration for vim.
-if has('nvim')
-    Plug 'dbgx/lldb.nvim'
-endif
-
-"=============================================================================
-"   vim-snippets                                            [SNIPPETS]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Actual implementation of snippets. Requires an engine, like UltiSnips.
-Plug 'honza/vim-snippets'
-
-"=============================================================================
-"   UltiSnips                                               [ULTISNIPS]
-"=============================================================================
-"-----------------------------------------------------------------------------
-" " Snippets engine that uses Python and neocomplete.
-Plug 'SirVer/ultisnips'
-
-"=============================================================================
 "   nvim-lspconfig                                          [LSP]
 "=============================================================================
 "-----------------------------------------------------------------------------
@@ -227,12 +191,6 @@ endif
 "=============================================================================
 " " Navigate open buffers.
 Plug 'jlanzarotta/bufexplorer'
-
-"=============================================================================
-"   vim-obsession                                           [OBSESSION]
-"=============================================================================
-" " Autosave vim sessions as I go.
-Plug 'tpope/vim-obsession'
 
 "=============================================================================
 "   vim-repeat                                              [REPEAT]
@@ -285,12 +243,6 @@ Plug 'vim-scripts/ReplaceWithRegister'
 Plug 'https://github.com/tpope/vim-rsi'
 
 "=============================================================================
-"   vim-tmux-focus-events                                   [FOCUSEVENTS]
-"=============================================================================
-" " Make the 'FocusGained' event, etc. work properly in tmux and the terminal.
-" Plug 'tmux-plugins/vim-tmux-focus-events'
-
-"=============================================================================
 "   fuzzy-find                                              [FZF]
 "=============================================================================
 " " Search for things very speedily.
@@ -321,18 +273,6 @@ Plug 'reedes/vim-pencil'
 "=============================================================================
 " " Check for word usage problems in prose writing.
 Plug 'reedes/vim-wordy'
-
-"=============================================================================
-"   vim-textobj-user                                     [TEXTOBJ_USER]
-"=============================================================================
-" " Dependency for vim-textobj-sentence.
-Plug 'kana/vim-textobj-user'
-
-"=============================================================================
-"   vim-textobj-sentence                                    [TEXTOBJ_SENTENCE]
-"=============================================================================
-" " Improve vim's built-in textobject detection (handle abbreviations, etc.)
-Plug 'reedes/vim-textobj-sentence'
 
 "=============================================================================
 "   vimwiki                                                 [VIMWIKI]
@@ -398,23 +338,6 @@ Plug 'tpope/vim-eunuch'
 Plug 'unblevable/quick-scope'
 
 "=============================================================================
-"   gv.vim                                                  [GVVIM]
-"=============================================================================
-" " Detailed commit history browser.
-Plug 'junegunn/gv.vim'
-
-"=============================================================================
-"   vim-indent-object                                       [INDENTOBJECT]
-"=============================================================================
-" " Define a new text object (`i`) representing an indentation level.
-" USAGE:
-"   <count>ai       line Above + Indentation block
-"   <count>ii       Inside Indentation block
-"   <count>aI       line Above + Indentation block + line below
-"=============================================================================
-Plug 'michaeljsmith/vim-indent-object'
-
-"=============================================================================
 "   vader.vim                                               [VADER]
 "=============================================================================
 " " Test case framework for vim plugins.
@@ -425,12 +348,6 @@ Plug 'junegunn/vader.vim'
 "=============================================================================
 " " See all of your marks in a sidebar.
 Plug 'Yilin-Yang/vim-markbar'
-
-"=============================================================================
-"   vim-peekaboo                                            [PEEKABOO]
-"=============================================================================
-" " See the contents of your registers in the sidebar when appropriate.
-" Plug 'junegunn/vim-peekaboo'
 
 "=============================================================================
 "   vim-illuminate                                          [ILLUMINATE]
@@ -453,22 +370,10 @@ endif
 Plug 'editorconfig/editorconfig-vim'
 
 "=============================================================================
-"   typescript-vim                                          [TS-VIM]
-"=============================================================================
-" " Syntax highlighting, filetype support for TypeScript.
-Plug 'leafgarland/typescript-vim'
-
-"=============================================================================
 "   vim-signature                                           [SIGNATURE]
 "=============================================================================
 " " Display marks in the sign column.
 Plug 'kshenoy/vim-signature'
-
-"=============================================================================
-"   vim-mundo                                               [MUNDO]
-"=============================================================================
-" " Visualize the vim undo tree.
-Plug 'simnalamburt/vim-mundo'
 
 "=============================================================================
 "   vim-syncopate                                           [SYNCOPATE]

@@ -7,6 +7,9 @@
 "   lldb                                                    [LLDB]
 "   vim-vebugger                                            [VEBUGGER]
 "=============================================================================
+"
+" Note that neither lldb nor vim-vebugger are installed any longer. I'll
+" eventually replace them with a DAP client. (2022-10-17)
 
 "=============================================================================
 "   GENERAL                                                 [GENERAL]

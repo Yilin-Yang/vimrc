@@ -1,14 +1,10 @@
 Yilin Yang's Personal `.vimrc`
 ================================================================================
-A public repository containing my [(neo)](https://neovim.io/)vim configuration,
+A repository containing my [(neo)](https://neovim.io/)vim configuration,
 as well as the shell scripts that I use to install it onto new machines.
 
-I'm not necessarily providing this so that people can just use it "as-is", since
-doing that would deprive them of the joy of getting their vim install to
-work exactly how *they* like it. (It would also just make their config harder to
-debug, since they wouldn't be familiar with where everything is.) It's meant
-mostly as a reference, in case I'm helping a classmate configure vim and need
-something to point at as I explain something.
+No longer public. It still works, but I'm a bit embarrassed at how bloated it
+is.
 
 If you want to get a sense of how this repo is structured, start by looking at
 `.vimrc`.
@@ -30,86 +26,3 @@ work properly, which is a nice bonus.
 gVim does this automatically, but vim instances that run in a terminal generally
 don't. This makes it substantially easier to edit the same file from several
 vim instances.
-
-An (Incomplete) List of (Hyperlinks to) Plugins That I Use
---------------------------------------------------------------------------------
-For convenience's sake. (Not guaranteed to be current or comprehensive; see
-`init.vimrc` for all plugins I'm currently using.)
-
-* [BufExplorer](https://github.com/jlanzarotta/bufexplorer)
-* [ReplaceWithRegister](https://github.com/vim-scripts/ReplaceWithRegister)
-* [UltiSnips](https://github.com/SirVer/ultisnips)
-* [coq\_nvim](https://github.com/ms-jpq/coq_nvim)
-* [diffconflicts](https://github.com/whiteinge/diffconflicts)
-* [editorconfig-vim](https://github.com/editorconfig/editorconfig-vim)
-* [fuzzyfind-vim](https://github.com/junegunn/fzf.vim)
-* [fuzzyfind](https://github.com/junegunn/fzf)
-* [gv.vim](https://github.com/junegunn/gv.vim)
-* [lldb](https://github.com/dbgx/lldb.nvim)
-* [localvimrc](https://github.com/embear/vim-localvimrc)
-* [neomake](https://github.com/neomake/neomake)
-* [plantuml-previewer.vim](https://github.com/weirongxu/plantuml-previewer.vim)
-* [quick-scope](https://github.com/unblevable/quick-scope)
-* [tabular](https://github.com/godlygeek/tabular)
-* [traces.vim](https://github.com/markonm/traces.vim)
-* [typescript-vim](https://github.com/leafgarland/typescript-vim)
-* [vader.vim](https://github.com/junegunn/vader.vim)
-* [vim-abolish](https://github.com/tpope/vim-abolish)
-* [vim-commentary](https://github.com/tpope/vim-commentary)
-* [vim-easy-align](https://github.com/junegunn/vim-easy-align)
-* [vim-easymotion](https://github.com/easymotion/vim-easymotion)
-* [vim-eunuch](https://github.com/tpope/vim-eunuch)
-* [vim-fugitive](https://github.com/tpope/vim-fugitive)
-* [vim-glaive](https://github.com/google/vim-glaive)
-* [vim-indent-object](https://github.com/michaeljsmith/vim-indent-object)
-* [vim-lexical](https://github.com/reedes/vim-lexical)
-* [vim-lightline](https://github.com/itchyny/lightline.vim)
-* [vim-maktaba](https://github.com/google/vim-maktaba)
-* [vim-mundo](https://github.com/simnalamburt/vim-mundo)
-* [vim-obsession](https://github.com/tpope/vim-obsession)
-* [vim-peekaboo](https://github.com/junegunn/vim-peekaboo)
-* [vim-pencil](https://github.com/reedes/vim-pencil)
-* [vim-repeat](https://github.com/tpope/vim-repeat)
-* [vim-rsi](https://github.com/tpope/vim-rsi)
-* [vim-signature](https://github.com/kshenoy/vim-signature)
-* [vim-signify](https://github.com/mhinz/vim-signify)
-* [vim-snippets](https://github.com/honza/vim-snippets)
-* [vim-surround](https://github.com/tpope/vim-surround)
-* [vim-syncopate](https://github.com/google/vim-syncopate)
-* [vim-textobj-sentence](https://github.com/reedes/vim-textobj-sentence)
-* [vim-textobj-user](https://github.com/kana/vim-textobj-user)
-* [vim-tmux-focus-events](https://github.com/tmux-plugins/vim-tmux-focus-events)
-* [vim-unimpaired](https://github.com/tpope/vim-unimpaired)
-* [vim-vebugger](https://github.com/idanarye/vim-vebugger)
-* [vim-wordy](https://github.com/reedes/vim-wordy)
-* [vimtex](https://github.com/lervag/vimtex)
-* [vimwiki](https://github.com/vimwiki/vimwiki)
-* [winresizer](https://github.com/simeji/winresizer)
-
-Plugins That I Wrote
---------------------------------------------------------------------------------
-`>:D`
-
-* [vim-markbar](https://github.com/Yilin-Yang/vim-markbar)
-* dapper.nvim
-
-Other Editing Tools
---------------------------------------------------------------------------------
-Some additional tools that aren't packaged as vim plugins.
-
-### Language Servers
-The Language Server Protocol provides editor-agnostic IDE-like tools for
-programming, such as semantic autocompletion, identifier renaming, and
-asynchronous syntax-checking. Use with a language client, such as
-LanguageClient-neovim.
-
-* [clangd](https://clang.llvm.org/extra/clangd.html)
-* [cquery](https://github.com/cquery-project/cquery)
-* [python-language-server](https://github.com/palantir/python-language-server)
-
-### Linters
-Linters check for common coding mistakes, syntax errors, and antipatterns. Use
-from the shell, or with a linting plugin such as Neomake or ALE.
-
-* [vim-vint](https://github.com/Kuniwak/vint)
-* [yamllint](https://github.com/adrienverge/yamllint)

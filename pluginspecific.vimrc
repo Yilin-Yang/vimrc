@@ -8,10 +8,8 @@ scriptencoding utf-8
 "   Asynchronous Lint Engine                                [ALE]
 "   NerdTree                                                [NERDTREE]
 "   vimtex                                                  [VIMTEX]
-"   UltiSnips                                               [ULTISNIPS]
 "   nvim-lspconfig                                          [LSP]
 "   BufExplorer                                             [BUFFER]
-"   vim-repeat                                              [REPEAT]
 "   vim-easymotion                                          [EASYMOTION]
 "   vim-commentary                                          [COMMENTARY]
 "   tabular                                                 [TABULAR]
@@ -29,7 +27,6 @@ scriptencoding utf-8
 "   quick-scope                                             [QUICKSCOPE]
 "   vim-markbar                                             [MARKBAR]
 "   vim-illuminate                                          [ILLUMINATE]
-"   vim-mundo                                               [MUNDO]
 "   vim-syncopate                                           [SYNCOPATE]
 "   coq_nvim                                                [COMPLETION]
 "=============================================================================
@@ -128,45 +125,6 @@ let g:vimtex_quickfix_enabled=0
 let g:tex_flavor = 'latex'
 
 "=============================================================================
-"   UltiSnips                                               [ULTISNIPS]
-"=============================================================================
-" Decide whether to open snippet editor in a horizontal/vertical split
-" automatically.
-let g:UltiSnipsEditSplit='context'
-
-" Append the UltiSnips directory in the ~/vimrc folder to runtimepath.
-let &runtimepath.=','.$HOME.'/vimrc/'
-
-" Store snippets files in the vimrc repository.
-let g:UltiSnipsSnippetsDir='~/vimrc/UltiSnips'
-
-" Search the above directory for snippets files.
-let g:UltiSnipsSnippetDirectories=['UltiSnips', '~/vimrc/UltiSnips']
-
-let g:UltiSnipsExpandTrigger='<Leader><Tab>'
-let g:UltiSnipsListSnippets='<Leader>ui'
-let g:UltiSnipsJumpForwardTrigger='<Leader><Tab>'
-let g:UltiSnipsJumpBackwardTrigger='<Leader><S-Tab>'
-
-" Launch UltiSnips snippets editor.
-"   'The UltiSnipsEdit command opens a private snippet definition file for the
-"   current filetype. If no snippet file exists, a new file is created.'
-nnoremap <silent> <Leader>ue :UltiSnipsEdit<cr>
-
-" UltiSnips slows neovim down substantially, due to performance issues caused
-" by neovim's emulation of vim's Python API. This isn't noticeable on a native
-" Ubuntu installation, but it's a major annoyance on WSL.
-"
-" These performance problems are caused by the UltiSnips_AutoTrigger augroup,
-" as described here:
-"   https://github.com/SirVer/ultisnips/issues/593#issuecomment-151101506
-"
-" Since I don't use AutoTrigger snippets, I disable that augroup here.
-augroup UltiSnips_AutoTrigger
-    au!
-augroup end
-
-"=============================================================================
 "   nvim-lspconfig                                          [LSP]
 "=============================================================================
 " Register Lua setup code.
@@ -206,16 +164,6 @@ let g:bufExplorerFindActive=0
 
 " Easier shortcut for toggling bufexplorer.
 nnoremap <silent> <Leader>bb :ToggleBufExplorer<cr>
-
-"=============================================================================
-"   vim-repeat                                              [REPEAT]
-"=============================================================================
-" Ctrl-S to make vim-obsession start saving the current session in the current
-" directory.
-nnoremap <silent> <C-s> :Obsession .<cr>
-
-" Ctrl-P to pause/resume vim-obsession.
-nnoremap <silent> <C-p> :Obsession<cr>
 
 "=============================================================================
 "   vim-easymotion                                          [EASYMOTION]
@@ -712,11 +660,6 @@ let g:Illuminate_ftblacklist = [
 let g:Illuminate_highlightUnderCursor = 0
 
 hi illuminatedWord cterm=bold,underline gui=bold,underline
-
-"=============================================================================
-"   vim-mundo                                               [MUNDO]
-"=============================================================================
-nnoremap U :MundoToggle<cr>
 
 "=============================================================================
 "   vim-syncopate                                           [SYNCOPATE]
