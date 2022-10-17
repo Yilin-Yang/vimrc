@@ -63,7 +63,6 @@ endfunction
 function! Prose()
   call pencil#init()
   call lexical#init()
-  call textobj#sentence#init()
 endfunction
 
 " EFFECTS:  Enables abbreviations for 'hard-to-type' punctuation marks.
