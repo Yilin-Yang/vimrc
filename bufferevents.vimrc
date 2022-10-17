@@ -48,6 +48,7 @@ endfunction
 " Buffer events
 augroup buffer_stuff
     au!
+    autocmd VimEnter * EditorConfigReload
     autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
     autocmd WinLeave * call LeaveWindow()
     autocmd WinEnter * call ReenterWindow()
