@@ -32,6 +32,7 @@ set tabstop=8                       " By default, most editors come configured w
 "=============================================================================
 set backspace=indent,eol,start      " Backspace over autoindents, line breaks,
                                     " position at start of insert mode.
+set mouse=                          " Don't respond to mouse clicks.
 set timeoutlen=200                  " Decrease timeout for combined keymaps.
 set updatetime=1000                 " More frequent swapbacks, CursorHold procs
 set scrolloff=20                    " The minimum number of lines that vim

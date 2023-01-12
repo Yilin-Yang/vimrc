@@ -419,3 +419,4 @@ call glaive#Install()     " allow glaive configuration past this point
 "#############################################################################
 
 filetype plugin indent on   " required, filetype detect, indenting per lang
+set rtp+=$HOME/.vim         " sometimes required to detect symlink.sh output
