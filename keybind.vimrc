@@ -26,6 +26,10 @@ let g:maplocalleader="\\"
 "   Ordinary                                                [ORDINARY]
 "=============================================================================
 
+" 'ip' to enter insert mode in paste mode.
+nnoremap <expr> ip &paste ? "i" : "i\<F2>"
+nnoremap <expr> ap &paste ? "a" : "a\<F2>"
+
 " Refresh the current buffer.
 nnoremap <silent> <F5> :e<cr>
 
