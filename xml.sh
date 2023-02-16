@@ -6,6 +6,7 @@ source "$(dirname $0)/global_constants.sh"
 
 sudo apt install -y maven
 
+mkdir -p temp
 cd temp || exit 1
 git clone https://github.com/eclipse/lemminx.git || exit 1
 cd lemminx || exit 1
