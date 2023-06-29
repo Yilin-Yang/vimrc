@@ -142,6 +142,9 @@ nnoremap <leader>h <cmd>lua vim.lsp.buf.hover()<CR>
 " Show signature help.
 nnoremap <leader>hs <cmd>lua vim.lsp.buf.signature_help()<CR>
 
+" Show code actions for the current symbol.
+nnoremap <leader>ta <cmd>lua vim.lsp.buf.code_action()<CR>
+
 " Rename symbol.
 nnoremap <leader>pr <cmd>lua vim.lsp.buf.rename()<CR>
 
@@ -273,7 +276,7 @@ nmap <leader>r  <Plug>ReplaceWithRegisterOperator
 "=============================================================================
 
 fu! FuzzyFindPrefix()
-    return 'm'
+    return 'ff'
 endf
 
 " fzf files in the PWD.
