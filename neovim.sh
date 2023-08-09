@@ -9,4 +9,4 @@ mkdir -p ~/.config
 mkdir -p ~/.vim
 ln -s ~/vimrc ~/.config/nvim
 ln -s ~/.config/nvim ~/.vim
-ln -s ~/.vimrc ~/.config/nvim/vimrc
+ln -s ~/.vimrc ~/.config/nvim/init.vim
