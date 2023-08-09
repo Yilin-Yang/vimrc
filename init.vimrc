@@ -42,6 +42,7 @@
 "   plantuml-previewer.vim                                  [PLANTUML]
 "   coq_nvim                                                [COMPLETION]
 "   vim-scriptease                                          [SCRIPTEASE]
+"   vim-markdown-folding                                    [MARKDOWN_FOLD]
 "=============================================================================
 
 " Basic Plug Commands:
@@ -405,6 +406,13 @@ endif
 "   vim-scriptease                                          [SCRIPTEASE]
 "=============================================================================
 Plug 'tpope/vim-scriptease'
+
+"=============================================================================
+"   vim-markdown-folding                                    [MARKDOWN_FOLD]
+"=============================================================================
+" " Better folding behavior in markdown files.
+Plug 'masukomi/vim-markdown-folding'
+"=============================================================================
 
 "#############################################################################
 " " All of your Plugins must be added before the following line.

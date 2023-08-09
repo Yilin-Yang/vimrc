@@ -27,10 +27,13 @@ function removeOrBackupDir() {
 
 FOLDERS="
     after
+    autoload
+    bundle
     colors
-    ftplugin
     ftdetect
+    ftplugin
     indent
     lua
+    undo
 "
 removeOrBackupDir "$HOME/.vim" "$DIR" "$FOLDERS"

@@ -693,6 +693,14 @@ let g:coq_settings = {
     \ }
 \ }
 
+" TODO
+" https://github.com/ms-jpq/coq_nvim/blob/coq/docs/SNIPS.md#compilation
+" :COQsnips compile
+function! StartCOQ() abort
+    COQsnips compile
+    COQnow
+endfunction
+
 " pop-up menu mappiings
 inoremap <silent><expr> <tab>   pumvisible() ? "\<C-y>" : "\<tab>"
 inoremap <silent><expr> <Esc>   pumvisible() ? "\<C-e><Esc>" : "\<Esc>"
