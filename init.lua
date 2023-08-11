@@ -86,8 +86,8 @@ require('lazy').setup({
     config = function()
       vim.g.winresizer_keycode_finish = 100  -- finish by pressing 'd'
       vim.keymap.del('n', '<C-e>', {silent = true})
-      vim.keymap.set('n', '<localleader>wr', ':WinResizerStartResize<cr>', {desc = 'Start WinResizer'})
-      vim.keymap.set('n', '<localleader>wm', ':WinResizerStartMove<cr>', {desc = 'Start WinResizerMove'})
+      vim.keymap.set('n', '<leader>wr', ':WinResizerStartResize<cr>', {desc = 'Start WinResizer'})
+      vim.keymap.set('n', '<leader>wm', ':WinResizerStartMove<cr>', {desc = 'Start WinResizerMove'})
     end
   },
 
@@ -97,11 +97,28 @@ require('lazy').setup({
   -- ]q is cnext, [q is :cprevious, ]a is :next, [b is :bprevious...
   'tpope/vim-unimpaired',
 
-  -- Easy, intuitive two-way git diffs!
-  'whiteinge/diffconflicts',
+  { -- Easy, intuitive two-way git diffs!
+    'whiteinge/diffconflicts',
+    -- TODO: get this working, even though DiffconflictsActive() doesn't
+    -- seem to exist?
+    -- config = function()
+    --   vim.keymap.set('n', 'd?', function()
+    --     if vim.cmd('DiffconflictsActive()') then
+    --       vim.cmd('DiffConflictsShowHistory<cr>')
+    --     else
+    --       error('vim is not running as a git mergetool. No history to show.')
+    --     end
+    --   end, {expr = true, replace_keycodes = true})
+    -- end,
+  },
 
-  -- Target and jump to a specific character,
-  'easymotion/vim-easymotion',
+  { -- Target and jump to a specific character,
+    'easymotion/vim-easymotion',
+    config = function()
+      vim.keymap.set('n', '<localleader><localleader>', '<Plug>(easymotion-prefix)')
+      vim.g.EasyMotion_smartcase = 1
+    end
+  },
 
   -- Local .vimrc settings.
   -- 'embear/vim-localvimrc',
@@ -109,8 +126,62 @@ require('lazy').setup({
   -- Repeat vim-surround commands using the period command.
   'tpope/vim-repeat',
 
-  -- Align things more easily! A bit more configurable than tabular.
-  'junegunn/vim-easy-align',
+--=============================================================================
+--   vim-easy-align                                          [EASYALIGN]
+--=============================================================================
+-------------------------------------------------------------------------------
+-- Alignment:    after entering EasyAlign, use Enter to cycle through left,
+--               right, and center alignment options.
+-------------------------------------------------------------------------------
+--
+-------------------------------------------------------------------------------
+-- Examples:
+----------------------+------------------------------------+--------------------
+-- With visual map     | Description                        | Equivalent command
+----------------------+------------------------------------+--------------------
+-- <Enterx2><Space>    | Around 1st whitespaces             | :'<,'>EasyAlign\
+-- <Enterx2>2<Space>   | Around 2nd whitespaces             | :'<,'>EasyAlign2\
+-- <Enterx2>-<Space>   | Around the last whitespaces        | :'<,'>EasyAlign-\
+-- <Enterx2>-2<Space>  | Around the 2nd to last whitespaces | :'<,'>EasyAlign-2\
+-- <Enterx2>:          | Around 1st colon ( `key:  value` ) | :'<,'>EasyAlign:
+-- <Enterx2><Right>:   | Around 1st colon ( `key : value` ) | :'<,'>EasyAlign:<l1
+-- <Enterx2>=          | Around 1st operators with =        | :'<,'>EasyAlign=
+-- <Enterx2>3=         | Around 3rd operators with =        | :'<,'>EasyAlign3=
+-- <Enterx2>*=         | Around all operators with =        | :'<,'>EasyAlign*=
+-- <Enterx2>**=        | Left-right alternating around =    | :'<,'>EasyAlign**=
+-- <Enterx2><Enter>=   | Right alignment around 1st =       | :'<,'>EasyAlign!=
+-- <Enterx2><Enter>**= | Right-left alternating around =    | :'<,'>EasyAlign!**=
+----------------------+------------------------------------+--------------------
+-- NOTE: Preceding the delimiter with a number X means "align around every Xth
+--       delimiter". Preceding the delimiter with a single `*` means "align
+--       around every occurrence of the delimiter." Two stars alternates
+--       between left-right alignment after each delimiter.
+--
+--       By default, EasyAlign will align around the first occurrence of the
+--       delimiter.
+-------------------------------------------------------------------------------
+--
+-------------------------------------------------------------------------------
+-- Indentation Option Settings:
+-------------------------------------------------------------------------------
+--       k       |       'keep'      |       Preserve existing indentation.
+-------------------------------------------------------------------------------
+--       d       |       'deep'      |       Use the indentation of the
+--               |                   |       most indented line.
+-------------------------------------------------------------------------------
+--       s       |       'shallow'   |       Use the indentation of the
+--               |                   |       least indented line.
+-------------------------------------------------------------------------------
+--       n       |       'none'      |       Left-align in-and-along the
+--               |                   |       left boundary of selected text.
+-------------------------------------------------------------------------------
+
+  { -- Align things more easily! A bit more configurable than tabular.
+    'junegunn/vim-easy-align',
+    config = function()
+      vim.keymap.set({'n', 'v'}, '<cr><cr>', '<Plug>(EasyAlign)')
+    end,
+  },
 
   -- Highlight targets for character motions.
   'unblevable/quick-scope',
@@ -224,21 +295,21 @@ require('lazy').setup({
 --  - vimwiki has tagbar support!
 -------------------------------------------------------------------------------
 
-  { -- vimwiki, for my personal notes
-    'vimwiki/vimwiki',
-    config = function()
-      vim.g.vimwiki_list = {
-        path = '/home/yiliny/notes/',
-        syntax = 'markdown',
-        ext = '.md',
-        index = 'README',
-        auto_toc = 1,
-      }
-      vim.g.vimwiki_folding = 'expr'
-      vim.g.vimwiki_global_ext = 0
-      vim.keymap.set('n', '<C-Space>', '<Plug>VimwikiToggleListItem')
-    end
-  },
+  -- { -- vimwiki, for my personal notes
+  --   'vimwiki/vimwiki',
+  --   config = function()
+  --     vim.g.vimwiki_list = {
+  --       path = '/home/yiliny/notes/',
+  --       syntax = 'markdown',
+  --       ext = '.md',
+  --       index = 'README',
+  --       auto_toc = 1,
+  --     }
+  --     vim.g.vimwiki_folding = 'expr'
+  --     vim.g.vimwiki_global_ext = 0
+  --     vim.keymap.set('n', '<C-Space>', '<Plug>VimwikiToggleListItem')
+  --   end
+  -- },
 
   { -- vimtex, for compiling my resume
     'lervag/vimtex',
@@ -249,7 +320,10 @@ require('lazy').setup({
       -- Disable opening the quickfix window during continuous compilation.
       vim.g.vimtex_quickfix_enabled = 0
 
-      vim.g.vimtex_view_general_viewer = '/mnt/c/'
+      -- TODO: open compiled PDFs in SumatraPDF
+      vim.g.vimtex_view_general_viewer = 'xdg-open'
+      -- vim.g.vimtex_view_general_viewer = 'SumatraPDF'
+      -- vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
 
       -- Stop error messages on startup.
       vim.g.tex_flavor = 'latex'
@@ -520,9 +594,9 @@ require('telescope').setup {
 pcall(require('telescope').load_extension, 'fzf')
 
 -- See `:help telescope.builtin`
-vim.keymap.set('n', '<leader>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
-vim.keymap.set('n', '<leader>b', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
-vim.keymap.set('n', '<leader>/', function()
+vim.keymap.set('n', '<cr>?', require('telescope.builtin').oldfiles, { desc = '[?] Find recently opened files' })
+vim.keymap.set('n', '<cr>b', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
+vim.keymap.set('n', '<cr>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
   require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
     winblend = 10,
@@ -530,12 +604,12 @@ vim.keymap.set('n', '<leader>/', function()
   })
 end, { desc = '[/] Fuzzily search in current buffer' })
 
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
+vim.keymap.set('n', '<cr>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
+vim.keymap.set('n', '<cr>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
+vim.keymap.set('n', '<cr>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
+vim.keymap.set('n', '<cr>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
+vim.keymap.set('n', '<cr>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
+vim.keymap.set('n', '<cr>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
 -- [[ Configure Treesitter ]]
 -- See `:help nvim-treesitter`
@@ -626,25 +700,25 @@ local on_attach = function(_, bufnr)
     vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
   end
 
-  nmap('<leader>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<leader>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
+  nmap('<cr>rn', vim.lsp.buf.rename, '[R]e[n]ame')
+  nmap('<cr>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
   nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
   nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
   nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<leader>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<leader>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<leader>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
+  nmap('<cr>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
+  nmap('<cr>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
+  nmap('<cr>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<M-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<cr>K', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<leader>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<leader>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<leader>wl', function()
+  nmap('<cr>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
+  nmap('<cr>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
+  nmap('<cr>wl', function()
     print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
   end, '[W]orkspace [L]ist Folders')
 
