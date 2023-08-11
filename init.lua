@@ -37,6 +37,7 @@ I hope you enjoy your Neovim journey,
 
 P.S. You can delete this when you're done too. It's your config now :)
 --]]
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -90,6 +91,35 @@ require('lazy').setup({
     end
   },
 
+  -- :Delete, :Move, :Rename, Mkdir...
+  'tpope/vim-eunuch',
+
+  -- ]q is cnext, [q is :cprevious, ]a is :next, [b is :bprevious...
+  'tpope/vim-unimpaired',
+
+  -- Easy, intuitive two-way git diffs!
+  'whiteinge/diffconflicts',
+
+  -- Target and jump to a specific character,
+  'easymotion/vim-easymotion',
+
+  -- Local .vimrc settings.
+  -- 'embear/vim-localvimrc',
+
+  -- Repeat vim-surround commands using the period command.
+  'tpope/vim-repeat',
+
+  -- Align things more easily! A bit more configurable than tabular.
+  'junegunn/vim-easy-align',
+
+  -- Highlight targets for character motions.
+  'unblevable/quick-scope',
+
+  -- Test case framework for vim plugins.
+  'junegunn/vader.vim',
+
+  -- Display marks in the sign column.
+  'kshenoy/vim-signature',
 
 --============================================================================
 --  vimwiki                                                 [VIMWIKI]

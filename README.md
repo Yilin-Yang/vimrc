@@ -1,20 +1,24 @@
-Yilin Yang's Personal `.vimrc`
+Yilin Yang's Personal `init.lua`
 ================================================================================
 A repository containing my [(neo)](https://neovim.io/)vim configuration,
 as well as the shell scripts that I use to install it onto new machines.
 
-General Recommendations
---------------------------------------------------------------------------------
-Some general vim settings (not plugins) that I find incredibly useful and am
-likely to recommend to others.
+This repo used to be pretty bloated: It was written entirely in vimscript while
+I was a college underclassman trying too hard to impress his peers, back when
+asynchronous linters like ALE and Neomake were dominant and before plugin
+developers were exploring Language Server Protocol integration.
 
-### Silencing Swapback File Warnings - `settings.vimrc`
-This makes it easier to simultaneously edit or view the same text file from
-separate vim instances (e.g. if you use tmux, multiple terminal windows, etc.),
-and makes it easier to reload vim session files even when old swapback files
-still exist in the same directory.
+It worked well at the time. It was much better than editing in Gedit, as some
+of my classmates did. With ALE and coc.nvim, I was able to use my neovim config
+at successful internships.
 
-### Reload Buffers When Files Change Outside of Vim - `bufferevents.vimrc`
-gVim does this automatically, but vim instances that run in a terminal generally
-don't. This makes it substantially easier to edit the same file from several
-vim instances.
+But there came a point where the best new plugins all seemed to be written in
+lua. I'd structured the repo to try to be mostly backwards compatible with vim,
+down to using vim-focused package managers like vim-plug instead of packer.nvim
+or lazy.nvim. That was fine when most plugins were built foremost for vim
+compatibility, but not when they targeted neovim *only.*
+
+I've rebuilt my config around [kickstart.nvim](https://github.com/nvim-lua/kickstart.nvim),
+largely because of how its LSP, completion engine, and telescope configurations
+worked out-of-the-box. Basic configuration options like keybinds still go into
+`./vimrc`, which is sourced from my `init.lua`.
