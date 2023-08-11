@@ -2,7 +2,7 @@
 
 source "`dirname $0`/global_constants.sh"
 
-$INSTALLCMD neovim
+$INSTALLCMD neovim ripgrep
 
 # Symlink nvim and vim's user-accessible config folders to the top-level of
 # this repo

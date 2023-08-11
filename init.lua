@@ -365,7 +365,8 @@ require('lazy').setup({
   { 'numToStr/Comment.nvim', opts = {} },
 
   -- Fuzzy Finder (files, lsp, etc)
-  {
+  { -- NOTE: that live grep won't work without BurntSushi/ripgrep installed:
+    --  sudo apt install ripgrep
     'nvim-telescope/telescope.nvim',
     branch = '0.1.x',
     dependencies = {
