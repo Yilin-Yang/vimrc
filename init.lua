@@ -41,7 +41,7 @@ P.S. You can delete this when you're done too. It's your config now :)
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
 vim.g.mapleader = ' '
-vim.g.maplocalleader = ' '
+vim.g.maplocalleader = '\\'
 
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
@@ -71,8 +71,21 @@ require('lazy').setup({
   'tpope/vim-fugitive',
   'tpope/vim-rhubarb',
 
+  -- Actions for working in and around braces.
+  'tpope/vim-surround',
+
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  { -- Easier binds for resizing splits.
+    'simeji/winresizer',
+    config = function()
+      vim.g.winresizer_keycode_finish = 100  -- finish by pressing 'd'
+      vim.keymap.del('n', '<C-e>', {silent = true})
+      vim.keymap.set('n', '<localleader>wr', ':WinResizerStartResize<cr>', {desc = 'Start WinResizer'})
+      vim.keymap.set('n', '<localleader>wm', ':WinResizerStartMove<cr>', {desc = 'Start WinResizerMove'})
+    end
+  },
 
   { -- highlight comments like TODO, NOTE, BUG
     "folke/todo-comments.nvim",
@@ -158,7 +171,29 @@ require('lazy').setup({
       vim.cmd.colorscheme 'onedark'
     end,
   },
-
+  {
+    -- Legacy vim configuration had working highlighting for trailing
+    -- whitespace, but this is broken by navarasu/onedark.nvim. This plugin's
+    -- highlighting, so use it as a workaround.
+    'lukoshkin/highlight-whitespace',
+    opts = {
+      tws = '\\s\\+$',
+      clean_on_winleave = true,
+      user_palette = {
+          markdown = {
+            ['\\(\\S\\)\\@<=\\s\\(\\.\\|,\\)\\@='] = 'CadetBlue3',
+            ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'SkyBlue1',
+            ['\\t\\+'] = 'plum4',
+          },
+          other = {
+            tws = 'PaleVioletRed',
+            -- ['\\(\\S\\)\\@<=\\s\\(,\\)\\@='] = 'coral1',
+            -- ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'LightGoldenrod3',
+            -- ['\\t\\+'] = 'plum4',
+          }
+        },
+    },
+  },
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -283,10 +318,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-
--- NOTE: Reuse platform-agnostic settings between vim and neovim. May clobber
--- settings from this file.
-vim.cmd('source ~/.config/nvim/vimrc')
 
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
@@ -434,7 +465,7 @@ local on_attach = function(_, bufnr)
 
   -- See `:help K` for why this keymap
   nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<C-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
+  nmap('<M-k>', vim.lsp.buf.signature_help, 'Signature Documentation')
 
   -- Lesser used LSP functionality
   nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
@@ -459,9 +490,9 @@ end
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
 local servers = {
-  -- clangd = {},
+  clangd = {},
   -- gopls = {},
-  -- pyright = {},
+  pyright = {},
   -- rust_analyzer = {},
   -- tsserver = {},
   -- html = { filetypes = { 'html', 'twig', 'hbs'} },
@@ -546,6 +577,11 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- NOTE: Reuse platform-agnostic settings between vim and neovim. May clobber
+-- settings from this file.
+vim.cmd('source ~/.config/nvim/vimrc')
+
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et

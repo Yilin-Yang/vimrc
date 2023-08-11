@@ -6,6 +6,7 @@ scriptencoding utf-8
 "
 "   Keybinds                                                    [KEYBINDS]
 "   Commands                                                    [COMMANDS]
+"   Buffer Events                                               [SETTINGS]
 "   Settings                                                    [SETTINGS]
 
 
@@ -106,7 +107,11 @@ function! DeleteTrailing()
     let l:old_search = @/
 
     let l:cur_pos = getcurpos()
+
+    " This raw substitution command breaks syntax highlighting for the rest of
+    " the file, but it doesn't work when wrapped in ':execute' or ':normal'.
     %s/\s\+$//e
+
     call setpos('.', l:cur_pos)
 
     let @/ = l:old_search
@@ -182,9 +187,6 @@ function! HighlightTrailing(high_grp) abort
     if type(a:high_grp) !=# 1
         echoerr "Highlight group name not a string!"
     endif
-    " initialize the highlight group
-    highlight TrailingWhitespace ctermbg=red
-    hi clear TrailingWhitespace
     if empty(a:high_grp)
       return
     endif
@@ -192,29 +194,76 @@ function! HighlightTrailing(high_grp) abort
     match TrailingWhitespace /\s\+$/
 endfunction
 
+""
+" Return a dict between window settings to be modified and their current values.
+"
+" {vars_and_new_vals} is a list of key-value pairs: the setting to be
+" modified, and its new value (which is ignored).
+function! WindowState(vars_and_new_vals) abort
+  " get only the setting names
+  let l:vars = map(copy(a:vars_and_new_vals), 'v:val[0]')
+  call map(l:vars, '"&".v:val')
+  let l:state = {}
+  let l:winnr = winnr()
+  for l:var in l:vars
+    let l:state[l:var] = getwinvar(l:winnr, l:var)
+  endfor
+  return l:state
+endfunction
+
+""
+" Save the current values of window settings, change those variables as we
+" wish, but store the old values as a window variable.
+function! LeaveWindow() abort
+  let l:to_set = [
+      \ ['number', 0],
+      \ ['relativenumber', 0],
+      \ ['foldcolumn', 0],
+      \ ['signcolumn', 'auto:1'],
+      \ ]
+  let w:winstate = WindowState(l:to_set)
+  let l:winnr = winnr()
+  for [l:setting, l:val] in l:to_set
+    call setwinvar(l:winnr, '&'.l:setting, l:val)
+  endfor
+endfunction
+
+""
+" Restore old window settings to the values they had before we left.
+function! ReenterWindow() abort
+  if !exists('w:winstate')
+    return
+  endif
+  let l:winnr = winnr()
+  for [l:setting, l:val] in items(w:winstate)
+    call setwinvar(l:winnr, l:setting, l:val)
+  endfor
+  unlet w:winstate
+endfunction
+
 "=============================================================================
 "   Settings                                                    [SETTINGS]
 "=============================================================================
 
-set relativenumber              " Relative numbering!
-set number                      " Show absolute line numbers.
-set ruler                       " Show line lengths in the statusline.
-set nocursorline                " Don't underline the current line.
-set cursorcolumn                " Mark the current column.
+set relativenumber      " Relative numbering!
+set number              " Show absolute line numbers.
+set ruler               " Show line lengths in the statusline.
+set nocursorline        " Don't underline the current line.
+set cursorcolumn        " Mark the current column.
 
-set expandtab                   " Spaces for indentation.
-set shiftwidth=2                " Indentation depth with << and >> commands.
-set softtabstop=-1              " The number of columns to insert when pressing
-                                " <Tab>. Helpful when *forced* to indent with mixed
-                                " tabs and spaces, like *profligate scum*.
-                                " (Negative value => use value of `shiftwidth`.)
-set tabstop=8                   " By default, most editors come configured with a
-                                " default tab-width of 8 columns, and
-                                " having that width set differently can
-                                " make files written in those editors look weird.
+set expandtab           " Spaces for indentation.
+set shiftwidth=2        " Indentation depth with << and >> commands.
+set softtabstop=-1      " The number of columns to insert when pressing <Tab>.
+                        " (Negative value => use value of `shiftwidth`.)
+set tabstop=8           " By default, most editors come configured with a
+                        " default tab-width of 8 columns, and
+                        " having that width set differently can make files
+                        " written in those editors look weird.
 
-set foldlevel=20                " Fully expand all document folds on open.
+set foldlevel=20        " Fully expand all document folds on open.
+set nowrap
 
+call ColorColumnBlock(80, 255, 'ctermbg=236')
 
 " Explicitly render `listchars`.
 set list
@@ -236,4 +285,19 @@ else
     set viminfo+=!
 endif
 
-call HighlightTrailing('ErrorMsg')
+" NOTES: this doesn't work with the default colorscheme
+" call HighlightTrailing('ErrorMsg')
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"   Buffer Events                                               [SETTINGS]
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Buffer events
+augroup buffer_stuff
+    au!
+    autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
+    autocmd WinLeave * call LeaveWindow()
+    " also on BufEnter, so that opening an unfocused buffer in a new tab will
+    " reapply focused settings
+    autocmd BufEnter,WinEnter * call ReenterWindow()
+augroup end
