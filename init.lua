@@ -198,7 +198,7 @@ require('lazy').setup({
     'vimwiki/vimwiki',
     config = function()
       vim.g.vimwiki_list = {
-        path = '~/notes/',
+        path = '/home/yiliny/notes/',
         syntax = 'markdown',
         ext = '.md',
         index = 'README',

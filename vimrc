@@ -6,8 +6,8 @@ scriptencoding utf-8
 "
 "   Keybinds                                                    [KEYBINDS]
 "   Commands                                                    [COMMANDS]
-"   Buffer Events                                               [SETTINGS]
 "   Settings                                                    [SETTINGS]
+"   Buffer Events                                               [BUFFER]
 
 
 "=============================================================================
@@ -285,7 +285,7 @@ endif
 " call HighlightTrailing('ErrorMsg')
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"   Buffer Events                                               [SETTINGS]
+"   Buffer Events                                               [BUFFER]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
 " Buffer events
