@@ -308,7 +308,7 @@ require('lazy').setup({
   --     vim.g.vimwiki_folding = 'expr'
   --     vim.g.vimwiki_global_ext = 0
   --     vim.keymap.set('n', '<C-Space>', '<Plug>VimwikiToggleListItem')
-  --   end
+  --   end,
   -- },
 
   { -- vimtex, for compiling my resume
@@ -387,6 +387,26 @@ require('lazy').setup({
     },
   },
 
+
+
+  { -- Debug Adapter Protocol for in-editor debugging.
+    -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
+    'rcarriga/nvim-dap-ui',
+    config = function()
+      require('dapui').setup()
+
+      vim.keymap.set('n', '<cr>ddd', function()
+        require('dapui').open()
+        vim.cmd('DapContinue')  -- lazy-load nvim-dap
+      end, { desc = 'Open nvim-dap UI' })
+
+    end,
+    dependencies = {
+      'mfussenegger/nvim-dap',
+      'mfussenegger/nvim-dap-python',
+    },
+  },
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   {
@@ -452,6 +472,21 @@ require('lazy').setup({
         section_separators = '',
       },
     },
+  },
+
+  { -- Good old vim-markbar, for naming marks. Put this later to override
+    -- which-key.
+    'Yilin-Yang/vim-markbar',
+    config = function()
+      vim.keymap.set('n', '<leader>m', '<Plug>ToggleMarkbar')
+      vim.g.markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      -- vim.g.markbar_peekaboo_marks_to_display = "'\".abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      vim.g.markbar_section_separation = 0
+      -- vim.g.markbar_explicitly_remap_mark_mappings = true
+      vim.g.markbar_enable_peekaboo = false
+
+      vim.g.markbar_force_clear_shared_data_on_delmark = true
+    end,
   },
 
   {
@@ -829,6 +864,74 @@ cmp.setup {
     { name = 'luasnip' },
   },
 }
+
+-- Additional Debug Adapter Protocol configuration
+
+local dap = require('dap')
+dap.configurations.python = {
+  {
+    type = 'python';
+    request = 'launch';
+    name = "Launch file";
+    program = "${file}";
+    pythonPath = function()
+      return '/usr/bin/python'
+    end;
+  },
+}
+
+vim.keymap.set("n", "<cr>d<cr>", ":DapContinue<CR>")
+vim.keymap.set("n", "<cr>dl", ":DapStepInto<CR>")
+vim.keymap.set("n", "<cr>dj", ":DapStepOver<CR>")
+vim.keymap.set("n", "<cr>dh", ":DapStepOut<CR>")
+vim.keymap.set("n", "<cr>dbt", function()
+  require('dap').toggle_breakpoint()
+end)
+vim.keymap.set({'n', 'v'}, '<cr>dh', function()
+  require('dap.ui.widgets').hover()
+end)
+vim.keymap.set({'n', 'v'}, '<cr>dp', function()
+  require('dap.ui.widgets').preview()
+end)
+vim.keymap.set('n', '<cr>df', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.frames)
+end, { desc = '[D]ebug [F]rames in centered float' })
+vim.keymap.set('n', '<cr>ds', function()
+  local widgets = require('dap.ui.widgets')
+  widgets.centered_float(widgets.scopes)
+end, { desc = '[D]ebug [S]copes in centered float' })
+vim.keymap.set("n", "<cr>dz", ":ZoomWinTabToggle<CR>")
+vim.keymap.set(
+    "n",
+    "<cr>dgt",  -- dg as in debu[g] [t]race
+    ":lua require('dap').set_log_level('TRACE')<CR>"
+)
+vim.keymap.set(
+    "n",
+    "<cr>dge",  -- dg as in debu[g] [e]dit
+    function()
+        vim.cmd(":edit " .. vim.fn.stdpath('cache') .. "/dap.log")
+    end
+)
+vim.keymap.set("n", "<F1>", ":DapStepOut<CR>")
+vim.keymap.set("n", "<F2>", ":DapStepOver<CR>")
+vim.keymap.set("n", "<F3>", ":DapStepInto<CR>")
+vim.keymap.set(
+    "n",
+    "<cr>d-",
+    function()
+        require("dap").restart()
+    end
+)
+vim.keymap.set(
+    "n",
+    "<cr>d_",
+    function()
+        require("dap").terminate()
+        require("dapui").close()
+    end
+)
 
 -- NOTE: Reuse platform-agnostic settings between vim and neovim. May clobber
 -- settings from this file.
