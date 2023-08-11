@@ -70,10 +70,6 @@ nnoremap L 40l
 nnoremap <silent> <M-a> :tabp<cr>
 nnoremap <silent> <M-d> :tabn<cr>
 
-" Alt + J/K to move through tabs
-nnoremap <silent> <M-j> :tabp<cr>
-nnoremap <silent> <M-k> :tabn<cr>
-
 " Alt + E/Q to open/close tabs
 nnoremap <silent> <M-e> :tabnew<cr>
 nnoremap <silent> <M-q> :tabclose<cr>

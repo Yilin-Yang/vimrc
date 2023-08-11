@@ -77,6 +77,9 @@ require('lazy').setup({
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- Readline-style bindings on the vim command line.
+  'tpope/vim-rsi',
+
   { -- Easier binds for resizing splits.
     'simeji/winresizer',
     config = function()
@@ -84,6 +87,142 @@ require('lazy').setup({
       vim.keymap.del('n', '<C-e>', {silent = true})
       vim.keymap.set('n', '<localleader>wr', ':WinResizerStartResize<cr>', {desc = 'Start WinResizer'})
       vim.keymap.set('n', '<localleader>wm', ':WinResizerStartMove<cr>', {desc = 'Start WinResizerMove'})
+    end
+  },
+
+
+--============================================================================
+--  vimwiki                                                 [VIMWIKI]
+--============================================================================
+--
+-------------------------------------------------------------------------------
+--Configured partly using the following link as reference:
+--  https://www.dailydrip.com/blog/vimwiki
+-------------------------------------------------------------------------------
+--
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--USAGE NOTES:
+--  If no [count] is specified, assume a count of one (1), unless otherwise
+--  noted.
+-------------------------------------------------------------------------------
+-------------------------------------------------------------------------------
+--
+-------------------------------------------------------------------------------
+--OPENING WIKI:
+--  [count]<Leader>ww   OR  <Plug>VimwikiIndex
+--      Open the index of the [count]th wiki in g:vimwiki_list.
+--
+--  [count]<Leader>wt   OR  <Plug>VimwikiTabIndex
+--      Open the index of the [count]th wiki in g:vimwiki_list *in a new tab.*
+--
+--  <Leader>ws          OR  <Plug>VimwikiUISelect
+--      List and select available wikis in g:vimwiki_list.
+--
+--  [count]<Leader>wi   OR  <Plug>VimwikiDiaryIndex
+--      Open the diary index of the [count]th wiki in g:vimwiki_list.
+--
+--  [count]<Leader>w<Leader>w   OR  <Plug>VimwikiMakeDiaryNote
+--  [count]<Leader>w<Leader>t   OR  <Plug>VimwikiTabMakeDiaryNote
+--      Open a diary wiki-file for the current day in the [count]th wiki in
+--      g:vimwiki_list [in a new tab.]
+--
+--  [count]<Leader>w<Leader>y   OR  <Plug>VimwikiMakeYesterdayDiaryNote
+--  [count]<Leader>w<Leader>m   OR  <Plug>VimwikiMakeTomorrowDiaryNote
+--
+-------------------------------------------------------------------------------
+--NAVIGATION:
+--  <CR>                        Open or create a wiki link.
+--      :VimwikiSplitLink           Open/create a wiki link in a split.
+--      :VimwikiVSplitLink          Open/create a wiki link in a vertical split.
+--  <Backspace>                 Go back to previous wiki page.
+--  <Tab>                       Find next link in current page.
+--  <S-Tab>                     Find previous link in the current page.
+--
+--  DIARY:
+--      <C-Up>                  Open the previous day's diary.
+--      <C-Down>                Open the next day's diary.
+--
+-------------------------------------------------------------------------------
+--PAGE EDITING:
+--
+--  (these mappings have been disabled in ftplugin/vimwiki.vim)
+--  <Leader>wd                  Delete current wiki page.
+--      :VimwikiDeleteLink          // ditto
+--  <Leader>wr                  Rename current wiki page.
+--      :VimwikiRenameLink          // ditto
+--  (end notice)
+--
+--  [[                          Previous header in buffer.
+--  ]]                          Next header in buffer.
+--  [=                          Previous header with same level as selected.
+--  ]=                          Next header with same level as selected.
+--  ]u                          Go one header level 'up'.
+--  [u                          // ditto
+--  +                           Create and/or decorate links.
+--
+--  LISTS:
+--      glr                     Renumber list items.
+--      gLr                     Renumber all list items in the current file.
+--
+--      <C-d>                   (insert mode) Demote current list item.
+--      <C-t>                   (insert mode) Promote current list item.
+--
+-------------------------------------------------------------------------------
+--LINK FORMATTING:
+--  By default, links are specified with respect to the present working
+--  directory, similar to directory navigation in a bash terminal.
+--  - The '/' prefix (as in '/index') means 'relative to the wiki root.'
+--  - The '../' prefix (as in '../index') means 'relative to the parent
+--  directory.'
+--
+--  One can link to diary entries with the following scheme:
+--      [[diary:2012-03-05]]
+--
+--  Raw URLs are also supported, e.g.
+--      https://github.com/vimwiki/vimwiki.git
+--      mailto:billymagic@gmail.com
+--
+-------------------------------------------------------------------------------
+--TEXT ANCHORS:
+--  Section headings and tags can be used as text anchors.
+--  See `:h vimwiki-anchors`.
+--
+-------------------------------------------------------------------------------
+--MISCELLANY:
+--  - `:VimwikiTOC` creates a table of contents at the top of the current file.
+--  - vimwiki has tagbar support!
+-------------------------------------------------------------------------------
+
+  { -- vimwiki, for my personal notes
+    'vimwiki/vimwiki',
+    config = function()
+      vim.g.vimwiki_list = {
+        path = '~/notes/',
+        syntax = 'markdown',
+        ext = '.md',
+        index = 'README',
+        auto_toc = 1,
+      }
+      vim.g.vimwiki_folding = 'expr'
+      vim.g.vimwiki_global_ext = 0
+      vim.keymap.set('n', '<C-Space>', '<Plug>VimwikiToggleListItem')
+    end
+  },
+
+  { -- vimtex, for compiling my resume
+    'lervag/vimtex',
+    init = function()
+      -- Enable folding of documents by LaTeX structure.
+      vim.g.vimtex_fold_enabled = 1
+
+      -- Disable opening the quickfix window during continuous compilation.
+      vim.g.vimtex_quickfix_enabled = 0
+
+      vim.g.vimtex_view_general_viewer = '/mnt/c/'
+
+      -- Stop error messages on startup.
+      vim.g.tex_flavor = 'latex'
     end
   },
 
@@ -105,6 +244,9 @@ require('lazy').setup({
         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
         "MunifTanjim/nui.nvim",
       },
+      opts = function()
+        vim.keymap.set('n', '<C-n>', ':Neotree toggle<cr>', {})
+      end
   },
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
