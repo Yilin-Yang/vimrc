@@ -470,6 +470,18 @@ require('lazy').setup({
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- [count]["x]gr{motion}  to replace {motion} text with register x.
+  -- [count]["x]grr         Replace [count] lines with the contents of
+  --                        register x.
+  -- ["x]gr$        to replace from the cursor position to the end of the line.
+  -- {Visual}["x]gr to replace the selection with the contents of register x.
+  { -- Make it easier to paste over things with the unnamed register.
+    'vim-scripts/ReplaceWithRegister',
+    init = function()
+      vim.keymap.set('x', '<leader>r', '<Plug>ReplaceWithRegisterVisual')
+    end,
+  },
+
   -- Fuzzy Finder (files, lsp, etc)
   { -- NOTE: that live grep won't work without BurntSushi/ripgrep installed:
     --  sudo apt install ripgrep
@@ -705,9 +717,9 @@ local on_attach = function(_, bufnr)
   nmap('<cr>rn', vim.lsp.buf.rename, '[R]e[n]ame')
   nmap('<cr>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
 
-  nmap('gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
+  nmap('<cr>gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
+  nmap('<cr>gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
+  nmap('<cr>gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
   nmap('<cr>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
   nmap('<cr>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
   nmap('<cr>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')

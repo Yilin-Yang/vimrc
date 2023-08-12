@@ -259,6 +259,8 @@ set tabstop=8           " By default, most editors come configured with a
 set foldlevel=20        " Fully expand all document folds on open.
 set nowrap
 
+set clipboard=unnamed   " Don't 'exchange' "+ contents with overwritten text.
+
 call ColorColumnBlock(80, 255, 'ctermbg=236')
 
 " Explicitly render `listchars`.
