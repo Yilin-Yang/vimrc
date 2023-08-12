@@ -47,6 +47,8 @@ vim.g.maplocalleader = '\\'
 -- Install package manager
 --    https://github.com/folke/lazy.nvim
 --    `:help lazy.nvim.txt` for more info
+--
+--    lazy.nvim installs plugins to: ~/.local/share/nvim/lazy/
 local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
   vim.fn.system {
@@ -873,15 +875,52 @@ cmp.setup {
 -- Additional Debug Adapter Protocol configuration
 
 local dap = require('dap')
-dap.configurations.python = {
+-- Uncommenting this would clobber all four of nvim-dap-python's default
+-- configurations, which were: (1) Launch, (2) Launch with arguments,
+-- (3) Attach remote, and (4) Run doctests in file.
+-- dap.configurations.python = {
+--   {
+--     type = 'python';
+--     request = 'launch';
+--     name = "Launch file";
+--     program = "${file}";
+--     pythonPath = function()
+--       return '/usr/bin/python'
+--     end;
+--   },
+-- }
+dap.adapters.lldb = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode-14',
+  name = 'lldb'
+}
+
+-- For this to work, lldb-vscode-XX must be in $PATH.
+dap.configurations.cpp = {
   {
-    type = 'python';
-    request = 'launch';
-    name = "Launch file";
-    program = "${file}";
-    pythonPath = function()
-      return '/usr/bin/python'
-    end;
+    name = 'Launch an executable',
+    type = 'lldb',
+    request = 'launch',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = {},
+  },
+  {
+    name = 'Launch an executable with arguments',
+    type = 'lldb',
+    request = 'launch',
+    program = function()
+      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+    end,
+    cwd = '${workspaceFolder}',
+    stopOnEntry = false,
+    args = function()
+      local args_string = vim.fn.input('Arguments: ')
+      return vim.split(args_string, " +")
+    end,
   },
 }
 
