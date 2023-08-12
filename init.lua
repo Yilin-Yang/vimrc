@@ -1,43 +1,3 @@
---[[
-
-=====================================================================
-==================== READ THIS BEFORE CONTINUING ====================
-=====================================================================
-
-Kickstart.nvim is *not* a distribution.
-
-Kickstart.nvim is a template for your own configuration.
-  The goal is that you can read every line of code, top-to-bottom, understand
-  what your configuration is doing, and modify it to suit your needs.
-
-  Once you've done that, you should start exploring, configuring and tinkering to
-  explore Neovim!
-
-  If you don't know anything about Lua, I recommend taking some time to read through
-  a guide. One possible example:
-  - https://learnxinyminutes.com/docs/lua/
-
-
-  And then you can explore or search through `:help lua-guide`
-  - https://neovim.io/doc/user/lua-guide.html
-
-
-Kickstart Guide:
-
-I have left several `:help X` comments throughout the init.lua
-You should run that command and read that help section for more information.
-
-In addition, I have some `NOTE:` items throughout the file.
-These are for you, the reader to help understand what is happening. Feel free to delete
-them once you know what you're doing, but they should serve as a guide for when you
-are first encountering a few different constructs in your nvim config.
-
-I hope you enjoy your Neovim journey,
-- TJ
-
-P.S. You can delete this when you're done too. It's your config now :)
---]]
-
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -178,7 +138,7 @@ require('lazy').setup({
   { -- Highlight targets for character motions.
     'unblevable/quick-scope',
     config = function()
-      -- vim.cmd('highlight link QuickScopePrimary CurSearch')
+      vim.cmd('highlight link QuickScopePrimary SpecialChar')
       -- vim.cmd('highlight link QuickScopeSecondary Search')
     end
   },
@@ -930,7 +890,7 @@ vim.keymap.set("n", "<cr>dj", ":DapStepOver<CR>")
 vim.keymap.set("n", "<cr>dh", ":DapStepOut<CR>")
 vim.keymap.set("n", "<cr>dbt", function()
   require('dap').toggle_breakpoint()
-end, { desc = '[T]oggle [B]reakpoint' } )
+end, { desc = '[B]reakpoint [T]toggle' } )
 
 vim.keymap.set({'n', 'v'}, '<cr>dh', function()
   require('dap.ui.widgets').hover()
@@ -966,6 +926,7 @@ vim.keymap.set(
 vim.keymap.set("n", "<F1>", ":DapStepOut<CR>")
 vim.keymap.set("n", "<F2>", ":DapStepOver<CR>")
 vim.keymap.set("n", "<F3>", ":DapStepInto<CR>")
+vim.keymap.set("n", "<F4>", ":DapContinue<CR>")
 vim.keymap.set(
     "n",
     "<cr>d-",
