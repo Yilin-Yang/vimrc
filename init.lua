@@ -98,18 +98,8 @@ require('lazy').setup({
   'tpope/vim-unimpaired',
 
   { -- Easy, intuitive two-way git diffs!
+    -- Note: DiffConflictsShowHistory, if we need the three-way diff.
     'whiteinge/diffconflicts',
-    -- TODO: get this working, even though DiffconflictsActive() doesn't
-    -- seem to exist?
-    -- config = function()
-    --   vim.keymap.set('n', 'd?', function()
-    --     if vim.cmd('DiffconflictsActive()') then
-    --       vim.cmd('DiffConflictsShowHistory<cr>')
-    --     else
-    --       error('vim is not running as a git mergetool. No history to show.')
-    --     end
-    --   end, {expr = true, replace_keycodes = true})
-    -- end,
   },
 
   { -- Target and jump to a specific character,
@@ -183,8 +173,13 @@ require('lazy').setup({
     end,
   },
 
-  -- Highlight targets for character motions.
-  'unblevable/quick-scope',
+  { -- Highlight targets for character motions.
+    'unblevable/quick-scope',
+    config = function()
+      -- vim.cmd('highlight link QuickScopePrimary CurSearch')
+      -- vim.cmd('highlight link QuickScopeSecondary Search')
+    end
+  },
 
   -- Test case framework for vim plugins.
   'junegunn/vader.vim',
@@ -405,6 +400,16 @@ require('lazy').setup({
       'mfussenegger/nvim-dap',
       'mfussenegger/nvim-dap-python',
     },
+  },
+  { -- Python DAP plugin
+    'mfussenegger/nvim-dap-python',
+    config = function()
+      -- TODO: can we do /usr/bin/env python3?
+      require('dap-python').setup('/usr/bin/python3')
+    end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter',
+    }
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -886,22 +891,27 @@ vim.keymap.set("n", "<cr>dj", ":DapStepOver<CR>")
 vim.keymap.set("n", "<cr>dh", ":DapStepOut<CR>")
 vim.keymap.set("n", "<cr>dbt", function()
   require('dap').toggle_breakpoint()
-end)
+end, { desc = '[T]oggle [B]reakpoint' } )
+
 vim.keymap.set({'n', 'v'}, '<cr>dh', function()
   require('dap.ui.widgets').hover()
 end)
 vim.keymap.set({'n', 'v'}, '<cr>dp', function()
   require('dap.ui.widgets').preview()
 end)
+
 vim.keymap.set('n', '<cr>df', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.frames)
 end, { desc = '[D]ebug [F]rames in centered float' })
+
 vim.keymap.set('n', '<cr>ds', function()
   local widgets = require('dap.ui.widgets')
   widgets.centered_float(widgets.scopes)
 end, { desc = '[D]ebug [S]copes in centered float' })
+
 vim.keymap.set("n", "<cr>dz", ":ZoomWinTabToggle<CR>")
+
 vim.keymap.set(
     "n",
     "<cr>dgt",  -- dg as in debu[g] [t]race
