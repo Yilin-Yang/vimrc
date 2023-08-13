@@ -444,13 +444,16 @@ require('lazy').setup({
   { -- Good old vim-markbar, for naming marks. Put this later to override
     -- which-key.
     'Yilin-Yang/vim-markbar',
+    dir = '/home/yiliny/plugins/vim-markbar',
+    init = function()
+      vim.g.markbar_enable_peekaboo = false
+    end,
     config = function()
       vim.keymap.set('n', '<leader>m', '<Plug>ToggleMarkbar')
       vim.g.markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
       -- vim.g.markbar_peekaboo_marks_to_display = "'\".abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
       vim.g.markbar_section_separation = 0
       -- vim.g.markbar_explicitly_remap_mark_mappings = true
-      vim.g.markbar_enable_peekaboo = false
 
       vim.g.markbar_force_clear_shared_data_on_delmark = true
     end,

@@ -95,6 +95,10 @@ vnoremap <silent> <leader>s :sort<cr>
 " Open the given helpdoc in a vertical split.
 command! -nargs=1 Help execute ':vert h <args>'
 
+" So that I can just type ':H <whatever>'. netrw defines this but I don't
+" use it.
+delcommand Hexplore
+
 ""
 " Deletes all trailing whitespace in the active file, returning
 " the cursor to its old location afterwards.
