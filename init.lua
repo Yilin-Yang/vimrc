@@ -814,29 +814,30 @@ cmp.setup {
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
     },
-    -- Prevent popup menu from intercepting 'real' keypresses
-    -- ['<CR>'] = cmp.mapping.confirm {
+    -- ['<Tab>'] = cmp.mapping.confirm {
     --   behavior = cmp.ConfirmBehavior.Replace,
     --   select = true,
     -- },
-    -- ['<Tab>'] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_next_item()
-    --   elseif luasnip.expand_or_locally_jumpable() then
-    --     luasnip.expand_or_jump()
-    --   else
-    --     fallback()
-    --   end
-    -- end, { 'i', 's' }),
-    -- ['<S-Tab>'] = cmp.mapping(function(fallback)
-    --   if cmp.visible() then
-    --     cmp.select_prev_item()
-    --   elseif luasnip.locally_jumpable(-1) then
-    --     luasnip.jump(-1)
-    --   else
-    --     fallback()
-    --   end
-    -- end, { 'i', 's' }),
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      -- if cmp.visible() then
+      --   cmp.select_next_item()
+      -- elseif luasnip.expand_or_locally_jumpable() then
+      if luasnip.expand_or_locally_jumpable() then
+        luasnip.expand_or_jump()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      -- if cmp.visible() then
+      --   cmp.select_prev_item()
+      -- elseif luasnip.locally_jumpable(-1) then
+      if luasnip.locally_jumpable(-1) then
+        luasnip.jump(-1)
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
   },
   sources = {
     { name = 'nvim_lsp' },
@@ -900,9 +901,14 @@ vim.keymap.set("n", "<cr>d<cr>", ":DapContinue<CR>")
 vim.keymap.set("n", "<cr>dl", ":DapStepInto<CR>")
 vim.keymap.set("n", "<cr>dj", ":DapStepOver<CR>")
 vim.keymap.set("n", "<cr>dh", ":DapStepOut<CR>")
+
 vim.keymap.set("n", "<cr>dbt", function()
   require('dap').toggle_breakpoint()
 end, { desc = '[B]reakpoint [T]toggle' } )
+
+vim.keymap.set("n", "<cr>dbc", function()
+  require('dap').toggle_breakpoint(vim.fn.input('Enter breakpoint condition: '))
+end, { desc = '[B]reakpoint with [C]ondition' } )
 
 vim.keymap.set({'n', 'v'}, '<cr>dh', function()
   require('dap.ui.widgets').hover()
