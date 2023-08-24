@@ -137,6 +137,9 @@ require('lazy').setup({
 
   { -- Highlight targets for character motions.
     'unblevable/quick-scope',
+    init = function()
+      vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
+    end,
     config = function()
       vim.cmd('highlight link QuickScopePrimary SpecialChar')
       -- vim.cmd('highlight link QuickScopeSecondary Search')
@@ -277,10 +280,10 @@ require('lazy').setup({
       -- Disable opening the quickfix window during continuous compilation.
       vim.g.vimtex_quickfix_enabled = 0
 
-      -- TODO: open compiled PDFs in SumatraPDF
-      vim.g.vimtex_view_general_viewer = 'xdg-open'
-      -- vim.g.vimtex_view_general_viewer = 'SumatraPDF'
-      -- vim.g.vimtex_view_general_options = '-reuse-instance -forward-search @tex @line @pdf'
+      -- ref: https://medium.com/@Pirmin/a-minimal-latex-setup-on-windows-using-wsl2-and-neovim-51259ff94734
+      -- vim.g.vimtex_view_general_viewer = 'xdg-open'
+      vim.g.vimtex_view_general_viewer = 'sumatraPDF'
+      vim.g.vimtex_view_general_options = '-reuse-instance @pdf'
 
       -- Stop error messages on startup.
       vim.g.tex_flavor = 'latex'
@@ -352,6 +355,12 @@ require('lazy').setup({
     config = function()
       require('dapui').setup()
 
+      vim.cmd('hi clear debugPC')
+      vim.cmd('hi link debugPC Underlined')
+
+      -- don't *comment out* unused variables
+      vim.cmd('hi link DiagnosticUnnecessary @variable')
+
       vim.keymap.set('n', '<cr>ddd', function()
         require('dapui').open()
         vim.cmd('DapContinue')  -- lazy-load nvim-dap
@@ -360,6 +369,7 @@ require('lazy').setup({
     end,
     dependencies = {
       'mfussenegger/nvim-dap',
+      'theHamsta/nvim-dap-virtual-text',
       'mfussenegger/nvim-dap-python',
     },
   },
@@ -372,6 +382,27 @@ require('lazy').setup({
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
     }
+  },
+  { -- Show variable values inline with source code
+    'theHamsta/nvim-dap-virtual-text',
+    opts = {
+      enabled = false,
+      enabled_commands = true,               -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+      highlight_changed_variables = true,    -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+      highlight_new_as_changed = false,      -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+      -- show_stop_reason = true,               -- show stop reason when stopped for exceptions
+      commented = false,                     -- prefix virtual text with comment string
+      -- only_first_definition = true,          -- only show virtual text at first definition (if there are multiple)
+      all_references = true,                 -- show virtual text on all all references of the variable (not only definitions)
+    },
+    config = function(_, opts)
+      require('nvim-dap-virtual-text').setup(opts)
+      vim.api.nvim_set_hl(0, 'NvimDapVirtualText', { link = 'DiagnosticInfo' })
+      vim.api.nvim_set_hl(0, 'NvimDapVirtualTextChanged', { link = 'DiagnosticWarn' })
+    end,
+    dependencies = {
+      'nvim-treesitter/nvim-treesitter', { }
+    },
   },
 
   -- Useful plugin to show you pending keybinds.
@@ -450,12 +481,16 @@ require('lazy').setup({
     end,
     config = function()
       vim.keymap.set('n', '<leader>m', '<Plug>ToggleMarkbar')
+      vim.keymap.set('n', '<leader>rrr', '<Plug>ReadMarkbarRosters')
+      vim.keymap.set('n', '<leader>www', '<Plug>WriteMarkbarRosters')
       vim.g.markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
       -- vim.g.markbar_peekaboo_marks_to_display = "'\".abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
       vim.g.markbar_section_separation = 0
       -- vim.g.markbar_explicitly_remap_mark_mappings = true
 
       vim.g.markbar_force_clear_shared_data_on_delmark = true
+      -- vim.g.markbar_persist_mark_names = false
+      vim.g.markbar_print_time_on_shada_io = true
     end,
   },
 
