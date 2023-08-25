@@ -308,7 +308,8 @@ require('lazy').setup({
         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
         "MunifTanjim/nui.nvim",
       },
-      opts = function()
+      config = function()
+        require('neo-tree').setup()
         vim.keymap.set('n', '<C-n>', ':Neotree toggle<cr>', {})
       end
   },
