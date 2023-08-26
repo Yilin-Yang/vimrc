@@ -439,6 +439,59 @@ require('lazy').setup({
     },
   },
 
+  { -- "Format runner" for neovim.
+    'mhartington/formatter.nvim',
+    config = function()
+      local util = require('formatter.util')
+      require('formatter').setup({
+        -- Enable or disable logging
+        logging = true,
+        -- Set the log level
+        log_level = vim.log.levels.WARN,
+        -- All formatter configurations are opt-in
+        filetype = {
+          -- Formatter configurations for filetype "lua" go here
+          -- and will be executed in order
+          lua = {
+            -- "formatter.filetypes.lua" defines default configurations for the
+            -- "lua" filetype
+            require("formatter.filetypes.lua").stylua,
+
+            -- You can also define your own configuration
+            function()
+              -- Supports conditional formatting
+              if util.get_current_buffer_file_name() == "special.lua" then
+                return nil
+              end
+
+              -- Full specification of configurations is down below and in Vim help
+              -- files
+              return {
+                exe = "stylua",
+                args = {
+                  "--search-parent-directories",
+                  "--stdin-filepath",
+                  util.escape_path(util.get_current_buffer_file_path()),
+                  "--",
+                  "-",
+                },
+                stdin = true,
+              }
+            end
+          },
+
+          -- Use the special "*" filetype for defining formatter configurations on
+          -- any filetype
+          ["*"] = {
+            -- "formatter.filetypes.any" defines default configurations for any
+            -- filetype
+            require("formatter.filetypes.any").remove_trailing_whitespace
+          },
+        }
+      })
+    end,
+  },
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   {
@@ -701,7 +754,8 @@ vim.keymap.set('n', '<cr>sd', require('telescope.builtin').diagnostics, { desc =
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx', 'typescript', 'vimdoc', 'vim' },
+  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx',
+                       'typescript', 'vimdoc', 'vim',  },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -810,6 +864,7 @@ local on_attach = function(_, bufnr)
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
+    vim.cmd('echomsg Formatted current buffer with LSP.')
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
@@ -826,9 +881,9 @@ local servers = {
   clangd = {},
   -- gopls = {},
   pyright = {},
+  pylsp = {},
   -- rust_analyzer = {},
-  -- tsserver = {},
-  -- html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs'} },
 
   lua_ls = {
     Lua = {
@@ -836,6 +891,12 @@ local servers = {
       telemetry = { enable = false },
     },
   },
+
+  dockerls = {},
+  eslint = {},
+  tsserver = {},
+  jsonls = {},
+  vimls = {},
 }
 
 -- Setup neovim lua configuration
