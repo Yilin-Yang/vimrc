@@ -57,6 +57,7 @@ require('lazy').setup({
   'tpope/vim-eunuch',
 
   -- ]q is cnext, [q is :cprevious, ]a is :next, [b is :bprevious...
+  -- [<Space> (add line before current) and ]<Space> (add line after current)
   'tpope/vim-unimpaired',
 
   { -- Easy, intuitive two-way git diffs!
@@ -300,19 +301,51 @@ require('lazy').setup({
     },
   },
 
-  { -- File browser
-      "nvim-neo-tree/neo-tree.nvim",
-      branch = "v3.x",
-      dependencies = {
-        "nvim-lua/plenary.nvim",
-        "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-        "MunifTanjim/nui.nvim",
-      },
-      config = function()
-        require('neo-tree').setup()
-        vim.keymap.set('n', '<C-n>', ':Neotree toggle<cr>', {})
-      end
+  -- { -- File browser
+  --     "nvim-neo-tree/neo-tree.nvim",
+  --     branch = "v3.x",
+  --     dependencies = {
+  --       "nvim-lua/plenary.nvim",
+  --       "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+  --       "MunifTanjim/nui.nvim",
+  --     },
+  --     config = function()
+  --       require('neo-tree').setup({
+  --         close_if_last_window = true,
+  --         window = {
+  --           mappings = {
+  --             -- NOTE: this mapping below (1) doesn't work and (2) triggers an error
+  --             -- message when showing neo-tree's help menu
+  --             ["//"] = 'fuzzy-finder', -- don't shadow / for standard search
+  --           },
+  --         },
+  --       })
+  --       vim.keymap.set('n', '<C-n>', ':Neotree toggle<cr>', {})
+  --     end
+  -- },
+
+  { -- File browser, **Ol' Reliable**
+    'preservim/nerdtree',
+    config = function()
+      vim.keymap.set('n', '<C-n>', ':NERDTree<cr>', {})
+      -- Close the tab if NERDTree is the only window remaining in it.
+      -- vim.cmd([[autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif]])
+
+      -- do it all in lua as a training exercise
+      vim.api.nvim_create_autocmd('BufEnter', {
+        pattern = '*',
+        -- NOTE: in lua, 0 is truthy, so we need the explicit `== 0` or `== 1`
+        callback = function()
+          if vim.fn.winnr('$') == 1 and vim.fn.exists('b:NERDTree') == 1
+              and vim.api.nvim_eval([[b:NERDTree.isTabTree()]]) == 1 then
+              -- and vim.api.nvim_call_dict_function(vim.b.NERDTree, 'isTabTree', {}) then
+            vim.cmd('quit')
+          end
+        end
+      })
+    end
   },
+
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
