@@ -443,6 +443,7 @@ require('lazy').setup({
     'mhartington/formatter.nvim',
     config = function()
       local util = require('formatter.util')
+      vim.keymap.set('n', '<leader><leader><leader>', ':FormatLock<cr>')
       require('formatter').setup({
         -- Enable or disable logging
         logging = true,
@@ -456,28 +457,60 @@ require('lazy').setup({
             -- "formatter.filetypes.lua" defines default configurations for the
             -- "lua" filetype
             require("formatter.filetypes.lua").stylua,
+            --
+            -- -- You can also define your own configuration
+            -- function()
+            --   -- Supports conditional formatting
+            --   if util.get_current_buffer_file_name() == "special.lua" then
+            --     return nil
+            --   end
+            --
+            --   -- Full specification of configurations is down below and in Vim help
+            --   -- files
+            --   return {
+            --     exe = "stylua",
+            --     args = {
+            --       "--search-parent-directories",
+            --       "--stdin-filepath",
+            --       util.escape_path(util.get_current_buffer_file_path()),
+            --       "--",
+            --       "-",
+            --     },
+            --     stdin = true,
+            --   }
+            -- end
+          },
 
-            -- You can also define your own configuration
-            function()
-              -- Supports conditional formatting
-              if util.get_current_buffer_file_name() == "special.lua" then
-                return nil
-              end
+          cpp = {
+            -- https://github.com/mhartington/formatter.nvim/blob/master/lua/formatter/filetypes/cpp.lua
+            require("formatter.defaults.clangformat"),
+            -- Above is equivalent to code below, which is copy-pasted from
+            -- formatter.nvim/lua/formatter/defaults/clangformat.lua,
+            --
+            -- function()
+            --   return {
+            --       exe = "clang-format",
+            --       args = {
+            --           "-assume-filename",
+            --           util.escape_path(util.get_current_buffer_file_name()),
+            --         },
+            --       stdin = true,
+            --       try_node_modules = true,
+            --     }
+            -- end
+          },
 
-              -- Full specification of configurations is down below and in Vim help
-              -- files
-              return {
-                exe = "stylua",
-                args = {
-                  "--search-parent-directories",
-                  "--stdin-filepath",
-                  util.escape_path(util.get_current_buffer_file_path()),
-                  "--",
-                  "-",
-                },
-                stdin = true,
-              }
-            end
+          css = {
+            require("formatter.defaults.prettier"),
+          },
+          html = {
+            require("formatter.defaults.prettier"),
+          },
+          xhtml = {
+            require("formatter.defaults.prettier"),
+          },
+          javascript = {
+            require("formatter.defaults.prettier"),
           },
 
           -- Use the special "*" filetype for defining formatter configurations on
@@ -485,7 +518,10 @@ require('lazy').setup({
           ["*"] = {
             -- "formatter.filetypes.any" defines default configurations for any
             -- filetype
-            require("formatter.filetypes.any").remove_trailing_whitespace
+            --
+            -- My configuration already strips trailing whitespace except for
+            -- vader.vim files; this does it for all files, period.
+            -- require("formatter.filetypes.any").remove_trailing_whitespace
           },
         }
       })
