@@ -338,7 +338,15 @@ require('lazy').setup({
   { -- File browser, **Ol' Reliable**
     'preservim/nerdtree',
     config = function()
-      vim.keymap.set('n', '<C-n>', ':NERDTree<cr>', {})
+      -- Fix an apparent bug in NERDTree: <C-n> to toggle opening and closing
+      -- NERDTree.
+      vim.keymap.set('n', '<C-n>', function()
+        if vim.fn.exists('b:NERDTree') == 1 then
+          vim.cmd(':NERDTreeClose')
+        else
+          vim.cmd(':NERDTree' .. vim.fn.getcwd())
+        end
+      end, {})
       -- Close the tab if NERDTree is the only window remaining in it.
       -- vim.cmd([[autocmd BufEnter * if winnr('$') == 1 && exists('b:NERDTree') && b:NERDTree.isTabTree() | quit | endif]])
 
