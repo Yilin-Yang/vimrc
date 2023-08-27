@@ -1,3 +1,15 @@
+-----------------------
+-- TABLE OF CONTENTS --
+-----------------------
+-- CONFIG_DAP_UI
+-- CONFIG_FORMATTER
+-- CONFIG_GITSIGNS
+-- CONFIG_UNIMPAIRED
+-- CONFIG_TELESCOPE
+-- CONFIG_TREESITTER
+-- CONFIG_LSPCONFIG
+
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -56,6 +68,7 @@ require('lazy').setup({
   -- :Delete, :Move, :Rename, Mkdir...
   'tpope/vim-eunuch',
 
+  -- [[ CONFIG_UNIMPAIRED ]]
   -- ]q is cnext, [q is :cprevious, ]a is :next, [b is :bprevious...
   -- [<Space> (add line before current) and ]<Space> (add line after current)
   'tpope/vim-unimpaired',
@@ -382,7 +395,7 @@ require('lazy').setup({
   },
 
 
-
+    -- [[ CONFIG_DAP_UI ]]
   { -- Debug Adapter Protocol for in-editor debugging.
     -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
     'rcarriga/nvim-dap-ui',
@@ -439,6 +452,7 @@ require('lazy').setup({
     },
   },
 
+    -- [[ CONFIG_FORMATTER ]]
   { -- "Format runner" for neovim.
     'mhartington/formatter.nvim',
     config = function()
@@ -530,7 +544,7 @@ require('lazy').setup({
 
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
-  {
+  { -- [[ CONFIG_GITSIGNS ]]
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -752,7 +766,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ Configure Telescope ]]
+-- [[ CONFIG_TELESCOPE ]]
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup {
   defaults = {
@@ -786,7 +800,7 @@ vim.keymap.set('n', '<cr>sw', require('telescope.builtin').grep_string, { desc =
 vim.keymap.set('n', '<cr>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<cr>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
--- [[ Configure Treesitter ]]
+-- [[ CONFIG_TREESITTER ]]
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup {
   -- Add languages to be installed here that you want installed for treesitter
@@ -859,7 +873,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- [[ Configure LSP ]]
+-- [[ CONFIG_LSPCONFIG ]]
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
