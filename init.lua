@@ -4,11 +4,9 @@
 -- CONFIG_DAP_UI
 -- CONFIG_FORMATTER
 -- CONFIG_GITSIGNS
--- CONFIG_UNIMPAIRED
 -- CONFIG_TELESCOPE
 -- CONFIG_TREESITTER
 -- CONFIG_LSPCONFIG
-
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -21,16 +19,16 @@ vim.g.maplocalleader = '\\'
 --    `:help lazy.nvim.txt` for more info
 --
 --    lazy.nvim installs plugins to: ~/.local/share/nvim/lazy/
-local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+local lazypath = vim.fn.stdpath('data') .. '/lazy/lazy.nvim'
 if not vim.loop.fs_stat(lazypath) then
-  vim.fn.system {
+  vim.fn.system({
     'git',
     'clone',
     '--filter=blob:none',
     'https://github.com/folke/lazy.nvim.git',
     '--branch=stable', -- latest stable release
     lazypath,
-  }
+  })
 end
 vim.opt.rtp:prepend(lazypath)
 
@@ -58,11 +56,11 @@ require('lazy').setup({
   { -- Easier binds for resizing splits.
     'simeji/winresizer',
     config = function()
-      vim.g.winresizer_keycode_finish = 100  -- finish by pressing 'd'
-      vim.keymap.del('n', '<C-e>', {silent = true})
-      vim.keymap.set('n', '<leader>wr', ':WinResizerStartResize<cr>', {desc = 'Start WinResizer'})
-      vim.keymap.set('n', '<leader>wm', ':WinResizerStartMove<cr>', {desc = 'Start WinResizerMove'})
-    end
+      vim.g.winresizer_keycode_finish = 100 -- finish by pressing 'd'
+      vim.keymap.del('n', '<C-e>', { silent = true })
+      vim.keymap.set('n', '<leader>wr', ':WinResizerStartResize<cr>', { desc = 'Start WinResizer' })
+      vim.keymap.set('n', '<leader>wm', ':WinResizerStartMove<cr>', { desc = 'Start WinResizerMove' })
+    end,
   },
 
   -- :Delete, :Move, :Rename, Mkdir...
@@ -83,7 +81,7 @@ require('lazy').setup({
     config = function()
       vim.keymap.set('n', '<localleader><localleader>', '<Plug>(easymotion-prefix)')
       vim.g.EasyMotion_smartcase = 1
-    end
+    end,
   },
 
   -- Local .vimrc settings.
@@ -92,72 +90,72 @@ require('lazy').setup({
   -- Repeat vim-surround commands using the period command.
   'tpope/vim-repeat',
 
---=============================================================================
---   vim-easy-align                                          [EASYALIGN]
---=============================================================================
--------------------------------------------------------------------------------
--- Alignment:    after entering EasyAlign, use Enter to cycle through left,
---               right, and center alignment options.
--------------------------------------------------------------------------------
---
--------------------------------------------------------------------------------
--- Examples:
-----------------------+------------------------------------+--------------------
--- With visual map     | Description                        | Equivalent command
-----------------------+------------------------------------+--------------------
--- <Enterx2><Space>    | Around 1st whitespaces             | :'<,'>EasyAlign\
--- <Enterx2>2<Space>   | Around 2nd whitespaces             | :'<,'>EasyAlign2\
--- <Enterx2>-<Space>   | Around the last whitespaces        | :'<,'>EasyAlign-\
--- <Enterx2>-2<Space>  | Around the 2nd to last whitespaces | :'<,'>EasyAlign-2\
--- <Enterx2>:          | Around 1st colon ( `key:  value` ) | :'<,'>EasyAlign:
--- <Enterx2><Right>:   | Around 1st colon ( `key : value` ) | :'<,'>EasyAlign:<l1
--- <Enterx2>=          | Around 1st operators with =        | :'<,'>EasyAlign=
--- <Enterx2>3=         | Around 3rd operators with =        | :'<,'>EasyAlign3=
--- <Enterx2>*=         | Around all operators with =        | :'<,'>EasyAlign*=
--- <Enterx2>**=        | Left-right alternating around =    | :'<,'>EasyAlign**=
--- <Enterx2><Enter>=   | Right alignment around 1st =       | :'<,'>EasyAlign!=
--- <Enterx2><Enter>**= | Right-left alternating around =    | :'<,'>EasyAlign!**=
-----------------------+------------------------------------+--------------------
--- NOTE: Preceding the delimiter with a number X means "align around every Xth
---       delimiter". Preceding the delimiter with a single `*` means "align
---       around every occurrence of the delimiter." Two stars alternates
---       between left-right alignment after each delimiter.
---
---       By default, EasyAlign will align around the first occurrence of the
---       delimiter.
--------------------------------------------------------------------------------
---
--------------------------------------------------------------------------------
--- Indentation Option Settings:
--------------------------------------------------------------------------------
---       k       |       'keep'      |       Preserve existing indentation.
--------------------------------------------------------------------------------
---       d       |       'deep'      |       Use the indentation of the
---               |                   |       most indented line.
--------------------------------------------------------------------------------
---       s       |       'shallow'   |       Use the indentation of the
---               |                   |       least indented line.
--------------------------------------------------------------------------------
---       n       |       'none'      |       Left-align in-and-along the
---               |                   |       left boundary of selected text.
--------------------------------------------------------------------------------
+  --=============================================================================
+  --   vim-easy-align                                          [EASYALIGN]
+  --=============================================================================
+  -------------------------------------------------------------------------------
+  -- Alignment:    after entering EasyAlign, use Enter to cycle through left,
+  --               right, and center alignment options.
+  -------------------------------------------------------------------------------
+  --
+  -------------------------------------------------------------------------------
+  -- Examples:
+  ----------------------+------------------------------------+--------------------
+  -- With visual map     | Description                        | Equivalent command
+  ----------------------+------------------------------------+--------------------
+  -- <Enterx2><Space>    | Around 1st whitespaces             | :'<,'>EasyAlign\
+  -- <Enterx2>2<Space>   | Around 2nd whitespaces             | :'<,'>EasyAlign2\
+  -- <Enterx2>-<Space>   | Around the last whitespaces        | :'<,'>EasyAlign-\
+  -- <Enterx2>-2<Space>  | Around the 2nd to last whitespaces | :'<,'>EasyAlign-2\
+  -- <Enterx2>:          | Around 1st colon ( `key:  value` ) | :'<,'>EasyAlign:
+  -- <Enterx2><Right>:   | Around 1st colon ( `key : value` ) | :'<,'>EasyAlign:<l1
+  -- <Enterx2>=          | Around 1st operators with =        | :'<,'>EasyAlign=
+  -- <Enterx2>3=         | Around 3rd operators with =        | :'<,'>EasyAlign3=
+  -- <Enterx2>*=         | Around all operators with =        | :'<,'>EasyAlign*=
+  -- <Enterx2>**=        | Left-right alternating around =    | :'<,'>EasyAlign**=
+  -- <Enterx2><Enter>=   | Right alignment around 1st =       | :'<,'>EasyAlign!=
+  -- <Enterx2><Enter>**= | Right-left alternating around =    | :'<,'>EasyAlign!**=
+  ----------------------+------------------------------------+--------------------
+  -- NOTE: Preceding the delimiter with a number X means "align around every Xth
+  --       delimiter". Preceding the delimiter with a single `*` means "align
+  --       around every occurrence of the delimiter." Two stars alternates
+  --       between left-right alignment after each delimiter.
+  --
+  --       By default, EasyAlign will align around the first occurrence of the
+  --       delimiter.
+  -------------------------------------------------------------------------------
+  --
+  -------------------------------------------------------------------------------
+  -- Indentation Option Settings:
+  -------------------------------------------------------------------------------
+  --       k       |       'keep'      |       Preserve existing indentation.
+  -------------------------------------------------------------------------------
+  --       d       |       'deep'      |       Use the indentation of the
+  --               |                   |       most indented line.
+  -------------------------------------------------------------------------------
+  --       s       |       'shallow'   |       Use the indentation of the
+  --               |                   |       least indented line.
+  -------------------------------------------------------------------------------
+  --       n       |       'none'      |       Left-align in-and-along the
+  --               |                   |       left boundary of selected text.
+  -------------------------------------------------------------------------------
 
   { -- Align things more easily! A bit more configurable than tabular.
     'junegunn/vim-easy-align',
     config = function()
-      vim.keymap.set({'n', 'v'}, '<cr><cr>', '<Plug>(EasyAlign)')
+      vim.keymap.set({ 'n', 'v' }, '<cr><cr>', '<Plug>(EasyAlign)')
     end,
   },
 
   { -- Highlight targets for character motions.
     'unblevable/quick-scope',
     init = function()
-      vim.g.qs_highlight_on_keys = {'f', 'F', 't', 'T'}
+      vim.g.qs_highlight_on_keys = { 'f', 'F', 't', 'T' }
     end,
     config = function()
       vim.cmd('highlight link QuickScopePrimary SpecialChar')
       -- vim.cmd('highlight link QuickScopeSecondary Search')
-    end
+    end,
   },
 
   -- Test case framework for vim plugins.
@@ -166,108 +164,108 @@ require('lazy').setup({
   -- Display marks in the sign column.
   'kshenoy/vim-signature',
 
---============================================================================
---  vimwiki                                                 [VIMWIKI]
---============================================================================
---
--------------------------------------------------------------------------------
---Configured partly using the following link as reference:
---  https://www.dailydrip.com/blog/vimwiki
--------------------------------------------------------------------------------
---
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
---USAGE NOTES:
---  If no [count] is specified, assume a count of one (1), unless otherwise
---  noted.
--------------------------------------------------------------------------------
--------------------------------------------------------------------------------
---
--------------------------------------------------------------------------------
---OPENING WIKI:
---  [count]<Leader>ww   OR  <Plug>VimwikiIndex
---      Open the index of the [count]th wiki in g:vimwiki_list.
---
---  [count]<Leader>wt   OR  <Plug>VimwikiTabIndex
---      Open the index of the [count]th wiki in g:vimwiki_list *in a new tab.*
---
---  <Leader>ws          OR  <Plug>VimwikiUISelect
---      List and select available wikis in g:vimwiki_list.
---
---  [count]<Leader>wi   OR  <Plug>VimwikiDiaryIndex
---      Open the diary index of the [count]th wiki in g:vimwiki_list.
---
---  [count]<Leader>w<Leader>w   OR  <Plug>VimwikiMakeDiaryNote
---  [count]<Leader>w<Leader>t   OR  <Plug>VimwikiTabMakeDiaryNote
---      Open a diary wiki-file for the current day in the [count]th wiki in
---      g:vimwiki_list [in a new tab.]
---
---  [count]<Leader>w<Leader>y   OR  <Plug>VimwikiMakeYesterdayDiaryNote
---  [count]<Leader>w<Leader>m   OR  <Plug>VimwikiMakeTomorrowDiaryNote
---
--------------------------------------------------------------------------------
---NAVIGATION:
---  <CR>                        Open or create a wiki link.
---      :VimwikiSplitLink           Open/create a wiki link in a split.
---      :VimwikiVSplitLink          Open/create a wiki link in a vertical split.
---  <Backspace>                 Go back to previous wiki page.
---  <Tab>                       Find next link in current page.
---  <S-Tab>                     Find previous link in the current page.
---
---  DIARY:
---      <C-Up>                  Open the previous day's diary.
---      <C-Down>                Open the next day's diary.
---
--------------------------------------------------------------------------------
---PAGE EDITING:
---
---  (these mappings have been disabled in ftplugin/vimwiki.vim)
---  <Leader>wd                  Delete current wiki page.
---      :VimwikiDeleteLink          // ditto
---  <Leader>wr                  Rename current wiki page.
---      :VimwikiRenameLink          // ditto
---  (end notice)
---
---  [[                          Previous header in buffer.
---  ]]                          Next header in buffer.
---  [=                          Previous header with same level as selected.
---  ]=                          Next header with same level as selected.
---  ]u                          Go one header level 'up'.
---  [u                          // ditto
---  +                           Create and/or decorate links.
---
---  LISTS:
---      glr                     Renumber list items.
---      gLr                     Renumber all list items in the current file.
---
---      <C-d>                   (insert mode) Demote current list item.
---      <C-t>                   (insert mode) Promote current list item.
---
--------------------------------------------------------------------------------
---LINK FORMATTING:
---  By default, links are specified with respect to the present working
---  directory, similar to directory navigation in a bash terminal.
---  - The '/' prefix (as in '/index') means 'relative to the wiki root.'
---  - The '../' prefix (as in '../index') means 'relative to the parent
---  directory.'
---
---  One can link to diary entries with the following scheme:
---      [[diary:2012-03-05]]
---
---  Raw URLs are also supported, e.g.
---      https://github.com/vimwiki/vimwiki.git
---      mailto:billymagic@gmail.com
---
--------------------------------------------------------------------------------
---TEXT ANCHORS:
---  Section headings and tags can be used as text anchors.
---  See `:h vimwiki-anchors`.
---
--------------------------------------------------------------------------------
---MISCELLANY:
---  - `:VimwikiTOC` creates a table of contents at the top of the current file.
---  - vimwiki has tagbar support!
--------------------------------------------------------------------------------
+  --============================================================================
+  --  vimwiki                                                 [VIMWIKI]
+  --============================================================================
+  --
+  -------------------------------------------------------------------------------
+  --Configured partly using the following link as reference:
+  --  https://www.dailydrip.com/blog/vimwiki
+  -------------------------------------------------------------------------------
+  --
+  -------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------
+  --USAGE NOTES:
+  --  If no [count] is specified, assume a count of one (1), unless otherwise
+  --  noted.
+  -------------------------------------------------------------------------------
+  -------------------------------------------------------------------------------
+  --
+  -------------------------------------------------------------------------------
+  --OPENING WIKI:
+  --  [count]<Leader>ww   OR  <Plug>VimwikiIndex
+  --      Open the index of the [count]th wiki in g:vimwiki_list.
+  --
+  --  [count]<Leader>wt   OR  <Plug>VimwikiTabIndex
+  --      Open the index of the [count]th wiki in g:vimwiki_list *in a new tab.*
+  --
+  --  <Leader>ws          OR  <Plug>VimwikiUISelect
+  --      List and select available wikis in g:vimwiki_list.
+  --
+  --  [count]<Leader>wi   OR  <Plug>VimwikiDiaryIndex
+  --      Open the diary index of the [count]th wiki in g:vimwiki_list.
+  --
+  --  [count]<Leader>w<Leader>w   OR  <Plug>VimwikiMakeDiaryNote
+  --  [count]<Leader>w<Leader>t   OR  <Plug>VimwikiTabMakeDiaryNote
+  --      Open a diary wiki-file for the current day in the [count]th wiki in
+  --      g:vimwiki_list [in a new tab.]
+  --
+  --  [count]<Leader>w<Leader>y   OR  <Plug>VimwikiMakeYesterdayDiaryNote
+  --  [count]<Leader>w<Leader>m   OR  <Plug>VimwikiMakeTomorrowDiaryNote
+  --
+  -------------------------------------------------------------------------------
+  --NAVIGATION:
+  --  <CR>                        Open or create a wiki link.
+  --      :VimwikiSplitLink           Open/create a wiki link in a split.
+  --      :VimwikiVSplitLink          Open/create a wiki link in a vertical split.
+  --  <Backspace>                 Go back to previous wiki page.
+  --  <Tab>                       Find next link in current page.
+  --  <S-Tab>                     Find previous link in the current page.
+  --
+  --  DIARY:
+  --      <C-Up>                  Open the previous day's diary.
+  --      <C-Down>                Open the next day's diary.
+  --
+  -------------------------------------------------------------------------------
+  --PAGE EDITING:
+  --
+  --  (these mappings have been disabled in ftplugin/vimwiki.vim)
+  --  <Leader>wd                  Delete current wiki page.
+  --      :VimwikiDeleteLink          // ditto
+  --  <Leader>wr                  Rename current wiki page.
+  --      :VimwikiRenameLink          // ditto
+  --  (end notice)
+  --
+  --  [[                          Previous header in buffer.
+  --  ]]                          Next header in buffer.
+  --  [=                          Previous header with same level as selected.
+  --  ]=                          Next header with same level as selected.
+  --  ]u                          Go one header level 'up'.
+  --  [u                          // ditto
+  --  +                           Create and/or decorate links.
+  --
+  --  LISTS:
+  --      glr                     Renumber list items.
+  --      gLr                     Renumber all list items in the current file.
+  --
+  --      <C-d>                   (insert mode) Demote current list item.
+  --      <C-t>                   (insert mode) Promote current list item.
+  --
+  -------------------------------------------------------------------------------
+  --LINK FORMATTING:
+  --  By default, links are specified with respect to the present working
+  --  directory, similar to directory navigation in a bash terminal.
+  --  - The '/' prefix (as in '/index') means 'relative to the wiki root.'
+  --  - The '../' prefix (as in '../index') means 'relative to the parent
+  --  directory.'
+  --
+  --  One can link to diary entries with the following scheme:
+  --      [[diary:2012-03-05]]
+  --
+  --  Raw URLs are also supported, e.g.
+  --      https://github.com/vimwiki/vimwiki.git
+  --      mailto:billymagic@gmail.com
+  --
+  -------------------------------------------------------------------------------
+  --TEXT ANCHORS:
+  --  Section headings and tags can be used as text anchors.
+  --  See `:h vimwiki-anchors`.
+  --
+  -------------------------------------------------------------------------------
+  --MISCELLANY:
+  --  - `:VimwikiTOC` creates a table of contents at the top of the current file.
+  --  - vimwiki has tagbar support!
+  -------------------------------------------------------------------------------
 
   -- { -- vimwiki, for my personal notes
   --   'vimwiki/vimwiki',
@@ -301,12 +299,12 @@ require('lazy').setup({
 
       -- Stop error messages on startup.
       vim.g.tex_flavor = 'latex'
-    end
+    end,
   },
 
   { -- highlight comments like TODO, NOTE, BUG
-    "folke/todo-comments.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
+    'folke/todo-comments.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
     opts = {
       -- your configuration comes here
       -- or leave it empty to use the default settings
@@ -349,14 +347,17 @@ require('lazy').setup({
         pattern = '*',
         -- NOTE: in lua, 0 is truthy, so we need the explicit `== 0` or `== 1`
         callback = function()
-          if vim.fn.winnr('$') == 1 and vim.fn.exists('b:NERDTree') == 1
-              and vim.api.nvim_eval([[b:NERDTree.isTabTree()]]) == 1 then
-              -- and vim.api.nvim_call_dict_function(vim.b.NERDTree, 'isTabTree', {}) then
+          if
+            vim.fn.winnr('$') == 1
+            and vim.fn.exists('b:NERDTree') == 1
+            and vim.api.nvim_eval([[b:NERDTree.isTabTree()]]) == 1
+          then
+            -- and vim.api.nvim_call_dict_function(vim.b.NERDTree, 'isTabTree', {}) then
             vim.cmd('quit')
           end
-        end
+        end,
       })
-    end
+    end,
   },
 
   -- NOTE: This is where your plugins related to LSP can be installed.
@@ -394,8 +395,7 @@ require('lazy').setup({
     },
   },
 
-
-    -- [[ CONFIG_DAP_UI ]]
+  -- [[ CONFIG_DAP_UI ]]
   { -- Debug Adapter Protocol for in-editor debugging.
     -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
     'rcarriga/nvim-dap-ui',
@@ -410,9 +410,8 @@ require('lazy').setup({
 
       vim.keymap.set('n', '<cr>ddd', function()
         require('dapui').open()
-        vim.cmd('DapContinue')  -- lazy-load nvim-dap
+        vim.cmd('DapContinue') -- lazy-load nvim-dap
       end, { desc = 'Open nvim-dap UI' })
-
     end,
     dependencies = {
       'mfussenegger/nvim-dap',
@@ -428,19 +427,19 @@ require('lazy').setup({
     end,
     dependencies = {
       'nvim-treesitter/nvim-treesitter',
-    }
+    },
   },
   { -- Show variable values inline with source code
     'theHamsta/nvim-dap-virtual-text',
     opts = {
       enabled = false,
-      enabled_commands = true,               -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-      highlight_changed_variables = true,    -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-      highlight_new_as_changed = false,      -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+      enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+      highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+      highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
       -- show_stop_reason = true,               -- show stop reason when stopped for exceptions
-      commented = false,                     -- prefix virtual text with comment string
+      commented = false, -- prefix virtual text with comment string
       -- only_first_definition = true,          -- only show virtual text at first definition (if there are multiple)
-      all_references = true,                 -- show virtual text on all all references of the variable (not only definitions)
+      all_references = true, -- show virtual text on all all references of the variable (not only definitions)
     },
     config = function(_, opts)
       require('nvim-dap-virtual-text').setup(opts)
@@ -448,11 +447,12 @@ require('lazy').setup({
       vim.api.nvim_set_hl(0, 'NvimDapVirtualTextChanged', { link = 'DiagnosticWarn' })
     end,
     dependencies = {
-      'nvim-treesitter/nvim-treesitter', { }
+      'nvim-treesitter/nvim-treesitter',
+      {},
     },
   },
 
-    -- [[ CONFIG_FORMATTER ]]
+  -- [[ CONFIG_FORMATTER ]]
   { -- "Format runner" for neovim.
     'mhartington/formatter.nvim',
     config = function()
@@ -470,7 +470,7 @@ require('lazy').setup({
           lua = {
             -- "formatter.filetypes.lua" defines default configurations for the
             -- "lua" filetype
-            require("formatter.filetypes.lua").stylua,
+            require('formatter.filetypes.lua').stylua,
             --
             -- -- You can also define your own configuration
             -- function()
@@ -497,7 +497,7 @@ require('lazy').setup({
 
           cpp = {
             -- https://github.com/mhartington/formatter.nvim/blob/master/lua/formatter/filetypes/cpp.lua
-            require("formatter.defaults.clangformat"),
+            require('formatter.defaults.clangformat'),
             -- Above is equivalent to code below, which is copy-pasted from
             -- formatter.nvim/lua/formatter/defaults/clangformat.lua,
             --
@@ -515,21 +515,21 @@ require('lazy').setup({
           },
 
           css = {
-            require("formatter.defaults.prettier"),
+            require('formatter.defaults.prettier'),
           },
           html = {
-            require("formatter.defaults.prettier"),
+            require('formatter.defaults.prettier'),
           },
           xhtml = {
-            require("formatter.defaults.prettier"),
+            require('formatter.defaults.prettier'),
           },
           javascript = {
-            require("formatter.defaults.prettier"),
+            require('formatter.defaults.prettier'),
           },
 
           -- Use the special "*" filetype for defining formatter configurations on
           -- any filetype
-          ["*"] = {
+          ['*'] = {
             -- "formatter.filetypes.any" defines default configurations for any
             -- filetype
             --
@@ -537,7 +537,7 @@ require('lazy').setup({
             -- vader.vim files; this does it for all files, period.
             -- require("formatter.filetypes.any").remove_trailing_whitespace
           },
-        }
+        },
       })
     end,
   },
@@ -557,9 +557,24 @@ require('lazy').setup({
         changedelete = { text = '~' },
       },
       on_attach = function(bufnr)
-        vim.keymap.set('n', '<leader>gp', require('gitsigns').prev_hunk, { buffer = bufnr, desc = '[G]o to [P]revious Hunk' })
-        vim.keymap.set('n', '<leader>gn', require('gitsigns').next_hunk, { buffer = bufnr, desc = '[G]o to [N]ext Hunk' })
-        vim.keymap.set('n', '<leader>ph', require('gitsigns').preview_hunk, { buffer = bufnr, desc = '[P]review [H]unk' })
+        vim.keymap.set(
+          'n',
+          '<leader>gp',
+          require('gitsigns').prev_hunk,
+          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>gn',
+          require('gitsigns').next_hunk,
+          { buffer = bufnr, desc = '[G]o to [N]ext Hunk' }
+        )
+        vim.keymap.set(
+          'n',
+          '<leader>ph',
+          require('gitsigns').preview_hunk,
+          { buffer = bufnr, desc = '[P]review [H]unk' }
+        )
       end,
     },
   },
@@ -569,7 +584,7 @@ require('lazy').setup({
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
-      vim.cmd.colorscheme 'onedark'
+      vim.cmd.colorscheme('onedark')
     end,
   },
   {
@@ -581,18 +596,18 @@ require('lazy').setup({
       tws = '\\s\\+$',
       clean_on_winleave = true,
       user_palette = {
-          markdown = {
-            ['\\(\\S\\)\\@<=\\s\\(\\.\\|,\\)\\@='] = 'CadetBlue3',
-            ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'SkyBlue1',
-            ['\\t\\+'] = 'plum4',
-          },
-          other = {
-            tws = 'PaleVioletRed',
-            -- ['\\(\\S\\)\\@<=\\s\\(,\\)\\@='] = 'coral1',
-            -- ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'LightGoldenrod3',
-            -- ['\\t\\+'] = 'plum4',
-          }
+        markdown = {
+          ['\\(\\S\\)\\@<=\\s\\(\\.\\|,\\)\\@='] = 'CadetBlue3',
+          ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'SkyBlue1',
+          ['\\t\\+'] = 'plum4',
         },
+        other = {
+          tws = 'PaleVioletRed',
+          -- ['\\(\\S\\)\\@<=\\s\\(,\\)\\@='] = 'coral1',
+          -- ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'LightGoldenrod3',
+          -- ['\\t\\+'] = 'plum4',
+        },
+      },
     },
   },
   {
@@ -620,7 +635,7 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>m', '<Plug>ToggleMarkbar')
       vim.keymap.set('n', '<leader>rrr', '<Plug>ReadMarkbarRosters')
       vim.keymap.set('n', '<leader>www', '<Plug>WriteMarkbarRosters')
-      vim.g.markbar_marks_to_display = "'\".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+      vim.g.markbar_marks_to_display = '\'".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
       -- vim.g.markbar_peekaboo_marks_to_display = "'\".abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
       vim.g.markbar_section_separation = 0
       -- vim.g.markbar_explicitly_remap_mark_mappings = true
@@ -673,7 +688,7 @@ require('lazy').setup({
         --       refer to the README for telescope-fzf-native for more instructions.
         build = 'make',
         cond = function()
-          return vim.fn.executable 'make' == 1
+          return vim.fn.executable('make') == 1
         end,
       },
     },
@@ -754,7 +769,6 @@ vim.keymap.set({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 vim.keymap.set('n', 'k', "v:count == 0 ? 'gk' : 'k'", { expr = true, silent = true })
 vim.keymap.set('n', 'j', "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 
-
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
@@ -768,7 +782,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
 
 -- [[ CONFIG_TELESCOPE ]]
 -- See `:help telescope` and `:help telescope.setup()`
-require('telescope').setup {
+require('telescope').setup({
   defaults = {
     mappings = {
       i = {
@@ -777,7 +791,7 @@ require('telescope').setup {
       },
     },
   },
-}
+})
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
@@ -787,10 +801,10 @@ vim.keymap.set('n', '<cr>?', require('telescope.builtin').oldfiles, { desc = '[?
 vim.keymap.set('n', '<cr>b', require('telescope.builtin').buffers, { desc = '[ ] Find existing buffers' })
 vim.keymap.set('n', '<cr>/', function()
   -- You can pass additional configuration to telescope to change theme, layout, etc.
-  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+  require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown({
     winblend = 10,
     previewer = false,
-  })
+  }))
 end, { desc = '[/] Fuzzily search in current buffer' })
 
 vim.keymap.set('n', '<cr>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
@@ -802,10 +816,20 @@ vim.keymap.set('n', '<cr>sd', require('telescope.builtin').diagnostics, { desc =
 
 -- [[ CONFIG_TREESITTER ]]
 -- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup {
+require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = { 'c', 'cpp', 'go', 'lua', 'python', 'rust', 'tsx',
-                       'typescript', 'vimdoc', 'vim',  },
+  ensure_installed = {
+    'c',
+    'cpp',
+    'go',
+    'lua',
+    'python',
+    'rust',
+    'tsx',
+    'typescript',
+    'vimdoc',
+    'vim',
+  },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
   auto_install = false,
@@ -865,7 +889,7 @@ require('nvim-treesitter.configs').setup {
       },
     },
   },
-}
+})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -933,7 +957,7 @@ local servers = {
   pyright = {},
   pylsp = {},
   -- rust_analyzer = {},
-  html = { filetypes = { 'html', 'twig', 'hbs'} },
+  html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
     Lua = {
@@ -957,46 +981,46 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
 -- Ensure the servers above are installed
-local mason_lspconfig = require 'mason-lspconfig'
+local mason_lspconfig = require('mason-lspconfig')
 
-mason_lspconfig.setup {
+mason_lspconfig.setup({
   ensure_installed = vim.tbl_keys(servers),
-}
+})
 
-mason_lspconfig.setup_handlers {
+mason_lspconfig.setup_handlers({
   function(server_name)
-    require('lspconfig')[server_name].setup {
+    require('lspconfig')[server_name].setup({
       capabilities = capabilities,
       on_attach = on_attach,
       settings = servers[server_name],
       filetypes = (servers[server_name] or {}).filetypes,
-    }
-  end
-}
+    })
+  end,
+})
 
 -- [[ Configure nvim-cmp ]]
 -- See `:help cmp`
-local cmp = require 'cmp'
-local luasnip = require 'luasnip'
+local cmp = require('cmp')
+local luasnip = require('luasnip')
 require('luasnip.loaders.from_vscode').lazy_load()
-luasnip.config.setup {}
+luasnip.config.setup({})
 
-cmp.setup {
+cmp.setup({
   snippet = {
     expand = function(args)
       luasnip.lsp_expand(args.body)
     end,
   },
-  mapping = cmp.mapping.preset.insert {
+  mapping = cmp.mapping.preset.insert({
     ['<C-n>'] = cmp.mapping.select_next_item(),
     ['<C-p>'] = cmp.mapping.select_prev_item(),
     ['<C-d>'] = cmp.mapping.scroll_docs(-4),
     ['<C-f>'] = cmp.mapping.scroll_docs(4),
-    ['<C-Space>'] = cmp.mapping.complete{},
-    ['<C-y>'] = cmp.mapping.confirm {
+    ['<C-Space>'] = cmp.mapping.complete({}),
+    ['<C-y>'] = cmp.mapping.confirm({
       behavior = cmp.ConfirmBehavior.Replace,
       select = true,
-    },
+    }),
     -- ['<Tab>'] = cmp.mapping.confirm {
     --   behavior = cmp.ConfirmBehavior.Replace,
     --   select = true,
@@ -1021,12 +1045,12 @@ cmp.setup {
         fallback()
       end
     end, { 'i', 's' }),
-  },
+  }),
   sources = {
     { name = 'nvim_lsp' },
     { name = 'luasnip' },
   },
-}
+})
 
 -- Additional Debug Adapter Protocol configuration
 
@@ -1048,7 +1072,7 @@ local dap = require('dap')
 dap.adapters.lldb = {
   type = 'executable',
   command = '/usr/bin/lldb-vscode-14',
-  name = 'lldb'
+  name = 'lldb',
 }
 
 -- For this to work, lldb-vscode-XX must be in $PATH.
@@ -1075,28 +1099,28 @@ dap.configurations.cpp = {
     stopOnEntry = false,
     args = function()
       local args_string = vim.fn.input('Arguments: ')
-      return vim.split(args_string, " +")
+      return vim.split(args_string, ' +')
     end,
   },
 }
 
-vim.keymap.set("n", "<cr>d<cr>", ":DapContinue<CR>")
-vim.keymap.set("n", "<cr>dl", ":DapStepInto<CR>")
-vim.keymap.set("n", "<cr>dj", ":DapStepOver<CR>")
-vim.keymap.set("n", "<cr>dh", ":DapStepOut<CR>")
+vim.keymap.set('n', '<cr>d<cr>', ':DapContinue<CR>')
+vim.keymap.set('n', '<cr>dl', ':DapStepInto<CR>')
+vim.keymap.set('n', '<cr>dj', ':DapStepOver<CR>')
+vim.keymap.set('n', '<cr>dh', ':DapStepOut<CR>')
 
-vim.keymap.set("n", "<cr>dbt", function()
+vim.keymap.set('n', '<cr>dbt', function()
   require('dap').toggle_breakpoint()
-end, { desc = '[B]reakpoint [T]toggle' } )
+end, { desc = '[B]reakpoint [T]toggle' })
 
-vim.keymap.set("n", "<cr>dbc", function()
+vim.keymap.set('n', '<cr>dbc', function()
   require('dap').toggle_breakpoint(vim.fn.input('Enter breakpoint condition: '))
-end, { desc = '[B]reakpoint with [C]ondition' } )
+end, { desc = '[B]reakpoint with [C]ondition' })
 
-vim.keymap.set({'n', 'v'}, '<cr>dh', function()
+vim.keymap.set({ 'n', 'v' }, '<cr>dh', function()
   require('dap.ui.widgets').hover()
 end)
-vim.keymap.set({'n', 'v'}, '<cr>dp', function()
+vim.keymap.set({ 'n', 'v' }, '<cr>dp', function()
   require('dap.ui.widgets').preview()
 end)
 
@@ -1110,44 +1134,35 @@ vim.keymap.set('n', '<cr>ds', function()
   widgets.centered_float(widgets.scopes)
 end, { desc = '[D]ebug [S]copes in centered float' })
 
-vim.keymap.set("n", "<cr>dz", ":ZoomWinTabToggle<CR>")
+vim.keymap.set('n', '<cr>dz', ':ZoomWinTabToggle<CR>')
 
 vim.keymap.set(
-    "n",
-    "<cr>dgt",  -- dg as in debu[g] [t]race
-    ":lua require('dap').set_log_level('TRACE')<CR>"
+  'n',
+  '<cr>dgt', -- dg as in debu[g] [t]race
+  ":lua require('dap').set_log_level('TRACE')<CR>"
 )
 vim.keymap.set(
-    "n",
-    "<cr>dge",  -- dg as in debu[g] [e]dit
-    function()
-        vim.cmd(":edit " .. vim.fn.stdpath('cache') .. "/dap.log")
-    end
+  'n',
+  '<cr>dge', -- dg as in debu[g] [e]dit
+  function()
+    vim.cmd(':edit ' .. vim.fn.stdpath('cache') .. '/dap.log')
+  end
 )
-vim.keymap.set("n", "<F1>", ":DapStepOut<CR>")
-vim.keymap.set("n", "<F2>", ":DapStepOver<CR>")
-vim.keymap.set("n", "<F3>", ":DapStepInto<CR>")
-vim.keymap.set("n", "<F4>", ":DapContinue<CR>")
-vim.keymap.set(
-    "n",
-    "<cr>d-",
-    function()
-        require("dap").restart()
-    end
-)
-vim.keymap.set(
-    "n",
-    "<cr>d_",
-    function()
-        require("dap").terminate()
-        require("dapui").close()
-    end
-)
+vim.keymap.set('n', '<F1>', ':DapStepOut<CR>')
+vim.keymap.set('n', '<F2>', ':DapStepOver<CR>')
+vim.keymap.set('n', '<F3>', ':DapStepInto<CR>')
+vim.keymap.set('n', '<F4>', ':DapContinue<CR>')
+vim.keymap.set('n', '<cr>d-', function()
+  require('dap').restart()
+end)
+vim.keymap.set('n', '<cr>d_', function()
+  require('dap').terminate()
+  require('dapui').close()
+end)
 
 -- NOTE: Reuse platform-agnostic settings between vim and neovim. May clobber
 -- settings from this file.
 vim.cmd('source ~/.config/nvim/vimrc')
-
 
 -- The line beneath this is called `modeline`. See `:help modeline`
 -- vim: ts=2 sts=2 sw=2 et
