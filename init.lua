@@ -69,6 +69,28 @@ require('lazy').setup({
   -- [[ CONFIG_UNIMPAIRED ]]
   -- ]q is cnext, [q is :cprevious, ]a is :next, [b is :bprevious...
   -- [<Space> (add line before current) and ]<Space> (add line after current)
+  --
+  -- PASTING                                         *unimpaired-pasting*
+  --
+  --   These are experimental:
+  --
+  -- >p    Paste after linewise, increasing indent.
+  -- >P    Paste before linewise, increasing indent.
+  -- <p    Paste after linewise, decreasing indent.
+  -- <P    Paste before linewise, decreasing indent.
+  -- =p    Paste after linewise, reindenting.
+  -- =P    Paste before linewise, reindenting.
+  --
+  -- |]p|, |[p|, |[P|, and |]P| have also been remapped to force linewise pasting,
+  -- while preserving their usual indent matching behavior.
+  --
+  -- *[op* *]op* *yop*
+  -- A toggle has not been provided for 'paste' because the typical use case of
+  -- wrapping of a solitary insertion is inefficient:  You toggle twice, but
+  -- you only paste once (YOPO).  Instead, press [op, ]op, or yop to invoke |O|,
+  -- |o|, or |0||C| with 'paste' already set.  Leaving insert mode sets 'nopaste'
+  -- automatically.
+
   'tpope/vim-unimpaired',
 
   { -- Easy, intuitive two-way git diffs!
@@ -465,7 +487,7 @@ require('lazy').setup({
     'mhartington/formatter.nvim',
     config = function()
       local util = require('formatter.util')
-      vim.keymap.set('n', '<leader><leader><leader>', ':FormatLock<cr>')
+      vim.keymap.set('n', '<leader>fff', ':FormatLock<cr>')
       require('formatter').setup({
         -- Enable or disable logging
         logging = true,
@@ -659,10 +681,31 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
-    opts = {
-      char = '┊',
-      show_trailing_blankline_indent = false,
-    },
+    config = function()
+      -- vim.opt.list = true
+      -- vim.opt.listchars:append "space:⋅"
+      -- vim.opt.listchars:append "eol:↴"
+      vim.cmd [[highlight IndentBlanklineIndent1 guifg=#E06C75 gui=nocombine]]
+      vim.cmd [[highlight IndentBlanklineIndent2 guifg=#E5C07B gui=nocombine]]
+      vim.cmd [[highlight IndentBlanklineIndent3 guifg=#98C379 gui=nocombine]]
+      vim.cmd [[highlight IndentBlanklineIndent4 guifg=#56B6C2 gui=nocombine]]
+      vim.cmd [[highlight IndentBlanklineIndent5 guifg=#61AFEF gui=nocombine]]
+      vim.cmd [[highlight IndentBlanklineIndent6 guifg=#C678DD gui=nocombine]]
+
+      require('indent_blankline').setup({
+        char = '┊',
+        show_trailing_blankline_indent = false,
+        space_char_blankline = ' ',
+        char_highlight_list = {
+          'IndentBlanklineIndent1',
+          'IndentBlanklineIndent2',
+          'IndentBlanklineIndent3',
+          'IndentBlanklineIndent4',
+          'IndentBlanklineIndent5',
+          'IndentBlanklineIndent6',
+        },
+      })
+    end,
   },
 
   -- "gc" to comment visual regions/lines
@@ -709,6 +752,27 @@ require('lazy').setup({
       'nvim-treesitter/nvim-treesitter-textobjects',
     },
     build = ':TSUpdate',
+  },
+
+  -- Tips for scrolling: 'zz' to move current line to middle of screen,
+  -- 'zt' to move current line to top of screen, 'zb' to move current line to
+  -- bottom of screen.
+  {
+    'nvim-treesitter/nvim-treesitter-context',
+    opts = {
+      enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
+      max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
+      min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
+      line_numbers = true,
+      multiline_threshold = 20, -- Maximum number of lines to show for a single context
+      trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
+      mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
+      -- Separator between context and content. Should be a single character string, like '-'.
+      -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
+      separator = nil,
+      zindex = 20, -- The Z-index of the context window
+      on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
+    },
   },
 
   -- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
@@ -979,6 +1043,7 @@ local servers = {
   tsserver = {},
   jsonls = {},
   vimls = {},
+  cssls = {},
 }
 
 -- Setup neovim lua configuration
