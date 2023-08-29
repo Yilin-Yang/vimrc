@@ -4,9 +4,11 @@
 -- CONFIG_DAP_UI
 -- CONFIG_FORMATTER
 -- CONFIG_GITSIGNS
+-- CONFIG_COLORSCHEME
 -- CONFIG_TELESCOPE
 -- CONFIG_TREESITTER
 -- CONFIG_LSPCONFIG
+-- CONFIG_CMP
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -556,6 +558,9 @@ require('lazy').setup({
           javascript = {
             require('formatter.defaults.prettier'),
           },
+          python = {
+            require('formatter.filetypes.python').yapf,
+          },
 
           -- Use the special "*" filetype for defining formatter configurations on
           -- any filetype
@@ -609,12 +614,15 @@ require('lazy').setup({
     },
   },
 
+  -- [[ CONFIG_COLORSCHEME ]]
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
     priority = 1000,
     config = function()
       vim.cmd.colorscheme('onedark')
+      -- Need 0 for terminal transparency
+      vim.cmd('hi Normal ctermbg=0 guibg=0')
     end,
   },
   {
@@ -893,14 +901,16 @@ require('nvim-treesitter.configs').setup({
   ensure_installed = {
     'c',
     'cpp',
+    'css',
     'go',
+    'html',
     'lua',
     'python',
     'rust',
     'tsx',
     'typescript',
-    'vimdoc',
     'vim',
+    'vimdoc',
   },
 
   -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
@@ -1010,7 +1020,7 @@ local on_attach = function(_, bufnr)
 
   -- Create a command `:Format` local to the LSP buffer
   vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.cmd('echomsg Formatted current buffer with LSP.')
+    vim.cmd('echomsg "Formatted current buffer with LSP."')
     vim.lsp.buf.format()
   end, { desc = 'Format current buffer with LSP' })
 end
@@ -1027,7 +1037,7 @@ local servers = {
   clangd = {},
   -- gopls = {},
   pyright = {},
-  pylsp = {},
+  -- pylsp = {},
   -- rust_analyzer = {},
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
@@ -1071,7 +1081,7 @@ mason_lspconfig.setup_handlers({
   end,
 })
 
--- [[ Configure nvim-cmp ]]
+-- [[ CONFIG_CMP ]]
 -- See `:help cmp`
 local cmp = require('cmp')
 local luasnip = require('luasnip')

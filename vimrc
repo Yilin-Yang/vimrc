@@ -67,8 +67,8 @@ nnoremap H 40h
 nnoremap L 40l
 
 " Alt + A/D to move through tabs
-nnoremap <silent> <M-a> :tabp<cr>
-nnoremap <silent> <M-d> :tabn<cr>
+nnoremap <silent> <M-a> :tabprevious<cr>
+nnoremap <silent> <M-d> :tabnext<cr>
 
 " Alt + E/Q to open/close tabs
 nnoremap <silent> <M-e> :tabnew<cr>
@@ -79,7 +79,29 @@ nnoremap <silent> <M-n> :tabnew<cr>
 nnoremap <silent> <M-c> :tabclose<cr>
 
 " Alt + H to clear highlights and error windows
-nnoremap <silent> <M-h> :cclose<cr>:lclose<cr>:noh<cr>:echo "Cleared highlights."<cr>
+nnoremap <silent> <M-h> :cclose<cr>:lclose<cr>:noh<cr>:echo "Cleared highlights and closed quickfix/location list."<cr>
+
+function! IsQuickfixOpen() abort
+    let l:is_open = 0
+    for l:winnr in range(1, winnr('$'))
+        if getwinvar(l:winnr, '&syntax') == 'qf'
+            let l:is_open = 1
+            break
+        endif
+    endfor
+    return l:is_open
+endfunction
+
+function! ToggleQuickfix() abort
+    if IsQuickfixOpen()
+        cclose
+    else
+        copen
+    endif
+endfunction
+
+nnoremap <silent> <leader>q :call ToggleQuickfix()<cr>
+
 
 " Exit the rabbit hole
 " " (If you dug too deep into a location list, etc.)
@@ -262,6 +284,7 @@ set tabstop=8           " By default, most editors come configured with a
 
 set foldlevel=20        " Fully expand all document folds on open.
 set nowrap
+set hlsearch            " Highlight matching strings when searching.
 
 set clipboard=unnamed   " Don't 'exchange' "+ contents with overwritten text.
 
