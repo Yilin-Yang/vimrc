@@ -577,6 +577,23 @@ require('lazy').setup({
     end,
   },
 
+  -- [CONFIG_LINTERS]
+  -- Because even with LSP, sometimes linters just give better results.
+  {
+    'mfussenegger/nvim-lint',
+    config = function()
+      -- require('lint').setup({})
+      require('lint').linters_by_ft = {
+        python = {'pylint', 'pycodestyle', 'pydocstyle'},
+      }
+      vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+          require('lint').try_lint()
+        end
+      })
+    end
+  },
+
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
   { -- [[ CONFIG_GITSIGNS ]]

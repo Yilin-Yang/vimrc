@@ -12,3 +12,6 @@ $INSTALLCMD ripgrep
 
 # So that nvim-dap-python will work correctly.
 $PIPINSTALL debugpy
+
+# Python linters
+$PIPINSTALL pylint pydocstyle pycodestyle
