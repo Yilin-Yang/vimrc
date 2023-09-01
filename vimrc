@@ -289,6 +289,7 @@ set hlsearch            " Highlight matching strings when searching.
 set clipboard=unnamed   " Don't 'exchange' "+ contents with overwritten text.
 
 call ColorColumnBlock(80, 255, 'ctermbg=236')
+hi Normal ctermbg=None guibg=None
 
 " Explicitly render `listchars`.
 set list

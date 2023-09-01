@@ -644,8 +644,8 @@ require('lazy').setup({
     priority = 1000,
     config = function()
       vim.cmd.colorscheme('onedark')
-      -- Need 0 for terminal transparency
-      vim.cmd('hi Normal ctermbg=0 guibg=0')
+      -- Set this in vimrc
+      -- vim.cmd('hi Normal ctermbg=None guibg=None')
     end,
   },
   {
