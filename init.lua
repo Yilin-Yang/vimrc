@@ -3,6 +3,7 @@
 -----------------------
 -- CONFIG_DAP_UI
 -- CONFIG_FORMATTER
+-- CONFIG_LINTERS
 -- CONFIG_GITSIGNS
 -- CONFIG_COLORSCHEME
 -- CONFIG_TELESCOPE
@@ -326,6 +327,9 @@ require('lazy').setup({
     end,
   },
 
+  -- Detect HTML and/or jinja2.
+  'Glench/Vim-Jinja2-Syntax',
+
   { -- highlight comments like TODO, NOTE, BUG
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -584,13 +588,15 @@ require('lazy').setup({
     config = function()
       -- require('lint').setup({})
       require('lint').linters_by_ft = {
-        python = {'pylint', 'pycodestyle', 'pydocstyle'},
+        python = {'pylint', 'mypy', 'pycodestyle', 'pydocstyle'},
       }
       vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
           require('lint').try_lint()
         end
       })
+
+      -- TODO: declare command to Lint without writing?
     end
   },
 
@@ -916,6 +922,7 @@ vim.keymap.set('n', '<cr>sd', require('telescope.builtin').diagnostics, { desc =
 require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
   ensure_installed = {
+    'bash',
     'c',
     'cpp',
     'css',
