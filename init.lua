@@ -434,6 +434,17 @@ require('lazy').setup({
   -- [[ CONFIG_DAP_UI ]]
   { -- Debug Adapter Protocol for in-editor debugging.
     -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
+    --
+    -- cmd('DapShowLog', 'split | e ' .. vim.fn.stdpath('cache') .. '/dap.log | normal! G', {})
+    -- cmd('DapContinue', function() require('dap').continue() end, { nargs = 0 })
+    -- cmd('DapToggleBreakpoint', function() require('dap').toggle_breakpoint() end, { nargs = 0 })
+    -- cmd('DapToggleRepl', function() require('dap.repl').toggle() end, { nargs = 0 })
+    -- cmd('DapStepOver', function() require('dap').step_over() end, { nargs = 0 })
+    -- cmd('DapStepInto', function() require('dap').step_into() end, { nargs = 0 })
+    -- cmd('DapStepOut', function() require('dap').step_out() end, { nargs = 0 })
+    -- cmd('DapTerminate', function() require('dap').terminate() end, { nargs = 0 })
+    -- cmd('DapLoadLaunchJSON', function() require('dap.ext.vscode').load_launchjs() end, { nargs = 0 })
+    -- cmd('DapRestartFrame', function() require('dap').restart_frame() end, { nargs = 0 })
     'rcarriga/nvim-dap-ui',
     config = function()
       require('dapui').setup()
@@ -444,8 +455,11 @@ require('lazy').setup({
       -- don't *comment out* unused variables
       vim.cmd('hi link DiagnosticUnnecessary @variable')
 
+      -- plagiarize all entries from launch.json
+      vim.keymap.set('n', '<cr>ddl', require('dap.ext.vscode').load_launchjs)
+
       vim.keymap.set('n', '<cr>ddd', function()
-        require('dapui').open()
+        require('dapui').open() -- open GUI
         vim.cmd('DapContinue') -- lazy-load nvim-dap
       end, { desc = 'Open nvim-dap UI' })
     end,
