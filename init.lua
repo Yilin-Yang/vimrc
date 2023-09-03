@@ -456,7 +456,12 @@ require('lazy').setup({
       vim.cmd('hi link DiagnosticUnnecessary @variable')
 
       -- plagiarize all entries from launch.json
-      vim.keymap.set('n', '<cr>ddl', require('dap.ext.vscode').load_launchjs)
+      vim.keymap.set(
+        'n',
+        '<cr>ddl',
+        require('dap.ext.vscode').load_launchjs,
+        { desc = 'Load launch.json configurations' }
+      )
 
       vim.keymap.set('n', '<cr>ddd', function()
         require('dapui').open() -- open GUI
@@ -574,6 +579,9 @@ require('lazy').setup({
             require('formatter.defaults.prettier'),
           },
           javascript = {
+            require('formatter.defaults.prettier'),
+          },
+          json = {
             require('formatter.defaults.prettier'),
           },
           python = {
