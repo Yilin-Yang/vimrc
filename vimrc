@@ -14,12 +14,6 @@ scriptencoding utf-8
 "   Keybinds                                                    [KEYBINDS]
 "=============================================================================
 
-" Ctrl + hjkl to cycle through windows!
-nnoremap <C-k> <C-w>k
-nnoremap <C-j> <C-w>j
-nnoremap <C-h> <C-w>h
-nnoremap <C-l> <C-w>l
-
 " Write the current buffer by double-tapping the leader key.
 nnoremap <leader><leader> :w<cr>
 
@@ -40,6 +34,9 @@ nnoremap <Leader>X ?\<<C-R>=expand('<cword>')<CR>\>\C<CR>``cgN
 nnoremap <leader>tcd :tcd %:p:h<CR>:pwd<CR>
 nnoremap <leader>lcd :lcd %:p:h<CR>:pwd<CR>
 nnoremap <leader>cd  :cd  %:p:h<CR>:pwd<CR>
+
+" Open selected buffer in a new tabpage.
+nnoremap <leader>nt :execute 'tabnew ' . expand('%')<CR>
 
 if has('nvim')
     " " nvim specific, not needed for vim.
