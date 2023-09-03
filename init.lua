@@ -708,7 +708,7 @@ require('lazy').setup({
         lualine_c = {
           {
             'filename',
-            path = 2,  -- absolute path
+            path = 2, -- absolute path
           },
         },
       },
@@ -716,8 +716,8 @@ require('lazy').setup({
         lualine_c = {
           {
             'filename',
-            path = 1  -- relative path
-          }
+            path = 1, -- relative path
+          },
         },
       },
       extensions = { 'fugitive', 'man', 'nerdtree', 'nvim-dap-ui' },
