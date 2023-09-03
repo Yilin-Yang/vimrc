@@ -60,6 +60,14 @@ else
     " Enable use of Alt key as modifier (sends Escape character).
     execute "set <M-d>=\ed"
     execute "set <M-a>=\ea"
+
+    " Don't set these if tmux.nvim is installed to avoid clobbering its keybinds
+    " Ctrl + hjkl to cycle through windows!
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-l> <C-w>l
+
 endif
 
 " Scroll laterally by large amounts.
