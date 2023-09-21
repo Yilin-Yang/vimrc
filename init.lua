@@ -1,6 +1,8 @@
 -----------------------
 -- TABLE OF CONTENTS --
 -----------------------
+-- CONFIG_UNIMPAIRED
+-- CONFIG_LANGUAGE_SMARTS
 -- CONFIG_DAP_UI
 -- CONFIG_FORMATTER
 -- CONFIG_LINTERS
@@ -10,6 +12,7 @@
 -- CONFIG_TREESITTER
 -- CONFIG_LSPCONFIG
 -- CONFIG_CMP
+--
 
 -- Set <space> as the leader key
 -- See `:help mapleader`
@@ -458,6 +461,7 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_LANGUAGE_SMARTS
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -650,6 +654,23 @@ require('lazy').setup({
             require('formatter.filetypes.python').yapf,
           },
 
+          sql = {
+            -- Supported dialects:
+            -- ansi, athena, bigquery, clickhouse, databricks, db2, duckdb,
+            -- exasol, greenplum, hive, materialize, mysql, oracle, postgres,
+            -- redshift, snowflake, soql, sparksql, sqlite, teradata, trino, tsql
+            function()
+              return {
+                exe = 'sqlfluff',
+                args = {
+                  'format',
+                  '--dialect=oracle',
+                  -- '--dialect=sqlite',
+                },
+              }
+            end,
+          },
+
           -- Use the special "*" filetype for defining formatter configurations on
           -- any filetype
           ['*'] = {
@@ -673,7 +694,20 @@ require('lazy').setup({
       -- require('lint').setup({})
       require('lint').linters_by_ft = {
         python = { 'pylint', 'mypy', 'pycodestyle', 'pydocstyle' },
+        sql = { 'sqlfluff' },
       }
+
+      local sqlfluff = require('lint').linters.sqlfluff
+      -- {
+      --   args = { "lint", "--format=json", "--dialect=postgres" },
+      --   cmd = "sqlfluff",
+      --   ignore_exitcode = true,
+      --   parser = <function 1>,
+      --   stdin = false
+      -- }
+      -- sqlfluff.args = { "lint", "--format=json", "--dialect=oracle" }
+      sqlfluff.args = { "lint", "--format=json", "--dialect=sqlite" }
+
       vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         callback = function()
           require('lint').try_lint()
@@ -1179,6 +1213,8 @@ local servers = {
   jsonls = {},
   vimls = {},
   cssls = {},
+  --
+  -- sqlls = {},
 }
 
 -- Setup neovim lua configuration
