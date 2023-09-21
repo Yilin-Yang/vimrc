@@ -14,12 +14,31 @@ scriptencoding utf-8
 "   Keybinds                                                    [KEYBINDS]
 "=============================================================================
 
+" Set my preferred leader and localleader when they're not being set by
+" `init.lua`.
+if !exists('g:mapleader')
+    let g:mapleader = ' '
+    let g:maplocalleader = '\'
+endif
+
+" Don't set these if tmux.nvim is installed to avoid clobbering its keybinds
+if maparg('<C-k>') ==# ''
+    " Ctrl + hjkl to cycle through windows!
+    nnoremap <C-k> <C-w>k
+    nnoremap <C-j> <C-w>j
+    nnoremap <C-h> <C-w>h
+    nnoremap <C-l> <C-w>l
+endif
+
 " Write the current buffer by double-tapping the leader key.
 nnoremap <leader><leader> :w<cr>
 
 " Exit interactive/visual mode by hitting j and k.
 inoremap jk <esc>
 vnoremap jk <esc>
+
+" Replace Windows-style \n\r with \n
+nnoremap <Leader>nl :%s/\r
 
 " Replace the word currently under the cursor. Mash `.` to continue
 " substituting instances of this word.
@@ -57,13 +76,6 @@ else
     " Enable use of Alt key as modifier (sends Escape character).
     execute "set <M-d>=\ed"
     execute "set <M-a>=\ea"
-
-    " Don't set these if tmux.nvim is installed to avoid clobbering its keybinds
-    " Ctrl + hjkl to cycle through windows!
-    nnoremap <C-k> <C-w>k
-    nnoremap <C-j> <C-w>j
-    nnoremap <C-h> <C-w>h
-    nnoremap <C-l> <C-w>l
 
 endif
 
@@ -124,7 +136,9 @@ command! -nargs=1 Help execute ':vert h <args>'
 
 " So that I can just type ':H <whatever>'. netrw defines this but I don't
 " use it.
-delcommand Hexplore
+if exists(':Hexplore')
+    delcommand Hexplore
+endif
 
 ""
 " Deletes all trailing whitespace in the active file, returning
@@ -293,7 +307,7 @@ set hlsearch            " Highlight matching strings when searching.
 
 set clipboard=unnamed   " Don't 'exchange' "+ contents with overwritten text.
 
-call ColorColumnBlock(80, 255, 'ctermbg=236')
+call ColorColumnBlock(81, 255, 'ctermbg=236')
 hi Normal ctermbg=None guibg=None
 
 " Explicitly render `listchars`.
