@@ -72,6 +72,13 @@ require('lazy').setup({
   -- :Delete, :Move, :Rename, Mkdir...
   'tpope/vim-eunuch',
 
+  { -- Open another existing buffer in the current window.
+    'jlanzarotta/bufexplorer',
+    config = function()
+      -- <Leader>be to open BufExplorer in the current window.
+    end,
+  },
+
   -- [[ CONFIG_UNIMPAIRED ]]
   -- ]q is cnext, [q is :cprevious, ]a is :next, [b is :bprevious...
   -- [<Space> (add line before current) and ]<Space> (add line after current)
@@ -171,7 +178,7 @@ require('lazy').setup({
   { -- Align things more easily! A bit more configurable than tabular.
     'junegunn/vim-easy-align',
     config = function()
-      vim.keymap.set({ 'n', 'v' }, '<cr><cr>', '<Plug>(EasyAlign)')
+      vim.keymap.set({ 'n', 'v' }, '<cr>e', '<Plug>(EasyAlign)')
     end,
   },
 
@@ -1403,6 +1410,17 @@ vim.keymap.set('n', '<cr>d_', function()
   require('dap').terminate()
   require('dapui').close()
 end)
+
+-- If the quickfix window is open, double-tap Enter to close the which-key
+-- window and jump to the listed line, but don't send a second Enter that would
+-- put us one line too low.
+vim.keymap.set('n', '<cr><cr>', function()
+  if vim.api.nvim_get_option_value('buftype', {}) == 'quickfix' then
+    return '<cr>'
+  else
+    return '<cr><cr>'
+  end
+end, {expr = true, replace_keycodes = true})
 
 -- NOTE: Reuse platform-agnostic settings between vim and neovim. May clobber
 -- settings from this file.

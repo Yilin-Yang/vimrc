@@ -149,9 +149,7 @@ function! DeleteTrailing()
 
     let l:cur_pos = getcurpos()
 
-    " This raw substitution command breaks syntax highlighting for the rest of
-    " the file, but it doesn't work when wrapped in ':execute' or ':normal'.
-    %s/\s\+$//e
+    execute '%s/\s\+$//e'
 
     call setpos('.', l:cur_pos)
 
