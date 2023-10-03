@@ -863,6 +863,7 @@ require('lazy').setup({
     'lukas-reineke/indent-blankline.nvim',
     -- Enable `lukas-reineke/indent-blankline.nvim`
     -- See `:help indent_blankline.txt`
+    version = "2.20.8",
     config = function()
       -- vim.opt.list = true
       -- vim.opt.listchars:append "space:⋅"
