@@ -722,7 +722,7 @@ require('lazy').setup({
       --   stdin = false
       -- }
       -- sqlfluff.args = { "lint", "--format=json", "--dialect=oracle" }
-      sqlfluff.args = { "lint", "--format=json", "--dialect=sqlite" }
+      sqlfluff.args = { 'lint', '--format=json', '--dialect=sqlite' }
 
       vim.api.nvim_create_autocmd({ 'BufWritePost' }, {
         callback = function()
@@ -1430,7 +1430,7 @@ vim.keymap.set('n', '<cr><cr>', function()
   else
     return '<cr><cr>'
   end
-end, {expr = true, replace_keycodes = true})
+end, { expr = true, replace_keycodes = true })
 
 -- NOTE: Reuse platform-agnostic settings between vim and neovim. May clobber
 -- settings from this file.
