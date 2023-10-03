@@ -75,6 +75,15 @@ require('lazy').setup({
   { -- Open another existing buffer in the current window.
     'jlanzarotta/bufexplorer',
     config = function()
+      vim.g.bufExplorerFindActive = 0
+
+      -- Clear default keymaps
+      vim.keymap.del('n', '<leader>be')
+      vim.keymap.del('n', '<leader>bt')
+      vim.keymap.del('n', '<leader>bs')
+      vim.keymap.del('n', '<leader>bv')
+
+      vim.keymap.set('n', '<leader>bb', ':BufExplorer<cr>')
       -- <Leader>be to open BufExplorer in the current window.
     end,
   },
