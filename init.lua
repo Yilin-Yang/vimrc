@@ -2,6 +2,7 @@
 -- TABLE OF CONTENTS --
 -----------------------
 -- CONFIG_UNIMPAIRED
+-- CONFIG_EASYALIGN
 -- CONFIG_LANGUAGE_SMARTS
 -- CONFIG_DAP_UI
 -- CONFIG_FORMATTER
@@ -134,9 +135,7 @@ require('lazy').setup({
   -- Repeat vim-surround commands using the period command.
   'tpope/vim-repeat',
 
-  --=============================================================================
-  --   vim-easy-align                                          [EASYALIGN]
-  --=============================================================================
+  -- [[ CONFIG_EASYALIGN ]]
   -------------------------------------------------------------------------------
   -- Alignment:    after entering EasyAlign, use Enter to cycle through left,
   --               right, and center alignment options.
@@ -477,7 +476,22 @@ require('lazy').setup({
     end,
   },
 
-  -- CONFIG_LANGUAGE_SMARTS
+  -- [[ CONFIG_VIM_SYNCOPATE ]]
+  {
+    'google/vim-syncopate',
+    dependencies = {
+      'google/vim-maktaba',
+    },
+    config = function()
+      -- vim.cmd('Glaive syncopate plugin[change_colorscheme]=false')
+      vim.cmd('let g:html_number_lines = 0')
+      vim.cmd('let g:syncopate = g:maktaba#plugin#Get("syncopate")')
+      vim.cmd('call g:syncopate.Flag("change_colorscheme", 0)')
+      vim.cmd('call g:syncopate.Flag("browser", "/mnt/c/Program Files/Google/Chrome/Application/chrome.exe")')
+    end,
+  },
+
+  -- [[ CONFIG_LANGUAGE_SMARTS ]]
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -663,6 +677,9 @@ require('lazy').setup({
           javascript = {
             require('formatter.defaults.prettier'),
           },
+          javascriptreact = {
+            require('formatter.defaults.prettier'),
+          },
           json = {
             require('formatter.defaults.prettier'),
           },
@@ -792,8 +809,8 @@ require('lazy').setup({
       clean_on_winleave = true,
       user_palette = {
         markdown = {
-          ['\\(\\S\\)\\@<=\\s\\(\\.\\|,\\)\\@='] = 'CadetBlue3',
-          ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'SkyBlue1',
+          -- ['\\(\\S\\)\\@<=\\s\\(\\.\\|,\\)\\@='] = 'CadetBlue3',
+          -- ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'SkyBlue1',
           ['\\t\\+'] = 'plum4',
         },
         other = {
@@ -1006,7 +1023,6 @@ vim.wo.signcolumn = 'yes'
 
 -- Decrease update time
 vim.o.updatetime = 250
-vim.o.timeoutlen = 300
 
 -- Set completeopt to have a better completion experience
 vim.o.completeopt = 'menuone,noselect'
@@ -1215,6 +1231,24 @@ local servers = {
   pyright = {},
   -- pylsp = {},
   -- rust_analyzer = {},
+
+  -- java_language_server = {},
+  -- jdtls = {},
+  jdtls = {
+    root_dir = {
+        -- Single-module projects
+        {
+          'build.xml', -- Ant
+          'pom.xml', -- Maven
+          'settings.gradle', -- Gradle
+          'settings.gradle.kts', -- Gradle
+          '.gitignore',
+        },
+        -- Multi-module projects
+        { 'build.gradle', 'build.gradle.kts' },
+      } or vim.fn.getcwd(),
+  },
+
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
   lua_ls = {
