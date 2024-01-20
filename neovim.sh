@@ -1,8 +1,5 @@
 #!/bin/bash
 
-set -Eeuo pipefail
-set -x
-
 source "`dirname $0`/global_constants.sh"
 
 $INSTALLCMD neovim

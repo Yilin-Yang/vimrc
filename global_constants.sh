@@ -1,4 +1,8 @@
 #!/bin/bash
+
+set -Eeuo pipefail
+set -x
+
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
 YILINYGIT="https://yiliny@bitbucket.org/yiliny"
 INSTALLCMD="sudo apt-get install -y"
