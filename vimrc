@@ -238,6 +238,7 @@ endfunction
 "   Settings                                                    [SETTINGS]
 "=============================================================================
 
+set mouse=              " Disable mouse. I activate the terminal by clicking.
 set relativenumber      " Relative numbering!
 set number              " Show absolute line numbers.
 set ruler               " Show line lengths in the statusline.
