@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.as     set filetype=as
+autocmd BufNewFile,BufRead \c*.as     set filetype=as | set syntax=as

@@ -237,8 +237,10 @@ endfunction
 "=============================================================================
 "   Settings                                                    [SETTINGS]
 "=============================================================================
+"
+filetype plugin indent on   " Detect filetypes.
 
-set mouse=              " Disable mouse. I activate the terminal by clicking.
+set mouse=              " Don't reposition cursor on clicking the window.
 set relativenumber      " Relative numbering!
 set number              " Show absolute line numbers.
 set ruler               " Show line lengths in the statusline.

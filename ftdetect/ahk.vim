@@ -1,1 +1,1 @@
-autocmd BufNewFile,BufRead *.ahk     set filetype=autohotkey
+autocmd BufNewFile,BufRead \c*.ahk set filetype=autohotkey | set syntax=autohotkey
