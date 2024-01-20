@@ -15,6 +15,22 @@
 -- CONFIG_CMP
 --
 
+-- Convenience function for pretty-printing lua tables
+function PrintTable(tbl, indent)
+  if not indent then
+    indent = 0
+  end
+  for key, value in pairs(tbl) do
+    local formatting = string.rep('  ', indent) .. key .. ': '
+    if type(value) == 'table' then
+      print(formatting)
+      PrintTable(value, indent + 1)
+    else
+      print(formatting .. tostring(value))
+    end
+  end
+end
+
 -- Set <space> as the leader key
 -- See `:help mapleader`
 --  NOTE: Must happen before plugins are required (otherwise wrong leader will be used)
@@ -56,6 +72,9 @@ require('lazy').setup({
 
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
+
+  -- Configure based on the local .editorconfig file
+  'editorconfig/editorconfig-vim',
 
   -- Readline-style bindings on the vim command line.
   'tpope/vim-rsi',
@@ -552,12 +571,9 @@ require('lazy').setup({
       vim.cmd('hi link DiagnosticUnnecessary @variable')
 
       -- plagiarize all entries from launch.json
-      vim.keymap.set(
-        'n',
-        '<cr>ddl',
-        require('dap.ext.vscode').load_launchjs,
-        { desc = 'Load launch.json configurations' }
-      )
+      vim.keymap.set('n', '<cr>ddl', function()
+        require('dap.ext.vscode').load_launchjs(nil, { cppdbg = {'c', 'cpp'} })
+      end, { desc = 'Load launch.json configurations' })
 
       vim.keymap.set('n', '<cr>ddd', function()
         require('dapui').open() -- open GUI
@@ -1236,17 +1252,17 @@ local servers = {
   -- jdtls = {},
   jdtls = {
     root_dir = {
-        -- Single-module projects
-        {
-          'build.xml', -- Ant
-          'pom.xml', -- Maven
-          'settings.gradle', -- Gradle
-          'settings.gradle.kts', -- Gradle
-          '.gitignore',
-        },
-        -- Multi-module projects
-        { 'build.gradle', 'build.gradle.kts' },
-      } or vim.fn.getcwd(),
+      -- Single-module projects
+      {
+        'build.xml', -- Ant
+        'pom.xml', -- Maven
+        'settings.gradle', -- Gradle
+        'settings.gradle.kts', -- Gradle
+        '.gitignore',
+      },
+      -- Multi-module projects
+      { 'build.gradle', 'build.gradle.kts' },
+    } or vim.fn.getcwd(),
   },
 
   html = { filetypes = { 'html', 'twig', 'hbs' } },
@@ -1369,6 +1385,11 @@ dap.adapters.lldb = {
   command = '/usr/bin/lldb-vscode-14',
   name = 'lldb',
 }
+dap.adapters.cpp = {
+  type = 'executable',
+  command = '/usr/bin/lldb-vscode-14',
+  name = 'lldb',
+}
 
 -- For this to work, lldb-vscode-XX must be in $PATH.
 dap.configurations.cpp = {
@@ -1398,6 +1419,7 @@ dap.configurations.cpp = {
     end,
   },
 }
+dap.configurations.cppdbg = dap.configurations.cpp
 
 vim.keymap.set('n', '<cr>d<cr>', ':DapContinue<CR>')
 vim.keymap.set('n', '<cr>dl', ':DapStepInto<CR>')
