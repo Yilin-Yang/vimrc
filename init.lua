@@ -823,7 +823,7 @@ require('lazy').setup({
     opts = {
       tws = '\\s\\+$',
       clean_on_winleave = true,
-      user_palette = {
+      palette = {
         markdown = {
           -- ['\\(\\S\\)\\@<=\\s\\(\\.\\|,\\)\\@='] = 'CadetBlue3',
           -- ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'SkyBlue1',
