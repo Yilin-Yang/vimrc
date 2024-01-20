@@ -1,8 +1,11 @@
 #!/bin/bash
 
+set -Eeuo pipefail
+set -x
+
 source "`dirname $0`/global_constants.sh"
 
-$INSTALLCMD neovim ripgrep
+$INSTALLCMD neovim
 
 # Symlink nvim and vim's user-accessible config folders to the top-level of
 # this repo
@@ -17,3 +20,5 @@ ln -s ~/.config/nvim ~/.vim
 
 # Can't use init.vim alongside init.lua because neovim will complain
 ln -s ~/.config/nvim/vimrc ~/.vimrc
+
+"$DIR/external_dependencies.sh"
