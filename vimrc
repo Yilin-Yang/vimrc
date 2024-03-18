@@ -299,7 +299,8 @@ endif
 " Buffer events
 augroup buffer_stuff
     au!
-    autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
+    " autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
+    autocmd FileType cpp setlocal comments=sr:/*,mb:*,ex:*/
 augroup end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""

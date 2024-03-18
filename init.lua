@@ -1,16 +1,49 @@
 -----------------------
 -- TABLE OF CONTENTS --
 -----------------------
+-- CONFIG_FUGITIVE
+-- CONFIG_RHUBARB
+-- CONFIG_SURROUND
+-- CONFIG_SlEUTH
+-- CONFIG_EDITORCONFIG
+-- CONFIG_RSI
+-- CONFIG_WINRESIZER
+-- CONFIG_EUNUCH
+-- CONFIG_BUFEXPLORER
 -- CONFIG_UNIMPAIRED
+-- CONFIG_DIFFCONFLICTS
+-- CONFIG_EASYMOTION
+-- CONFIG_REPEAT
 -- CONFIG_EASYALIGN
+-- CONFIG_QUICKSCOPE
+-- CONFIG_VADER
+-- CONFIG_SIGNATURE
+-- CONFIG_VIMWIKI
+-- CONFIG_VIMTEX
+-- CONFIG_JINJA
+-- CONFIG_TODO
+-- CONFIG_NERDTREE
+-- CONFIG_TMUX
+-- CONFIG_SYNCOPATE
 -- CONFIG_LANGUAGE_SMARTS
 -- CONFIG_DAP_UI
 -- CONFIG_FORMATTER
 -- CONFIG_LINTERS
+-- CONFIG_WHICHKEY
 -- CONFIG_GITSIGNS
 -- CONFIG_COLORSCHEME
--- CONFIG_TELESCOPE
+-- CONFIG_HIGHLIGHTWHITESPACE
+-- CONFIG_LUALINE
+-- CONFIG_MARKBAR
+-- CONFIG_INDENTBLANKLINE
+-- CONFIG_VISUALCOMMENT
+-- CONFIG_REPLACEWITHREGISTER
+-- CONFIG_LUASNIPS
+-- CONFIG_FUZZYFINDER
 -- CONFIG_TREESITTER
+-- CONFIG_KEYMAPS
+-- CONFIG_TELESCOPE
+-- CONFIG_TREESITTER_MORE
 -- CONFIG_LSPCONFIG
 -- CONFIG_CMP
 --
@@ -63,22 +96,31 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
   -- NOTE: First, some plugins that don't require any configuration
 
+  -- CONFIG_FUGITIVE
   -- Git related plugins
   'tpope/vim-fugitive',
+
+  -- CONFIG_RHUBARB
+  -- GitHub integration for vim-fugitive
   'tpope/vim-rhubarb',
 
+  -- CONFIG_SURROUND
   -- Actions for working in and around braces.
   'tpope/vim-surround',
 
+  -- CONFIG_SlEUTH
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
+  -- CONFIG_EDITORCONFIG
   -- Configure based on the local .editorconfig file
   'editorconfig/editorconfig-vim',
 
+  -- CONFIG_RSI
   -- Readline-style bindings on the vim command line.
   'tpope/vim-rsi',
 
+  -- CONFIG_WINRESIZER
   { -- Easier binds for resizing splits.
     'simeji/winresizer',
     config = function()
@@ -89,9 +131,11 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_EUNUCH
   -- :Delete, :Move, :Rename, Mkdir...
   'tpope/vim-eunuch',
 
+  -- CONFIG_BUFEXPLORER
   { -- Open another existing buffer in the current window.
     'jlanzarotta/bufexplorer',
     config = function()
@@ -108,7 +152,7 @@ require('lazy').setup({
     end,
   },
 
-  -- [[ CONFIG_UNIMPAIRED ]]
+  -- CONFIG_UNIMPAIRED
   -- ]q is cnext, [q is :cprevious, ]a is :next, [b is :bprevious...
   -- [<Space> (add line before current) and ]<Space> (add line after current)
   --
@@ -135,11 +179,13 @@ require('lazy').setup({
 
   'tpope/vim-unimpaired',
 
+  -- CONFIG_DIFFCONFLICTS
   { -- Easy, intuitive two-way git diffs!
     -- Note: DiffConflictsShowHistory, if we need the three-way diff.
     'whiteinge/diffconflicts',
   },
 
+  -- CONFIG_EASYMOTION
   { -- Target and jump to a specific character,
     'easymotion/vim-easymotion',
     config = function()
@@ -151,10 +197,11 @@ require('lazy').setup({
   -- Local .vimrc settings.
   -- 'embear/vim-localvimrc',
 
+  -- CONFIG_REPEAT
   -- Repeat vim-surround commands using the period command.
   'tpope/vim-repeat',
 
-  -- [[ CONFIG_EASYALIGN ]]
+  -- CONFIG_EASYALIGN
   -------------------------------------------------------------------------------
   -- Alignment:    after entering EasyAlign, use Enter to cycle through left,
   --               right, and center alignment options.
@@ -165,18 +212,18 @@ require('lazy').setup({
   ----------------------+------------------------------------+--------------------
   -- With visual map     | Description                        | Equivalent command
   ----------------------+------------------------------------+--------------------
-  -- <Enterx2><Space>    | Around 1st whitespaces             | :'<,'>EasyAlign\
-  -- <Enterx2>2<Space>   | Around 2nd whitespaces             | :'<,'>EasyAlign2\
-  -- <Enterx2>-<Space>   | Around the last whitespaces        | :'<,'>EasyAlign-\
-  -- <Enterx2>-2<Space>  | Around the 2nd to last whitespaces | :'<,'>EasyAlign-2\
-  -- <Enterx2>:          | Around 1st colon ( `key:  value` ) | :'<,'>EasyAlign:
-  -- <Enterx2><Right>:   | Around 1st colon ( `key : value` ) | :'<,'>EasyAlign:<l1
-  -- <Enterx2>=          | Around 1st operators with =        | :'<,'>EasyAlign=
-  -- <Enterx2>3=         | Around 3rd operators with =        | :'<,'>EasyAlign3=
-  -- <Enterx2>*=         | Around all operators with =        | :'<,'>EasyAlign*=
-  -- <Enterx2>**=        | Left-right alternating around =    | :'<,'>EasyAlign**=
-  -- <Enterx2><Enter>=   | Right alignment around 1st =       | :'<,'>EasyAlign!=
-  -- <Enterx2><Enter>**= | Right-left alternating around =    | :'<,'>EasyAlign!**=
+  -- <Enter>e<Space>    | Around 1st whitespaces             | :'<,'>EasyAlign\
+  -- <Enter>e2<Space>   | Around 2nd whitespaces             | :'<,'>EasyAlign2\
+  -- <Enter>e-<Space>   | Around the last whitespaces        | :'<,'>EasyAlign-\
+  -- <Enter>e-2<Space>  | Around the 2nd to last whitespaces | :'<,'>EasyAlign-2\
+  -- <Enter>e:          | Around 1st colon ( `key:  value` ) | :'<,'>EasyAlign:
+  -- <Enter>e<Right>:   | Around 1st colon ( `key : value` ) | :'<,'>EasyAlign:<l1
+  -- <Enter>e=          | Around 1st operators with =        | :'<,'>EasyAlign=
+  -- <Enter>e3=         | Around 3rd operators with =        | :'<,'>EasyAlign3=
+  -- <Enter>e*=         | Around all operators with =        | :'<,'>EasyAlign*=
+  -- <Enter>e**=        | Left-right alternating around =    | :'<,'>EasyAlign**=
+  -- <Enter>e<Enter>=   | Right alignment around 1st =       | :'<,'>EasyAlign!=
+  -- <Enter>e<Enter>**= | Right-left alternating around =    | :'<,'>EasyAlign!**=
   ----------------------+------------------------------------+--------------------
   -- NOTE: Preceding the delimiter with a number X means "align around every Xth
   --       delimiter". Preceding the delimiter with a single `*` means "align
@@ -209,6 +256,7 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_QUICKSCOPE
   { -- Highlight targets for character motions.
     'unblevable/quick-scope',
     init = function()
@@ -220,16 +268,15 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_VADER
   -- Test case framework for vim plugins.
   'junegunn/vader.vim',
 
+  -- CONFIG_SIGNATURE
   -- Display marks in the sign column.
   'kshenoy/vim-signature',
 
-  --============================================================================
-  --  vimwiki                                                 [VIMWIKI]
-  --============================================================================
-  --
+  -- CONFIG_VIMWIKI
   -------------------------------------------------------------------------------
   --Configured partly using the following link as reference:
   --  https://www.dailydrip.com/blog/vimwiki
@@ -345,6 +392,7 @@ require('lazy').setup({
   --   end,
   -- },
 
+  -- CONFIG_VIMTEX
   { -- vimtex, for compiling my resume
     'lervag/vimtex',
     init = function()
@@ -364,9 +412,11 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_JINJA
   -- Detect HTML and/or jinja2.
   'Glench/Vim-Jinja2-Syntax',
 
+  -- CONFIG_TODO
   { -- highlight comments like TODO, NOTE, BUG
     'folke/todo-comments.nvim',
     dependencies = { 'nvim-lua/plenary.nvim' },
@@ -400,6 +450,7 @@ require('lazy').setup({
   --     end
   -- },
 
+  -- CONFIG_NERDTREE
   { -- File browser, **Ol' Reliable**
     'preservim/nerdtree',
     config = function()
@@ -433,6 +484,7 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_TMUX
   {
     'aserowy/tmux.nvim',
     config = function()
@@ -495,7 +547,7 @@ require('lazy').setup({
     end,
   },
 
-  -- [[ CONFIG_VIM_SYNCOPATE ]]
+  -- CONFIG_SYNCOPATE
   {
     'google/vim-syncopate',
     dependencies = {
@@ -510,7 +562,7 @@ require('lazy').setup({
     end,
   },
 
-  -- [[ CONFIG_LANGUAGE_SMARTS ]]
+  -- CONFIG_LANGUAGE_SMARTS
   -- NOTE: This is where your plugins related to LSP can be installed.
   --  The configuration is done below. Search for lspconfig to find it below.
   {
@@ -546,7 +598,7 @@ require('lazy').setup({
     },
   },
 
-  -- [[ CONFIG_DAP_UI ]]
+  -- CONFIG_DAP_UI
   { -- Debug Adapter Protocol for in-editor debugging.
     -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
     --
@@ -572,7 +624,7 @@ require('lazy').setup({
 
       -- plagiarize all entries from launch.json
       vim.keymap.set('n', '<cr>ddl', function()
-        require('dap.ext.vscode').load_launchjs(nil, { cppdbg = {'c', 'cpp'} })
+        require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' } })
       end, { desc = 'Load launch.json configurations' })
 
       vim.keymap.set('n', '<cr>ddd', function()
@@ -619,7 +671,7 @@ require('lazy').setup({
     },
   },
 
-  -- [[ CONFIG_FORMATTER ]]
+  -- CONFIG_FORMATTER
   { -- "Format runner" for neovim.
     'mhartington/formatter.nvim',
     config = function()
@@ -735,7 +787,7 @@ require('lazy').setup({
     end,
   },
 
-  -- [CONFIG_LINTERS]
+  -- CONFIG_LINTERS
   -- Because even with LSP, sometimes linters just give better results.
   {
     'mfussenegger/nvim-lint',
@@ -767,9 +819,12 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_WHICHKEY
   -- Useful plugin to show you pending keybinds.
   { 'folke/which-key.nvim', opts = {} },
-  { -- [[ CONFIG_GITSIGNS ]]
+
+  -- CONFIG_GITSIGNS
+  {
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     'lewis6991/gitsigns.nvim',
     opts = {
@@ -804,7 +859,7 @@ require('lazy').setup({
     },
   },
 
-  -- [[ CONFIG_COLORSCHEME ]]
+  -- CONFIG_COLORSCHEME
   {
     -- Theme inspired by Atom
     'navarasu/onedark.nvim',
@@ -815,6 +870,8 @@ require('lazy').setup({
       -- vim.cmd('hi Normal ctermbg=None guibg=None')
     end,
   },
+
+  -- CONFIG_HIGHLIGHTWHITESPACE
   {
     -- Legacy vim configuration had working highlighting for trailing
     -- whitespace, but this is broken by navarasu/onedark.nvim. This plugin's
@@ -838,6 +895,7 @@ require('lazy').setup({
       },
     },
   },
+  -- CONFIG_LUALINE
   {
     -- Set lualine as statusline
     'nvim-lualine/lualine.nvim',
@@ -869,6 +927,7 @@ require('lazy').setup({
     },
   },
 
+  -- CONFIG_MARKBAR
   { -- Good old vim-markbar, for naming marks. Put this later to override
     -- which-key.
     'Yilin-Yang/vim-markbar',
@@ -891,6 +950,7 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_INDENTBLANKLINE
   {
     -- Add indentation guides even on blank lines
     'lukas-reineke/indent-blankline.nvim',
@@ -924,9 +984,11 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_VISUALCOMMENT
   -- "gc" to comment visual regions/lines
   { 'numToStr/Comment.nvim', opts = {} },
 
+  -- CONFIG_REPLACEWITHREGISTER
   -- [count]["x]gr{motion}  to replace {motion} text with register x.
   -- [count]["x]grr         Replace [count] lines with the contents of
   --                        register x.
@@ -939,6 +1001,36 @@ require('lazy').setup({
     end,
   },
 
+  -- CONFIG_LUASNIPS
+  {
+    'L3MON4D3/LuaSnip',
+    -- follow latest release.
+    version = 'v2.*', -- Replace <CurrentMajor> by the latest released major (first number of latest release)
+    -- install jsregexp (optional!).
+    build = 'make install_jsregexp',
+    config = function()
+      local ls = require('luasnip')
+      vim.keymap.set({ 'i' }, '<C-e>', function()
+        ls.expand()
+      end, { silent = true })
+      vim.keymap.set({ 'i', 's' }, '<C-e>', function()
+        ls.jump(1)
+      end, { silent = true })
+      vim.keymap.set({ 'i', 's' }, '<C-b>', function()
+        ls.jump(-1)
+      end, { silent = true })
+
+      vim.keymap.set({ 'i', 's' }, '<C-c>', function()
+        if ls.choice_active() then
+          ls.change_choice(1)
+        end
+      end, { silent = true })
+
+      require('luasnip.loaders.from_vscode').lazy_load({ paths = { vim.fn.stdpath('config') .. '/snippets' } })
+    end,
+  },
+
+  -- CONFIG_FUZZYFINDER
   -- Fuzzy Finder (files, lsp, etc)
   { -- NOTE: that live grep won't work without BurntSushi/ripgrep installed:
     --  sudo apt install ripgrep
@@ -961,6 +1053,7 @@ require('lazy').setup({
     },
   },
 
+  -- CONFIG_TREESITTER
   {
     -- Highlight, edit, and navigate code
     'nvim-treesitter/nvim-treesitter',
@@ -1046,7 +1139,7 @@ vim.o.completeopt = 'menuone,noselect'
 -- NOTE: You should make sure your terminal supports this
 vim.o.termguicolors = true
 
--- [[ Basic Keymaps ]]
+-- CONFIG_KEYMAPS
 
 -- Keymaps for better default experience
 -- See `:help vim.keymap.set()`
@@ -1067,7 +1160,7 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   pattern = '*',
 })
 
--- [[ CONFIG_TELESCOPE ]]
+-- CONFIG_TELESCOPE
 -- See `:help telescope` and `:help telescope.setup()`
 require('telescope').setup({
   defaults = {
@@ -1101,7 +1194,7 @@ vim.keymap.set('n', '<cr>sw', require('telescope.builtin').grep_string, { desc =
 vim.keymap.set('n', '<cr>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<cr>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
--- [[ CONFIG_TREESITTER ]]
+-- CONFIG_TREESITTER_MORE
 -- See `:help nvim-treesitter`
 require('nvim-treesitter.configs').setup({
   -- Add languages to be installed here that you want installed for treesitter
@@ -1187,7 +1280,7 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- [[ CONFIG_LSPCONFIG ]]
+-- CONFIG_LSPCONFIG
 --  This function gets run when an LSP connects to a particular buffer.
 local on_attach = function(_, bufnr)
   -- NOTE: Remember that lua is a real programming language, and as such it is possible
@@ -1309,7 +1402,7 @@ mason_lspconfig.setup_handlers({
   end,
 })
 
--- [[ CONFIG_CMP ]]
+-- CONFIG_CMP
 -- See `:help cmp`
 local cmp = require('cmp')
 local luasnip = require('luasnip')
