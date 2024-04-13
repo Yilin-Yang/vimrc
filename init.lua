@@ -636,6 +636,7 @@ require('lazy').setup({
       'mfussenegger/nvim-dap',
       'theHamsta/nvim-dap-virtual-text',
       'mfussenegger/nvim-dap-python',
+      'nvim-neotest/nvim-nio',
     },
   },
   { -- Python DAP plugin
@@ -839,15 +840,27 @@ require('lazy').setup({
       on_attach = function(bufnr)
         vim.keymap.set(
           'n',
-          '<leader>gp',
+          '[g',
           require('gitsigns').prev_hunk,
-          { buffer = bufnr, desc = '[G]o to [P]revious Hunk' }
+          { buffer = bufnr, desc = 'Go to Previous Git Hunk' }
         )
         vim.keymap.set(
           'n',
-          '<leader>gn',
+          ']g',
           require('gitsigns').next_hunk,
-          { buffer = bufnr, desc = '[G]o to [N]ext Hunk' }
+          { buffer = bufnr, desc = 'Go to Next Git Hunk' }
+        )
+        vim.keymap.set(
+          'n',
+          'gs',
+          require('gitsigns').stage_hunk,
+          { buffer = bufnr, desc = 'Stage Hunk at Cursor' }
+        )
+        vim.keymap.set(
+          'n',
+          'gu',
+          require('gitsigns').undo_stage_hunk,
+          { buffer = bufnr, desc = 'Undo Stage Hunk at Cursor' }
         )
         vim.keymap.set(
           'n',
@@ -1334,11 +1347,14 @@ end
 --
 --  If you want to override the default filetypes that your language server will attach to you can
 --  define the property 'filetypes' to the map in question.
+-- Add this to CMAKE_CXX_FLAGS: '--gcc-toolchain=/opt/gcc-root'
 local servers = {
-  clangd = {},
+  clangd = {
+    cmd = {'clangd', '--extra-arg=--gcc-toolchain=/opt/gcc-root'},
+  },
   -- gopls = {},
   pyright = {},
-  -- pylsp = {},
+  pylsp = {},
   -- rust_analyzer = {},
 
   -- java_language_server = {},

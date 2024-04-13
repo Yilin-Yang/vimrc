@@ -4,6 +4,11 @@
     "body": ["namespace ${1:namespace} {\n\nclass ${2:classname} {\n public:\n  $0\n};\n\n}  // namespace ${1:namespace}"],
     "description": "Class in a namespace."
   },
+  "namespace": {
+    "prefix": ["namespace"],
+    "body": ["namespace ${1:namespace} {\n\n$0\n\n}  // namespace ${1:namespace}"],
+    "description": "Class in a namespace."
+  },
   "Include Guard": {
     "prefix": ["pragma"],
     "body": ["#pragma once"],
