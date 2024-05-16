@@ -234,6 +234,10 @@ function! HighlightTrailing(high_grp) abort
     match TrailingWhitespace /\s\+$/
 endfunction
 
+function! TestCaseAutoFormat() abort
+    .,$s/void \(\w\+\)();/void \1() {\r  cout << "Testing if \1..." << endl;\r\r  cout << "Test passed!" << endl;\r}
+endfunction
+
 "=============================================================================
 "   Settings                                                    [SETTINGS]
 "=============================================================================

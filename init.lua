@@ -26,6 +26,7 @@
 -- CONFIG_TMUX
 -- CONFIG_SYNCOPATE
 -- CONFIG_LANGUAGE_SMARTS
+-- CONFIG_NIO
 -- CONFIG_DAP_UI
 -- CONFIG_FORMATTER
 -- CONFIG_LINTERS
@@ -598,6 +599,12 @@ require('lazy').setup({
     },
   },
 
+  -- CONFIG_NIO
+  -- Dependency for nvim-dap-ui.
+  {
+    'nvim-neotest/nvim-nio'
+  },
+
   -- CONFIG_DAP_UI
   { -- Debug Adapter Protocol for in-editor debugging.
     -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
@@ -714,7 +721,9 @@ require('lazy').setup({
             --   }
             -- end
           },
-
+          c = {
+            require('formatter.defaults.clangformat'),
+          },
           cpp = {
             -- https://github.com/mhartington/formatter.nvim/blob/master/lua/formatter/filetypes/cpp.lua
             require('formatter.defaults.clangformat'),
@@ -954,7 +963,9 @@ require('lazy').setup({
       vim.keymap.set('n', '<leader>www', '<Plug>WriteMarkbarRosters')
       vim.g.markbar_marks_to_display = '\'".^abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
       -- vim.g.markbar_peekaboo_marks_to_display = "'\".abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-      vim.g.markbar_section_separation = 0
+      vim.g.markbar_section_separation = 1
+      vim.g.markbar_context_indent_block = ' '
+      vim.g.markbar_width = 60
       -- vim.g.markbar_explicitly_remap_mark_mappings = true
 
       vim.g.markbar_force_clear_shared_data_on_delmark = true
