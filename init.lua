@@ -4,7 +4,7 @@
 -- CONFIG_FUGITIVE
 -- CONFIG_RHUBARB
 -- CONFIG_SURROUND
--- CONFIG_SlEUTH
+-- CONFIG_SLEUTH
 -- CONFIG_EDITORCONFIG
 -- CONFIG_RSI
 -- CONFIG_WINRESIZER
@@ -110,7 +110,7 @@ require('lazy').setup({
   -- Actions for working in and around braces.
   'tpope/vim-surround',
 
-  -- CONFIG_SlEUTH
+  -- CONFIG_SLEUTH
   -- Detect tabstop and shiftwidth automatically
   'tpope/vim-sleuth',
 
