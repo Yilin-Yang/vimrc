@@ -244,7 +244,10 @@ endfunction
 "
 filetype plugin indent on   " Detect filetypes.
 
-set mouse=              " Don't reposition cursor on clicking the window.
+set mouse=nvi
+if has('nvim')
+    set mousescroll=ver:1,hor:6
+endif
 set relativenumber      " Relative numbering!
 set number              " Show absolute line numbers.
 set ruler               " Show line lengths in the statusline.
