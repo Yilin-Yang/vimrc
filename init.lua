@@ -47,7 +47,8 @@
 -- CONFIG_TREESITTER_MORE
 -- CONFIG_LSPCONFIG
 -- CONFIG_CMP
---
+
+local home = os.getenv('HOME')
 
 -- Convenience function for pretty-printing lua tables
 function PrintTable(tbl, indent)
@@ -381,7 +382,7 @@ require('lazy').setup({
   --   'vimwiki/vimwiki',
   --   config = function()
   --     vim.g.vimwiki_list = {
-  --       path = '/home/yiliny/notes/',
+  --       path = home .. '/notes/',
   --       syntax = 'markdown',
   --       ext = '.md',
   --       index = 'README',
@@ -953,7 +954,7 @@ require('lazy').setup({
   { -- Good old vim-markbar, for naming marks. Put this later to override
     -- which-key.
     'Yilin-Yang/vim-markbar',
-    dir = '/home/yiliny/plugins/vim-markbar',
+    dir = home .. '/plugins/vim-markbar',
     init = function()
       vim.g.markbar_enable_peekaboo = false
     end,
