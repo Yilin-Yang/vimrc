@@ -1361,12 +1361,12 @@ end
 --  define the property 'filetypes' to the map in question.
 -- Add this to CMAKE_CXX_FLAGS: '--gcc-toolchain=/opt/gcc-root'
 local servers = {
-  clangd = {
-    cmd = {'clangd', '--extra-arg=--gcc-toolchain=/opt/gcc-root'},
-  },
+  -- clangd = {
+  --   cmd = {'clangd', '--extra-arg=--gcc-toolchain=/opt/gcc-root'},
+  -- },
   -- gopls = {},
   pyright = {},
-  pylsp = {},
+  -- pylsp = {},
   -- rust_analyzer = {},
 
   -- java_language_server = {},
@@ -1388,20 +1388,19 @@ local servers = {
 
   html = { filetypes = { 'html', 'twig', 'hbs' } },
 
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
+  -- lua_ls = {
+  --   Lua = {
+  --     workspace = { checkThirdParty = false },
+  --     telemetry = { enable = false },
+  --   },
+  -- },
 
   dockerls = {},
   eslint = {},
-  tsserver = {},
+  -- tsserver = {},
   jsonls = {},
   vimls = {},
   cssls = {},
-  --
   -- sqlls = {},
 }
 
