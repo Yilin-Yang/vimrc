@@ -606,79 +606,79 @@ require('lazy').setup({
     'nvim-neotest/nvim-nio'
   },
 
-  -- CONFIG_DAP_UI
-  { -- Debug Adapter Protocol for in-editor debugging.
-    -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
-    --
-    -- cmd('DapShowLog', 'split | e ' .. vim.fn.stdpath('cache') .. '/dap.log | normal! G', {})
-    -- cmd('DapContinue', function() require('dap').continue() end, { nargs = 0 })
-    -- cmd('DapToggleBreakpoint', function() require('dap').toggle_breakpoint() end, { nargs = 0 })
-    -- cmd('DapToggleRepl', function() require('dap.repl').toggle() end, { nargs = 0 })
-    -- cmd('DapStepOver', function() require('dap').step_over() end, { nargs = 0 })
-    -- cmd('DapStepInto', function() require('dap').step_into() end, { nargs = 0 })
-    -- cmd('DapStepOut', function() require('dap').step_out() end, { nargs = 0 })
-    -- cmd('DapTerminate', function() require('dap').terminate() end, { nargs = 0 })
-    -- cmd('DapLoadLaunchJSON', function() require('dap.ext.vscode').load_launchjs() end, { nargs = 0 })
-    -- cmd('DapRestartFrame', function() require('dap').restart_frame() end, { nargs = 0 })
-    'rcarriga/nvim-dap-ui',
-    config = function()
-      require('dapui').setup()
-
-      vim.cmd('hi clear debugPC')
-      vim.cmd('hi link debugPC Underlined')
-
-      -- don't *comment out* unused variables
-      vim.cmd('hi link DiagnosticUnnecessary @variable')
-
-      -- plagiarize all entries from launch.json
-      vim.keymap.set('n', '<cr>ddl', function()
-        require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' } })
-      end, { desc = 'Load launch.json configurations' })
-
-      vim.keymap.set('n', '<cr>ddd', function()
-        require('dapui').open() -- open GUI
-        vim.cmd('DapContinue') -- lazy-load nvim-dap
-      end, { desc = 'Open nvim-dap UI' })
-    end,
-    dependencies = {
-      'mfussenegger/nvim-dap',
-      'theHamsta/nvim-dap-virtual-text',
-      'mfussenegger/nvim-dap-python',
-      'nvim-neotest/nvim-nio',
-    },
-  },
-  { -- Python DAP plugin
-    'mfussenegger/nvim-dap-python',
-    config = function()
-      -- TODO: can we do /usr/bin/env python3?
-      require('dap-python').setup('/usr/bin/python3')
-    end,
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-    },
-  },
-  { -- Show variable values inline with source code
-    'theHamsta/nvim-dap-virtual-text',
-    opts = {
-      enabled = false,
-      enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
-      highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
-      highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
-      -- show_stop_reason = true,               -- show stop reason when stopped for exceptions
-      commented = false, -- prefix virtual text with comment string
-      -- only_first_definition = true,          -- only show virtual text at first definition (if there are multiple)
-      all_references = true, -- show virtual text on all all references of the variable (not only definitions)
-    },
-    config = function(_, opts)
-      require('nvim-dap-virtual-text').setup(opts)
-      vim.api.nvim_set_hl(0, 'NvimDapVirtualText', { link = 'DiagnosticInfo' })
-      vim.api.nvim_set_hl(0, 'NvimDapVirtualTextChanged', { link = 'DiagnosticWarn' })
-    end,
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter',
-      {},
-    },
-  },
+--  -- CONFIG_DAP_UI
+--  { -- Debug Adapter Protocol for in-editor debugging.
+--    -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
+--    --
+--    -- cmd('DapShowLog', 'split | e ' .. vim.fn.stdpath('cache') .. '/dap.log | normal! G', {})
+--    -- cmd('DapContinue', function() require('dap').continue() end, { nargs = 0 })
+--    -- cmd('DapToggleBreakpoint', function() require('dap').toggle_breakpoint() end, { nargs = 0 })
+--    -- cmd('DapToggleRepl', function() require('dap.repl').toggle() end, { nargs = 0 })
+--    -- cmd('DapStepOver', function() require('dap').step_over() end, { nargs = 0 })
+--    -- cmd('DapStepInto', function() require('dap').step_into() end, { nargs = 0 })
+--    -- cmd('DapStepOut', function() require('dap').step_out() end, { nargs = 0 })
+--    -- cmd('DapTerminate', function() require('dap').terminate() end, { nargs = 0 })
+--    -- cmd('DapLoadLaunchJSON', function() require('dap.ext.vscode').load_launchjs() end, { nargs = 0 })
+--    -- cmd('DapRestartFrame', function() require('dap').restart_frame() end, { nargs = 0 })
+--    'rcarriga/nvim-dap-ui',
+--    config = function()
+--      require('dapui').setup()
+--
+--      vim.cmd('hi clear debugPC')
+--      vim.cmd('hi link debugPC Underlined')
+--
+--      -- don't *comment out* unused variables
+--      vim.cmd('hi link DiagnosticUnnecessary @variable')
+--
+--      -- plagiarize all entries from launch.json
+--      vim.keymap.set('n', '<cr>ddl', function()
+--        require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' } })
+--      end, { desc = 'Load launch.json configurations' })
+--
+--      vim.keymap.set('n', '<cr>ddd', function()
+--        require('dapui').open() -- open GUI
+--        vim.cmd('DapContinue') -- lazy-load nvim-dap
+--      end, { desc = 'Open nvim-dap UI' })
+--    end,
+--    dependencies = {
+--      'mfussenegger/nvim-dap',
+--      'theHamsta/nvim-dap-virtual-text',
+--      'mfussenegger/nvim-dap-python',
+--      'nvim-neotest/nvim-nio',
+--    },
+--  },
+--  { -- Python DAP plugin
+--    'mfussenegger/nvim-dap-python',
+--    config = function()
+--      -- TODO: can we do /usr/bin/env python3?
+--      require('dap-python').setup('/usr/bin/python3')
+--    end,
+--    dependencies = {
+--      'nvim-treesitter/nvim-treesitter',
+--    },
+--  },
+--  { -- Show variable values inline with source code
+--    'theHamsta/nvim-dap-virtual-text',
+--    opts = {
+--      enabled = false,
+--      enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
+--      highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
+--      highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
+--      -- show_stop_reason = true,               -- show stop reason when stopped for exceptions
+--      commented = false, -- prefix virtual text with comment string
+--      -- only_first_definition = true,          -- only show virtual text at first definition (if there are multiple)
+--      all_references = true, -- show virtual text on all all references of the variable (not only definitions)
+--    },
+--    config = function(_, opts)
+--      require('nvim-dap-virtual-text').setup(opts)
+--      vim.api.nvim_set_hl(0, 'NvimDapVirtualText', { link = 'DiagnosticInfo' })
+--      vim.api.nvim_set_hl(0, 'NvimDapVirtualTextChanged', { link = 'DiagnosticWarn' })
+--    end,
+--    dependencies = {
+--      'nvim-treesitter/nvim-treesitter',
+--      {},
+--    },
+--  },
 
   -- CONFIG_FORMATTER
   { -- "Format runner" for neovim.
@@ -1412,23 +1412,23 @@ require('neodev').setup()
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
 
--- Ensure the servers above are installed
-local mason_lspconfig = require('mason-lspconfig')
-
-mason_lspconfig.setup({
-  ensure_installed = vim.tbl_keys(servers),
-})
-
-mason_lspconfig.setup_handlers({
-  function(server_name)
-    require('lspconfig')[server_name].setup({
-      capabilities = capabilities,
-      on_attach = on_attach,
-      settings = servers[server_name],
-      filetypes = (servers[server_name] or {}).filetypes,
-    })
-  end,
-})
+-- -- Ensure the servers above are installed
+-- local mason_lspconfig = require('mason-lspconfig')
+--
+-- mason_lspconfig.setup({
+--   ensure_installed = vim.tbl_keys(servers),
+-- })
+--
+-- mason_lspconfig.setup_handlers({
+--   function(server_name)
+--     require('lspconfig')[server_name].setup({
+--       capabilities = capabilities,
+--       on_attach = on_attach,
+--       settings = servers[server_name],
+--       filetypes = (servers[server_name] or {}).filetypes,
+--     })
+--   end,
+-- })
 
 -- CONFIG_CMP
 -- See `:help cmp`
@@ -1486,61 +1486,61 @@ cmp.setup({
 
 -- Additional Debug Adapter Protocol configuration
 
-local dap = require('dap')
--- Uncommenting this would clobber all four of nvim-dap-python's default
--- configurations, which were: (1) Launch, (2) Launch with arguments,
--- (3) Attach remote, and (4) Run doctests in file.
--- dap.configurations.python = {
---   {
---     type = 'python';
---     request = 'launch';
---     name = "Launch file";
---     program = "${file}";
---     pythonPath = function()
---       return '/usr/bin/python'
---     end;
---   },
--- }
-dap.adapters.lldb = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode-14',
-  name = 'lldb',
-}
-dap.adapters.cpp = {
-  type = 'executable',
-  command = '/usr/bin/lldb-vscode-14',
-  name = 'lldb',
-}
-
--- For this to work, lldb-vscode-XX must be in $PATH.
-dap.configurations.cpp = {
-  {
-    name = 'Launch an executable',
-    type = 'lldb',
-    request = 'launch',
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-    args = {},
-  },
-  {
-    name = 'Launch an executable with arguments',
-    type = 'lldb',
-    request = 'launch',
-    program = function()
-      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
-    end,
-    cwd = '${workspaceFolder}',
-    stopOnEntry = false,
-    args = function()
-      local args_string = vim.fn.input('Arguments: ')
-      return vim.split(args_string, ' +')
-    end,
-  },
-}
-dap.configurations.cppdbg = dap.configurations.cpp
+--local dap = require('dap')
+---- Uncommenting this would clobber all four of nvim-dap-python's default
+---- configurations, which were: (1) Launch, (2) Launch with arguments,
+---- (3) Attach remote, and (4) Run doctests in file.
+---- dap.configurations.python = {
+----   {
+----     type = 'python';
+----     request = 'launch';
+----     name = "Launch file";
+----     program = "${file}";
+----     pythonPath = function()
+----       return '/usr/bin/python'
+----     end;
+----   },
+---- }
+--dap.adapters.lldb = {
+--  type = 'executable',
+--  command = '/usr/bin/lldb-vscode-14',
+--  name = 'lldb',
+--}
+--dap.adapters.cpp = {
+--  type = 'executable',
+--  command = '/usr/bin/lldb-vscode-14',
+--  name = 'lldb',
+--}
+--
+---- For this to work, lldb-vscode-XX must be in $PATH.
+--dap.configurations.cpp = {
+--  {
+--    name = 'Launch an executable',
+--    type = 'lldb',
+--    request = 'launch',
+--    program = function()
+--      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--    end,
+--    cwd = '${workspaceFolder}',
+--    stopOnEntry = false,
+--    args = {},
+--  },
+--  {
+--    name = 'Launch an executable with arguments',
+--    type = 'lldb',
+--    request = 'launch',
+--    program = function()
+--      return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/', 'file')
+--    end,
+--    cwd = '${workspaceFolder}',
+--    stopOnEntry = false,
+--    args = function()
+--      local args_string = vim.fn.input('Arguments: ')
+--      return vim.split(args_string, ' +')
+--    end,
+--  },
+--}
+--dap.configurations.cppdbg = dap.configurations.cpp
 
 vim.keymap.set('n', '<cr>d<cr>', ':DapContinue<CR>')
 vim.keymap.set('n', '<cr>dl', ':DapStepInto<CR>')
