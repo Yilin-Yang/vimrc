@@ -1,5 +1,4 @@
 #!/bin/bash
-#!/bin/bash
 
 source "`dirname $0`/global_constants.sh"
 
