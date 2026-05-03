@@ -41,11 +41,8 @@
 -- CONFIG_REPLACEWITHREGISTER
 -- CONFIG_LUASNIPS
 -- CONFIG_FUZZYFINDER
--- CONFIG_TREESITTER
 -- CONFIG_KEYMAPS
 -- CONFIG_TELESCOPE
--- CONFIG_TREESITTER_MORE
--- CONFIG_LSPCONFIG
 -- CONFIG_CMP
 
 local home = os.getenv('HOME')
@@ -606,79 +603,6 @@ require('lazy').setup({
     'nvim-neotest/nvim-nio'
   },
 
---  -- CONFIG_DAP_UI
---  { -- Debug Adapter Protocol for in-editor debugging.
---    -- Lifted from: https://www.reddit.com/r/neovim/comments/12wypuf/what_has_been_peoples_experience_with_nvimdap_or/jhjmdwu/
---    --
---    -- cmd('DapShowLog', 'split | e ' .. vim.fn.stdpath('cache') .. '/dap.log | normal! G', {})
---    -- cmd('DapContinue', function() require('dap').continue() end, { nargs = 0 })
---    -- cmd('DapToggleBreakpoint', function() require('dap').toggle_breakpoint() end, { nargs = 0 })
---    -- cmd('DapToggleRepl', function() require('dap.repl').toggle() end, { nargs = 0 })
---    -- cmd('DapStepOver', function() require('dap').step_over() end, { nargs = 0 })
---    -- cmd('DapStepInto', function() require('dap').step_into() end, { nargs = 0 })
---    -- cmd('DapStepOut', function() require('dap').step_out() end, { nargs = 0 })
---    -- cmd('DapTerminate', function() require('dap').terminate() end, { nargs = 0 })
---    -- cmd('DapLoadLaunchJSON', function() require('dap.ext.vscode').load_launchjs() end, { nargs = 0 })
---    -- cmd('DapRestartFrame', function() require('dap').restart_frame() end, { nargs = 0 })
---    'rcarriga/nvim-dap-ui',
---    config = function()
---      require('dapui').setup()
---
---      vim.cmd('hi clear debugPC')
---      vim.cmd('hi link debugPC Underlined')
---
---      -- don't *comment out* unused variables
---      vim.cmd('hi link DiagnosticUnnecessary @variable')
---
---      -- plagiarize all entries from launch.json
---      vim.keymap.set('n', '<cr>ddl', function()
---        require('dap.ext.vscode').load_launchjs(nil, { cppdbg = { 'c', 'cpp' } })
---      end, { desc = 'Load launch.json configurations' })
---
---      vim.keymap.set('n', '<cr>ddd', function()
---        require('dapui').open() -- open GUI
---        vim.cmd('DapContinue') -- lazy-load nvim-dap
---      end, { desc = 'Open nvim-dap UI' })
---    end,
---    dependencies = {
---      'mfussenegger/nvim-dap',
---      'theHamsta/nvim-dap-virtual-text',
---      'mfussenegger/nvim-dap-python',
---      'nvim-neotest/nvim-nio',
---    },
---  },
---  { -- Python DAP plugin
---    'mfussenegger/nvim-dap-python',
---    config = function()
---      -- TODO: can we do /usr/bin/env python3?
---      require('dap-python').setup('/usr/bin/python3')
---    end,
---    dependencies = {
---      'nvim-treesitter/nvim-treesitter',
---    },
---  },
---  { -- Show variable values inline with source code
---    'theHamsta/nvim-dap-virtual-text',
---    opts = {
---      enabled = false,
---      enabled_commands = true, -- create commands DapVirtualTextEnable, DapVirtualTextDisable, DapVirtualTextToggle, (DapVirtualTextForceRefresh for refreshing when debug adapter did not notify its termination)
---      highlight_changed_variables = true, -- highlight changed values with NvimDapVirtualTextChanged, else always NvimDapVirtualText
---      highlight_new_as_changed = false, -- highlight new variables in the same way as changed variables (if highlight_changed_variables)
---      -- show_stop_reason = true,               -- show stop reason when stopped for exceptions
---      commented = false, -- prefix virtual text with comment string
---      -- only_first_definition = true,          -- only show virtual text at first definition (if there are multiple)
---      all_references = true, -- show virtual text on all all references of the variable (not only definitions)
---    },
---    config = function(_, opts)
---      require('nvim-dap-virtual-text').setup(opts)
---      vim.api.nvim_set_hl(0, 'NvimDapVirtualText', { link = 'DiagnosticInfo' })
---      vim.api.nvim_set_hl(0, 'NvimDapVirtualTextChanged', { link = 'DiagnosticWarn' })
---    end,
---    dependencies = {
---      'nvim-treesitter/nvim-treesitter',
---      {},
---    },
---  },
 
   -- CONFIG_FORMATTER
   { -- "Format runner" for neovim.
@@ -896,27 +820,27 @@ require('lazy').setup({
 
   -- CONFIG_HIGHLIGHTWHITESPACE
   {
-    -- Legacy vim configuration had working highlighting for trailing
-    -- whitespace, but this is broken by navarasu/onedark.nvim. This plugin's
-    -- highlighting, so use it as a workaround.
-    'lukoshkin/highlight-whitespace',
+    "lukoshkin/highlight-whitespace",
     opts = {
-      tws = '\\s\\+$',
-      clean_on_winleave = true,
+      tws = "\\s\\+$",
+      clear_on_bufleave = false,
       palette = {
         markdown = {
-          -- ['\\(\\S\\)\\@<=\\s\\(\\.\\|,\\)\\@='] = 'CadetBlue3',
-          -- ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'SkyBlue1',
+          tws = 'RosyBrown',
+          ['\\S\\@<=\\s\\(\\.\\|,\\)\\@='] = 'CadetBlue3',
+          ['\\S\\@<= \\{2,\\}\\S\\@='] = 'SkyBlue1',
           ['\\t\\+'] = 'plum4',
         },
         other = {
           tws = 'PaleVioletRed',
-          -- ['\\(\\S\\)\\@<=\\s\\(,\\)\\@='] = 'coral1',
-          -- ['\\(\\S\\)\\@<= \\{2,\\}\\(\\S\\)\\@='] = 'LightGoldenrod3',
-          -- ['\\t\\+'] = 'plum4',
-        },
-      },
-    },
+          ['\\S\\@<=\\s,\\@='] = 'coral1',
+          ['\\S\\@<=\\(#\\|--\\)\\@<! \\{2,3\\}\\S\\@=\\(#\\|--\\)\\@!'] = 'LightGoldenrod3',
+          ['\\(#\\|--\\)\\@<= \\{2,\\}\\S\\@='] = '#3B3B3B',
+          ['\\S\\@<= \\{3,\\}\\(#\\|--\\)\\@='] = '#3B3B3B',
+          ['\\t\\+'] = 'plum4',
+        }
+      }
+    }
   },
   -- CONFIG_LUALINE
   {
@@ -971,7 +895,7 @@ require('lazy').setup({
 
       vim.g.markbar_force_clear_shared_data_on_delmark = true
       -- vim.g.markbar_persist_mark_names = false
-      vim.g.markbar_print_time_on_shada_io = true
+      -- vim.g.markbar_print_time_on_shada_io = true
     end,
   },
 
@@ -1075,37 +999,6 @@ require('lazy').setup({
           return vim.fn.executable('make') == 1
         end,
       },
-    },
-  },
-
-  -- CONFIG_TREESITTER
-  {
-    -- Highlight, edit, and navigate code
-    'nvim-treesitter/nvim-treesitter',
-    dependencies = {
-      'nvim-treesitter/nvim-treesitter-textobjects',
-    },
-    build = ':TSUpdate',
-  },
-
-  -- Tips for scrolling: 'zz' to move current line to middle of screen,
-  -- 'zt' to move current line to top of screen, 'zb' to move current line to
-  -- bottom of screen.
-  {
-    'nvim-treesitter/nvim-treesitter-context',
-    opts = {
-      enable = true, -- Enable this plugin (Can be enabled/disabled later via commands)
-      max_lines = 0, -- How many lines the window should span. Values <= 0 mean no limit.
-      min_window_height = 0, -- Minimum editor window height to enable context. Values <= 0 mean no limit.
-      line_numbers = true,
-      multiline_threshold = 20, -- Maximum number of lines to show for a single context
-      trim_scope = 'outer', -- Which context lines to discard if `max_lines` is exceeded. Choices: 'inner', 'outer'
-      mode = 'cursor', -- Line used to calculate context. Choices: 'cursor', 'topline'
-      -- Separator between context and content. Should be a single character string, like '-'.
-      -- When separator is set, the context will only show up when there are at least 2 lines above cursorline.
-      separator = nil,
-      zindex = 20, -- The Z-index of the context window
-      on_attach = nil, -- (fun(buf: integer): boolean) return false to disable attaching
     },
   },
 
@@ -1219,85 +1112,6 @@ vim.keymap.set('n', '<cr>sw', require('telescope.builtin').grep_string, { desc =
 vim.keymap.set('n', '<cr>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<cr>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
 
--- CONFIG_TREESITTER_MORE
--- See `:help nvim-treesitter`
-require('nvim-treesitter.configs').setup({
-  -- Add languages to be installed here that you want installed for treesitter
-  ensure_installed = {
-    'bash',
-    'c',
-    'cpp',
-    'css',
-    'go',
-    'html',
-    'lua',
-    'python',
-    'rust',
-    'tsx',
-    'typescript',
-    'vim',
-    'vimdoc',
-  },
-
-  -- Autoinstall languages that are not installed. Defaults to false (but you can change for yourself!)
-  auto_install = false,
-
-  highlight = { enable = true },
-  indent = { enable = true },
-  incremental_selection = {
-    enable = true,
-    keymaps = {
-      init_selection = '<c-space>',
-      node_incremental = '<c-space>',
-      scope_incremental = '<c-s>',
-      node_decremental = '<M-space>',
-    },
-  },
-  textobjects = {
-    select = {
-      enable = true,
-      lookahead = true, -- Automatically jump forward to textobj, similar to targets.vim
-      keymaps = {
-        -- You can use the capture groups defined in textobjects.scm
-        ['aa'] = '@parameter.outer',
-        ['ia'] = '@parameter.inner',
-        ['af'] = '@function.outer',
-        ['if'] = '@function.inner',
-        ['ac'] = '@class.outer',
-        ['ic'] = '@class.inner',
-      },
-    },
-    move = {
-      enable = true,
-      set_jumps = true, -- whether to set jumps in the jumplist
-      goto_next_start = {
-        [']m'] = '@function.outer',
-        [']]'] = '@class.outer',
-      },
-      goto_next_end = {
-        [']M'] = '@function.outer',
-        [']['] = '@class.outer',
-      },
-      goto_previous_start = {
-        ['[m'] = '@function.outer',
-        ['[['] = '@class.outer',
-      },
-      goto_previous_end = {
-        ['[M'] = '@function.outer',
-        ['[]'] = '@class.outer',
-      },
-    },
-    swap = {
-      enable = true,
-      swap_next = {
-        ['<leader>a'] = '@parameter.inner',
-      },
-      swap_previous = {
-        ['<leader>A'] = '@parameter.inner',
-      },
-    },
-  },
-})
 
 -- Diagnostic keymaps
 vim.keymap.set('n', '[d', vim.diagnostic.goto_prev, { desc = 'Go to previous diagnostic message' })
@@ -1305,105 +1119,6 @@ vim.keymap.set('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnos
 vim.keymap.set('n', '<leader>e', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
--- CONFIG_LSPCONFIG
---  This function gets run when an LSP connects to a particular buffer.
-local on_attach = function(_, bufnr)
-  -- NOTE: Remember that lua is a real programming language, and as such it is possible
-  -- to define small helper and utility functions so you don't have to repeat yourself
-  -- many times.
-  --
-  -- In this case, we create a function that lets us more easily define mappings specific
-  -- for LSP related items. It sets the mode, buffer and description for us each time.
-  local nmap = function(keys, func, desc)
-    if desc then
-      desc = 'LSP: ' .. desc
-    end
-
-    vim.keymap.set('n', keys, func, { buffer = bufnr, desc = desc })
-  end
-
-  nmap('<cr>rn', vim.lsp.buf.rename, '[R]e[n]ame')
-  nmap('<cr>ca', vim.lsp.buf.code_action, '[C]ode [A]ction')
-
-  nmap('<cr>gd', vim.lsp.buf.definition, '[G]oto [D]efinition')
-  nmap('<cr>gr', require('telescope.builtin').lsp_references, '[G]oto [R]eferences')
-  nmap('<cr>gI', vim.lsp.buf.implementation, '[G]oto [I]mplementation')
-  nmap('<cr>D', vim.lsp.buf.type_definition, 'Type [D]efinition')
-  nmap('<cr>ds', require('telescope.builtin').lsp_document_symbols, '[D]ocument [S]ymbols')
-  nmap('<cr>ws', require('telescope.builtin').lsp_dynamic_workspace_symbols, '[W]orkspace [S]ymbols')
-
-  -- See `:help K` for why this keymap
-  nmap('K', vim.lsp.buf.hover, 'Hover Documentation')
-  nmap('<cr>K', vim.lsp.buf.signature_help, 'Signature Documentation')
-
-  -- Lesser used LSP functionality
-  nmap('gD', vim.lsp.buf.declaration, '[G]oto [D]eclaration')
-  nmap('<cr>wa', vim.lsp.buf.add_workspace_folder, '[W]orkspace [A]dd Folder')
-  nmap('<cr>wr', vim.lsp.buf.remove_workspace_folder, '[W]orkspace [R]emove Folder')
-  nmap('<cr>wl', function()
-    print(vim.inspect(vim.lsp.buf.list_workspace_folders()))
-  end, '[W]orkspace [L]ist Folders')
-
-  -- Create a command `:Format` local to the LSP buffer
-  vim.api.nvim_buf_create_user_command(bufnr, 'Format', function(_)
-    vim.cmd('echomsg "Formatted current buffer with LSP."')
-    vim.lsp.buf.format()
-  end, { desc = 'Format current buffer with LSP' })
-end
-
--- Enable the following language servers
---  Feel free to add/remove any LSPs that you want here. They will automatically be installed.
---
---  Add any additional override configuration in the following tables. They will be passed to
---  the `settings` field of the server config. You must look up that documentation yourself.
---
---  If you want to override the default filetypes that your language server will attach to you can
---  define the property 'filetypes' to the map in question.
--- Add this to CMAKE_CXX_FLAGS: '--gcc-toolchain=/opt/gcc-root'
-local servers = {
-  clangd = {
-    cmd = {'clangd', '--extra-arg=--gcc-toolchain=/opt/gcc-root'},
-  },
-  -- gopls = {},
-  pyright = {},
-  pylsp = {},
-  -- rust_analyzer = {},
-
-  -- java_language_server = {},
-  -- jdtls = {},
-  jdtls = {
-    root_dir = {
-      -- Single-module projects
-      {
-        'build.xml', -- Ant
-        'pom.xml', -- Maven
-        'settings.gradle', -- Gradle
-        'settings.gradle.kts', -- Gradle
-        '.gitignore',
-      },
-      -- Multi-module projects
-      { 'build.gradle', 'build.gradle.kts' },
-    } or vim.fn.getcwd(),
-  },
-
-  html = { filetypes = { 'html', 'twig', 'hbs' } },
-
-  lua_ls = {
-    Lua = {
-      workspace = { checkThirdParty = false },
-      telemetry = { enable = false },
-    },
-  },
-
-  dockerls = {},
-  eslint = {},
-  tsserver = {},
-  jsonls = {},
-  vimls = {},
-  cssls = {},
-  --
-  -- sqlls = {},
-}
 
 -- Setup neovim lua configuration
 require('neodev').setup()
