@@ -8,7 +8,7 @@ scriptencoding utf-8
 "   Commands                                                    [COMMANDS]
 "   Settings                                                    [SETTINGS]
 "   Buffer Events                                               [BUFFER]
-"   vim-unfocus                                                 [UNFOCUS]
+"   Unfocus                                                     [UNFOCUS]
 
 
 "=============================================================================
@@ -308,71 +308,13 @@ augroup buffer_stuff
 augroup end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-"   vim-unfocus                                                 [UNFOCUS]
+"   Unfocus                                                     [UNFOCUS]
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-""
-" Return a dict between window settings to be modified and their current values.
-"
-" {vars} is a list of window settings like ['&number', '&relativenumber', ...]
-function! WindowState(vars) abort
-    if type(a:vars) !=# v:t_list
-        throw 'ERROR(WrongType): Expected a list'
-    endif
-    let l:state = {}
-    let l:winid = win_getid()
-    for l:var in a:vars
-        let l:state[l:var] = getwinvar(l:winid, l:var)
-    endfor
-    return l:state
-endfunction
-
-let g:unfocus_unfocused_settings = {
-    \ '&number': 0,
-    \ '&relativenumber': 0,
-    \ '&foldcolumn': 0,
-    \ '&signcolumn': 'auto:1',
-    \ }
-let g:unfocus_default_settings = WindowState(keys(g:unfocus_unfocused_settings))
-
-""
-" Save the current values of window settings, change those variables as we
-" wish, but store the old values as a window variable.
-function! LeaveWindow() abort
-    let w:winstate = WindowState(keys(g:unfocus_unfocused_settings))
-    let l:winid = win_getid()
-    for [l:setting, l:val] in items(g:unfocus_unfocused_settings)
-        call setwinvar(l:winid, l:setting, l:val)
-    endfor
-endfunction
-
-""
-" Restore old window settings to the values they had before we left.
-function! ReenterWindow() abort
-    if !exists('w:winstate')
-        return
-    endif
-    let l:winid = win_getid()
-    for [l:setting, l:val] in items(w:winstate)
-        call setwinvar(l:winid, l:setting, l:val)
-    endfor
-    unlet w:winstate
-endfunction
-
-function! EnterNewWindow() abort
-    let l:winid = win_getid()
-    for [l:setting, l:val] in items(g:unfocus_default_settings)
-        call setwinvar(l:winid, l:setting, l:val)
-    endfor
-endfunction
-
 if !exists('g:vscode')
-augroup vim_unfocus
-    au!
-    autocmd VimEnter,TabNewEntered * call EnterNewWindow()
-    autocmd WinLeave * call LeaveWindow()
-    " also on BufEnter, so that opening an unfocused buffer in a new tab will
-    " reapply focused settings
-    autocmd BufEnter,WinEnter * call ReenterWindow()
-augroup end
+augroup NumberToggle
+    autocmd!
+    autocmd BufEnter,FocusGained,InsertLeave,WinEnter * set number relativenumber
+    autocmd BufLeave,FocusLost,InsertEnter,WinLeave * set nonumber norelativenumber
+augroup END
 endif

@@ -147,7 +147,7 @@ require('lazy').setup({
       vim.keymap.del('n', '<leader>bv')
 
       vim.keymap.set('n', '<leader>bb', ':BufExplorer<cr>')
-      -- <Leader>be to open BufExplorer in the current window.
+      -- <Leader>bb to open BufExplorer in the current window.
     end,
   },
 
@@ -188,7 +188,8 @@ require('lazy').setup({
   { -- Target and jump to a specific character,
     'easymotion/vim-easymotion',
     config = function()
-      vim.keymap.set('n', '<localleader><localleader>', '<Plug>(easymotion-prefix)')
+      -- Double-tap localleader (backslash) to move to any word onscreen
+      vim.keymap.set('n', '<localleader><localleader>', '<Plug>(easymotion-overwin-w)')
       vim.g.EasyMotion_smartcase = 1
     end,
   },
@@ -756,7 +757,12 @@ require('lazy').setup({
 
   -- CONFIG_WHICHKEY
   -- Useful plugin to show you pending keybinds.
-  { 'folke/which-key.nvim', opts = {} },
+  {
+    'folke/which-key.nvim',
+    opts = {
+      delay = 200,  -- Don't trigger on fast jk to exit insert/visual mode.
+    }
+  },
 
   -- CONFIG_GITSIGNS
   {
@@ -875,10 +881,9 @@ require('lazy').setup({
   },
 
   -- CONFIG_MARKBAR
-  { -- Good old vim-markbar, for naming marks. Put this later to override
-    -- which-key.
+  {
     'Yilin-Yang/vim-markbar',
-    dir = home .. '/plugins/vim-markbar',
+    -- dir = home .. '/plugins/vim-markbar',
     init = function()
       vim.g.markbar_enable_peekaboo = false
     end,
