@@ -1323,6 +1323,21 @@ require('lazy').setup({
         vim.lsp.config(name, server)
         vim.lsp.enable(name)
       end
+
+      -- Enable the following manually configured language servers
+      --  See `:help lsp-config` for config info, as above.
+      ---@type table<string, vim.lsp.Config>
+      local manual_servers = {
+        clangd = {
+          cmd = {'clangd'},
+          root_markers = { '.clang-format', 'compile_commands.json' },
+        },
+      }
+
+      for name, server in pairs(manual_servers) do
+        vim.lsp.config(name, server)
+        vim.lsp.enable(name)
+      end
     end,
   },
 
