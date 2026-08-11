@@ -378,21 +378,21 @@ require('lazy').setup({
   --  - vimwiki has tagbar support!
   -------------------------------------------------------------------------------
 
-  -- { -- vimwiki, for my personal notes
-  --   'vimwiki/vimwiki',
-  --   config = function()
-  --     vim.g.vimwiki_list = {
-  --       path = home .. '/notes/',
-  --       syntax = 'markdown',
-  --       ext = '.md',
-  --       index = 'README',
-  --       auto_toc = 1,
-  --     }
-  --     vim.g.vimwiki_folding = 'expr'
-  --     vim.g.vimwiki_global_ext = 0
-  --     vim.keymap.set('n', '<C-Space>', '<Plug>VimwikiToggleListItem')
-  --   end,
-  -- },
+  { -- vimwiki, for my personal notes
+    'vimwiki/vimwiki',
+    config = function()
+      vim.g.vimwiki_list = {
+        path = home .. '/notes/',
+        syntax = 'markdown',
+        ext = '.md',
+        index = 'README',
+        auto_toc = 1,
+      }
+      vim.g.vimwiki_folding = 'expr'
+      vim.g.vimwiki_global_ext = 0
+      vim.keymap.set('n', '<C-Space>', '<Plug>VimwikiToggleListItem')
+    end,
+  },
 
   -- CONFIG_VIMTEX
   { -- vimtex, for compiling my resume
