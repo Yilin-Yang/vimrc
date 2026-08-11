@@ -391,6 +391,12 @@ require('lazy').setup({
       vim.g.vimwiki_folding = 'expr'
       vim.g.vimwiki_global_ext = 0
       vim.keymap.set('n', '<C-Space>', '<Plug>VimwikiToggleListItem')
+
+      -- Work around this keymap not working in vimwiki in my setup; it always
+      -- opens /home/yiliny/vimwiki/diary instead.
+      vim.keymap.del('n', '<leader>w<leader>w')
+      vim.keymap.set('n', '<leader>w<leader>w', ':edit /home/yiliny/notes/diary/'
+        .. vim.fn.strftime('%Y-%m-%d.md') .. '<cr>')
     end,
   },
 
