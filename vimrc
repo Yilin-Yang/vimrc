@@ -270,7 +270,6 @@ set hlsearch            " Highlight matching strings when searching.
 
 set clipboard=unnamed   " Don't 'exchange' "+ contents with overwritten text.
 
-call ColorColumnBlock(81, 255, 'ctermbg=236')
 hi Normal ctermbg=None guibg=None
 
 " Explicitly render `listchars`.
@@ -305,6 +304,8 @@ augroup buffer_stuff
     au!
     " autocmd BufWritePre * if &filetype !=# 'vader' | call DeleteTrailing() | endif
     autocmd FileType cpp setlocal comments=sr:/*,mb:*,ex:*/
+    autocmd BufEnter * call ColorColumnBlock(&textwidth ? &textwidth + 1 : 81,
+        \ 255, 'ctermbg=236')
 augroup end
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
