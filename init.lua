@@ -1242,6 +1242,28 @@ require('lazy').setup({
             })
           end
 
+          -- Automatically show hover documentation (function signatures, docs, etc.)
+          -- when the cursor rests on a symbol for a bit (see `updatetime`).
+          -- The floating window is unfocusable, so it closes itself as soon as
+          -- the cursor moves, same as the document-highlight behavior above.
+          if client and client:supports_method('textDocument/hover', event.buf) then
+            local hover_augroup = vim.api.nvim_create_augroup('kickstart-lsp-hover', { clear = false })
+            vim.api.nvim_create_autocmd('CursorHold', {
+              buffer = event.buf,
+              group = hover_augroup,
+              callback = function()
+                -- Don't clobber an already-open float (e.g. a diagnostic message
+                -- opened with `vim.diagnostic.open_float`) with the hover popup.
+                for _, win in ipairs(vim.api.nvim_tabpage_list_wins(0)) do
+                  if vim.api.nvim_win_get_config(win).relative ~= '' then
+                    return
+                  end
+                end
+                vim.lsp.buf.hover { focusable = false, silent = true }
+              end,
+            })
+          end
+
           -- The following code creates a keymap to toggle inlay hints in your
           -- code, if the language server you are using supports them
           --
