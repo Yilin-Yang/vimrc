@@ -1356,6 +1356,13 @@ require('lazy').setup({
           cmd = {'clangd'},
           root_markers = { '.clang-format', 'compile_commands.json' },
         },
+        -- cmake language server. Doesn't work. When I try to run it in a
+        -- terminal, it crashes, complaining about a missing method named
+        -- asyncio.get_child_watcher().
+        -- cmake = {
+        --   cmd = { 'cmake-language-server' },
+        --   root_markers = { '.git' },
+        -- },
       }
 
       for name, server in pairs(manual_servers) do
